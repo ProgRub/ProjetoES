@@ -1,0 +1,8 @@
+Factory Method: Creator é HealthCareProfessional, Product é IPrescripton
+Adapter: Exportar para o calendário, base de dados que o professor mostrou
+Facade: perguntar ao professor se o Windows Forms conta como implementar o padrão Facade
+Decorator: para adicionar funcionalidades e restrições às prescrições (possivelmente)
+Command: visto que é forms, suportar undo redo
+Observer: devido às notificações (esclarecer o que são as notificações)
+Proxy: para controlar acessos à base de dados (possivelmente)
+Singleton: única instância do Windows Form (??)
