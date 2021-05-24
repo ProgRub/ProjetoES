@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataLibrary
+namespace ComponentsLibrary
 {
     public class Class1
     {
