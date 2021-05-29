@@ -42,9 +42,9 @@ namespace Forms
             // 
             this.LabelEmail.AutoSize = true;
             this.LabelEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelEmail.Location = new System.Drawing.Point(26, 13);
+            this.LabelEmail.Location = new System.Drawing.Point(30, 17);
             this.LabelEmail.Name = "LabelEmail";
-            this.LabelEmail.Size = new System.Drawing.Size(54, 21);
+            this.LabelEmail.Size = new System.Drawing.Size(67, 28);
             this.LabelEmail.TabIndex = 0;
             this.LabelEmail.Text = "E-mail";
             // 
@@ -52,35 +52,38 @@ namespace Forms
             // 
             this.LabelPassword.AutoSize = true;
             this.LabelPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelPassword.Location = new System.Drawing.Point(4, 48);
+            this.LabelPassword.Location = new System.Drawing.Point(5, 64);
             this.LabelPassword.Name = "LabelPassword";
-            this.LabelPassword.Size = new System.Drawing.Size(76, 21);
+            this.LabelPassword.Size = new System.Drawing.Size(93, 28);
             this.LabelPassword.TabIndex = 1;
             this.LabelPassword.Text = "Password";
             // 
             // TextBoxEmail
             // 
             this.TextBoxEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxEmail.Location = new System.Drawing.Point(86, 10);
+            this.TextBoxEmail.Location = new System.Drawing.Point(98, 13);
+            this.TextBoxEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxEmail.Name = "TextBoxEmail";
-            this.TextBoxEmail.Size = new System.Drawing.Size(371, 29);
+            this.TextBoxEmail.Size = new System.Drawing.Size(423, 34);
             this.TextBoxEmail.TabIndex = 2;
             // 
             // TextBoxPassword
             // 
             this.TextBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxPassword.Location = new System.Drawing.Point(86, 45);
+            this.TextBoxPassword.Location = new System.Drawing.Point(98, 60);
+            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.PasswordChar = '*';
-            this.TextBoxPassword.Size = new System.Drawing.Size(371, 29);
+            this.TextBoxPassword.Size = new System.Drawing.Size(423, 34);
             this.TextBoxPassword.TabIndex = 3;
             // 
             // ButtonLogin
             // 
             this.ButtonLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonLogin.Location = new System.Drawing.Point(228, 80);
+            this.ButtonLogin.Location = new System.Drawing.Point(261, 107);
+            this.ButtonLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(96, 33);
+            this.ButtonLogin.Size = new System.Drawing.Size(110, 44);
             this.ButtonLogin.TabIndex = 4;
             this.ButtonLogin.Text = "Login";
             this.ButtonLogin.UseVisualStyleBackColor = true;
@@ -92,26 +95,28 @@ namespace Forms
             this.ButtonSignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonSignUp.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.ButtonSignUp.Location = new System.Drawing.Point(316, 121);
+            this.ButtonSignUp.Location = new System.Drawing.Point(361, 161);
+            this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSignUp.Name = "ButtonSignUp";
-            this.ButtonSignUp.Size = new System.Drawing.Size(85, 34);
+            this.ButtonSignUp.Size = new System.Drawing.Size(97, 45);
             this.ButtonSignUp.TabIndex = 5;
             this.ButtonSignUp.Text = "Sign Up!";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
+            this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // LabelNoAccount
             // 
             this.LabelNoAccount.AutoSize = true;
             this.LabelNoAccount.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelNoAccount.Location = new System.Drawing.Point(139, 128);
+            this.LabelNoAccount.Location = new System.Drawing.Point(159, 171);
             this.LabelNoAccount.Name = "LabelNoAccount";
-            this.LabelNoAccount.Size = new System.Drawing.Size(171, 21);
+            this.LabelNoAccount.Size = new System.Drawing.Size(216, 28);
             this.LabelNoAccount.TabIndex = 6;
             this.LabelNoAccount.Text = "Don\'t have an account?";
             // 
             // LoginScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -123,8 +128,10 @@ namespace Forms
             this.Controls.Add(this.TextBoxEmail);
             this.Controls.Add(this.LabelPassword);
             this.Controls.Add(this.LabelEmail);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "LoginScreen";
-            this.Size = new System.Drawing.Size(460, 158);
+            this.Size = new System.Drawing.Size(524, 210);
+            this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.LabelPassword, 0);
             this.Controls.SetChildIndex(this.TextBoxEmail, 0);

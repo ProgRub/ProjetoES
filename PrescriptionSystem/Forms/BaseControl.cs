@@ -15,18 +15,6 @@ namespace Forms
             InitializeComponent();
         }
 
-
-        //public void NextScreen<T>(BaseControl oldControl)
-        //{
-        //    oldControl.Hide();
-        //    var aux = new ((BaseControl)typeof(T))
-        //    {
-        //        Dock = DockStyle.Fill
-        //    };
-        //    (Parent as Window).Controls.Add(aux);
-        //    (Parent as Window).ActiveControl = aux;
-        //}
-
         protected void MoveToScreen(BaseControl newControl)
         {
             Window window = ((Window) Parent);
