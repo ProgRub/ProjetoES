@@ -50,6 +50,10 @@ namespace Forms
             this.ButtonSignUp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // ButtonBack
+            // 
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
+            // 
             // TextBoxEmail
             // 
             this.TextBoxEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -264,6 +268,26 @@ namespace Forms
             this.Controls.Add(this.LabelPhoneNumber);
             this.Name = "SignUpScreen";
             this.Size = new System.Drawing.Size(557, 384);
+            this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
+            this.Controls.SetChildIndex(this.LabelEmail, 0);
+            this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);
+            this.Controls.SetChildIndex(this.TextBoxEmail, 0);
+            this.Controls.SetChildIndex(this.RadioButtonPacient, 0);
+            this.Controls.SetChildIndex(this.RadioButtonTherapist, 0);
+            this.Controls.SetChildIndex(this.LabelName, 0);
+            this.Controls.SetChildIndex(this.LabelDOB, 0);
+            this.Controls.SetChildIndex(this.TextBoxName, 0);
+            this.Controls.SetChildIndex(this.DateTimePickerDOB, 0);
+            this.Controls.SetChildIndex(this.LabelPassword, 0);
+            this.Controls.SetChildIndex(this.TextBoxPassword, 0);
+            this.Controls.SetChildIndex(this.LabelHealthUserNumber, 0);
+            this.Controls.SetChildIndex(this.TextBoxHealthUserNumber, 0);
+            this.Controls.SetChildIndex(this.LabelAllergies, 0);
+            this.Controls.SetChildIndex(this.ChecBoxExample, 0);
+            this.Controls.SetChildIndex(this.LabelMissingBodyParts, 0);
+            this.Controls.SetChildIndex(this.CheckBoxExampleMBP, 0);
+            this.Controls.SetChildIndex(this.ButtonSignUp, 0);
+            this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

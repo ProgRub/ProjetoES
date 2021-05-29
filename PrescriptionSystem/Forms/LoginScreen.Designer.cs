@@ -71,6 +71,7 @@ namespace Forms
             this.TextBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TextBoxPassword.Location = new System.Drawing.Point(86, 45);
             this.TextBoxPassword.Name = "TextBoxPassword";
+            this.TextBoxPassword.PasswordChar = '*';
             this.TextBoxPassword.Size = new System.Drawing.Size(371, 29);
             this.TextBoxPassword.TabIndex = 3;
             // 
@@ -83,6 +84,7 @@ namespace Forms
             this.ButtonLogin.TabIndex = 4;
             this.ButtonLogin.Text = "Login";
             this.ButtonLogin.UseVisualStyleBackColor = true;
+            this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // ButtonSignUp
             // 
@@ -123,6 +125,13 @@ namespace Forms
             this.Controls.Add(this.LabelEmail);
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(460, 158);
+            this.Controls.SetChildIndex(this.LabelEmail, 0);
+            this.Controls.SetChildIndex(this.LabelPassword, 0);
+            this.Controls.SetChildIndex(this.TextBoxEmail, 0);
+            this.Controls.SetChildIndex(this.TextBoxPassword, 0);
+            this.Controls.SetChildIndex(this.ButtonLogin, 0);
+            this.Controls.SetChildIndex(this.ButtonSignUp, 0);
+            this.Controls.SetChildIndex(this.LabelNoAccount, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -8,17 +8,16 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class LoginScreen : BaseControl
+    public partial class CalendarScreenTherapist : BaseControl
     {
-        public LoginScreen()
+        public CalendarScreenTherapist()
         {
             InitializeComponent();
-            DisableBackButton();
         }
 
-        private void ButtonLogin_Click(object sender, EventArgs e)
+        private void ButtonBack_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new CalendarScreenTherapist());
+            MoveToScreen(new LoginScreen());
         }
     }
 }
