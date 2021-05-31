@@ -20,5 +20,10 @@ namespace Forms
         {
             MoveToScreen(new CalendarScreenTherapist());
         }
+
+        private void ButtonSignUp_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new SignUpScreen());
+        }
     }
 }
