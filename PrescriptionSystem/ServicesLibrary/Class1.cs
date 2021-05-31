@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ComponentsLibrary
+namespace ServicesLibrary
 {
     public class Class1
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ComponentsLibrary.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComponentsLibrary
 {

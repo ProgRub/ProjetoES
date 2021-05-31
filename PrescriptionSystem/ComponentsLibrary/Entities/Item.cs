@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ComponentsLibrary
+﻿namespace ComponentsLibrary.Entities
 {
     public class Item
     {
