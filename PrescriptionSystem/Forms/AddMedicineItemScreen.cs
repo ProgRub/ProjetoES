@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class AddMedicineItem : BaseControl
+    public partial class AddMedicineItemScreen : BaseControl
     {
-        public AddMedicineItem()
+        public AddMedicineItemScreen()
         {
             InitializeComponent();
         }

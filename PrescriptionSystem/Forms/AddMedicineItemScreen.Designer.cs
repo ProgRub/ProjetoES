@@ -1,7 +1,7 @@
 ﻿
 namespace Forms
 {
-    partial class AddMedicineItem
+    partial class AddMedicineItemScreen
     {
         /// <summary> 
         /// Variável de designer necessária.
