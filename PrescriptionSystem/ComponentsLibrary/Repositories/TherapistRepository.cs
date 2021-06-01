@@ -1,8 +1,8 @@
 ﻿using ComponentsLibrary.Entities;
 
-namespace ComponentsLibrary
+namespace ComponentsLibrary.Repositories
 {
-    public class TherapistRepository:BaseRepository<Therapist>
+    public class TherapistRepository:UserRepository
     {
         public TherapistRepository(PrescriptionSystemDbContext context) : base(context)
         {

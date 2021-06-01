@@ -39,7 +39,7 @@ namespace ComponentsLibrary
             modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
 
-
+            
         }
 
         public DbSet<Patient> Patients { get; set; }

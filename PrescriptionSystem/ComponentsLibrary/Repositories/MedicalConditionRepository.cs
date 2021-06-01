@@ -1,6 +1,6 @@
 ﻿using ComponentsLibrary.Entities;
 
-namespace ComponentsLibrary
+namespace ComponentsLibrary.Repositories
 {
     public class MedicalConditionRepository:BaseRepository<MedicalCondition>
     {

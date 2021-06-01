@@ -1,6 +1,6 @@
 ﻿using ComponentsLibrary.Entities.PrescriptionItems;
 
-namespace ComponentsLibrary
+namespace ComponentsLibrary.Repositories
 {
     public class TreatmentRepository:BaseRepository<Treatment>
     {
