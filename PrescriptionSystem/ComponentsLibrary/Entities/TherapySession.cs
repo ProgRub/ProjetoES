@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using ComponentsLibrary.Entities.PrescriptionItems;
 
 namespace ComponentsLibrary.Entities
 {
     public class TherapySession : Item
     {
-        public int TherapistId { get; set; }
-        public int PatientId { get; set; }
+        public Therapist Therapist { get; set; }
+        public Patient Patient { get; set; }
         public DateTime Date { get; set; }
-        public IEnumerable<int> TreatmentsIDs { get; set; }
-        public IEnumerable<int> CompletedTreatmentsIDs { get; set; }
         public string Note { get; set; }
-        public IDictionary<int,string> TreatmentNotes { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ComponentsLibrary.Entities
 {
@@ -11,8 +12,5 @@ namespace ComponentsLibrary.Entities
         public int HealthUserNumber { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public IEnumerable<int> MedicalConditions { get; set; }
-        public IEnumerable<BodyPart> MissingBodyParts { get; set; }
-        public int Type { get; set; }
     }
 }
