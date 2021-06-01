@@ -13,6 +13,7 @@ namespace Forms
         public BaseControl()
         {
             InitializeComponent();
+            AutoSize = true;
         }
 
         protected void MoveToScreen(BaseControl newControl)
