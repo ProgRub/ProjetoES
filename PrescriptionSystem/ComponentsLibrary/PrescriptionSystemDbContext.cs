@@ -1,5 +1,4 @@
-﻿using System;
-using ComponentsLibrary.Entities;
+﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,12 +9,11 @@ namespace ComponentsLibrary
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDB");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=PrescriptionSystemDb");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             //Tables
             modelBuilder.Entity<Item>().ToTable("Item");
             modelBuilder.Entity<Patient>().ToTable("Patient");
@@ -35,29 +33,17 @@ namespace ComponentsLibrary
             modelBuilder.Entity<TherapySessionHasTreatments>().ToTable("TherapySessionHasTreatments");
 
 
+
+
             modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
-
-            
+            modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
         }
 
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<HealthCareProfessional> HealthCareProfessionals { get; set; }
-        public DbSet<Therapist> Therapists { get; set; }
-        public DbSet<MedicalCondition> MedicalConditions { get; set; }
-        public DbSet<PrescriptionItem> PrescriptionItems { get; set; }
-        public DbSet<Medicine> Medicines { get; set; }
-        public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<TherapySession> TherapySessions { get; set; }
-        public DbSet<Prescription> Prescriptions { get; set; }
-        public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<ExerciseHasBodyParts> ExerciseHasBodyPartsEnumerable { get; set; }
-        public DbSet<MedicineHasIncompatibleMedicalConditions> MedicineHasIncompatibleMedicalConditionsEnumerable { get; set; }
-        public DbSet<PrescriptionHasPrescriptionItems> PrescriptionHasPrescriptionItemsEnumerable { get; set; }
-        public DbSet<PrescriptionHasViewers> PrescriptionHasViewersEnumerable { get; set; }
-        public DbSet<TherapySessionHasTreatments> TherapySessionHasTreatmentsEnumerable { get; set; }
-
-        //Command on Package Manager Console => Add-Migration 
+        //Command na Package Manager Console  => Add-Migration 
+        //
     }
 }
