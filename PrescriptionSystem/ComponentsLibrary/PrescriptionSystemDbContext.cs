@@ -43,7 +43,7 @@ namespace ComponentsLibrary
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
         }
 
-        //Command na Package Manager Console  => Add-Migration 
-        //
+        //Comando para adiconar alterações no context à DB na Package Manager Console  => Add-Migration 
+        //Commando para atualizar DB => Update-Database
     }
 }
