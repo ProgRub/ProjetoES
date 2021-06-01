@@ -34,7 +34,6 @@ namespace Forms
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -95,13 +94,6 @@ namespace Forms
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(250, 27);
             this.textBox3.TabIndex = 12;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(390, 600);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(250, 27);
-            this.textBox4.TabIndex = 13;
             // 
             // label2
             // 
@@ -205,6 +197,7 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
@@ -216,7 +209,6 @@ namespace Forms
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -230,7 +222,6 @@ namespace Forms
             this.Controls.SetChildIndex(this.textBox1, 0);
             this.Controls.SetChildIndex(this.textBox2, 0);
             this.Controls.SetChildIndex(this.textBox3, 0);
-            this.Controls.SetChildIndex(this.textBox4, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
@@ -255,7 +246,6 @@ namespace Forms
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;

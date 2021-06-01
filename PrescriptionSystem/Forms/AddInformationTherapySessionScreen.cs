@@ -8,19 +8,19 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class SignUpScreen : BaseControl
+    public partial class AddInformationTherapySessionScreen : BaseControl
     {
-        public SignUpScreen()
+        public AddInformationTherapySessionScreen()
         {
             InitializeComponent();
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new LoginScreen());
+
         }
 
-        private void SignUpScreen_Load(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

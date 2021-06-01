@@ -257,8 +257,7 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ButtonSignUp);
             this.Controls.Add(this.CheckBoxExampleMBP);
             this.Controls.Add(this.LabelMissingBodyParts);
@@ -281,6 +280,7 @@ namespace Forms
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "SignUpScreen";
             this.Size = new System.Drawing.Size(637, 512);
+            this.Load += new System.EventHandler(this.SignUpScreen_Load);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);

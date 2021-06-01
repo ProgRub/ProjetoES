@@ -149,6 +149,7 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label4);
@@ -160,7 +161,7 @@ namespace Forms
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "AddExerciseItemScreen";
-            this.Size = new System.Drawing.Size(591, 462);
+            this.Size = new System.Drawing.Size(612, 462);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.textBox1, 0);
