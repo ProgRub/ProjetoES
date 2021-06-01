@@ -19,5 +19,15 @@ namespace Forms
         {
             MoveToScreen(new LoginScreen());
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ButtonSignUp_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new AddPrescriptionItemScreen());
+        }
     }
 }

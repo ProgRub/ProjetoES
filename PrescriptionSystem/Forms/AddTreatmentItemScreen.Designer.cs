@@ -1,7 +1,7 @@
 ﻿
 namespace Forms
 {
-    partial class AddMedicineItem
+    partial class AddTreatmentItemScreen
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -41,12 +41,16 @@ namespace Forms
             this.label7 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
+            // 
+            // ButtonBack
+            // 
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // button1
             // 
@@ -64,11 +68,11 @@ namespace Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(152, 32);
+            this.label1.Location = new System.Drawing.Point(129, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(282, 28);
+            this.label1.Size = new System.Drawing.Size(330, 28);
             this.label1.TabIndex = 7;
-            this.label1.Text = "Create Treatment Prescription";
+            this.label1.Text = "Create Treatment Prescription Item";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
@@ -156,14 +160,6 @@ namespace Forms
             this.label4.Text = "Duration:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(174, 328);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(250, 27);
-            this.textBox6.TabIndex = 23;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
-            // 
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(174, 385);
@@ -196,16 +192,25 @@ namespace Forms
             this.label8.TabIndex = 28;
             this.label8.Text = "-";
             // 
-            // AddMedicineItem
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(174, 323);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePicker1.TabIndex = 29;
+            // 
+            // AddTreatmentItemScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label6);
@@ -217,7 +222,7 @@ namespace Forms
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "AddMedicineItem";
+            this.Name = "AddTreatmentItemScreen";
             this.Size = new System.Drawing.Size(546, 555);
             this.Load += new System.EventHandler(this.AddMedicineItem_Load);
             this.Controls.SetChildIndex(this.button1, 0);
@@ -232,12 +237,12 @@ namespace Forms
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.textBox5, 0);
             this.Controls.SetChildIndex(this.label7, 0);
-            this.Controls.SetChildIndex(this.textBox6, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.textBox7, 0);
             this.Controls.SetChildIndex(this.textBox8, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,10 +262,10 @@ namespace Forms
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

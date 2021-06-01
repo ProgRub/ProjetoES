@@ -55,6 +55,7 @@ namespace Forms
             this.button2.TabIndex = 7;
             this.button2.Text = "Treatment";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -65,6 +66,7 @@ namespace Forms
             this.button3.TabIndex = 8;
             this.button3.Text = "Exercise";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -82,12 +84,13 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "AddPrescriptionItemScreen";
-            this.Size = new System.Drawing.Size(642, 273);
+            this.Size = new System.Drawing.Size(649, 277);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
