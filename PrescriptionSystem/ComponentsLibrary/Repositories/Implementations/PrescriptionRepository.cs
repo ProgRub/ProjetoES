@@ -1,8 +1,9 @@
 ﻿using ComponentsLibrary.Entities;
+using ComponentsLibrary.Repositories.Interfaces;
 
-namespace ComponentsLibrary.Repositories
+namespace ComponentsLibrary.Repositories.Implementations
 {
-    public class PrescriptionRepository : BaseRepository<Prescription>
+    public class PrescriptionRepository : BaseRepository<Prescription>, IPrescriptionRepository
     {
         private PrescriptionHasItemsRepository _prescriptionHasItemsRepository;
         private PrescriptionHasViewersRepository _prescriptionHasViewersRepository;

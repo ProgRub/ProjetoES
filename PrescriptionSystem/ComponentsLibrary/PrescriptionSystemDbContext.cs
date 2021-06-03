@@ -58,6 +58,7 @@ namespace ComponentsLibrary
         public DbSet<PrescriptionHasViewers> PrescriptionHasViewersEnumerable { get; set; }
         public DbSet<TherapySessionHasTreatments> TherapySessionHasTreatmentsEnumerable { get; set; }
 
-        //Command on Package Manager Console => Add-Migration 
+        //Comando na Package Manager Console para adicionar modificações no contexto à DB => Add-Migration 
+        //Comando na Package Manager Console para atualizar DB => Update-Database
     }
 }

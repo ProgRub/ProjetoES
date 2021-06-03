@@ -1,6 +1,6 @@
 ﻿using ComponentsLibrary.Entities;
 
-namespace ComponentsLibrary.Repositories
+namespace ComponentsLibrary.Repositories.Implementations
 {
     internal class UserHasMissingBodyPartRepository:BaseRepository<UserHasMissingBodyPart>
     {
