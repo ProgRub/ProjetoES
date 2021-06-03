@@ -14,8 +14,9 @@ namespace ComponentsLibrary
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Tables
+            #region Tables
             modelBuilder.Entity<Item>().ToTable("Item");
+            modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Patient>().ToTable("Patient");
             modelBuilder.Entity<HealthCareProfessional>().ToTable("HealthCareProfessional");
             modelBuilder.Entity<Therapist>().ToTable("Therapist");
@@ -32,12 +33,37 @@ namespace ComponentsLibrary
             modelBuilder.Entity<PrescriptionHasViewers>().ToTable("PrescriptionHasViewers");
             modelBuilder.Entity<TherapySessionHasTreatments>().ToTable("TherapySessionHasTreatments");
 
-
-
+            #endregion
 
             modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+
+            modelBuilder.Entity<User>().Property(e => e.FullName).IsRequired();
+            modelBuilder.Entity<User>().Property(e => e.DateOfBirth).IsRequired();
+            modelBuilder.Entity<User>().Property(e => e.Email).IsRequired();
+            modelBuilder.Entity<User>().Property(e => e.HealthUserNumber).IsRequired();
+            modelBuilder.Entity<User>().Property(e => e.Password).IsRequired();
+            modelBuilder.Entity<User>().Property(e => e.PhoneNumber).IsRequired();
+
+            modelBuilder.Entity<Prescription>().Property(e => e.EndDate).IsRequired();
+            modelBuilder.Entity<Prescription>().Property(e => e.StartDate).IsRequired();
+            //modelBuilder.Entity<Prescription>().Property(e => e.Author).IsRequired();
+            //modelBuilder.Entity<Prescription>().Property(e => e.Patient).IsRequired();
+            
+            //modelBuilder.Entity<TherapySession>().Property(e => e.Patient).IsRequired();
+            //modelBuilder.Entity<TherapySession>().Property(e => e.Therapist).IsRequired();
+            modelBuilder.Entity<TherapySession>().Property(e => e.Date).IsRequired();
+
+            modelBuilder.Entity<PrescriptionItem>().Property(e => e.Name).IsRequired();
+            modelBuilder.Entity<Medicine>().Property(e => e.Price).IsRequired();
+            modelBuilder.Entity<Treatment>().Property(e => e.Duration).IsRequired();
+            modelBuilder.Entity<Treatment>().Property(e => e.AgeMaximum).IsRequired().HasDefaultValue(150);
+            modelBuilder.Entity<Treatment>().Property(e => e.AgeMinimum).IsRequired().HasDefaultValue(0);
+            modelBuilder.Entity<Treatment>().Property(e => e.BodyPart).IsRequired();
+            modelBuilder.Entity<Exercise>().Property(e => e.AgeMaximum).IsRequired().HasDefaultValue(150);
+            modelBuilder.Entity<Exercise>().Property(e => e.AgeMinimum).IsRequired().HasDefaultValue(0);
+            modelBuilder.Entity<Exercise>().Property(e => e.Duration).IsRequired();
         }
 
         public DbSet<Patient> Patients { get; set; }

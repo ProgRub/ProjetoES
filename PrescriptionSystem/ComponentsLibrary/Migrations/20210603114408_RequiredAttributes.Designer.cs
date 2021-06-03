@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    [Migration("20210601144821_teste6")]
-    partial class teste6
+    [Migration("20210603114408_RequiredAttributes")]
+    partial class RequiredAttributes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,31 +43,6 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HealthUserNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.ToTable("HealthCareProfessional");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.Item");
@@ -82,31 +57,6 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("MedicalCondition");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HealthUserNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.ToTable("Patient");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.Prescription", b =>
@@ -212,6 +162,7 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("PrescriptionItem");
@@ -263,11 +214,32 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("TherapySessionHasTreatments");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+            modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
-                    b.HasBaseType("ComponentsLibrary.Entities.HealthCareProfessional");
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
 
-                    b.ToTable("Therapist");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HealthUserNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
@@ -275,10 +247,14 @@ namespace ComponentsLibrary.Migrations
                     b.HasBaseType("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem");
 
                     b.Property<int>("AgeMaximum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(150);
 
                     b.Property<int>("AgeMinimum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
@@ -301,10 +277,14 @@ namespace ComponentsLibrary.Migrations
                     b.HasBaseType("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem");
 
                     b.Property<int>("AgeMaximum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(150);
 
                     b.Property<int>("AgeMinimum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("BodyPart")
                         .HasColumnType("int");
@@ -317,11 +297,23 @@ namespace ComponentsLibrary.Migrations
 
             modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
                 {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.HealthCareProfessional", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                    b.HasBaseType("ComponentsLibrary.Entities.User");
+
+                    b.ToTable("HealthCareProfessional");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.User");
+
+                    b.ToTable("Patient");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.HealthCareProfessional");
+
+                    b.ToTable("Therapist");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
@@ -329,15 +321,6 @@ namespace ComponentsLibrary.Migrations
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
                         .WithOne()
                         .HasForeignKey("ComponentsLibrary.Entities.MedicalCondition", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
@@ -492,11 +475,11 @@ namespace ComponentsLibrary.Migrations
                     b.Navigation("Treatment");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+            modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
-                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", null)
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
                         .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.Therapist", "Id")
+                        .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
@@ -524,6 +507,33 @@ namespace ComponentsLibrary.Migrations
                     b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", null)
                         .WithOne()
                         .HasForeignKey("ComponentsLibrary.Entities.PrescriptionItems.Treatment", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.HealthCareProfessional", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.Patient", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.Therapist", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });

@@ -2,8 +2,9 @@
 {
     public class TimeConstraintsValidator:BaseValidator
     {
-        public TimeConstraintsValidator(IValidator nextValidator) : base(nextValidator)
+        public override object Validate(object request)
         {
+            return null;
         }
     }
 }
