@@ -93,6 +93,7 @@ namespace Forms
             // RadioButtonPatient
             // 
             this.RadioButtonPatient.AutoSize = true;
+            this.RadioButtonPatient.Checked = true;
             this.RadioButtonPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RadioButtonPatient.Location = new System.Drawing.Point(168, 18);
             this.RadioButtonPatient.Name = "RadioButtonPatient";
@@ -110,7 +111,6 @@ namespace Forms
             this.RadioButtonTherapist.Name = "RadioButtonTherapist";
             this.RadioButtonTherapist.Size = new System.Drawing.Size(92, 25);
             this.RadioButtonTherapist.TabIndex = 9;
-            this.RadioButtonTherapist.TabStop = true;
             this.RadioButtonTherapist.Text = "Therapist";
             this.RadioButtonTherapist.UseVisualStyleBackColor = true;
             // 
@@ -247,6 +247,7 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.ButtonSignUp);
             this.Controls.Add(this.CheckBoxExampleMBP);
