@@ -96,10 +96,10 @@ namespace Forms
             this.RadioButtonPacient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.RadioButtonPacient.Location = new System.Drawing.Point(168, 18);
             this.RadioButtonPacient.Name = "RadioButtonPacient";
-            this.RadioButtonPacient.Size = new System.Drawing.Size(77, 25);
+            this.RadioButtonPacient.Size = new System.Drawing.Size(75, 25);
             this.RadioButtonPacient.TabIndex = 8;
             this.RadioButtonPacient.TabStop = true;
-            this.RadioButtonPacient.Text = "Pacient";
+            this.RadioButtonPacient.Text = "Patient";
             this.RadioButtonPacient.UseVisualStyleBackColor = true;
             // 
             // RadioButtonTherapist
@@ -146,12 +146,13 @@ namespace Forms
             // 
             this.DateTimePickerDOB.CalendarFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DateTimePickerDOB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DateTimePickerDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DateTimePickerDOB.Location = new System.Drawing.Point(154, 104);
-            this.DateTimePickerDOB.MaxDate = new System.DateTime(2021, 5, 24, 0, 0, 0, 0);
+            this.DateTimePickerDOB.MaxDate = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             this.DateTimePickerDOB.Name = "DateTimePickerDOB";
-            this.DateTimePickerDOB.Size = new System.Drawing.Size(190, 29);
+            this.DateTimePickerDOB.Size = new System.Drawing.Size(263, 29);
             this.DateTimePickerDOB.TabIndex = 13;
-            this.DateTimePickerDOB.Value = new System.DateTime(2021, 5, 24, 0, 0, 0, 0);
+            this.DateTimePickerDOB.Value = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             // 
             // TextBoxPassword
             // 
@@ -225,7 +226,7 @@ namespace Forms
             // 
             this.LabelMissingBodyParts.AutoSize = true;
             this.LabelMissingBodyParts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelMissingBodyParts.Location = new System.Drawing.Point(7, 318);
+            this.LabelMissingBodyParts.Location = new System.Drawing.Point(-2, 318);
             this.LabelMissingBodyParts.Name = "LabelMissingBodyParts";
             this.LabelMissingBodyParts.Size = new System.Drawing.Size(141, 21);
             this.LabelMissingBodyParts.TabIndex = 20;
@@ -266,8 +267,10 @@ namespace Forms
             this.Controls.Add(this.TextBoxPhoneNumber);
             this.Controls.Add(this.LabelEmail);
             this.Controls.Add(this.LabelPhoneNumber);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SignUpScreen";
             this.Size = new System.Drawing.Size(557, 384);
+            this.Load += new System.EventHandler(this.SignUpScreen_Load);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);

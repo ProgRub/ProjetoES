@@ -13,6 +13,8 @@ namespace Forms
         public SignUpScreen()
         {
             InitializeComponent();
+            DateTimePickerDOB.MaxDate=DateTime.Today;
+            DateTimePickerDOB.Value=DateTime.Today;
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)
