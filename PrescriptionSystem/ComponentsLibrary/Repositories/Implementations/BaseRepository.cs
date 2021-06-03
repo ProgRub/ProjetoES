@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using ComponentsLibrary.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComponentsLibrary.Repositories
+namespace ComponentsLibrary.Repositories.Implementations
 {
     public class BaseRepository<T> : IGenericRepository<T> where T : class
     {

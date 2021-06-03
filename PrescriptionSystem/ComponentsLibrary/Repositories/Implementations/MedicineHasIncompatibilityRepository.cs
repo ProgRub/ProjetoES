@@ -1,6 +1,6 @@
 ﻿using ComponentsLibrary.Entities.PrescriptionItems;
 
-namespace ComponentsLibrary.Repositories
+namespace ComponentsLibrary.Repositories.Implementations
 {
     internal class MedicineHasIncompatibilityRepository:BaseRepository<MedicineHasIncompatibleMedicalConditions>
     {

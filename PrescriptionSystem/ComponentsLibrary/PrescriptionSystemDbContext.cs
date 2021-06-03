@@ -38,12 +38,25 @@ namespace ComponentsLibrary
             modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
-            modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
-            modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
         }
 
-        //Comando para adiconar alterações no context à DB na Package Manager Console  => Add-Migration 
-        //Commando para atualizar DB => Update-Database
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<HealthCareProfessional> HealthCareProfessionals { get; set; }
+        public DbSet<Therapist> Therapists { get; set; }
+        public DbSet<MedicalCondition> MedicalConditions { get; set; }
+        public DbSet<PrescriptionItem> PrescriptionItems { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Treatment> Treatments { get; set; }
+        public DbSet<TherapySession> TherapySessions { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseHasBodyParts> ExerciseHasBodyPartsEnumerable { get; set; }
+        public DbSet<MedicineHasIncompatibleMedicalConditions> MedicineHasIncompatibleMedicalConditionsEnumerable { get; set; }
+        public DbSet<PrescriptionHasPrescriptionItems> PrescriptionHasPrescriptionItemsEnumerable { get; set; }
+        public DbSet<PrescriptionHasViewers> PrescriptionHasViewersEnumerable { get; set; }
+        public DbSet<TherapySessionHasTreatments> TherapySessionHasTreatmentsEnumerable { get; set; }
+
+        //Comando na Package Manager Console para adicionar modificações no contexto à DB => Add-Migration 
+        //Comando na Package Manager Console para atualizar DB => Update-Database
     }
 }
