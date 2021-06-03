@@ -9,7 +9,7 @@ namespace ComponentsLibrary
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=PrescriptionSystemDb");
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDb");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
