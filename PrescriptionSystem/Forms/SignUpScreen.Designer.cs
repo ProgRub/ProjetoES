@@ -33,7 +33,7 @@ namespace Forms
             this.TextBoxPhoneNumber = new System.Windows.Forms.TextBox();
             this.LabelEmail = new System.Windows.Forms.Label();
             this.LabelPhoneNumber = new System.Windows.Forms.Label();
-            this.RadioButtonPacient = new System.Windows.Forms.RadioButton();
+            this.RadioButtonPatient = new System.Windows.Forms.RadioButton();
             this.RadioButtonTherapist = new System.Windows.Forms.RadioButton();
             this.TextBoxName = new System.Windows.Forms.TextBox();
             this.LabelDOB = new System.Windows.Forms.Label();
@@ -90,17 +90,17 @@ namespace Forms
             this.LabelPhoneNumber.TabIndex = 4;
             this.LabelPhoneNumber.Text = "Phone Number";
             // 
-            // RadioButtonPacient
+            // RadioButtonPatient
             // 
-            this.RadioButtonPacient.AutoSize = true;
-            this.RadioButtonPacient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RadioButtonPacient.Location = new System.Drawing.Point(168, 18);
-            this.RadioButtonPacient.Name = "RadioButtonPacient";
-            this.RadioButtonPacient.Size = new System.Drawing.Size(75, 25);
-            this.RadioButtonPacient.TabIndex = 8;
-            this.RadioButtonPacient.TabStop = true;
-            this.RadioButtonPacient.Text = "Patient";
-            this.RadioButtonPacient.UseVisualStyleBackColor = true;
+            this.RadioButtonPatient.AutoSize = true;
+            this.RadioButtonPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.RadioButtonPatient.Location = new System.Drawing.Point(168, 18);
+            this.RadioButtonPatient.Name = "RadioButtonPatient";
+            this.RadioButtonPatient.Size = new System.Drawing.Size(75, 25);
+            this.RadioButtonPatient.TabIndex = 8;
+            this.RadioButtonPatient.TabStop = true;
+            this.RadioButtonPatient.Text = "Patient";
+            this.RadioButtonPatient.UseVisualStyleBackColor = true;
             // 
             // RadioButtonTherapist
             // 
@@ -241,12 +241,12 @@ namespace Forms
             this.ButtonSignUp.TabIndex = 22;
             this.ButtonSignUp.Text = "Sign Up";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
+            this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // SignUpScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.ButtonSignUp);
             this.Controls.Add(this.CheckBoxExampleMBP);
@@ -262,7 +262,7 @@ namespace Forms
             this.Controls.Add(this.LabelDOB);
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.RadioButtonTherapist);
-            this.Controls.Add(this.RadioButtonPacient);
+            this.Controls.Add(this.RadioButtonPatient);
             this.Controls.Add(this.TextBoxEmail);
             this.Controls.Add(this.TextBoxPhoneNumber);
             this.Controls.Add(this.LabelEmail);
@@ -270,12 +270,11 @@ namespace Forms
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SignUpScreen";
             this.Size = new System.Drawing.Size(557, 384);
-            this.Load += new System.EventHandler(this.SignUpScreen_Load);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);
             this.Controls.SetChildIndex(this.TextBoxEmail, 0);
-            this.Controls.SetChildIndex(this.RadioButtonPacient, 0);
+            this.Controls.SetChildIndex(this.RadioButtonPatient, 0);
             this.Controls.SetChildIndex(this.RadioButtonTherapist, 0);
             this.Controls.SetChildIndex(this.LabelName, 0);
             this.Controls.SetChildIndex(this.LabelDOB, 0);
@@ -302,7 +301,7 @@ namespace Forms
         private System.Windows.Forms.TextBox TextBoxPhoneNumber;
         private System.Windows.Forms.Label LabelEmail;
         private System.Windows.Forms.Label LabelPhoneNumber;
-        private System.Windows.Forms.RadioButton RadioButtonPacient;
+        private System.Windows.Forms.RadioButton RadioButtonPatient;
         private System.Windows.Forms.RadioButton RadioButtonTherapist;
         private System.Windows.Forms.TextBox TextBoxName;
         private System.Windows.Forms.Label LabelDOB;
