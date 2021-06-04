@@ -34,7 +34,7 @@ namespace ServicesLibrary
             AgeMininumNotValid = 16,
             AgeMaxinumNotValid = 17,
             PriceNotValid = 18;
-
+        #endregion
         #region LoggingIn
 
         public const int EmailDoesntExist = 1, PasswordDoesntMatch = 2;
