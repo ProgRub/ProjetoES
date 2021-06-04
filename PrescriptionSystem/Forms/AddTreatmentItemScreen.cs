@@ -1,8 +1,11 @@
-﻿using System;
+﻿using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -62,7 +65,24 @@ namespace Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var treatmentName = textBoxTreatmentName.Text;
+            var treatmentDescription = textBoxTreatmentDescription.Text;
+            var treatmentAgeMinimum = int.Parse(textBoxMinAge.Text);
+            var treatmentAgeMaximum = int.Parse(textBoxMaxAge.Text);
+            var treatmentDuration = dateTimePickerDuration.Value.TimeOfDay;
 
+            var bodyPart = "";
+            foreach (RadioButton rdo in groupBox1.Controls.OfType<RadioButton>())
+            {
+                if (rdo.Checked)
+                {
+                    bodyPart = rdo.Text;
+                    break;
+                }
+            }
+            
+            Services.Instance.CreateTreatmentPrescriptionItem(treatmentName, treatmentDescription,
+                treatmentAgeMinimum, treatmentAgeMaximum, treatmentDuration, bodyPart);
         }
 
         private void label7_Click(object sender, EventArgs e)
