@@ -1,6 +1,8 @@
-﻿namespace ComponentsLibrary.Repositories.Interfaces
+﻿using ComponentsLibrary.Entities.PrescriptionItems;
+
+namespace ComponentsLibrary.Repositories.Interfaces
 {
-    public interface ITreatmentRepository
+    public interface ITreatmentRepository:IGenericRepository<Treatment>
     {
     }
 }

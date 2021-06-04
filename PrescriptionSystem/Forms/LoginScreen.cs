@@ -25,5 +25,10 @@ namespace Forms
         {
             MoveToScreen(new SignUpScreen());
         }
+
+        private void LoginScreen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

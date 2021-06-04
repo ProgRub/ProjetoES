@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class AddMedicineItem : BaseControl
+    public partial class AddTreatmentItemScreen : BaseControl
     {
-        public AddMedicineItem()
+        public AddTreatmentItemScreen()
         {
             InitializeComponent();
         }
@@ -78,6 +78,11 @@ namespace Forms
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new AddPrescriptionItemScreen());
         }
     }
 }

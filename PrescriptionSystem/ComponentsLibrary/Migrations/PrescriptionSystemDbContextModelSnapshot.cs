@@ -41,31 +41,6 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HealthUserNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.ToTable("HealthCareProfessional");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.Item");
@@ -80,31 +55,48 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("MedicalCondition");
-                });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HealthUserNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.ToTable("Patient");
+                    b.HasData(
+                        new
+                        {
+                            Id = 11,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Penicillin",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Aspirin",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Ibuprofen",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Hypertension",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Zombie = false,
+                            Description = "This type of arthritis affects specifically the knees",
+                            Name = "Knee Osteoarthritis",
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.Prescription", b =>
@@ -210,6 +202,7 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("PrescriptionItem");
@@ -261,11 +254,64 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("TherapySessionHasTreatments");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+            modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
-                    b.HasBaseType("ComponentsLibrary.Entities.HealthCareProfessional");
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
 
-                    b.ToTable("Therapist");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HealthUserNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
+
+                    b.Property<int?>("MedicalConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("MedicalConditionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHasMedicalCondition");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
+
+                    b.Property<int>("BodyPart")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHasMissingBodyPart");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
@@ -273,15 +319,51 @@ namespace ComponentsLibrary.Migrations
                     b.HasBaseType("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem");
 
                     b.Property<int>("AgeMaximum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(150);
 
                     b.Property<int>("AgeMinimum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
                     b.ToTable("Exercise");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 8,
+                            Zombie = false,
+                            Description = "From standing up, drop into a high plank and then jump your feet to your hands, stand up and jump with your arms up. Repeat.",
+                            Name = "Burpees",
+                            AgeMaximum = 50,
+                            AgeMinimum = 15,
+                            Duration = new TimeSpan(0, 0, 10, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Pushups",
+                            AgeMaximum = 78,
+                            AgeMinimum = 8,
+                            Duration = new TimeSpan(0, 0, 20, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Zombie = false,
+                            Description = "Make sure your knees don't go in front of your feet",
+                            Name = "Squats",
+                            AgeMaximum = 0,
+                            AgeMinimum = 5,
+                            Duration = new TimeSpan(0, 0, 15, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Medicine", b =>
@@ -292,6 +374,32 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("float");
 
                     b.ToTable("Medicine");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Penicillin",
+                            Price = 2.3199999999999998
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Streptomycin",
+                            Price = 4.5700000000000003
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Zombie = false,
+                            Description = "",
+                            Name = "Pyrazolones",
+                            Price = 12.4
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Treatment", b =>
@@ -299,10 +407,14 @@ namespace ComponentsLibrary.Migrations
                     b.HasBaseType("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem");
 
                     b.Property<int>("AgeMaximum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(150);
 
                     b.Property<int>("AgeMinimum")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("BodyPart")
                         .HasColumnType("int");
@@ -311,15 +423,73 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("time");
 
                     b.ToTable("Treatment");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 4,
+                            Zombie = false,
+                            Description = "Treatment given to people with torn triceps on their right arm",
+                            Name = "Torn Triceps",
+                            AgeMaximum = 0,
+                            AgeMinimum = 0,
+                            BodyPart = 3,
+                            Duration = new TimeSpan(0, 0, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Zombie = false,
+                            Description = "Treatment given to people with torn triceps on their left arm",
+                            Name = "Torn Triceps",
+                            AgeMaximum = 0,
+                            AgeMinimum = 0,
+                            BodyPart = 2,
+                            Duration = new TimeSpan(0, 0, 30, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Zombie = false,
+                            Description = "An ice pack is needed for this treatment",
+                            Name = "Hyper-extended Knee",
+                            AgeMaximum = 0,
+                            AgeMinimum = 0,
+                            BodyPart = 4,
+                            Duration = new TimeSpan(0, 1, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Zombie = false,
+                            Description = "An ice pack is needed for this treatment",
+                            Name = "Hyper-extended Knee",
+                            AgeMaximum = 0,
+                            AgeMinimum = 0,
+                            BodyPart = 5,
+                            Duration = new TimeSpan(0, 1, 0, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
                 {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.HealthCareProfessional", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                    b.HasBaseType("ComponentsLibrary.Entities.User");
+
+                    b.ToTable("HealthCareProfessional");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.User");
+
+                    b.ToTable("Patient");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.HealthCareProfessional");
+
+                    b.ToTable("Therapist");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
@@ -327,15 +497,6 @@ namespace ComponentsLibrary.Migrations
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
                         .WithOne()
                         .HasForeignKey("ComponentsLibrary.Entities.MedicalCondition", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });
@@ -490,13 +651,49 @@ namespace ComponentsLibrary.Migrations
                     b.Navigation("Treatment");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+            modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
-                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", null)
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
                         .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.Therapist", "Id")
+                        .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMedicalCondition", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.MedicalCondition", "MedicalCondition")
+                        .WithMany()
+                        .HasForeignKey("MedicalConditionId");
+
+                    b.HasOne("ComponentsLibrary.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("MedicalCondition");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMissingBodyPart", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
@@ -522,6 +719,33 @@ namespace ComponentsLibrary.Migrations
                     b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", null)
                         .WithOne()
                         .HasForeignKey("ComponentsLibrary.Entities.PrescriptionItems.Treatment", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.HealthCareProfessional", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Patient", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.Patient", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Therapist", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.Therapist", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
                 });

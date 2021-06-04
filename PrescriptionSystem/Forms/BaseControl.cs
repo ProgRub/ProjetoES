@@ -13,11 +13,12 @@ namespace Forms
         public BaseControl()
         {
             InitializeComponent();
+            AutoSize = true;
         }
 
         protected void MoveToScreen(BaseControl newControl)
         {
-            Window window = ((Window) Parent);
+            var window = ((Window) Parent);
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);
@@ -27,6 +28,13 @@ namespace Forms
         {
             ButtonBack.Enabled = false;
             ButtonBack.Visible = false;
+        }
+        protected void ClearTextbox(TextBox textBox) => textBox.Text = "";
+
+        protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
+        {
+            ClearTextbox(textBox);
+            textBox.PlaceholderText = errorMessage;
         }
     }
 }

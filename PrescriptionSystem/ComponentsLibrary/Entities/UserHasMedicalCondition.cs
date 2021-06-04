@@ -3,6 +3,6 @@
     public class UserHasMedicalCondition:Item
     {
         public User User { get; set; }
-        public BodyPart BodyPart { get; set; }
+        public MedicalCondition MedicalCondition { get; set; }
     }
 }
