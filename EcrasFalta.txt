@@ -1,0 +1,8 @@
+Criar Prescrição/Alterar Prescrição
+Adicionar permissão a prescrição
+Criar Sessão Tratamento
+
+Ecrã pós sessão de tratamento
+Histórico de Prescrições
+Form separado de notificação (pop-up) (Messagebox)
+

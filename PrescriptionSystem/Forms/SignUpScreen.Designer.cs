@@ -57,26 +57,28 @@ namespace Forms
             // TextBoxEmail
             // 
             this.TextBoxEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxEmail.Location = new System.Drawing.Point(154, 171);
+            this.TextBoxEmail.Location = new System.Drawing.Point(176, 228);
+            this.TextBoxEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxEmail.Name = "TextBoxEmail";
-            this.TextBoxEmail.Size = new System.Drawing.Size(400, 29);
+            this.TextBoxEmail.Size = new System.Drawing.Size(457, 34);
             this.TextBoxEmail.TabIndex = 7;
             // 
             // TextBoxPhoneNumber
             // 
             this.TextBoxPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxPhoneNumber.Location = new System.Drawing.Point(154, 136);
+            this.TextBoxPhoneNumber.Location = new System.Drawing.Point(176, 181);
+            this.TextBoxPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber";
-            this.TextBoxPhoneNumber.Size = new System.Drawing.Size(400, 29);
+            this.TextBoxPhoneNumber.Size = new System.Drawing.Size(457, 34);
             this.TextBoxPhoneNumber.TabIndex = 6;
             // 
             // LabelEmail
             // 
             this.LabelEmail.AutoSize = true;
             this.LabelEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelEmail.Location = new System.Drawing.Point(94, 174);
+            this.LabelEmail.Location = new System.Drawing.Point(107, 232);
             this.LabelEmail.Name = "LabelEmail";
-            this.LabelEmail.Size = new System.Drawing.Size(54, 21);
+            this.LabelEmail.Size = new System.Drawing.Size(67, 28);
             this.LabelEmail.TabIndex = 5;
             this.LabelEmail.Text = "E-mail";
             // 
@@ -84,9 +86,9 @@ namespace Forms
             // 
             this.LabelPhoneNumber.AutoSize = true;
             this.LabelPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelPhoneNumber.Location = new System.Drawing.Point(32, 139);
+            this.LabelPhoneNumber.Location = new System.Drawing.Point(37, 185);
             this.LabelPhoneNumber.Name = "LabelPhoneNumber";
-            this.LabelPhoneNumber.Size = new System.Drawing.Size(116, 21);
+            this.LabelPhoneNumber.Size = new System.Drawing.Size(144, 28);
             this.LabelPhoneNumber.TabIndex = 4;
             this.LabelPhoneNumber.Text = "Phone Number";
             // 
@@ -107,9 +109,10 @@ namespace Forms
             // 
             this.RadioButtonTherapist.AutoSize = true;
             this.RadioButtonTherapist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RadioButtonTherapist.Location = new System.Drawing.Point(283, 18);
+            this.RadioButtonTherapist.Location = new System.Drawing.Point(323, 24);
+            this.RadioButtonTherapist.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.RadioButtonTherapist.Name = "RadioButtonTherapist";
-            this.RadioButtonTherapist.Size = new System.Drawing.Size(92, 25);
+            this.RadioButtonTherapist.Size = new System.Drawing.Size(113, 32);
             this.RadioButtonTherapist.TabIndex = 9;
             this.RadioButtonTherapist.Text = "Therapist";
             this.RadioButtonTherapist.UseVisualStyleBackColor = true;
@@ -117,18 +120,19 @@ namespace Forms
             // TextBoxName
             // 
             this.TextBoxName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxName.Location = new System.Drawing.Point(154, 66);
+            this.TextBoxName.Location = new System.Drawing.Point(176, 88);
+            this.TextBoxName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxName.Name = "TextBoxName";
-            this.TextBoxName.Size = new System.Drawing.Size(400, 29);
+            this.TextBoxName.Size = new System.Drawing.Size(457, 34);
             this.TextBoxName.TabIndex = 12;
             // 
             // LabelDOB
             // 
             this.LabelDOB.AutoSize = true;
             this.LabelDOB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelDOB.Location = new System.Drawing.Point(51, 104);
+            this.LabelDOB.Location = new System.Drawing.Point(58, 139);
             this.LabelDOB.Name = "LabelDOB";
-            this.LabelDOB.Size = new System.Drawing.Size(97, 21);
+            this.LabelDOB.Size = new System.Drawing.Size(122, 28);
             this.LabelDOB.TabIndex = 11;
             this.LabelDOB.Text = "Date of Birth";
             // 
@@ -136,9 +140,9 @@ namespace Forms
             // 
             this.LabelName.AutoSize = true;
             this.LabelName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelName.Location = new System.Drawing.Point(96, 69);
+            this.LabelName.Location = new System.Drawing.Point(110, 92);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(52, 21);
+            this.LabelName.Size = new System.Drawing.Size(64, 28);
             this.LabelName.TabIndex = 10;
             this.LabelName.Text = "Name";
             // 
@@ -157,36 +161,38 @@ namespace Forms
             // TextBoxPassword
             // 
             this.TextBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxPassword.Location = new System.Drawing.Point(154, 206);
+            this.TextBoxPassword.Location = new System.Drawing.Point(176, 275);
+            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxPassword.Name = "TextBoxPassword";
-            this.TextBoxPassword.Size = new System.Drawing.Size(400, 29);
+            this.TextBoxPassword.Size = new System.Drawing.Size(457, 34);
             this.TextBoxPassword.TabIndex = 15;
             // 
             // LabelPassword
             // 
             this.LabelPassword.AutoSize = true;
             this.LabelPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelPassword.Location = new System.Drawing.Point(72, 209);
+            this.LabelPassword.Location = new System.Drawing.Point(82, 279);
             this.LabelPassword.Name = "LabelPassword";
-            this.LabelPassword.Size = new System.Drawing.Size(76, 21);
+            this.LabelPassword.Size = new System.Drawing.Size(93, 28);
             this.LabelPassword.TabIndex = 14;
             this.LabelPassword.Text = "Password";
             // 
             // TextBoxHealthUserNumber
             // 
             this.TextBoxHealthUserNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxHealthUserNumber.Location = new System.Drawing.Point(154, 241);
+            this.TextBoxHealthUserNumber.Location = new System.Drawing.Point(176, 321);
+            this.TextBoxHealthUserNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxHealthUserNumber.Name = "TextBoxHealthUserNumber";
-            this.TextBoxHealthUserNumber.Size = new System.Drawing.Size(400, 29);
+            this.TextBoxHealthUserNumber.Size = new System.Drawing.Size(457, 34);
             this.TextBoxHealthUserNumber.TabIndex = 17;
             // 
             // LabelHealthUserNumber
             // 
             this.LabelHealthUserNumber.AutoSize = true;
             this.LabelHealthUserNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelHealthUserNumber.Location = new System.Drawing.Point(3, 244);
+            this.LabelHealthUserNumber.Location = new System.Drawing.Point(3, 325);
             this.LabelHealthUserNumber.Name = "LabelHealthUserNumber";
-            this.LabelHealthUserNumber.Size = new System.Drawing.Size(145, 21);
+            this.LabelHealthUserNumber.Size = new System.Drawing.Size(180, 28);
             this.LabelHealthUserNumber.TabIndex = 16;
             this.LabelHealthUserNumber.Text = "HealthUserNumber";
             // 
@@ -194,9 +200,9 @@ namespace Forms
             // 
             this.LabelAllergies.AutoSize = true;
             this.LabelAllergies.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelAllergies.Location = new System.Drawing.Point(72, 282);
+            this.LabelAllergies.Location = new System.Drawing.Point(82, 376);
             this.LabelAllergies.Name = "LabelAllergies";
-            this.LabelAllergies.Size = new System.Drawing.Size(70, 21);
+            this.LabelAllergies.Size = new System.Drawing.Size(87, 28);
             this.LabelAllergies.TabIndex = 18;
             this.LabelAllergies.Text = "Allergies";
             // 
@@ -204,9 +210,10 @@ namespace Forms
             // 
             this.ChecBoxExample.AutoSize = true;
             this.ChecBoxExample.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ChecBoxExample.Location = new System.Drawing.Point(154, 282);
+            this.ChecBoxExample.Location = new System.Drawing.Point(176, 376);
+            this.ChecBoxExample.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ChecBoxExample.Name = "ChecBoxExample";
-            this.ChecBoxExample.Size = new System.Drawing.Size(78, 25);
+            this.ChecBoxExample.Size = new System.Drawing.Size(96, 32);
             this.ChecBoxExample.TabIndex = 19;
             this.ChecBoxExample.Text = "Allergy";
             this.ChecBoxExample.UseVisualStyleBackColor = true;
@@ -215,9 +222,10 @@ namespace Forms
             // 
             this.CheckBoxExampleMBP.AutoSize = true;
             this.CheckBoxExampleMBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CheckBoxExampleMBP.Location = new System.Drawing.Point(154, 318);
+            this.CheckBoxExampleMBP.Location = new System.Drawing.Point(176, 424);
+            this.CheckBoxExampleMBP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CheckBoxExampleMBP.Name = "CheckBoxExampleMBP";
-            this.CheckBoxExampleMBP.Size = new System.Drawing.Size(95, 25);
+            this.CheckBoxExampleMBP.Size = new System.Drawing.Size(118, 32);
             this.CheckBoxExampleMBP.TabIndex = 21;
             this.CheckBoxExampleMBP.Text = "Body Part";
             this.CheckBoxExampleMBP.UseVisualStyleBackColor = true;
@@ -228,16 +236,17 @@ namespace Forms
             this.LabelMissingBodyParts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LabelMissingBodyParts.Location = new System.Drawing.Point(-2, 318);
             this.LabelMissingBodyParts.Name = "LabelMissingBodyParts";
-            this.LabelMissingBodyParts.Size = new System.Drawing.Size(141, 21);
+            this.LabelMissingBodyParts.Size = new System.Drawing.Size(176, 28);
             this.LabelMissingBodyParts.TabIndex = 20;
             this.LabelMissingBodyParts.Text = "Missing Body Parts";
             // 
             // ButtonSignUp
             // 
             this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonSignUp.Location = new System.Drawing.Point(279, 348);
+            this.ButtonSignUp.Location = new System.Drawing.Point(319, 464);
+            this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSignUp.Name = "ButtonSignUp";
-            this.ButtonSignUp.Size = new System.Drawing.Size(96, 33);
+            this.ButtonSignUp.Size = new System.Drawing.Size(110, 44);
             this.ButtonSignUp.TabIndex = 22;
             this.ButtonSignUp.Text = "Sign Up";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
@@ -245,10 +254,9 @@ namespace Forms
             // 
             // SignUpScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ButtonSignUp);
             this.Controls.Add(this.CheckBoxExampleMBP);
             this.Controls.Add(this.LabelMissingBodyParts);
@@ -270,7 +278,8 @@ namespace Forms
             this.Controls.Add(this.LabelPhoneNumber);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SignUpScreen";
-            this.Size = new System.Drawing.Size(557, 384);
+            this.Size = new System.Drawing.Size(637, 512);
+            this.Load += new System.EventHandler(this.SignUpScreen_Load);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);

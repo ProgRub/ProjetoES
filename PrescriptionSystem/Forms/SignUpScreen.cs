@@ -107,5 +107,10 @@ namespace Forms
                 }
             }
         }
+
+        private void SignUpScreen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

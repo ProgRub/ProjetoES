@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class AddExerciseItemScreen : BaseControl
+    public partial class AddInformationTherapySessionScreen : BaseControl
     {
-        public AddExerciseItemScreen()
+        public AddInformationTherapySessionScreen()
         {
             InitializeComponent();
         }
@@ -20,9 +20,9 @@ namespace Forms
 
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddPrescriptionItemScreen());
+
         }
     }
 }
