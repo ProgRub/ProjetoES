@@ -31,20 +31,28 @@ namespace Forms
         {
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxTreatmentName = new System.Windows.Forms.TextBox();
+            this.textBoxTreatmentDescription = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBoxTreatmentNote = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBoxMinAge = new System.Windows.Forms.TextBox();
+            this.textBoxMaxAge = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDuration = new System.Windows.Forms.DateTimePicker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.Head = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonBack
@@ -55,7 +63,7 @@ namespace Forms
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.ForestGreen;
-            this.button1.Location = new System.Drawing.Point(221, 503);
+            this.button1.Location = new System.Drawing.Point(226, 551);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 43);
             this.button1.TabIndex = 6;
@@ -74,26 +82,19 @@ namespace Forms
             this.label1.Text = "Create Treatment Prescription Item";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // textBoxTreatmentName
             // 
-            this.textBox1.Location = new System.Drawing.Point(174, 85);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 27);
-            this.textBox1.TabIndex = 10;
+            this.textBoxTreatmentName.Location = new System.Drawing.Point(174, 85);
+            this.textBoxTreatmentName.Name = "textBoxTreatmentName";
+            this.textBoxTreatmentName.Size = new System.Drawing.Size(250, 27);
+            this.textBoxTreatmentName.TabIndex = 10;
             // 
-            // textBox2
+            // textBoxTreatmentDescription
             // 
-            this.textBox2.Location = new System.Drawing.Point(174, 145);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(250, 27);
-            this.textBox2.TabIndex = 11;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(174, 203);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(250, 27);
-            this.textBox3.TabIndex = 12;
+            this.textBoxTreatmentDescription.Location = new System.Drawing.Point(174, 145);
+            this.textBoxTreatmentDescription.Name = "textBoxTreatmentDescription";
+            this.textBoxTreatmentDescription.Size = new System.Drawing.Size(250, 27);
+            this.textBoxTreatmentDescription.TabIndex = 11;
             // 
             // label2
             // 
@@ -115,61 +116,51 @@ namespace Forms
             this.label3.Text = "Description:";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(93, 203);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 20);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Body Part:";
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(123, 266);
+            this.label7.Location = new System.Drawing.Point(123, 203);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(45, 20);
             this.label7.TabIndex = 22;
             this.label7.Text = "Note:";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // textBox5
+            // textBoxTreatmentNote
             // 
-            this.textBox5.Location = new System.Drawing.Point(174, 266);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(250, 27);
-            this.textBox5.TabIndex = 21;
+            this.textBoxTreatmentNote.Location = new System.Drawing.Point(174, 203);
+            this.textBoxTreatmentNote.Name = "textBoxTreatmentNote";
+            this.textBoxTreatmentNote.Size = new System.Drawing.Size(250, 27);
+            this.textBoxTreatmentNote.TabIndex = 21;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(98, 328);
+            this.label4.Location = new System.Drawing.Point(98, 259);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 20);
             this.label4.TabIndex = 24;
             this.label4.Text = "Duration:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox7
+            // textBoxMinAge
             // 
-            this.textBox7.Location = new System.Drawing.Point(174, 385);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(45, 27);
-            this.textBox7.TabIndex = 25;
+            this.textBoxMinAge.Location = new System.Drawing.Point(174, 305);
+            this.textBoxMinAge.Name = "textBoxMinAge";
+            this.textBoxMinAge.Size = new System.Drawing.Size(45, 27);
+            this.textBoxMinAge.TabIndex = 25;
             // 
-            // textBox8
+            // textBoxMaxAge
             // 
-            this.textBox8.Location = new System.Drawing.Point(249, 385);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(45, 27);
-            this.textBox8.TabIndex = 26;
+            this.textBoxMaxAge.Location = new System.Drawing.Point(247, 308);
+            this.textBoxMaxAge.Name = "textBoxMaxAge";
+            this.textBoxMaxAge.Size = new System.Drawing.Size(45, 27);
+            this.textBoxMaxAge.TabIndex = 26;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 385);
+            this.label5.Location = new System.Drawing.Point(127, 308);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 20);
             this.label5.TabIndex = 27;
@@ -178,62 +169,167 @@ namespace Forms
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(228, 388);
+            this.label8.Location = new System.Drawing.Point(226, 311);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(15, 20);
             this.label8.TabIndex = 28;
             this.label8.Text = "-";
             // 
-            // dateTimePicker1
+            // dateTimePickerDuration
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker1.Location = new System.Drawing.Point(174, 323);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
-            this.dateTimePicker1.TabIndex = 29;
+            this.dateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerDuration.Location = new System.Drawing.Point(174, 259);
+            this.dateTimePickerDuration.Name = "dateTimePickerDuration";
+            this.dateTimePickerDuration.ShowUpDown = true;
+            this.dateTimePickerDuration.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePickerDuration.TabIndex = 29;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton7);
+            this.groupBox1.Controls.Add(this.radioButton6);
+            this.groupBox1.Controls.Add(this.radioButton5);
+            this.groupBox1.Controls.Add(this.radioButton4);
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.Head);
+            this.groupBox1.Location = new System.Drawing.Point(174, 361);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(250, 157);
+            this.groupBox1.TabIndex = 31;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Body Part:";
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(133, 118);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(95, 24);
+            this.radioButton7.TabIndex = 7;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "RightFoot";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(133, 87);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(85, 24);
+            this.radioButton6.TabIndex = 6;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "LeftFoot";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(133, 56);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(89, 24);
+            this.radioButton5.TabIndex = 5;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "RightLeg";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(133, 26);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(79, 24);
+            this.radioButton4.TabIndex = 4;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "LeftLeg";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(7, 117);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(66, 24);
+            this.radioButton3.TabIndex = 3;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Torso";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 86);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(93, 24);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "RightArm";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 56);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(83, 24);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "LeftArm";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // Head
+            // 
+            this.Head.AutoSize = true;
+            this.Head.Location = new System.Drawing.Point(6, 26);
+            this.Head.Name = "Head";
+            this.Head.Size = new System.Drawing.Size(66, 24);
+            this.Head.TabIndex = 0;
+            this.Head.TabStop = true;
+            this.Head.Text = "Head";
+            this.Head.UseVisualStyleBackColor = true;
             // 
             // AddTreatmentItemScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dateTimePickerDuration);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBoxMaxAge);
+            this.Controls.Add(this.textBoxMinAge);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBoxTreatmentNote);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxTreatmentDescription);
+            this.Controls.Add(this.textBoxTreatmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "AddTreatmentItemScreen";
-            this.Size = new System.Drawing.Size(546, 555);
+            this.Size = new System.Drawing.Size(532, 612);
             this.Load += new System.EventHandler(this.AddMedicineItem_Load);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
-            this.Controls.SetChildIndex(this.textBox2, 0);
-            this.Controls.SetChildIndex(this.textBox3, 0);
+            this.Controls.SetChildIndex(this.textBoxTreatmentName, 0);
+            this.Controls.SetChildIndex(this.textBoxTreatmentDescription, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.textBox5, 0);
+            this.Controls.SetChildIndex(this.textBoxTreatmentNote, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.textBox7, 0);
-            this.Controls.SetChildIndex(this.textBox8, 0);
+            this.Controls.SetChildIndex(this.textBoxMinAge, 0);
+            this.Controls.SetChildIndex(this.textBoxMaxAge, 0);
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label8, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
+            this.Controls.SetChildIndex(this.dateTimePickerDuration, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,19 +339,26 @@ namespace Forms
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxTreatmentName;
+        private System.Windows.Forms.TextBox textBoxTreatmentDescription;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox textBoxTreatmentNote;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBoxMinAge;
+        private System.Windows.Forms.TextBox textBoxMaxAge;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDuration;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton Head;
     }
 }

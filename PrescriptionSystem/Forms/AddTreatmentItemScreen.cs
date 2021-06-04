@@ -1,8 +1,11 @@
-﻿using System;
+﻿using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -62,7 +65,54 @@ namespace Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var errorCodes = Services.Instance.CheckExerciseAndTreatmentCreation(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
+               textBoxMinAge.Text, textBoxMaxAge.Text);
 
+            var bodyPart = "";
+            foreach (RadioButton rdo in groupBox1.Controls.OfType<RadioButton>())
+            {
+                if (rdo.Checked)
+                {
+                    bodyPart = rdo.Text;
+                    break;
+                }
+            }
+            if (errorCodes.Any())
+            {
+                ShowErrorMessages(errorCodes);
+            }
+            else
+            {
+                Services.Instance.CreateTreatmentPrescriptionItem(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
+                    int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyPart);
+            }
+            
+        }
+
+        private void ShowErrorMessages(IEnumerable<int> errorCodes)
+        {
+            foreach (var error in errorCodes)
+            {
+                switch (error)
+                {
+                    case Services.NameRequired:
+                        ShowTextBoxErrorMessage(textBoxTreatmentName, "Name is required!");
+                        textBoxTreatmentName.BackColor = Color.Salmon;
+                        break;
+                    case Services.DescriptionRequired:
+                        ShowTextBoxErrorMessage(textBoxTreatmentDescription, "Description is required!");
+                        textBoxTreatmentDescription.BackColor = Color.Salmon;
+                        break;
+                    case Services.AgeMininumNotValid:
+                        ShowTextBoxErrorMessage(textBoxMinAge, "Age mininum is required!");
+                        textBoxMinAge.BackColor = Color.Salmon;
+                        break;
+                    case Services.AgeMaxinumNotValid:
+                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maxinum is required!");
+                        textBoxMaxAge.BackColor = Color.Salmon;
+                        break;
+                }
+            }
         }
 
         private void label7_Click(object sender, EventArgs e)

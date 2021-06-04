@@ -36,20 +36,23 @@ namespace Forms
             // 
             this.ButtonBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonBack.Location = new System.Drawing.Point(0, 0);
+            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonBack.Name = "ButtonBack";
-            this.ButtonBack.Size = new System.Drawing.Size(59, 29);
+            this.ButtonBack.Size = new System.Drawing.Size(67, 39);
             this.ButtonBack.TabIndex = 5;
             this.ButtonBack.Text = "Back";
             this.ButtonBack.UseVisualStyleBackColor = true;
             // 
             // BaseControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.ButtonBack);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BaseControl";
-            this.Size = new System.Drawing.Size(575, 419);
+            this.Size = new System.Drawing.Size(657, 559);
+            this.Load += new System.EventHandler(this.BaseControl_Load);
             this.ResumeLayout(false);
 
         }

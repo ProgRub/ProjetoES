@@ -29,8 +29,11 @@ namespace ServicesLibrary
             EmailNotValid = 11,
             EmailAlreadyExists = 12,
             HealthUserNumberAlreadyExists = 13,
-            TherapistNotOldEnough = 14;
-        #endregion
+            TherapistNotOldEnough = 14,
+            DescriptionRequired = 15,
+            AgeMininumNotValid = 16,
+            AgeMaxinumNotValid = 17,
+            PriceNotValid = 18;
 
         #region LoggingIn
 
@@ -109,6 +112,53 @@ namespace ServicesLibrary
         {
             _userService.RegisterUser(name, dateOfBirth, phoneNumber, healthUserNumber, email,
                 password, allergies, diseases, missingBodyParts, userType);
+        }
+
+        public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+            TimeSpan duration, IEnumerable<string> bodyParts)
+        {
+            _prescriptionItemService.CreateExercisePrescriptionItem(name, description, ageMinimum, ageMaximum, duration, bodyParts);
+
+        }
+
+        public void CreateMedicinePrescriptionItem(string name, string description, double price, IEnumerable<string> allergies, IEnumerable<string> diseases)
+        {
+            _prescriptionItemService.CreateMedicinePrescriptionItem(name, description, price, allergies, diseases);
+        }
+
+        public void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+            TimeSpan duration, string bodyPart)
+        {
+            _prescriptionItemService.CreateTreatmentPrescriptionItem(name, description, ageMinimum, ageMaximum, duration, bodyPart);
+        }
+
+        public IEnumerable<int> CheckExerciseAndTreatmentCreation(string name, string description, string ageMinimum, string ageMaximum)
+        {
+            var errorCodes = new List<int>();
+
+            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
+
+            if (!int.TryParse(ageMinimum, out _)) errorCodes.Add(AgeMininumNotValid);
+            else if (string.IsNullOrWhiteSpace(ageMinimum)) errorCodes.Add(AgeMininumNotValid);
+
+            if (!int.TryParse(ageMaximum, out _)) errorCodes.Add(AgeMaxinumNotValid);
+            else if (string.IsNullOrWhiteSpace(ageMaximum)) errorCodes.Add(AgeMaxinumNotValid);
+
+            return errorCodes;
+        }
+
+        public IEnumerable<int> CheckMedicineCreation(string name, string description, string price)
+        {
+            var errorCodes = new List<int>();
+
+            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
+
+            if (!Double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
+            else if (string.IsNullOrWhiteSpace(price)) errorCodes.Add(PriceNotValid);
+
+            return errorCodes;
         }
 
         public int Login(string email, string password)

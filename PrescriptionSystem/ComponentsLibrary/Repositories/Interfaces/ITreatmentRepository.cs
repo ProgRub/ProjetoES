@@ -1,4 +1,5 @@
-﻿using ComponentsLibrary.Entities.PrescriptionItems;
+﻿using ComponentsLibrary.Entities;
+using ComponentsLibrary.Entities.PrescriptionItems;
 
 namespace ComponentsLibrary.Repositories.Interfaces
 {

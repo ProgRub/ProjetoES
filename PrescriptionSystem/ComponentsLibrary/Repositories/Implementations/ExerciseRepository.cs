@@ -1,4 +1,5 @@
-﻿using ComponentsLibrary.Entities.PrescriptionItems;
+﻿using ComponentsLibrary.Entities;
+using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
 
 namespace ComponentsLibrary.Repositories.Implementations
@@ -10,5 +11,11 @@ namespace ComponentsLibrary.Repositories.Implementations
         {
             _exerciseHasBodyPartRepository = new ExerciseHasBodyPartRepository(context);
         }
+
+        public void AddBodyPartsToExercise(Exercise exercise, BodyPart bodyPart)
+        {
+            _exerciseHasBodyPartRepository.Add(new ExerciseHasBodyParts {Exercise = exercise, BodyPart = bodyPart});
+        }
+
     }
 }
