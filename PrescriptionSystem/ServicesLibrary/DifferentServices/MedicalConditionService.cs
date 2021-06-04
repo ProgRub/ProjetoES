@@ -25,24 +25,24 @@ namespace ServicesLibrary.DifferentServices
             _medicalConditionRepository = new MedicalConditionRepository(Database.GetContext());
         }
 
-        public MedicalCondition GetMedicalConditionByName(string name)
+        internal MedicalCondition GetMedicalConditionByName(string name)
         {
             try
             {
                 return _medicalConditionRepository.Find(e => e.Name == name).First();
             }
-            catch (ArgumentNullException e)
+            catch (ArgumentNullException)
             {
                 return null;
             }
         }
 
-        public IEnumerable<MedicalCondition> GetAllergies()
+        internal IEnumerable<MedicalCondition> GetAllergies()
         {
             return _medicalConditionRepository.Find(e => e.Type == Allergy);
         }
 
-        public IEnumerable<MedicalCondition> GetDiseases()
+        internal IEnumerable<MedicalCondition> GetDiseases()
         {
 
             return _medicalConditionRepository.Find(e => e.Type == Disease);

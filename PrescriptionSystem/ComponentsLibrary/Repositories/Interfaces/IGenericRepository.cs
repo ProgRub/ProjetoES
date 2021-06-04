@@ -6,6 +6,7 @@ namespace ComponentsLibrary.Repositories.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
+        void SaveChanges();
         T GetById(int id);
         IEnumerable<T> GetAll();
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);

@@ -130,7 +130,6 @@ namespace Forms
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(674, 254);
-            this.Load += new System.EventHandler(this.LoginScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.LabelPassword, 0);

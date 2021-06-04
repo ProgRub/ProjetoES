@@ -67,6 +67,8 @@ namespace Forms
                     int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
                     TextBoxPassword.Text,
                     allergies, diseases, missingBodyParts, userType);
+                ShowInformationMessageBox("User registered successively.", "Success");
+                MoveToScreen(new LoginScreen());
             }
         }
 
@@ -125,20 +127,19 @@ namespace Forms
                         ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number needs to be a number!");
                         break;
                     case Services.HealthUserNumberAlreadyExists:
-                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number belongs to registered user!");
+                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number belongs to a registered user!");
                         break;
                     case Services.EmailNotValid:
                         ShowTextBoxErrorMessage(TextBoxEmail, "E-mail is not in a valid format!");
                         break;
                     case Services.EmailAlreadyExists:
-                        ShowTextBoxErrorMessage(TextBoxEmail, "E-mail belongs to registered user!");
+                        ShowTextBoxErrorMessage(TextBoxEmail, "E-mail belongs to a registered user!");
                         break;
                     case Services.TherapistNotOldEnough:
-                        MessageBox.Show("Therapist has to be at least 22 years old!", "Error Detected", MessageBoxButtons.OK);
-                        
+                        ShowInformationMessageBox("Therapist needs to be at least 22 years old!", "Error Detected");
                         break;
                     case Services.MiscError:
-                        MessageBox.Show("Something went wrong...", "Error Detected", MessageBoxButtons.OK);
+                        ShowInformationMessageBox("Something went wrong...", "Error Detected");
                         MoveToScreen(new LoginScreen());
                         break;
                 }

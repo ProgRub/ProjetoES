@@ -1,4 +1,5 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System.Collections.Generic;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Repositories.Interfaces;
 
 namespace ComponentsLibrary.Repositories.Implementations
@@ -42,6 +43,16 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 User = user,BodyPart = bodyPart
             });
+        }
+
+        public IEnumerable<Patient> GetAllPatients()
+        {
+            return _patientRepository.GetAll();
+        }
+
+        public IEnumerable<Therapist> GetAllTherapists()
+        {
+            return _therapistRepository.GetAll();
         }
     }
 }
