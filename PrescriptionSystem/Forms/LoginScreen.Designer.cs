@@ -118,7 +118,6 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.LabelNoAccount);
             this.Controls.Add(this.ButtonSignUp);
@@ -128,6 +127,7 @@ namespace Forms
             this.Controls.Add(this.LabelPassword);
             this.Controls.Add(this.LabelEmail);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.MinimumSize = new System.Drawing.Size(650, 254);
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(674, 254);
             this.Load += new System.EventHandler(this.LoginScreen_Load);

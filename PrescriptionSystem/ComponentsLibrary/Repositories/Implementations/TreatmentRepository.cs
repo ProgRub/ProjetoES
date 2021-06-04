@@ -9,5 +9,6 @@ namespace ComponentsLibrary.Repositories.Implementations
         public TreatmentRepository(PrescriptionSystemDbContext context) : base(context)
         {
         }
+
     }
 }

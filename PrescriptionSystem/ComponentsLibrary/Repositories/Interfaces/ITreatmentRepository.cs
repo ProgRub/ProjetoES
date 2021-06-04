@@ -5,6 +5,5 @@ namespace ComponentsLibrary.Repositories.Interfaces
 {
     public interface ITreatmentRepository:IGenericRepository<Treatment>
     {
-        void AddBodyPartsToTreatment(Treatment treatment, BodyPart bodyPart);
     }
 }

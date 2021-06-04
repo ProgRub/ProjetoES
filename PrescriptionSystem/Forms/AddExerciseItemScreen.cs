@@ -36,7 +36,7 @@ namespace Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckExerciseCreation(textBoxName.Text, textBoxDescription.Text,
+            var errorCodes = Services.Instance.CheckExerciseAndTreatmentCreation(textBoxName.Text, textBoxDescription.Text,
                textBoxMinAge.Text, textBoxMaxAge.Text);
 
             var bodyParts = new List<string>();

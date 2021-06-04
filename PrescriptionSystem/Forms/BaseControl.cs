@@ -36,5 +36,10 @@ namespace Forms
             ClearTextbox(textBox);
             textBox.PlaceholderText = errorMessage;
         }
+
+        private void BaseControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

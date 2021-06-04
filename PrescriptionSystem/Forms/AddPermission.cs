@@ -19,5 +19,10 @@ namespace Forms
         {
             MoveToScreen(new CalendarScreenPatient());
         }
+
+        private void AddPermission_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

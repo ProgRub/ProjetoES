@@ -83,6 +83,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddPermission";
             this.Size = new System.Drawing.Size(519, 257);
+            this.Load += new System.EventHandler(this.AddPermission_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
