@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using ComponentsLibrary.Entities;
@@ -24,7 +25,10 @@ namespace ServicesLibrary
             PhoneNumberNotANumber = 8,
             HealthUserNumberWrongLength = 9,
             HealthUserNumberNotANumber = 10,
-            EmailNotValid = 11;
+            EmailNotValid = 11,
+            EmailAlreadyExists = 12,
+            HealthUserNumberAlreadyExists = 13,
+            TherapistNotOldEnough=14;
 
         #endregion
 
@@ -35,86 +39,91 @@ namespace ServicesLibrary
         #region Services
 
         private MedicalConditionService _medicalConditionService;
-        private PatientService _patientService;
+        private UserService _userService;
         private PrescriptionItemService _prescriptionItemService;
         private PrescriptionService _prescriptionService;
-        private TherapistService _therapistService;
         private TherapySessionService _therapySessionService;
 
         #endregion
-
-        private int _loggedInUserType;
+        
 
         private Services()
         {
             _medicalConditionService = new MedicalConditionService();
-            _patientService = new PatientService();
+            _userService = new UserService();
             _prescriptionService = new PrescriptionService();
             _prescriptionItemService = new PrescriptionItemService();
-            _therapistService = new TherapistService();
             _therapySessionService = new TherapySessionService();
         }
 
         public static Services Instance { get; } = new Services();
 
-        public IEnumerable<int> CheckUserRegistration(string name, DateTime dateOfBirth, string phoneNumberString,
-            string healthUserNumberString, string email,
+        public IEnumerable<int> CheckUserRegistration(string name, DateTime dateOfBirth, string phoneNumberParameter,
+            string healthUserNumberParameter, string email,
             string password, string userType)
         {
-            int phoneNumber = 0, healthUserNumber = 0;
-            IEnumerable<int> errorCodes = new List<int>();
-            if (name == "") errorCodes.Append(NameRequired);
-            if (phoneNumberString == "") errorCodes.Append(PhoneNumberRequired);
+            var phoneNumberString = string.Join("",
+                phoneNumberParameter.Split(new char[0], StringSplitOptions.RemoveEmptyEntries));
+            var healthUserNumberString = string.Join("",
+                healthUserNumberParameter.Split(new char[0], StringSplitOptions.RemoveEmptyEntries));
+            var errorCodes = new List<int>();
+            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            if (string.IsNullOrWhiteSpace(phoneNumberString)) errorCodes.Add(PhoneNumberRequired);
             else if (phoneNumberString.Length < PhoneNumberMinimumLength ||
                      phoneNumberString.Length > PhoneNumberMaximumLength)
-                errorCodes.Append(PhoneNumberWrongLength);
-            else if (!int.TryParse(phoneNumberString, out phoneNumber)) errorCodes.Append(PhoneNumberNotANumber);
-            if (healthUserNumberString == "") errorCodes.Append(HealthUserNumberRequired);
+                errorCodes.Add(PhoneNumberWrongLength);
+            else if (!int.TryParse(phoneNumberString, out _)) errorCodes.Add(PhoneNumberNotANumber);
+            if (string.IsNullOrWhiteSpace(healthUserNumberString)) errorCodes.Add(HealthUserNumberRequired);
             else if (healthUserNumberString.Length < HealthUserNumberMinimumLength ||
                      healthUserNumberString.Length > HealthUserNumberMaximumLength)
-                errorCodes.Append(HealthUserNumberWrongLength);
-            else if (!int.TryParse(healthUserNumberString, out healthUserNumber))
-                errorCodes.Append(HealthUserNumberNotANumber);
-            if (email == "") errorCodes.Append(EmailRequired);
-            else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Append(EmailNotValid);
-            if (password == "") errorCodes.Append(PasswordRequired);
-            if (errorCodes.Count() != 0)
+                errorCodes.Add(HealthUserNumberWrongLength);
+            else if (!int.TryParse(healthUserNumberString, out var healthUserNumber))
+                errorCodes.Add(HealthUserNumberNotANumber);
+            else if (!_userService.IsHealthUserNumberUnique(healthUserNumber))
+                errorCodes.Add(HealthUserNumberAlreadyExists);
+            if (string.IsNullOrWhiteSpace(email)) errorCodes.Add(EmailRequired);
+            else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
+            else if(!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
+            if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
+            if (userType == "Therapist")
             {
-                return errorCodes;
+                if (!_userService.IsTherapistOldEnough(dateOfBirth))
+                {
+                    errorCodes.Add(TherapistNotOldEnough);
+                }
             }
-
-            switch (userType)
-            {
-                case "Patient":
-                    return _patientService.CheckPatientRegistration(healthUserNumber, email);
-                case "Therapist":
-                    return _therapistService.CheckTherapistRegistration(dateOfBirth, healthUserNumber, email);
-                default:
-                    errorCodes.Append(MiscError);
-                    return errorCodes;
-            }
+            return errorCodes;
         }
 
         public void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber,
             int healthUserNumber, string email,
-            string password, IEnumerable<string> allergies, IEnumerable<string> diseases, string userType)
+            string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
+            IEnumerable<string> missingBodyParts, string userType)
         {
-            switch (userType)
-            {
-                case "Patient":
-                    _patientService.RegisterPatient(name, dateOfBirth, phoneNumber, healthUserNumber, email,
-                        password, allergies, diseases);
-                    return;
-                case "Therapist":
-                    _therapistService.RegisterTherapist(name, dateOfBirth, phoneNumber, healthUserNumber,
-                        email, password, allergies, diseases);
-                    return;
-            }
+            Debug.WriteLine("BEFORE");
+            _userService.RegisterUser(name, dateOfBirth, phoneNumber, healthUserNumber, email,
+                password, allergies, diseases, missingBodyParts, userType);
+            Debug.WriteLine("AFTER");
         }
 
         public int Login(string email, string password)
         {
             return Ok;
+        }
+
+        public IEnumerable<string> GetAllergies()
+        {
+            return _medicalConditionService.GetAllergies().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetDiseases()
+        {
+            return _medicalConditionService.GetDiseases().Select(e => e.Name);
+        }
+
+        internal MedicalCondition GetMedicalConditionByName(string name)
+        {
+            return _medicalConditionService.GetMedicalConditionByName(name);
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace ComponentsLibrary.Repositories.Interfaces
+﻿using ComponentsLibrary.Entities;
+
+namespace ComponentsLibrary.Repositories.Interfaces
 {
-    public interface IPatientRepository
+    public interface IPatientRepository:IGenericRepository<Patient>
     {
     }
 }

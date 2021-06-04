@@ -44,10 +44,12 @@ namespace Forms
             this.TextBoxHealthUserNumber = new System.Windows.Forms.TextBox();
             this.LabelHealthUserNumber = new System.Windows.Forms.Label();
             this.LabelAllergies = new System.Windows.Forms.Label();
-            this.ChecBoxExample = new System.Windows.Forms.CheckBox();
-            this.CheckBoxExampleMBP = new System.Windows.Forms.CheckBox();
             this.LabelMissingBodyParts = new System.Windows.Forms.Label();
             this.ButtonSignUp = new System.Windows.Forms.Button();
+            this.CheckedListBoxAllergies = new System.Windows.Forms.CheckedListBox();
+            this.CheckedListBoxMissingBodyParts = new System.Windows.Forms.CheckedListBox();
+            this.CheckedListBoxDiseases = new System.Windows.Forms.CheckedListBox();
+            this.LabelDiseases = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ButtonBack
@@ -57,28 +59,26 @@ namespace Forms
             // TextBoxEmail
             // 
             this.TextBoxEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxEmail.Location = new System.Drawing.Point(176, 228);
-            this.TextBoxEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TextBoxEmail.Location = new System.Drawing.Point(158, 206);
             this.TextBoxEmail.Name = "TextBoxEmail";
-            this.TextBoxEmail.Size = new System.Drawing.Size(457, 34);
+            this.TextBoxEmail.Size = new System.Drawing.Size(400, 29);
             this.TextBoxEmail.TabIndex = 7;
             // 
             // TextBoxPhoneNumber
             // 
             this.TextBoxPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxPhoneNumber.Location = new System.Drawing.Point(176, 181);
-            this.TextBoxPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TextBoxPhoneNumber.Location = new System.Drawing.Point(158, 136);
             this.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber";
-            this.TextBoxPhoneNumber.Size = new System.Drawing.Size(457, 34);
+            this.TextBoxPhoneNumber.Size = new System.Drawing.Size(400, 29);
             this.TextBoxPhoneNumber.TabIndex = 6;
             // 
             // LabelEmail
             // 
             this.LabelEmail.AutoSize = true;
             this.LabelEmail.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelEmail.Location = new System.Drawing.Point(107, 232);
+            this.LabelEmail.Location = new System.Drawing.Point(98, 209);
             this.LabelEmail.Name = "LabelEmail";
-            this.LabelEmail.Size = new System.Drawing.Size(67, 28);
+            this.LabelEmail.Size = new System.Drawing.Size(54, 21);
             this.LabelEmail.TabIndex = 5;
             this.LabelEmail.Text = "E-mail";
             // 
@@ -86,9 +86,9 @@ namespace Forms
             // 
             this.LabelPhoneNumber.AutoSize = true;
             this.LabelPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelPhoneNumber.Location = new System.Drawing.Point(37, 185);
+            this.LabelPhoneNumber.Location = new System.Drawing.Point(36, 139);
             this.LabelPhoneNumber.Name = "LabelPhoneNumber";
-            this.LabelPhoneNumber.Size = new System.Drawing.Size(144, 28);
+            this.LabelPhoneNumber.Size = new System.Drawing.Size(116, 21);
             this.LabelPhoneNumber.TabIndex = 4;
             this.LabelPhoneNumber.Text = "Phone Number";
             // 
@@ -97,7 +97,8 @@ namespace Forms
             this.RadioButtonPatient.AutoSize = true;
             this.RadioButtonPatient.Checked = true;
             this.RadioButtonPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RadioButtonPatient.Location = new System.Drawing.Point(168, 18);
+            this.RadioButtonPatient.Location = new System.Drawing.Point(149, 18);
+            this.RadioButtonPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RadioButtonPatient.Name = "RadioButtonPatient";
             this.RadioButtonPatient.Size = new System.Drawing.Size(75, 25);
             this.RadioButtonPatient.TabIndex = 8;
@@ -109,10 +110,9 @@ namespace Forms
             // 
             this.RadioButtonTherapist.AutoSize = true;
             this.RadioButtonTherapist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.RadioButtonTherapist.Location = new System.Drawing.Point(323, 24);
-            this.RadioButtonTherapist.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.RadioButtonTherapist.Location = new System.Drawing.Point(287, 18);
             this.RadioButtonTherapist.Name = "RadioButtonTherapist";
-            this.RadioButtonTherapist.Size = new System.Drawing.Size(113, 32);
+            this.RadioButtonTherapist.Size = new System.Drawing.Size(92, 25);
             this.RadioButtonTherapist.TabIndex = 9;
             this.RadioButtonTherapist.Text = "Therapist";
             this.RadioButtonTherapist.UseVisualStyleBackColor = true;
@@ -120,19 +120,18 @@ namespace Forms
             // TextBoxName
             // 
             this.TextBoxName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxName.Location = new System.Drawing.Point(176, 88);
-            this.TextBoxName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TextBoxName.Location = new System.Drawing.Point(158, 66);
             this.TextBoxName.Name = "TextBoxName";
-            this.TextBoxName.Size = new System.Drawing.Size(457, 34);
+            this.TextBoxName.Size = new System.Drawing.Size(400, 29);
             this.TextBoxName.TabIndex = 12;
             // 
             // LabelDOB
             // 
             this.LabelDOB.AutoSize = true;
             this.LabelDOB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelDOB.Location = new System.Drawing.Point(58, 139);
+            this.LabelDOB.Location = new System.Drawing.Point(55, 104);
             this.LabelDOB.Name = "LabelDOB";
-            this.LabelDOB.Size = new System.Drawing.Size(122, 28);
+            this.LabelDOB.Size = new System.Drawing.Size(97, 21);
             this.LabelDOB.TabIndex = 11;
             this.LabelDOB.Text = "Date of Birth";
             // 
@@ -140,9 +139,9 @@ namespace Forms
             // 
             this.LabelName.AutoSize = true;
             this.LabelName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelName.Location = new System.Drawing.Point(110, 92);
+            this.LabelName.Location = new System.Drawing.Point(100, 69);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(64, 28);
+            this.LabelName.Size = new System.Drawing.Size(52, 21);
             this.LabelName.TabIndex = 10;
             this.LabelName.Text = "Name";
             // 
@@ -151,116 +150,142 @@ namespace Forms
             this.DateTimePickerDOB.CalendarFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DateTimePickerDOB.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DateTimePickerDOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimePickerDOB.Location = new System.Drawing.Point(154, 104);
+            this.DateTimePickerDOB.Location = new System.Drawing.Point(158, 102);
+            this.DateTimePickerDOB.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateTimePickerDOB.MaxDate = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             this.DateTimePickerDOB.Name = "DateTimePickerDOB";
-            this.DateTimePickerDOB.Size = new System.Drawing.Size(263, 29);
+            this.DateTimePickerDOB.Size = new System.Drawing.Size(231, 29);
             this.DateTimePickerDOB.TabIndex = 13;
             this.DateTimePickerDOB.Value = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             // 
             // TextBoxPassword
             // 
             this.TextBoxPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxPassword.Location = new System.Drawing.Point(176, 275);
-            this.TextBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TextBoxPassword.Location = new System.Drawing.Point(158, 241);
             this.TextBoxPassword.Name = "TextBoxPassword";
-            this.TextBoxPassword.Size = new System.Drawing.Size(457, 34);
+            this.TextBoxPassword.PasswordChar = '*';
+            this.TextBoxPassword.Size = new System.Drawing.Size(400, 29);
             this.TextBoxPassword.TabIndex = 15;
             // 
             // LabelPassword
             // 
             this.LabelPassword.AutoSize = true;
             this.LabelPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelPassword.Location = new System.Drawing.Point(82, 279);
+            this.LabelPassword.Location = new System.Drawing.Point(76, 244);
             this.LabelPassword.Name = "LabelPassword";
-            this.LabelPassword.Size = new System.Drawing.Size(93, 28);
+            this.LabelPassword.Size = new System.Drawing.Size(76, 21);
             this.LabelPassword.TabIndex = 14;
             this.LabelPassword.Text = "Password";
             // 
             // TextBoxHealthUserNumber
             // 
             this.TextBoxHealthUserNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxHealthUserNumber.Location = new System.Drawing.Point(176, 321);
-            this.TextBoxHealthUserNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TextBoxHealthUserNumber.Location = new System.Drawing.Point(158, 171);
             this.TextBoxHealthUserNumber.Name = "TextBoxHealthUserNumber";
-            this.TextBoxHealthUserNumber.Size = new System.Drawing.Size(457, 34);
+            this.TextBoxHealthUserNumber.Size = new System.Drawing.Size(400, 29);
             this.TextBoxHealthUserNumber.TabIndex = 17;
             // 
             // LabelHealthUserNumber
             // 
             this.LabelHealthUserNumber.AutoSize = true;
             this.LabelHealthUserNumber.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelHealthUserNumber.Location = new System.Drawing.Point(3, 325);
+            this.LabelHealthUserNumber.Location = new System.Drawing.Point(-1, 174);
             this.LabelHealthUserNumber.Name = "LabelHealthUserNumber";
-            this.LabelHealthUserNumber.Size = new System.Drawing.Size(180, 28);
+            this.LabelHealthUserNumber.Size = new System.Drawing.Size(153, 21);
             this.LabelHealthUserNumber.TabIndex = 16;
-            this.LabelHealthUserNumber.Text = "HealthUserNumber";
+            this.LabelHealthUserNumber.Text = "Health User Number";
             // 
             // LabelAllergies
             // 
             this.LabelAllergies.AutoSize = true;
             this.LabelAllergies.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelAllergies.Location = new System.Drawing.Point(82, 376);
+            this.LabelAllergies.Location = new System.Drawing.Point(76, 276);
             this.LabelAllergies.Name = "LabelAllergies";
-            this.LabelAllergies.Size = new System.Drawing.Size(87, 28);
+            this.LabelAllergies.Size = new System.Drawing.Size(70, 21);
             this.LabelAllergies.TabIndex = 18;
             this.LabelAllergies.Text = "Allergies";
-            // 
-            // ChecBoxExample
-            // 
-            this.ChecBoxExample.AutoSize = true;
-            this.ChecBoxExample.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ChecBoxExample.Location = new System.Drawing.Point(176, 376);
-            this.ChecBoxExample.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ChecBoxExample.Name = "ChecBoxExample";
-            this.ChecBoxExample.Size = new System.Drawing.Size(96, 32);
-            this.ChecBoxExample.TabIndex = 19;
-            this.ChecBoxExample.Text = "Allergy";
-            this.ChecBoxExample.UseVisualStyleBackColor = true;
-            // 
-            // CheckBoxExampleMBP
-            // 
-            this.CheckBoxExampleMBP.AutoSize = true;
-            this.CheckBoxExampleMBP.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CheckBoxExampleMBP.Location = new System.Drawing.Point(176, 424);
-            this.CheckBoxExampleMBP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.CheckBoxExampleMBP.Name = "CheckBoxExampleMBP";
-            this.CheckBoxExampleMBP.Size = new System.Drawing.Size(118, 32);
-            this.CheckBoxExampleMBP.TabIndex = 21;
-            this.CheckBoxExampleMBP.Text = "Body Part";
-            this.CheckBoxExampleMBP.UseVisualStyleBackColor = true;
             // 
             // LabelMissingBodyParts
             // 
             this.LabelMissingBodyParts.AutoSize = true;
             this.LabelMissingBodyParts.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelMissingBodyParts.Location = new System.Drawing.Point(-2, 318);
+            this.LabelMissingBodyParts.Location = new System.Drawing.Point(11, 584);
             this.LabelMissingBodyParts.Name = "LabelMissingBodyParts";
-            this.LabelMissingBodyParts.Size = new System.Drawing.Size(176, 28);
+            this.LabelMissingBodyParts.Size = new System.Drawing.Size(141, 21);
             this.LabelMissingBodyParts.TabIndex = 20;
             this.LabelMissingBodyParts.Text = "Missing Body Parts";
             // 
             // ButtonSignUp
             // 
             this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonSignUp.Location = new System.Drawing.Point(319, 464);
-            this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonSignUp.Location = new System.Drawing.Point(313, 666);
             this.ButtonSignUp.Name = "ButtonSignUp";
-            this.ButtonSignUp.Size = new System.Drawing.Size(110, 44);
+            this.ButtonSignUp.Size = new System.Drawing.Size(96, 33);
             this.ButtonSignUp.TabIndex = 22;
             this.ButtonSignUp.Text = "Sign Up";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
+            // CheckedListBoxAllergies
+            // 
+            this.CheckedListBoxAllergies.CheckOnClick = true;
+            this.CheckedListBoxAllergies.FormattingEnabled = true;
+            this.CheckedListBoxAllergies.Location = new System.Drawing.Point(158, 276);
+            this.CheckedListBoxAllergies.MultiColumn = true;
+            this.CheckedListBoxAllergies.Name = "CheckedListBoxAllergies";
+            this.CheckedListBoxAllergies.Size = new System.Drawing.Size(400, 148);
+            this.CheckedListBoxAllergies.TabIndex = 23;
+            // 
+            // CheckedListBoxMissingBodyParts
+            // 
+            this.CheckedListBoxMissingBodyParts.CheckOnClick = true;
+            this.CheckedListBoxMissingBodyParts.FormattingEnabled = true;
+            this.CheckedListBoxMissingBodyParts.Items.AddRange(new object[] {
+            "Head",
+            "Left Arm",
+            "Left Foot",
+            "Left Leg",
+            "Right Arm",
+            "Right Foot",
+            "Right Leg",
+            "Torso"});
+            this.CheckedListBoxMissingBodyParts.Location = new System.Drawing.Point(158, 584);
+            this.CheckedListBoxMissingBodyParts.MultiColumn = true;
+            this.CheckedListBoxMissingBodyParts.Name = "CheckedListBoxMissingBodyParts";
+            this.CheckedListBoxMissingBodyParts.Size = new System.Drawing.Size(400, 76);
+            this.CheckedListBoxMissingBodyParts.TabIndex = 24;
+            // 
+            // CheckedListBoxDiseases
+            // 
+            this.CheckedListBoxDiseases.CheckOnClick = true;
+            this.CheckedListBoxDiseases.FormattingEnabled = true;
+            this.CheckedListBoxDiseases.Location = new System.Drawing.Point(158, 430);
+            this.CheckedListBoxDiseases.MultiColumn = true;
+            this.CheckedListBoxDiseases.Name = "CheckedListBoxDiseases";
+            this.CheckedListBoxDiseases.Size = new System.Drawing.Size(400, 148);
+            this.CheckedListBoxDiseases.TabIndex = 26;
+            // 
+            // LabelDiseases
+            // 
+            this.LabelDiseases.AutoSize = true;
+            this.LabelDiseases.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelDiseases.Location = new System.Drawing.Point(76, 430);
+            this.LabelDiseases.Name = "LabelDiseases";
+            this.LabelDiseases.Size = new System.Drawing.Size(70, 21);
+            this.LabelDiseases.TabIndex = 25;
+            this.LabelDiseases.Text = "Diseases";
+            // 
             // SignUpScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.CheckedListBoxDiseases);
+            this.Controls.Add(this.LabelDiseases);
+            this.Controls.Add(this.CheckedListBoxMissingBodyParts);
+            this.Controls.Add(this.CheckedListBoxAllergies);
             this.Controls.Add(this.ButtonSignUp);
-            this.Controls.Add(this.CheckBoxExampleMBP);
             this.Controls.Add(this.LabelMissingBodyParts);
-            this.Controls.Add(this.ChecBoxExample);
             this.Controls.Add(this.LabelAllergies);
             this.Controls.Add(this.TextBoxHealthUserNumber);
             this.Controls.Add(this.LabelHealthUserNumber);
@@ -276,10 +301,8 @@ namespace Forms
             this.Controls.Add(this.TextBoxPhoneNumber);
             this.Controls.Add(this.LabelEmail);
             this.Controls.Add(this.LabelPhoneNumber);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SignUpScreen";
-            this.Size = new System.Drawing.Size(637, 512);
-            this.Load += new System.EventHandler(this.SignUpScreen_Load);
+            this.Size = new System.Drawing.Size(561, 750);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);
@@ -295,11 +318,13 @@ namespace Forms
             this.Controls.SetChildIndex(this.LabelHealthUserNumber, 0);
             this.Controls.SetChildIndex(this.TextBoxHealthUserNumber, 0);
             this.Controls.SetChildIndex(this.LabelAllergies, 0);
-            this.Controls.SetChildIndex(this.ChecBoxExample, 0);
             this.Controls.SetChildIndex(this.LabelMissingBodyParts, 0);
-            this.Controls.SetChildIndex(this.CheckBoxExampleMBP, 0);
             this.Controls.SetChildIndex(this.ButtonSignUp, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
+            this.Controls.SetChildIndex(this.CheckedListBoxAllergies, 0);
+            this.Controls.SetChildIndex(this.CheckedListBoxMissingBodyParts, 0);
+            this.Controls.SetChildIndex(this.LabelDiseases, 0);
+            this.Controls.SetChildIndex(this.CheckedListBoxDiseases, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,9 +347,11 @@ namespace Forms
         private System.Windows.Forms.TextBox TextBoxHealthUserNumber;
         private System.Windows.Forms.Label LabelHealthUserNumber;
         private System.Windows.Forms.Label LabelAllergies;
-        private System.Windows.Forms.CheckBox ChecBoxExample;
-        private System.Windows.Forms.CheckBox CheckBoxExampleMBP;
         private System.Windows.Forms.Label LabelMissingBodyParts;
         private System.Windows.Forms.Button ButtonSignUp;
+        private System.Windows.Forms.CheckedListBox CheckedListBoxAllergies;
+        private System.Windows.Forms.CheckedListBox CheckedListBoxMissingBodyParts;
+        private System.Windows.Forms.CheckedListBox CheckedListBoxDiseases;
+        private System.Windows.Forms.Label LabelDiseases;
     }
 }

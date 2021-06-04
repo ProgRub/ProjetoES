@@ -1,6 +1,8 @@
-﻿namespace ComponentsLibrary.Repositories.Interfaces
+﻿using ComponentsLibrary.Entities;
+
+namespace ComponentsLibrary.Repositories.Interfaces
 {
-    public interface ITherapySessionRepository
+    public interface ITherapySessionRepository:IGenericRepository<TherapySession>
     {
     }
 }

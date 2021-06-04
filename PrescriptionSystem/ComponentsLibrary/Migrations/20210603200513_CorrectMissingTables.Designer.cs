@@ -4,14 +4,16 @@ using ComponentsLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    partial class PrescriptionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210603200513_CorrectMissingTables")]
+    partial class CorrectMissingTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,48 +57,6 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("MedicalCondition");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 11,
-                            Zombie = false,
-                            Description = "",
-                            Name = "Penicillin",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Zombie = false,
-                            Description = "",
-                            Name = "Aspirin",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Zombie = false,
-                            Description = "",
-                            Name = "Ibuprofen",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Zombie = false,
-                            Description = "",
-                            Name = "Hypertension",
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Zombie = false,
-                            Description = "This type of arthritis affects specifically the knees",
-                            Name = "Knee Osteoarthritis",
-                            Type = 1
-                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.Prescription", b =>

@@ -7,6 +7,11 @@ namespace ComponentsLibrary
 {
     public class PrescriptionSystemDbContext : DbContext
     {
+        #region Constants
+
+        public const int Allergy = 0, Disease = 1;        
+
+        #endregion
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDb");
@@ -34,6 +39,8 @@ namespace ComponentsLibrary
             modelBuilder.Entity<PrescriptionHasPrescriptionItems>().ToTable("PrescriptionHasPrescriptionItems");
             modelBuilder.Entity<PrescriptionHasViewers>().ToTable("PrescriptionHasViewers");
             modelBuilder.Entity<TherapySessionHasTreatments>().ToTable("TherapySessionHasTreatments");
+            modelBuilder.Entity<UserHasMedicalCondition>().ToTable("UserHasMedicalCondition");
+            modelBuilder.Entity<UserHasMissingBodyPart>().ToTable("UserHasMissingBodyPart");
 
             #endregion
 
@@ -132,6 +139,40 @@ namespace ComponentsLibrary
                 Description = "Make sure your knees don't go in front of your feet",
                 Duration = new TimeSpan(0, 15, 0)
             });
+            modelBuilder.Entity<MedicalCondition>().HasData(new MedicalCondition
+            {
+                Id = 11,
+                Zombie = false,
+                Name = "Penicillin", Description = "", Type = Allergy
+            }, new MedicalCondition
+            {
+                Id = 12,
+                Zombie = false,
+                Name = "Aspirin",
+                Description = "",
+                Type = Allergy
+            }, new MedicalCondition
+            {
+                Id = 13,
+                Zombie = false,
+                Name = "Ibuprofen",
+                Description = "",
+                Type = Allergy
+            }, new MedicalCondition
+            {
+                Id = 14,
+                Zombie = false,
+                Name = "Hypertension",
+                Description = "",
+                Type = Disease
+            }, new MedicalCondition
+            {
+                Id = 15,
+                Zombie = false,
+                Name = "Knee Osteoarthritis",
+                Description = "This type of arthritis affects specifically the knees",
+                Type = Disease
+            });
 
             #endregion
         }
@@ -157,6 +198,8 @@ namespace ComponentsLibrary
         public DbSet<PrescriptionHasPrescriptionItems> PrescriptionHasPrescriptionItemsEnumerable { get; set; }
         public DbSet<PrescriptionHasViewers> PrescriptionHasViewersEnumerable { get; set; }
         public DbSet<TherapySessionHasTreatments> TherapySessionHasTreatmentsEnumerable { get; set; }
+        public DbSet<UserHasMedicalCondition> UserHasMedicalConditionsEnumerable { get; set; }
+        public DbSet<UserHasMissingBodyPart> UserHasMissingBodyPartsEnumerable { get; set; }
 
         //Comando na Package Manager Console para adicionar modificações no contexto à DB => Add-Migration 
         //Comando na Package Manager Console para atualizar DB => Update-Database
