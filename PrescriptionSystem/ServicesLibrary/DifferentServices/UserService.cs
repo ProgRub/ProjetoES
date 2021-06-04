@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
@@ -17,22 +18,27 @@ namespace ServicesLibrary.DifferentServices
             _userRepository = new UserRepository(Database.GetContext());
         }
 
-        public bool IsHealthUserNumberUnique(int healthUserNumber)
+        internal bool IsHealthUserNumberUnique(int healthUserNumber)
         {
             return !_userRepository.Find(e => e.HealthUserNumber == healthUserNumber).Any();
         }
 
-        public bool IsEmailUnique(string email)
+        internal bool IsEmailUnique(string email)
         {
             return !_userRepository.Find(e => e.Email == email).Any();
         }
 
-        public bool IsTherapistOldEnough(DateTime dateOfBirth)
+        internal bool IsTherapistOldEnough(DateTime dateOfBirth)
         {
+            Debug.WriteLine(DateTime.Today.Date);
+            Debug.WriteLine(dateOfBirth.Date);
+            Debug.WriteLine((DateTime.Today.Date - dateOfBirth.Date).TotalDays);
+            Debug.WriteLine(( dateOfBirth.Date-DateTime.Today.Date).TotalDays);
+            Debug.WriteLine(22 * 365.75);
             return (DateTime.Today - dateOfBirth).Days >= 22 * 365.75;
         }
 
-        public void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
+        internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
             string email, string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
             IEnumerable<string> missingBodyParts, string type)
         {
@@ -47,6 +53,7 @@ namespace ServicesLibrary.DifferentServices
                     _userRepository.AddPatient(patient);
                     AddMedicalConditionsToUser(patient, allergies, diseases);
                     AddMissingBodyPartsToUser(patient, missingBodyParts);
+                    _userRepository.SaveChanges();
                     return;
                 case "Therapist":
                     Therapist therapist = new Therapist
@@ -57,6 +64,7 @@ namespace ServicesLibrary.DifferentServices
                     _userRepository.AddTherapist(therapist);
                     AddMedicalConditionsToUser(therapist, allergies, diseases);
                     AddMissingBodyPartsToUser(therapist, missingBodyParts);
+                    _userRepository.SaveChanges();
                     return;
             }
         }
@@ -71,6 +79,7 @@ namespace ServicesLibrary.DifferentServices
 
             foreach (var diseaseString in diseases)
             {
+                Debug.WriteLine(Services.Instance.GetMedicalConditionByName(diseaseString).Name);
                 _userRepository.AddMedicalConditionToUser(user,
                     Services.Instance.GetMedicalConditionByName(diseaseString));
             }
@@ -82,6 +91,32 @@ namespace ServicesLibrary.DifferentServices
             {
                 _userRepository.AddMissingBodyPartToUser(user, (BodyPart) Enum.Parse(typeof(BodyPart), bodyPartString));
             }
+        }
+
+        internal bool IsUserEmailInDatabase(string email)
+        {
+            return _userRepository.Find(e => e.Email == email).Any();
+        }
+
+        internal bool DoesPasswordCorrespondToEmail(string email, string password)
+        {
+            return _userRepository.Find(e => e.Email == email && e.Password == password).Any();
+        }
+
+        internal int GetLoggedInUserType(string email, string password)
+        {
+            User user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
+            if (_userRepository.GetAllPatients().Contains(user))
+            {
+                return Services.Patient;
+            }
+
+            return Services.Therapist;
+        }
+
+        internal void LoadDBHelpFunction()
+        {
+            _userRepository.GetAll();
         }
     }
 }

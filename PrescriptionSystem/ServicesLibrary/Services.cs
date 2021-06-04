@@ -12,10 +12,11 @@ namespace ServicesLibrary
 {
     public class Services
     {
+        public const int Ok = 0;
         #region ErrorConstants
 
-        public const int Ok = 0,
-            MiscError = 1,
+        #region Registration
+        public const int MiscError = 1,
             NameRequired = 2,
             PhoneNumberRequired = 3,
             HealthUserNumberRequired = 4,
@@ -28,21 +29,27 @@ namespace ServicesLibrary
             EmailNotValid = 11,
             EmailAlreadyExists = 12,
             HealthUserNumberAlreadyExists = 13,
-            TherapistNotOldEnough=14;
+            TherapistNotOldEnough = 14;
+        #endregion
+
+        #region LoggingIn
+
+        public const int EmailDoesntExist = 1, PasswordDoesntMatch = 2;
+        #endregion
 
         #endregion
 
         public const int PhoneNumberMinimumLength = 9, PhoneNumberMaximumLength = 9;
         public const int HealthUserNumberMinimumLength = 9, HealthUserNumberMaximumLength = 9;
-        private const int Patient = 0, Therapist = 1;
+        public const int Patient = 15, Therapist = 16;
 
         #region Services
 
-        private MedicalConditionService _medicalConditionService;
-        private UserService _userService;
-        private PrescriptionItemService _prescriptionItemService;
-        private PrescriptionService _prescriptionService;
-        private TherapySessionService _therapySessionService;
+        private readonly MedicalConditionService _medicalConditionService;
+        private readonly UserService _userService;
+        private readonly PrescriptionItemService _prescriptionItemService;
+        private readonly PrescriptionService _prescriptionService;
+        private readonly TherapySessionService _therapySessionService;
 
         #endregion
         
@@ -85,7 +92,7 @@ namespace ServicesLibrary
             else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
             else if(!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
             if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
-            if (userType == "Therapist")
+           if (userType == "Therapist")
             {
                 if (!_userService.IsTherapistOldEnough(dateOfBirth))
                 {
@@ -100,15 +107,15 @@ namespace ServicesLibrary
             string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
             IEnumerable<string> missingBodyParts, string userType)
         {
-            Debug.WriteLine("BEFORE");
             _userService.RegisterUser(name, dateOfBirth, phoneNumber, healthUserNumber, email,
                 password, allergies, diseases, missingBodyParts, userType);
-            Debug.WriteLine("AFTER");
         }
 
         public int Login(string email, string password)
         {
-            return Ok;
+            if (!_userService.IsUserEmailInDatabase(email)) return EmailDoesntExist;
+            if (!_userService.DoesPasswordCorrespondToEmail(email, password)) return PasswordDoesntMatch;
+            return _userService.GetLoggedInUserType(email, password);
         }
 
         public IEnumerable<string> GetAllergies()
@@ -124,6 +131,11 @@ namespace ServicesLibrary
         internal MedicalCondition GetMedicalConditionByName(string name)
         {
             return _medicalConditionService.GetMedicalConditionByName(name);
+        }
+
+        public void LoadDatabase()
+        {
+            _userService.LoadDBHelpFunction();
         }
     }
 }
