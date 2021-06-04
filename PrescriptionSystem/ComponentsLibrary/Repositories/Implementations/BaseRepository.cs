@@ -17,7 +17,7 @@ namespace ComponentsLibrary.Repositories.Implementations
             _dbSet = context.Set<T>();
         }
 
-        private void SaveChanges()
+        public void SaveChanges()
         {
             _context.SaveChanges();
         }
@@ -25,13 +25,11 @@ namespace ComponentsLibrary.Repositories.Implementations
         public void Add(T entity)
         {
             _dbSet.Add(entity); 
-            SaveChanges();
         }
 
         public void AddRange(IEnumerable<T> entities)
         {
             _dbSet.AddRange(entities);
-            SaveChanges();
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
@@ -52,13 +50,11 @@ namespace ComponentsLibrary.Repositories.Implementations
         public void Remove(T entity)
         {
             _dbSet.Remove(entity);
-            SaveChanges();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
-            SaveChanges();
         }
     }
 }

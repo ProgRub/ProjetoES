@@ -36,5 +36,11 @@ namespace Forms
             ClearTextbox(textBox);
             textBox.PlaceholderText = errorMessage;
         }
+
+        protected void ShowInformationMessageBox(string message, string messageBoxTitle)
+        {
+
+            MessageBox.Show(message, messageBoxTitle, MessageBoxButtons.OK);
+        }
     }
 }
