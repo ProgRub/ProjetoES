@@ -44,6 +44,7 @@ namespace ComponentsLibrary
 
             #endregion
 
+
             #region Properties Config
 
             modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
@@ -74,6 +75,30 @@ namespace ComponentsLibrary
 
             #endregion
 
+            #region Many-To-Many Tables Config
+
+            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>()
+                .HasKey(e => new { e.MedicineId, e.MedicalConditionId });
+            modelBuilder.Entity<PrescriptionHasViewers>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<PrescriptionHasViewers>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<PrescriptionHasViewers>()
+                .HasKey(e => new { e.HealthCareProfessionalId, e.PrescriptionId });
+            modelBuilder.Entity<PrescriptionHasPrescriptionItems>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<PrescriptionHasPrescriptionItems>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<PrescriptionHasPrescriptionItems>()
+                .HasKey(e => new { e.PrescriptionId, e.PrescriptionItemId });
+            modelBuilder.Entity<TherapySessionHasTreatments>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<TherapySessionHasTreatments>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<TherapySessionHasTreatments>()
+                .HasKey(e => new { e.TherapySessionId, e.TreatmentId });
+            modelBuilder.Entity<UserHasMedicalCondition>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<UserHasMedicalCondition>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<UserHasMedicalCondition>()
+                .HasKey(e => new { e.MedicalConditionId, e.UserId });
+
+            #endregion
             #region Initial Data
 
             modelBuilder.Entity<Medicine>().HasData(new Medicine {Id = 1,Zombie = false,Name = "Penicillin", Description = "", Price = 2.32},

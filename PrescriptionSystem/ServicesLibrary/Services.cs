@@ -155,7 +155,7 @@ namespace ServicesLibrary
             if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
             if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
 
-            if (!Double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
+            if (!double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
             else if (string.IsNullOrWhiteSpace(price)) errorCodes.Add(PriceNotValid);
 
             return errorCodes;

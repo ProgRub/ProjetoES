@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    [Migration("20210604134603_asd")]
-    partial class asd
+    [Migration("20210605083907_CorrectedManyToManyTables")]
+    partial class CorrectedManyToManyTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,140 @@ namespace ComponentsLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Item");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasPrescriptionItems", b =>
+                {
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrescriptionItemId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("RecommendedTime")
+                        .HasColumnType("time");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<bool>("Zombie")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("PrescriptionId", "PrescriptionItemId");
+
+                    b.HasIndex("PrescriptionItemId");
+
+                    b.ToTable("PrescriptionHasPrescriptionItems");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasViewers", b =>
+                {
+                    b.Property<int>("HealthCareProfessionalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<bool>("Zombie")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("HealthCareProfessionalId", "PrescriptionId");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("PrescriptionHasViewers");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.MedicineHasIncompatibleMedicalConditions", b =>
+                {
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<bool>("Zombie")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("MedicineId", "MedicalConditionId");
+
+                    b.HasIndex("MedicalConditionId");
+
+                    b.ToTable("MedicineHasIncompatibleMedicalConditions");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.TherapySessionHasTreatments", b =>
+                {
+                    b.Property<int>("TherapySessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TreatmentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CompletedTreatment")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<bool>("Zombie")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("TherapySessionId", "TreatmentId");
+
+                    b.HasIndex("TreatmentId");
+
+                    b.ToTable("TherapySessionHasTreatments");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
+                {
+                    b.Property<int>("MedicalConditionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("TimeStamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<bool>("Zombie")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("MedicalConditionId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHasMedicalCondition");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
@@ -127,43 +261,6 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("Prescription");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasPrescriptionItems", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int?>("PrescriptionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PrescriptionItemId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("RecommendedTime")
-                        .HasColumnType("time");
-
-                    b.HasIndex("PrescriptionId");
-
-                    b.HasIndex("PrescriptionItemId");
-
-                    b.ToTable("PrescriptionHasPrescriptionItems");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasViewers", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int?>("HealthCareProfessionalId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PrescriptionId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("HealthCareProfessionalId");
-
-                    b.HasIndex("PrescriptionId");
-
-                    b.ToTable("PrescriptionHasViewers");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.ExerciseHasBodyParts", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.Item");
@@ -177,23 +274,6 @@ namespace ComponentsLibrary.Migrations
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("ExerciseHasBodyParts");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.MedicineHasIncompatibleMedicalConditions", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int?>("MedicalConditionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MedicineId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("MedicalConditionId");
-
-                    b.HasIndex("MedicineId");
-
-                    b.ToTable("MedicineHasIncompatibleMedicalConditions");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
@@ -233,29 +313,6 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("TherapySession");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.TherapySessionHasTreatments", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<bool>("CompletedTreatment")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TherapySessionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TreatmentId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("TherapySessionId");
-
-                    b.HasIndex("TreatmentId");
-
-                    b.ToTable("TherapySessionHasTreatments");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.Item");
@@ -282,23 +339,6 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int?>("MedicalConditionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("MedicalConditionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserHasMedicalCondition");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
@@ -494,6 +534,101 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("Therapist");
                 });
 
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasPrescriptionItems", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.Prescription", "Prescription")
+                        .WithMany("PrescriptionHasPrescriptionItemsCollection")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", "PrescriptionItem")
+                        .WithMany("PrescriptionHasPrescriptionItemsCollection")
+                        .HasForeignKey("PrescriptionItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prescription");
+
+                    b.Navigation("PrescriptionItem");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasViewers", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", "HealthCareProfessional")
+                        .WithMany("PrescriptionHasViewersCollection")
+                        .HasForeignKey("HealthCareProfessionalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.Prescription", "Prescription")
+                        .WithMany("PrescriptionHasViewersCollection")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HealthCareProfessional");
+
+                    b.Navigation("Prescription");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.MedicineHasIncompatibleMedicalConditions", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.MedicalCondition", "MedicalCondition")
+                        .WithMany("MedicineHasIncompatibleMedicalConditionsList")
+                        .HasForeignKey("MedicalConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Medicine", "Medicine")
+                        .WithMany("MedicineHasIncompatibleMedicalConditionsList")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MedicalCondition");
+
+                    b.Navigation("Medicine");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.TherapySessionHasTreatments", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.TherapySession", "TherapySession")
+                        .WithMany("TherapySessionHasTreatmentsCollection")
+                        .HasForeignKey("TherapySessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Treatment", "Treatment")
+                        .WithMany("TherapySessionHasTreatmentsCollection")
+                        .HasForeignKey("TreatmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TherapySession");
+
+                    b.Navigation("Treatment");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.MedicalCondition", "MedicalCondition")
+                        .WithMany()
+                        .HasForeignKey("MedicalConditionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MedicalCondition");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
                 {
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
@@ -524,48 +659,6 @@ namespace ComponentsLibrary.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasPrescriptionItems", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.PrescriptionHasPrescriptionItems", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.Prescription", "Prescription")
-                        .WithMany()
-                        .HasForeignKey("PrescriptionId");
-
-                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", "PrescriptionItem")
-                        .WithMany()
-                        .HasForeignKey("PrescriptionItemId");
-
-                    b.Navigation("Prescription");
-
-                    b.Navigation("PrescriptionItem");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionHasViewers", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.HealthCareProfessional", "HealthCareProfessional")
-                        .WithMany()
-                        .HasForeignKey("HealthCareProfessionalId");
-
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.PrescriptionHasViewers", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.Prescription", "Prescription")
-                        .WithMany()
-                        .HasForeignKey("PrescriptionId");
-
-                    b.Navigation("HealthCareProfessional");
-
-                    b.Navigation("Prescription");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.ExerciseHasBodyParts", b =>
                 {
                     b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Exercise", "Exercise")
@@ -579,27 +672,6 @@ namespace ComponentsLibrary.Migrations
                         .IsRequired();
 
                     b.Navigation("Exercise");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.MedicineHasIncompatibleMedicalConditions", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.PrescriptionItems.MedicineHasIncompatibleMedicalConditions", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.MedicalCondition", "MedicalCondition")
-                        .WithMany()
-                        .HasForeignKey("MedicalConditionId");
-
-                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Medicine", "Medicine")
-                        .WithMany()
-                        .HasForeignKey("MedicineId");
-
-                    b.Navigation("MedicalCondition");
-
-                    b.Navigation("Medicine");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
@@ -632,27 +704,6 @@ namespace ComponentsLibrary.Migrations
                     b.Navigation("Therapist");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.TherapySessionHasTreatments", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.TherapySessionHasTreatments", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.TherapySession", "TherapySession")
-                        .WithMany()
-                        .HasForeignKey("TherapySessionId");
-
-                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Treatment", "Treatment")
-                        .WithMany()
-                        .HasForeignKey("TreatmentId");
-
-                    b.Navigation("TherapySession");
-
-                    b.Navigation("Treatment");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
                 {
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
@@ -660,27 +711,6 @@ namespace ComponentsLibrary.Migrations
                         .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMedicalCondition", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.MedicalCondition", "MedicalCondition")
-                        .WithMany()
-                        .HasForeignKey("MedicalConditionId");
-
-                    b.HasOne("ComponentsLibrary.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("MedicalCondition");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
@@ -750,6 +780,43 @@ namespace ComponentsLibrary.Migrations
                         .HasForeignKey("ComponentsLibrary.Entities.Therapist", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.MedicalCondition", b =>
+                {
+                    b.Navigation("MedicineHasIncompatibleMedicalConditionsList");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.Prescription", b =>
+                {
+                    b.Navigation("PrescriptionHasPrescriptionItemsCollection");
+
+                    b.Navigation("PrescriptionHasViewersCollection");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
+                {
+                    b.Navigation("PrescriptionHasPrescriptionItemsCollection");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.TherapySession", b =>
+                {
+                    b.Navigation("TherapySessionHasTreatmentsCollection");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Medicine", b =>
+                {
+                    b.Navigation("MedicineHasIncompatibleMedicalConditionsList");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Treatment", b =>
+                {
+                    b.Navigation("TherapySessionHasTreatmentsCollection");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.HealthCareProfessional", b =>
+                {
+                    b.Navigation("PrescriptionHasViewersCollection");
                 });
 #pragma warning restore 612, 618
         }
