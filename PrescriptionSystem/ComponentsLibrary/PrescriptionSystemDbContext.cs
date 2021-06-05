@@ -199,6 +199,49 @@ namespace ComponentsLibrary
                 Type = Disease
             });
 
+            modelBuilder.Entity<Patient>().HasData(new Patient
+            {
+                Id = 16,
+                Zombie = false,
+                FullName = "Luís Brito",
+                DateOfBirth = new DateTime(1985, 10, 4),
+                PhoneNumber = 924837193,
+                HealthUserNumber = 243719236,
+                Email = "luisbrito@gmail.com",
+                Password = "luis123"
+            }, new Patient
+            {
+                Id = 17,
+                Zombie = false,
+                FullName = "Mariana Abreu",
+                DateOfBirth = new DateTime(1994, 6, 19),
+                PhoneNumber = 968391023,
+                HealthUserNumber = 295831023,
+                Email = "marybreu@hotmail.com",
+                Password = "M_A_R_Y"
+            });
+
+            modelBuilder.Entity<Therapist>().HasData(new Therapist
+            {
+                Id = 18,
+                Zombie = false,
+                FullName = "Carla Nunes",
+                DateOfBirth = new DateTime(1975, 5, 2),
+                PhoneNumber = 917009283,
+                HealthUserNumber = 291039113,
+                Email = "carlanunes1975@hotmail.com",
+                Password = "carlaaa"
+            }, new Therapist
+            {
+                Id = 19,
+                Zombie = false,
+                FullName = "Rui Nóbrega",
+                DateOfBirth = new DateTime(1958, 11, 13),
+                PhoneNumber = 969070184,
+                HealthUserNumber = 200192356,
+                Email = "nobregarui@hotmail.com",
+                Password = "ruiruirui"
+            });
             #endregion
         }
 
