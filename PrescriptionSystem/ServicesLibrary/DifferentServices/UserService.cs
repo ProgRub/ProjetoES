@@ -106,6 +106,8 @@ namespace ServicesLibrary.DifferentServices
         internal int GetLoggedInUserType(string email, string password)
         {
             User user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
+            Services.Instance.LoggedInUserID = user.Id;
+            Debug.WriteLine(Services.Instance.LoggedInUserID);
             if (_userRepository.GetAllPatients().Contains(user))
             {
                 return Services.Patient;

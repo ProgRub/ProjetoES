@@ -15,14 +15,14 @@ namespace Forms
             InitializeComponent();
         }
 
-        private void CalendarScreenPatient_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             MoveToScreen(new GetPrescriptionHistoryScreen());
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new LoginScreen());
         }
     }
 }

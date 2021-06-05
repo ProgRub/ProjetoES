@@ -55,7 +55,8 @@ namespace ServicesLibrary
         private readonly TherapySessionService _therapySessionService;
 
         #endregion
-        
+
+        internal int LoggedInUserID { get; set;}
 
         private Services()
         {
