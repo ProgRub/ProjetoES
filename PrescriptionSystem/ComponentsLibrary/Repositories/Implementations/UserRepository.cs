@@ -31,10 +31,28 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void AddMedicalConditionToUser(User user, MedicalCondition medicalCondition)
         {
-            _userHasMedicalConditionRepository.Add(new UserHasMedicalCondition
+            if (user.UserHasMedicalConditions == null)
             {
-                User = user,MedicalCondition = medicalCondition
-            });
+                user.UserHasMedicalConditions = new List<UserHasMedicalCondition>
+                {
+                    new UserHasMedicalCondition
+                    {
+                        User = user, MedicalCondition = medicalCondition
+                    }
+                };
+            }
+            else
+            {
+                user.UserHasMedicalConditions.Add(new UserHasMedicalCondition
+                {
+                    User = user,
+                    MedicalCondition = medicalCondition
+                });
+            }
+            //_userHasMedicalConditionRepository.Add(new UserHasMedicalCondition
+            //{
+            //    User = user,MedicalCondition = medicalCondition
+            //});
         }
 
         public void AddMissingBodyPartToUser(User user, BodyPart bodyPart)

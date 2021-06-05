@@ -10,5 +10,6 @@ namespace ComponentsLibrary.Entities
         public Patient Patient { get; set; }
         public DateTime Date { get; set; }
         public string Note { get; set; }
+        public ICollection<TherapySessionHasTreatments> TherapySessionHasTreatmentsCollection { get; set; }
     }
 }
