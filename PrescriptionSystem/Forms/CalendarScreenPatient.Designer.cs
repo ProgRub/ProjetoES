@@ -85,6 +85,7 @@ namespace Forms
             this.ButtonSignUp.TabIndex = 29;
             this.ButtonSignUp.Text = "Add Permission";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
+            this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // monthCalendar1
             // 

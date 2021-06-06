@@ -24,5 +24,10 @@ namespace Forms
         {
             MoveToScreen(new LoginScreen());
         }
+
+        private void ButtonSignUp_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new AddPermission());
+        }
     }
 }
