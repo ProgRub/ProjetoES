@@ -28,168 +28,165 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.treatments = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.labelAddTreatmentSession = new System.Windows.Forms.Label();
+            this.labelPatient = new System.Windows.Forms.Label();
+            this.comboBoxPatient = new System.Windows.Forms.ComboBox();
+            this.labelDate = new System.Windows.Forms.Label();
+            this.sessionDate = new System.Windows.Forms.DateTimePicker();
+            this.labelHour = new System.Windows.Forms.Label();
+            this.sessionHour = new System.Windows.Forms.DateTimePicker();
+            this.labelLocal = new System.Windows.Forms.Label();
+            this.local = new System.Windows.Forms.TextBox();
+            this.labelTreatments = new System.Windows.Forms.Label();
+            this.buttonAddTreatmentSession = new System.Windows.Forms.Button();
+            this.treatments = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
-			// 
+            // 
             // ButtonBack
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // label1
+            // labelAddTreatmentSession
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(87, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(252, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Add Treatment Session";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.labelAddTreatmentSession.AutoSize = true;
+            this.labelAddTreatmentSession.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelAddTreatmentSession.Location = new System.Drawing.Point(87, 34);
+            this.labelAddTreatmentSession.Name = "labelAddTreatmentSession";
+            this.labelAddTreatmentSession.Size = new System.Drawing.Size(252, 31);
+            this.labelAddTreatmentSession.TabIndex = 0;
+            this.labelAddTreatmentSession.Text = "Add Treatment Session";
             // 
-            // label2
+            // labelPatient
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(42, 91);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Patient:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.labelPatient.AutoSize = true;
+            this.labelPatient.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelPatient.Location = new System.Drawing.Point(42, 91);
+            this.labelPatient.Name = "labelPatient";
+            this.labelPatient.Size = new System.Drawing.Size(61, 20);
+            this.labelPatient.TabIndex = 1;
+            this.labelPatient.Text = "Patient:";
             // 
-            // comboBox1
+            // comboBoxPatient
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(109, 88);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(250, 28);
-            this.comboBox1.TabIndex = 2;
+            this.comboBoxPatient.FormattingEnabled = true;
+            this.comboBoxPatient.Location = new System.Drawing.Point(109, 88);
+            this.comboBoxPatient.Name = "comboBoxPatient";
+            this.comboBoxPatient.Size = new System.Drawing.Size(250, 28);
+            this.comboBoxPatient.TabIndex = 2;
             // 
-            // label3
+            // labelDate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(42, 137);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 20);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Date:";
+            this.labelDate.AutoSize = true;
+            this.labelDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelDate.Location = new System.Drawing.Point(42, 137);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(45, 20);
+            this.labelDate.TabIndex = 3;
+            this.labelDate.Text = "Date:";
             // 
-            // dateTimePicker1
+            // sessionDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(109, 137);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
-            this.dateTimePicker1.TabIndex = 4;
+            this.sessionDate.Location = new System.Drawing.Point(109, 137);
+            this.sessionDate.Name = "sessionDate";
+            this.sessionDate.Size = new System.Drawing.Size(250, 27);
+            this.sessionDate.TabIndex = 4;
             // 
-            // label4
+            // labelHour
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(42, 186);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 20);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Hour:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.labelHour.AutoSize = true;
+            this.labelHour.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelHour.Location = new System.Drawing.Point(42, 186);
+            this.labelHour.Name = "labelHour";
+            this.labelHour.Size = new System.Drawing.Size(49, 20);
+            this.labelHour.TabIndex = 5;
+            this.labelHour.Text = "Hour:";
             // 
-            // dateTimePicker2
+            // sessionHour
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(109, 186);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(250, 27);
-            this.dateTimePicker2.TabIndex = 6;
+            this.sessionHour.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.sessionHour.Location = new System.Drawing.Point(109, 186);
+            this.sessionHour.Name = "sessionHour";
+            this.sessionHour.ShowUpDown = true;
+            this.sessionHour.Size = new System.Drawing.Size(250, 27);
+            this.sessionHour.TabIndex = 6;
             // 
-            // label5
+            // labelLocal
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(42, 234);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 20);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Local:";
+            this.labelLocal.AutoSize = true;
+            this.labelLocal.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelLocal.Location = new System.Drawing.Point(42, 234);
+            this.labelLocal.Name = "labelLocal";
+            this.labelLocal.Size = new System.Drawing.Size(48, 20);
+            this.labelLocal.TabIndex = 7;
+            this.labelLocal.Text = "Local:";
             // 
-            // textBox1
+            // local
             // 
-            this.textBox1.Location = new System.Drawing.Point(109, 231);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 27);
-            this.textBox1.TabIndex = 8;
+            this.local.Location = new System.Drawing.Point(109, 231);
+            this.local.Name = "local";
+            this.local.Size = new System.Drawing.Size(250, 27);
+            this.local.TabIndex = 8;
             // 
-            // label6
+            // labelTreatments
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(15, 279);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(88, 20);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Treatments:";
+            this.labelTreatments.AutoSize = true;
+            this.labelTreatments.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelTreatments.Location = new System.Drawing.Point(15, 279);
+            this.labelTreatments.Name = "labelTreatments";
+            this.labelTreatments.Size = new System.Drawing.Size(88, 20);
+            this.labelTreatments.TabIndex = 9;
+            this.labelTreatments.Text = "Treatments:";
+            // 
+            // buttonAddTreatmentSession
+            // 
+            this.buttonAddTreatmentSession.BackColor = System.Drawing.Color.ForestGreen;
+            this.buttonAddTreatmentSession.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddTreatmentSession.Location = new System.Drawing.Point(118, 411);
+            this.buttonAddTreatmentSession.Name = "buttonAddTreatmentSession";
+            this.buttonAddTreatmentSession.Size = new System.Drawing.Size(221, 29);
+            this.buttonAddTreatmentSession.TabIndex = 11;
+            this.buttonAddTreatmentSession.Text = "Add treatment session";
+            this.buttonAddTreatmentSession.UseVisualStyleBackColor = false;
             // 
             // treatments
             // 
+            this.treatments.FormattingEnabled = true;
             this.treatments.Location = new System.Drawing.Point(109, 279);
-            this.treatments.Multiline = true;
             this.treatments.Name = "treatments";
-            this.treatments.Size = new System.Drawing.Size(250, 107);
-            this.treatments.TabIndex = 10;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(145, 414);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 29);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Add treatment";
-            this.button1.UseVisualStyleBackColor = false;
+            this.treatments.Size = new System.Drawing.Size(250, 114);
+            this.treatments.TabIndex = 12;
             // 
             // AddTreatmentSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.treatments);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonAddTreatmentSession);
+            this.Controls.Add(this.labelTreatments);
+            this.Controls.Add(this.local);
+            this.Controls.Add(this.labelLocal);
+            this.Controls.Add(this.sessionHour);
+            this.Controls.Add(this.labelHour);
+            this.Controls.Add(this.sessionDate);
+            this.Controls.Add(this.labelDate);
+            this.Controls.Add(this.comboBoxPatient);
+            this.Controls.Add(this.labelPatient);
+            this.Controls.Add(this.labelAddTreatmentSession);
             this.Name = "AddTreatmentSession";
             this.Size = new System.Drawing.Size(432, 468);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker2, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.treatments, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.labelAddTreatmentSession, 0);
+            this.Controls.SetChildIndex(this.labelPatient, 0);
+            this.Controls.SetChildIndex(this.comboBoxPatient, 0);
+            this.Controls.SetChildIndex(this.labelDate, 0);
+            this.Controls.SetChildIndex(this.sessionDate, 0);
+            this.Controls.SetChildIndex(this.labelHour, 0);
+            this.Controls.SetChildIndex(this.sessionHour, 0);
+            this.Controls.SetChildIndex(this.labelLocal, 0);
+            this.Controls.SetChildIndex(this.local, 0);
+            this.Controls.SetChildIndex(this.labelTreatments, 0);
+            this.Controls.SetChildIndex(this.buttonAddTreatmentSession, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
+            this.Controls.SetChildIndex(this.treatments, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,17 +194,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox treatments;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelAddTreatmentSession;
+        private System.Windows.Forms.Label labelPatient;
+        private System.Windows.Forms.ComboBox comboBoxPatient;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.DateTimePicker sessionDate;
+        private System.Windows.Forms.Label labelHour;
+        private System.Windows.Forms.DateTimePicker sessionHour;
+        private System.Windows.Forms.Label labelLocal;
+        private System.Windows.Forms.TextBox local;
+        private System.Windows.Forms.Label labelTreatments;
+        private System.Windows.Forms.Button buttonAddTreatmentSession;
+        private System.Windows.Forms.CheckedListBox treatments;
     }
 }

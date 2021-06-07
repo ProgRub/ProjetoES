@@ -120,5 +120,10 @@ namespace ServicesLibrary.DifferentServices
         {
             _userRepository.GetAll();
         }
+
+        internal IEnumerable<Patient> GetAllPatients()
+        {
+            return _userRepository.GetAllPatients();
+        }
     }
 }

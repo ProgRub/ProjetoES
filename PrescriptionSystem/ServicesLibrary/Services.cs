@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using ComponentsLibrary.Entities;
+using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
 
 namespace ServicesLibrary
@@ -187,6 +188,16 @@ namespace ServicesLibrary
         public void LoadDatabase()
         {
             _userService.LoadDBHelpFunction();
+        }
+
+        public IEnumerable<Patient> GetAllPatients()
+        {
+            return _userService.GetAllPatients();
+        }
+
+        public IEnumerable<Treatment> GetAllTreatments()
+        {
+            return _prescriptionItemService.GetAllTreatments();
         }
     }
 }

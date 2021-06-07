@@ -82,5 +82,10 @@ namespace ServicesLibrary.DifferentServices
                 _exerciseRepository.AddBodyPartsToExercise(exercise, (BodyPart)Enum.Parse(typeof(BodyPart), bodyPartString));
             }
         }
+
+        internal IEnumerable<Treatment> GetAllTreatments()
+        {
+            return _treatmentRepository.GetAll();
+        }
     }
 }
