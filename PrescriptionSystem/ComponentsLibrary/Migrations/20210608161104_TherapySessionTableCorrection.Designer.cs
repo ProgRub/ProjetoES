@@ -4,14 +4,16 @@ using ComponentsLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    partial class PrescriptionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210608161104_TherapySessionTableCorrection")]
+    partial class TherapySessionTableCorrection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,10 +303,10 @@ namespace ComponentsLibrary.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TherapistId")
+                    b.Property<int?>("TherapistId")
                         .HasColumnType("int");
 
                     b.HasIndex("PatientId");
@@ -694,15 +696,11 @@ namespace ComponentsLibrary.Migrations
 
                     b.HasOne("ComponentsLibrary.Entities.Patient", "Patient")
                         .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PatientId");
 
                     b.HasOne("ComponentsLibrary.Entities.Therapist", "Therapist")
                         .WithMany()
-                        .HasForeignKey("TherapistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TherapistId");
 
                     b.Navigation("Patient");
 

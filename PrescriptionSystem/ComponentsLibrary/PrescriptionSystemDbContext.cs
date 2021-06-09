@@ -61,7 +61,7 @@ namespace ComponentsLibrary
             modelBuilder.Entity<Prescription>().Property(e => e.EndDate).IsRequired();
             modelBuilder.Entity<Prescription>().Property(e => e.StartDate).IsRequired();
 
-            modelBuilder.Entity<TherapySession>().Property(e => e.Date).IsRequired();
+            modelBuilder.Entity<TherapySession>().Property(e => e.DateTime).IsRequired();
 
             modelBuilder.Entity<PrescriptionItem>().Property(e => e.Name).IsRequired();
             modelBuilder.Entity<Medicine>().Property(e => e.Price).IsRequired();
@@ -72,6 +72,9 @@ namespace ComponentsLibrary
             modelBuilder.Entity<Exercise>().Property(e => e.AgeMaximum).IsRequired().HasDefaultValue(150);
             modelBuilder.Entity<Exercise>().Property(e => e.AgeMinimum).IsRequired().HasDefaultValue(0);
             modelBuilder.Entity<Exercise>().Property(e => e.Duration).IsRequired();
+
+            //modelBuilder.Entity<TherapySession>().HasOne<Patient>().WithOne().HasForeignKey<Patient>(e => e.Id);
+            //modelBuilder.Entity<TherapySession>().HasOne<Therapist>().WithOne().HasForeignKey<Therapist>(e => e.Id);
 
             #endregion
 

@@ -5,37 +5,41 @@ using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServicesLibrary.DifferentServices
 {
     public class PrescriptionItemService
     {
-        private IMedicineRepository _medicineRepository;
-        private IExerciseRepository _exerciseRepository;
-        private ITreatmentRepository _treatmentRepository;
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IExerciseRepository _exerciseRepository;
+        private readonly ITreatmentRepository _treatmentRepository;
 
-        public PrescriptionItemService()
+        private PrescriptionItemService()
         {
             _medicineRepository = new MedicineRepository(Database.GetContext());
             _exerciseRepository = new ExerciseRepository(Database.GetContext());
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
         }
 
-        public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+        internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
+
+        internal void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
              TimeSpan duration, IEnumerable<string> bodyParts)
         {
-            Exercise exercise = new Exercise
+            var exercise = new Exercise
             {
                 Name = name, Description = description, AgeMinimum = ageMinimum, AgeMaximum = ageMaximum, 
                 Duration = duration, 
             };
             _exerciseRepository.Add(exercise);
             AddBodyPartsToExercise(exercise, bodyParts);
+            _treatmentRepository.SaveChanges();
         }
 
-        public void CreateMedicinePrescriptionItem(string name, string description, double price , IEnumerable<string> allergies, IEnumerable<string> diseases)
+        internal void CreateMedicinePrescriptionItem(string name, string description, double price , IEnumerable<string> allergies, IEnumerable<string> diseases)
         {
-            Medicine medicine = new Medicine
+            var medicine = new Medicine
             {
                 Name = name,
                 Description = description,
@@ -44,13 +48,14 @@ namespace ServicesLibrary.DifferentServices
 
             _medicineRepository.Add(medicine);
             AddMedicalConditionsToMedicine(medicine, allergies, diseases);
+            _treatmentRepository.SaveChanges();
         }
 
-        public void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+        internal void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
              TimeSpan duration, string bodyPart)
         {
 
-            Treatment treatment = new Treatment
+            var treatment = new Treatment
             {
                 Name = name,
                 Description = description,
@@ -60,18 +65,19 @@ namespace ServicesLibrary.DifferentServices
                 BodyPart = (BodyPart)Enum.Parse(typeof(BodyPart), bodyPart)
             };
             _treatmentRepository.Add(treatment);
+            _treatmentRepository.SaveChanges();
         }
 
         private void AddMedicalConditionsToMedicine(Medicine medicine, IEnumerable<string> allergies, IEnumerable<string> diseases)
         {
             foreach (var allergyString in allergies)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine, Services.Instance.GetMedicalConditionByName(allergyString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine, MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
             }
 
             foreach (var diseaseString in diseases)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine, Services.Instance.GetMedicalConditionByName(diseaseString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine, MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
             }
         }
 
@@ -81,6 +87,16 @@ namespace ServicesLibrary.DifferentServices
             {
                 _exerciseRepository.AddBodyPartsToExercise(exercise, (BodyPart)Enum.Parse(typeof(BodyPart), bodyPartString));
             }
+        }
+
+        internal IEnumerable<Treatment> GetAllTreatments()
+        {
+            return _treatmentRepository.GetAll();
+        }
+
+        internal Treatment GetTreatmentByNameBodyPartAndDuration(string name, BodyPart bodyPart,TimeSpan duration)
+        {
+            return _treatmentRepository.Find(e => e.Name == name && e.BodyPart == bodyPart && e.Duration == duration).First();
         }
     }
 }

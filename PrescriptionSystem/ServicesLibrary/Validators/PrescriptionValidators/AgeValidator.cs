@@ -1,4 +1,7 @@
-﻿namespace ServicesLibrary.Validators
+﻿
+using ServicesLibrary.Validators.Prescription;
+
+namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class AgeValidator:BaseValidator
     {

@@ -20,11 +20,12 @@ namespace ServicesLibrary.DifferentServices
 
         private IMedicalConditionRepository _medicalConditionRepository;
 
-        public MedicalConditionService()
+        private MedicalConditionService()
         {
             _medicalConditionRepository = new MedicalConditionRepository(Database.GetContext());
         }
 
+        internal static MedicalConditionService Instance { get; } = new MedicalConditionService();
         internal MedicalCondition GetMedicalConditionByName(string name)
         {
             try
