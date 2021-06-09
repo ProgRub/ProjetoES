@@ -13,9 +13,18 @@ namespace ServicesLibrary.DifferentServices
     {
         private IUserRepository _userRepository;
 
-        public UserService()
+        internal int LoggedInUserId { get; private set; }
+
+        private UserService()
         {
             _userRepository = new UserRepository(Database.GetContext());
+        }
+
+        internal static UserService Instance { get; } = new UserService();
+
+        internal User GetUserById(int id)
+        {
+            return _userRepository.GetById(id);
         }
 
         internal bool IsHealthUserNumberUnique(int healthUserNumber)
@@ -30,11 +39,6 @@ namespace ServicesLibrary.DifferentServices
 
         internal bool IsTherapistOldEnough(DateTime dateOfBirth)
         {
-            Debug.WriteLine(DateTime.Today.Date);
-            Debug.WriteLine(dateOfBirth.Date);
-            Debug.WriteLine((DateTime.Today.Date - dateOfBirth.Date).TotalDays);
-            Debug.WriteLine(( dateOfBirth.Date-DateTime.Today.Date).TotalDays);
-            Debug.WriteLine(22 * 365.75);
             return (DateTime.Today - dateOfBirth).Days >= 22 * 365.75;
         }
 
@@ -45,7 +49,7 @@ namespace ServicesLibrary.DifferentServices
             switch (type)
             {
                 case "Patient":
-                    Patient patient = new Patient
+                    var patient = new Patient
                     {
                         FullName = name, DateOfBirth = dateOfBirth, Email = email, HealthUserNumber = healthUserNumber,
                         Password = password, PhoneNumber = phoneNumber
@@ -56,7 +60,7 @@ namespace ServicesLibrary.DifferentServices
                     _userRepository.SaveChanges();
                     return;
                 case "Therapist":
-                    Therapist therapist = new Therapist
+                    var therapist = new Therapist
                     {
                         FullName = name, DateOfBirth = dateOfBirth, Email = email, HealthUserNumber = healthUserNumber,
                         Password = password, PhoneNumber = phoneNumber
@@ -74,14 +78,13 @@ namespace ServicesLibrary.DifferentServices
             foreach (var allergyString in allergies)
             {
                 _userRepository.AddMedicalConditionToUser(user,
-                    Services.Instance.GetMedicalConditionByName(allergyString));
+                    MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
             }
 
             foreach (var diseaseString in diseases)
             {
-                Debug.WriteLine(Services.Instance.GetMedicalConditionByName(diseaseString).Name);
                 _userRepository.AddMedicalConditionToUser(user,
-                    Services.Instance.GetMedicalConditionByName(diseaseString));
+                    MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
             }
         }
 
@@ -103,9 +106,10 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.Find(e => e.Email == email && e.Password == password).Any();
         }
 
-        internal int GetLoggedInUserType(string email, string password)
+        internal int LogIn(string email, string password)
         {
-            User user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
+            var user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
+            LoggedInUserId = user.Id;
             if (_userRepository.GetAllPatients().Contains(user))
             {
                 return Services.Patient;
@@ -117,6 +121,21 @@ namespace ServicesLibrary.DifferentServices
         internal void LoadDBHelpFunction()
         {
             _userRepository.GetAll();
+        }
+
+        internal IEnumerable<Patient> GetAllPatients()
+        {
+            return _userRepository.GetAllPatients();
+        }
+
+        internal bool IsPatientAvailable(int patientId, DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
+        {
+            return false;
+        }
+
+        internal bool IsTherapistAvailable(DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
+        {
+            return false;
         }
     }
 }

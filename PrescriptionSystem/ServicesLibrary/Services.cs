@@ -6,16 +6,20 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using ComponentsLibrary.Entities;
+using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
+using ServicesLibrary.Validators.TherapySessionValidators;
 
 namespace ServicesLibrary
 {
     public class Services
     {
         public const int Ok = 0;
+
         #region ErrorConstants
 
         #region Registration
+
         public const int MiscError = 1,
             NameRequired = 2,
             PhoneNumberRequired = 3,
@@ -34,10 +38,19 @@ namespace ServicesLibrary
             AgeMininumNotValid = 16,
             AgeMaxinumNotValid = 17,
             PriceNotValid = 18;
+
         #endregion
+
         #region LoggingIn
 
         public const int EmailDoesntExist = 1, PasswordDoesntMatch = 2;
+
+        #endregion
+
+        #region TherapySessionCreation
+
+        public const int PatientUnavailable = 1, TherapistUnavailable = 2, PatientRequired = 3, AtLeastOneTreatment = 4;
+
         #endregion
 
         #endregion
@@ -55,15 +68,15 @@ namespace ServicesLibrary
         private readonly TherapySessionService _therapySessionService;
 
         #endregion
-        
+
 
         private Services()
         {
-            _medicalConditionService = new MedicalConditionService();
-            _userService = new UserService();
-            _prescriptionService = new PrescriptionService();
-            _prescriptionItemService = new PrescriptionItemService();
-            _therapySessionService = new TherapySessionService();
+            _medicalConditionService = MedicalConditionService.Instance;
+            _userService = UserService.Instance;
+            _prescriptionService = PrescriptionService.Instance;
+            _prescriptionItemService = PrescriptionItemService.Instance;
+            _therapySessionService = TherapySessionService.Instance;
         }
 
         public static Services Instance { get; } = new Services();
@@ -93,15 +106,16 @@ namespace ServicesLibrary
                 errorCodes.Add(HealthUserNumberAlreadyExists);
             if (string.IsNullOrWhiteSpace(email)) errorCodes.Add(EmailRequired);
             else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
-            else if(!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
+            else if (!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
             if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
-           if (userType == "Therapist")
+            if (userType == "Therapist")
             {
                 if (!_userService.IsTherapistOldEnough(dateOfBirth))
                 {
                     errorCodes.Add(TherapistNotOldEnough);
                 }
             }
+
             return errorCodes;
         }
 
@@ -117,11 +131,12 @@ namespace ServicesLibrary
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
             TimeSpan duration, IEnumerable<string> bodyParts)
         {
-            _prescriptionItemService.CreateExercisePrescriptionItem(name, description, ageMinimum, ageMaximum, duration, bodyParts);
-
+            _prescriptionItemService.CreateExercisePrescriptionItem(name, description, ageMinimum, ageMaximum, duration,
+                bodyParts);
         }
 
-        public void CreateMedicinePrescriptionItem(string name, string description, double price, IEnumerable<string> allergies, IEnumerable<string> diseases)
+        public void CreateMedicinePrescriptionItem(string name, string description, double price,
+            IEnumerable<string> allergies, IEnumerable<string> diseases)
         {
             _prescriptionItemService.CreateMedicinePrescriptionItem(name, description, price, allergies, diseases);
         }
@@ -129,10 +144,12 @@ namespace ServicesLibrary
         public void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
             TimeSpan duration, string bodyPart)
         {
-            _prescriptionItemService.CreateTreatmentPrescriptionItem(name, description, ageMinimum, ageMaximum, duration, bodyPart);
+            _prescriptionItemService.CreateTreatmentPrescriptionItem(name, description, ageMinimum, ageMaximum,
+                duration, bodyPart);
         }
 
-        public IEnumerable<int> CheckExerciseAndTreatmentCreation(string name, string description, string ageMinimum, string ageMaximum)
+        public IEnumerable<int> CheckExerciseAndTreatmentCreation(string name, string description, string ageMinimum,
+            string ageMaximum)
         {
             var errorCodes = new List<int>();
 
@@ -165,7 +182,7 @@ namespace ServicesLibrary
         {
             if (!_userService.IsUserEmailInDatabase(email)) return EmailDoesntExist;
             if (!_userService.DoesPasswordCorrespondToEmail(email, password)) return PasswordDoesntMatch;
-            return _userService.GetLoggedInUserType(email, password);
+            return _userService.LogIn(email, password);
         }
 
         public IEnumerable<string> GetAllergies()
@@ -178,11 +195,6 @@ namespace ServicesLibrary
             return _medicalConditionService.GetDiseases().Select(e => e.Name);
         }
 
-        internal MedicalCondition GetMedicalConditionByName(string name)
-        {
-            return _medicalConditionService.GetMedicalConditionByName(name);
-        }
-
         public void LoadDatabase()
         {
             _userService.LoadDBHelpFunction();
@@ -190,24 +202,87 @@ namespace ServicesLibrary
 
         public IEnumerable<string> GetAllPatients()
         {
-            IEnumerable<Patient> patients = _userService.GetAllPatients();
-            List<string> patientsAsStrings = new List<string>();
+            var patients = _userService.GetAllPatients();
+            var patientsAsStrings = new List<string>();
             foreach (var patient in patients)
             {
                 patientsAsStrings.Add($"{patient.Id} - {patient.FullName}");
             }
+
             return patientsAsStrings;
         }
 
-        public IEnumerable<string> GetAllTreatments()
+        public IDictionary<string, TimeSpan> GetAllTreatments()
         {
-            IEnumerable<Treatment> treatments = _prescriptionItemService.GetAllTreatments();
-            List<string> treatmentsAsStrings = new List<string>();
+            var treatments = _prescriptionItemService.GetAllTreatments();
+            var treatmentsAsDict = new Dictionary<string, TimeSpan>();
             foreach (var treatment in treatments)
             {
-                treatmentsAsStrings.Add($"{treatment.Name} - {treatment.BodyPart} ({treatment.Duration})");
+                treatmentsAsDict.Add($"{treatment.Name} | {treatment.BodyPart} | {treatment.Duration}",
+                    treatment.Duration);
             }
-            return treatmentsAsStrings;
+
+            return treatmentsAsDict;
+        }
+
+        public IEnumerable<int> CheckTherapySessionCreation(string patient, DateTime sessionDate, DateTime sessionTime,
+            IEnumerable<string> treatments, TimeSpan estimatedDuration)
+        {
+            var errorCodes = new List<int>();
+            if (patient == "")
+            {
+                errorCodes.Add(PatientRequired);
+            }
+            else
+            {
+                var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+                //if (!_userService.IsPatientAvailable(patientId, sessionDate, sessionTime, estimatedDuration))
+                //{
+                //    errorCodes.Add(PatientUnavailable);
+                //}
+                var validator = new PatientAvailabilityValidator();
+                validator.SetNext(new TherapistAvailabilityValidator());
+                var validateResult = validator.Validate(new List<object>
+                {
+                    new TherapySession
+                    {
+                        Patient = (Patient) UserService.Instance.GetUserById(patientId),
+                        Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
+                        DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay), EstimatedDuration = estimatedDuration
+                    },
+                    errorCodes
+                });
+                //List<object> validateResultList = (List<object>) validateResult;
+                errorCodes = (List<int>) validateResult;
+            }
+
+            //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
+            //{
+            //    errorCodes.Add(TherapistUnavailable);
+            //}
+
+            if (!treatments.Any())
+            {
+                errorCodes.Add(AtLeastOneTreatment);
+            }
+
+            return errorCodes;
+        }
+
+        public void CreateTherapySession(string patient, DateTime sessionDate, DateTime sessionTime,
+            IEnumerable<string> treatments, TimeSpan estimatedDuration)
+        {
+            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+            var treatmentsList = new List<Treatment>();
+            foreach (var treatmentString in treatments)
+            {
+                var treatmentStringSplit = treatmentString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);//Order of info: name -> bodyPart -> Duration
+                treatmentsList.Add(PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDuration(
+                    treatmentStringSplit[0], (BodyPart) Enum.Parse(typeof(BodyPart), treatmentStringSplit[1]),
+                    TimeSpan.Parse(treatmentStringSplit[2])));
+            }
+            TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
+                sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
         }
     }
 }

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ComponentsLibrary\ComponentsLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\FinishedTherapySession\" />
+  </ItemGroup>
+
 </Project>

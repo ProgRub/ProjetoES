@@ -1,4 +1,4 @@
-﻿namespace ServicesLibrary.Validators
+﻿namespace ServicesLibrary.Validators.Prescription
 {
     public class ExistingDiseaseValidator : BaseValidator
     {

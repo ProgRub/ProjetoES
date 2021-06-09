@@ -1,6 +1,6 @@
-﻿namespace ServicesLibrary.Validators
+﻿namespace ServicesLibrary.Validators.Prescription
 {
-    public class MissingBodyPartValidator : BaseValidator
+    public class AllergyValidator : BaseValidator
     {
         public override object Validate(object request)
         {

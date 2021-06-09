@@ -18,7 +18,7 @@ namespace Forms
 
         protected void MoveToScreen(BaseControl newControl)
         {
-            var window = ((Window) Parent);
+            var window = ((Window)Parent);
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);
@@ -33,14 +33,23 @@ namespace Forms
 
         protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
         {
-            ClearTextbox(textBox);
-            textBox.PlaceholderText = errorMessage;
+            if (string.IsNullOrWhiteSpace(textBox.PlaceholderText))
+            {
+                ((Window)Parent).ActiveControl = null;
+                ClearTextbox(textBox);
+                textBox.PlaceholderText = errorMessage;
+            }
         }
 
         protected void ShowInformationMessageBox(string message, string messageBoxTitle)
         {
 
             MessageBox.Show(message, messageBoxTitle, MessageBoxButtons.OK);
+        }
+
+        protected void SetFormAcceptButton(Button button)
+        {
+            ((Window)Parent).AcceptButton = button;
         }
     }
 }

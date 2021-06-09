@@ -1,10 +1,11 @@
-﻿namespace ServicesLibrary.Validators
+﻿namespace ServicesLibrary.Validators.Prescription
 {
-    public class TimeConstraintsValidator:BaseValidator
+    public class MissingBodyPartValidator : BaseValidator
     {
         public override object Validate(object request)
         {
             return null;
         }
+
     }
 }

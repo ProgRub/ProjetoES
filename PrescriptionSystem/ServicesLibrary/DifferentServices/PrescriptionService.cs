@@ -9,9 +9,11 @@ namespace ServicesLibrary.DifferentServices
     {
         private IPrescriptionRepository _prescriptionRepository;
 
-        public PrescriptionService()
+        private PrescriptionService()
         {
             _prescriptionRepository = new PrescriptionRepository(Database.GetContext());
         }
+
+        internal static PrescriptionService Instance { get; } = new PrescriptionService();
     }
 }

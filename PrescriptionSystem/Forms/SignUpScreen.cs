@@ -26,6 +26,7 @@ namespace Forms
             {
                 CheckedListBoxDiseases.Items.Add(disease);
             }
+            SetFormAcceptButton(ButtonSignUp);
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)

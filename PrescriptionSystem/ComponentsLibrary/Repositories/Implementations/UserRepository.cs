@@ -49,10 +49,6 @@ namespace ComponentsLibrary.Repositories.Implementations
                     MedicalCondition = medicalCondition
                 });
             }
-            //_userHasMedicalConditionRepository.Add(new UserHasMedicalCondition
-            //{
-            //    User = user,MedicalCondition = medicalCondition
-            //});
         }
 
         public void AddMissingBodyPartToUser(User user, BodyPart bodyPart)
