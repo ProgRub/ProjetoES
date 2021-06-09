@@ -187,5 +187,27 @@ namespace ServicesLibrary
         {
             _userService.LoadDBHelpFunction();
         }
+
+        public IEnumerable<string> GetAllPatients()
+        {
+            IEnumerable<Patient> patients = _userService.GetAllPatients();
+            List<string> patientsAsStrings = new List<string>();
+            foreach (var patient in patients)
+            {
+                patientsAsStrings.Add($"{patient.Id} - {patient.FullName}");
+            }
+            return patientsAsStrings;
+        }
+
+        public IEnumerable<string> GetAllTreatments()
+        {
+            IEnumerable<Treatment> treatments = _prescriptionItemService.GetAllTreatments();
+            List<string> treatmentsAsStrings = new List<string>();
+            foreach (var treatment in treatments)
+            {
+                treatmentsAsStrings.Add($"{treatment.Name} - {treatment.BodyPart} ({treatment.Duration})");
+            }
+            return treatmentsAsStrings;
+        }
     }
 }

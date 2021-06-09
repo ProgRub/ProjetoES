@@ -29,51 +29,6 @@ namespace Forms
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddMedicineItem_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             var errorCodes = Services.Instance.CheckMedicineCreation(textBoxMedicineName.Text, textBoxMedicineDescription.Text, textBoxMedicinePrice.Text);
@@ -96,7 +51,7 @@ namespace Forms
             else
             {
                 Services.Instance.CreateMedicinePrescriptionItem(textBoxMedicineName.Text, textBoxMedicineDescription.Text,
-                    Double.Parse(textBoxMedicinePrice.Text), allergies, diseases);
+                    double.Parse(textBoxMedicinePrice.Text), allergies, diseases);
             }
 
             
@@ -129,11 +84,6 @@ namespace Forms
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddPrescriptionItemScreen());
-        }
-
-        private void textBoxMedicineName_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

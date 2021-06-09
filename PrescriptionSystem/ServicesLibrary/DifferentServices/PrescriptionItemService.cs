@@ -21,7 +21,7 @@ namespace ServicesLibrary.DifferentServices
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
         }
 
-        public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+        internal void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
              TimeSpan duration, IEnumerable<string> bodyParts)
         {
             Exercise exercise = new Exercise
@@ -33,7 +33,7 @@ namespace ServicesLibrary.DifferentServices
             AddBodyPartsToExercise(exercise, bodyParts);
         }
 
-        public void CreateMedicinePrescriptionItem(string name, string description, double price , IEnumerable<string> allergies, IEnumerable<string> diseases)
+        internal void CreateMedicinePrescriptionItem(string name, string description, double price , IEnumerable<string> allergies, IEnumerable<string> diseases)
         {
             Medicine medicine = new Medicine
             {
@@ -46,7 +46,7 @@ namespace ServicesLibrary.DifferentServices
             AddMedicalConditionsToMedicine(medicine, allergies, diseases);
         }
 
-        public void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
+        internal void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
              TimeSpan duration, string bodyPart)
         {
 
