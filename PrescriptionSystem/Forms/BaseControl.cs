@@ -43,7 +43,6 @@ namespace Forms
 
         protected void ShowInformationMessageBox(string message, string messageBoxTitle)
         {
-
             MessageBox.Show(message, messageBoxTitle, MessageBoxButtons.OK);
         }
 

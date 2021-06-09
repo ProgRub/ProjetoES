@@ -24,7 +24,7 @@ namespace Forms
             {
                 case Services.EmailDoesntExist:
                     ShowTextBoxErrorMessage(TextBoxEmail,"Incorrect Email");
-                    TextBoxPassword.Text = "";
+                    ShowTextBoxErrorMessage(TextBoxPassword, "Incorrect Password");
                     return;
                 case Services.PasswordDoesntMatch:
                     ShowTextBoxErrorMessage(TextBoxPassword,"Incorrect Password");

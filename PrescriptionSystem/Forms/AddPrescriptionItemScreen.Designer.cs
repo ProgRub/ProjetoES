@@ -34,6 +34,10 @@ namespace Forms
             this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+			// 
+            // ButtonBack
+            // 
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // button1
             // 

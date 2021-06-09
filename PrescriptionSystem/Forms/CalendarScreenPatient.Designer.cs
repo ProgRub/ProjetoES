@@ -40,6 +40,7 @@ namespace Forms
             // 
             this.ButtonBack.Size = new System.Drawing.Size(94, 39);
             this.ButtonBack.Text = "Logout";
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // textBox1
             // 
@@ -84,6 +85,7 @@ namespace Forms
             this.ButtonSignUp.TabIndex = 29;
             this.ButtonSignUp.Text = "Add Permission";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
+            this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // monthCalendar1
             // 
@@ -105,7 +107,6 @@ namespace Forms
             this.Controls.Add(this.monthCalendar1);
             this.Name = "CalendarScreenPatient";
             this.Size = new System.Drawing.Size(511, 527);
-            this.Load += new System.EventHandler(this.CalendarScreenPatient_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.monthCalendar1, 0);
             this.Controls.SetChildIndex(this.ButtonSignUp, 0);

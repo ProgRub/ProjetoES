@@ -22,7 +22,7 @@ namespace Forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            MoveToScreen(new CreatePrescription());
         }
 
         private void ButtonSignUp_Click(object sender, EventArgs e)

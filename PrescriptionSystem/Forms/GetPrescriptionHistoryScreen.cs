@@ -14,5 +14,11 @@ namespace Forms
         {
             InitializeComponent();
         }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new CalendarScreenPatient());
+        }
+
     }
 }

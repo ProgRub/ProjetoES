@@ -54,6 +54,7 @@ namespace Forms
             // 
             // ButtonBack
             // 
+            this.ButtonBack.TabIndex = 0;
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // TextBoxEmail
@@ -70,7 +71,7 @@ namespace Forms
             this.TextBoxPhoneNumber.Location = new System.Drawing.Point(158, 136);
             this.TextBoxPhoneNumber.Name = "TextBoxPhoneNumber";
             this.TextBoxPhoneNumber.Size = new System.Drawing.Size(400, 29);
-            this.TextBoxPhoneNumber.TabIndex = 6;
+            this.TextBoxPhoneNumber.TabIndex = 5;
             // 
             // LabelEmail
             // 
@@ -101,7 +102,7 @@ namespace Forms
             this.RadioButtonPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RadioButtonPatient.Name = "RadioButtonPatient";
             this.RadioButtonPatient.Size = new System.Drawing.Size(75, 25);
-            this.RadioButtonPatient.TabIndex = 8;
+            this.RadioButtonPatient.TabIndex = 1;
             this.RadioButtonPatient.TabStop = true;
             this.RadioButtonPatient.Text = "Patient";
             this.RadioButtonPatient.UseVisualStyleBackColor = true;
@@ -113,7 +114,8 @@ namespace Forms
             this.RadioButtonTherapist.Location = new System.Drawing.Point(287, 18);
             this.RadioButtonTherapist.Name = "RadioButtonTherapist";
             this.RadioButtonTherapist.Size = new System.Drawing.Size(92, 25);
-            this.RadioButtonTherapist.TabIndex = 9;
+            this.RadioButtonTherapist.TabIndex = 2;
+            this.RadioButtonTherapist.TabStop = true;
             this.RadioButtonTherapist.Text = "Therapist";
             this.RadioButtonTherapist.UseVisualStyleBackColor = true;
             // 
@@ -123,7 +125,7 @@ namespace Forms
             this.TextBoxName.Location = new System.Drawing.Point(158, 66);
             this.TextBoxName.Name = "TextBoxName";
             this.TextBoxName.Size = new System.Drawing.Size(400, 29);
-            this.TextBoxName.TabIndex = 12;
+            this.TextBoxName.TabIndex = 3;
             // 
             // LabelDOB
             // 
@@ -155,7 +157,7 @@ namespace Forms
             this.DateTimePickerDOB.MaxDate = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             this.DateTimePickerDOB.Name = "DateTimePickerDOB";
             this.DateTimePickerDOB.Size = new System.Drawing.Size(231, 29);
-            this.DateTimePickerDOB.TabIndex = 13;
+            this.DateTimePickerDOB.TabIndex = 4;
             this.DateTimePickerDOB.Value = new System.DateTime(2021, 6, 3, 0, 0, 0, 0);
             // 
             // TextBoxPassword
@@ -165,7 +167,7 @@ namespace Forms
             this.TextBoxPassword.Name = "TextBoxPassword";
             this.TextBoxPassword.PasswordChar = '*';
             this.TextBoxPassword.Size = new System.Drawing.Size(400, 29);
-            this.TextBoxPassword.TabIndex = 15;
+            this.TextBoxPassword.TabIndex = 8;
             // 
             // LabelPassword
             // 
@@ -183,7 +185,7 @@ namespace Forms
             this.TextBoxHealthUserNumber.Location = new System.Drawing.Point(158, 171);
             this.TextBoxHealthUserNumber.Name = "TextBoxHealthUserNumber";
             this.TextBoxHealthUserNumber.Size = new System.Drawing.Size(400, 29);
-            this.TextBoxHealthUserNumber.TabIndex = 17;
+            this.TextBoxHealthUserNumber.TabIndex = 6;
             // 
             // LabelHealthUserNumber
             // 
@@ -221,7 +223,7 @@ namespace Forms
             this.ButtonSignUp.Location = new System.Drawing.Point(313, 666);
             this.ButtonSignUp.Name = "ButtonSignUp";
             this.ButtonSignUp.Size = new System.Drawing.Size(96, 33);
-            this.ButtonSignUp.TabIndex = 22;
+            this.ButtonSignUp.TabIndex = 12;
             this.ButtonSignUp.Text = "Sign Up";
             this.ButtonSignUp.UseVisualStyleBackColor = true;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
@@ -234,7 +236,7 @@ namespace Forms
             this.CheckedListBoxAllergies.MultiColumn = true;
             this.CheckedListBoxAllergies.Name = "CheckedListBoxAllergies";
             this.CheckedListBoxAllergies.Size = new System.Drawing.Size(400, 148);
-            this.CheckedListBoxAllergies.TabIndex = 23;
+            this.CheckedListBoxAllergies.TabIndex = 9;
             // 
             // CheckedListBoxMissingBodyParts
             // 
@@ -253,7 +255,7 @@ namespace Forms
             this.CheckedListBoxMissingBodyParts.MultiColumn = true;
             this.CheckedListBoxMissingBodyParts.Name = "CheckedListBoxMissingBodyParts";
             this.CheckedListBoxMissingBodyParts.Size = new System.Drawing.Size(400, 76);
-            this.CheckedListBoxMissingBodyParts.TabIndex = 24;
+            this.CheckedListBoxMissingBodyParts.TabIndex = 11;
             // 
             // CheckedListBoxDiseases
             // 
@@ -263,7 +265,7 @@ namespace Forms
             this.CheckedListBoxDiseases.MultiColumn = true;
             this.CheckedListBoxDiseases.Name = "CheckedListBoxDiseases";
             this.CheckedListBoxDiseases.Size = new System.Drawing.Size(400, 148);
-            this.CheckedListBoxDiseases.TabIndex = 26;
+            this.CheckedListBoxDiseases.TabIndex = 10;
             // 
             // LabelDiseases
             // 
