@@ -276,13 +276,30 @@ namespace ServicesLibrary
             var treatmentsList = new List<Treatment>();
             foreach (var treatmentString in treatments)
             {
-                var treatmentStringSplit = treatmentString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);//Order of info: name -> bodyPart -> Duration
+                var treatmentStringSplit =
+                    treatmentString.Split(" | ",
+                        StringSplitOptions.RemoveEmptyEntries); //Order of info: name -> bodyPart -> Duration
                 treatmentsList.Add(PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDuration(
                     treatmentStringSplit[0], (BodyPart) Enum.Parse(typeof(BodyPart), treatmentStringSplit[1]),
                     TimeSpan.Parse(treatmentStringSplit[2])));
             }
+
             TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
+        }
+
+        public IEnumerable<string> GetPastTherapySessionsOfLoggedInTherapist()
+        {
+            var pastTherapySessions = _therapySessionService.GetTherapySessionsBeforeDate(
+                _therapySessionService.GetAllTherapySessionsOfTherapist(UserService.Instance.LoggedInUserId),
+               new DateTime(2022,1,1));
+            var therapySessionsStrings = new List<string>();
+            foreach (var pastTherapySession in pastTherapySessions)
+            {
+                therapySessionsStrings.Add($"{pastTherapySession.Id} | {_userService.GetUserById(pastTherapySession.PatientId).FullName}{Environment.NewLine}{pastTherapySession.DateTime.ToString("dddd dd/MM/yyyy HH:mm")}");
+            }
+
+            return therapySessionsStrings;
         }
     }
 }
