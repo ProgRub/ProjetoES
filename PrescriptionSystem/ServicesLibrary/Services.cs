@@ -128,6 +128,31 @@ namespace ServicesLibrary
                 password, allergies, diseases, missingBodyParts, userType);
         }
 
+        public void CreatePrescription(string patient, string description, DateTime startDate, DateTime endDate,
+            ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises)
+        {
+            var prescriptionItems = new List<PrescriptionItem>();
+
+            foreach (var exerciseString in exercises)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetExerciseByName(exerciseString));
+            }
+
+            foreach (var treatmentString in treatments)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetTreatmentByName(treatmentString));
+            }
+
+            foreach (var medicineString in medicines)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineByName(medicineString));
+            }
+
+            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+
+            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description, startDate, endDate, prescriptionItems);
+        }
+
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
             TimeSpan duration, IEnumerable<string> bodyParts)
         {
@@ -188,6 +213,21 @@ namespace ServicesLibrary
         public IEnumerable<string> GetAllergies()
         {
             return _medicalConditionService.GetAllergies().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetExercises()
+        {
+            return _prescriptionItemService.GetAllExercises().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetMedicine()
+        {
+            return _prescriptionItemService.GetAllMedicine().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetTreatments()
+        {
+            return _prescriptionItemService.GetAllTreatments().Select(e => e.Name);
         }
 
         public IEnumerable<string> GetDiseases()

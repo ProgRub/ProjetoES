@@ -94,6 +94,31 @@ namespace ServicesLibrary.DifferentServices
             return _treatmentRepository.GetAll();
         }
 
+        internal IEnumerable<Medicine> GetAllMedicine()
+        {
+            return _medicineRepository.GetAll();
+        }
+
+        internal IEnumerable<Exercise> GetAllExercises()
+        {
+            return _exerciseRepository.GetAll();
+        }
+
+        internal Treatment GetTreatmentByName(string name)
+        {
+            return _treatmentRepository.Find(e => e.Name == name).First();
+        }
+
+        internal Medicine GetMedicineByName(string name)
+        {
+            return _medicineRepository.Find(e => e.Name == name).First();
+        }
+
+        internal Exercise GetExerciseByName(string name)
+        {
+            return _exerciseRepository.Find(e => e.Name == name).First();
+        }
+
         internal Treatment GetTreatmentByNameBodyPartAndDuration(string name, BodyPart bodyPart,TimeSpan duration)
         {
             return _treatmentRepository.Find(e => e.Name == name && e.BodyPart == bodyPart && e.Duration == duration).First();
