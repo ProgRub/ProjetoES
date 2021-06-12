@@ -42,7 +42,7 @@ namespace ServicesLibrary.DifferentServices
             var therapySession = new TherapySession
             {
                 PatientId = patient.Id,
-                TherapistId = ((Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId)).Id,
+                TherapistId = UserService.Instance.LoggedInUserId,
                 DateTime = sessionDateTime,
                 EstimatedDuration = estimatedDuration
             };
