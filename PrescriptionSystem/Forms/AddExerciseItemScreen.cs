@@ -53,6 +53,7 @@ namespace Forms
             {
                 Services.Instance.CreateExercisePrescriptionItem(textBoxName.Text, textBoxDescription.Text,
                     int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyParts);
+                ShowInformationMessageBox("Exercise successfully added.", "Success");
 
             }
             

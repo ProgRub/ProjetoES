@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using Microsoft.EntityFrameworkCore;
@@ -245,6 +246,28 @@ namespace ComponentsLibrary
                 Email = "nobregarui@hotmail.com",
                 Password = "ruiruirui"
             });
+
+            modelBuilder.Entity<TherapySession>().HasData(new TherapySession
+            {
+                Id = 21,
+                Zombie = false,
+                PatientId = 16,
+                TherapistId = 18,
+                DateTime = new DateTime(2021, 06, 02, 15,00,00),
+                EstimatedDuration = new TimeSpan(1,0,0),
+                Note = ""
+            });
+
+            modelBuilder.Entity<TherapySessionHasTreatments>().HasData(new TherapySessionHasTreatments
+            {
+                CompletedTreatment = false,
+                TherapySessionId = 21,
+                Note = "",
+                TreatmentId = 7,
+                Zombie = false
+            });
+
+            
             #endregion
         }
 

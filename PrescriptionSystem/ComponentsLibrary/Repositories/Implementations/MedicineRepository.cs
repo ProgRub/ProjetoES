@@ -1,6 +1,7 @@
 ﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
+using System.Collections.Generic;
 
 namespace ComponentsLibrary.Repositories.Implementations
 {
@@ -14,11 +15,14 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition)
         {
-            _medicineHasIncompatibilityRepository.Add(new MedicineHasIncompatibleMedicalConditions
+
+            medicine.MedicineHasIncompatibleMedicalConditionsList = new List<MedicineHasIncompatibleMedicalConditions>
             {
-                Medicine = medicine,
-                MedicalCondition = medicalCondition
-            });
+                new MedicineHasIncompatibleMedicalConditions
+                {
+                    Medicine = medicine, MedicalCondition = medicalCondition
+                }
+            };
         }
         
     }

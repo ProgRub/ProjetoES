@@ -34,7 +34,7 @@ namespace ServicesLibrary.DifferentServices
             };
             _exerciseRepository.Add(exercise);
             AddBodyPartsToExercise(exercise, bodyParts);
-            _treatmentRepository.SaveChanges();
+            _exerciseRepository.SaveChanges();
         }
 
         internal void CreateMedicinePrescriptionItem(string name, string description, double price , IEnumerable<string> allergies, IEnumerable<string> diseases)
@@ -48,7 +48,7 @@ namespace ServicesLibrary.DifferentServices
 
             _medicineRepository.Add(medicine);
             AddMedicalConditionsToMedicine(medicine, allergies, diseases);
-            _treatmentRepository.SaveChanges();
+            _medicineRepository.SaveChanges();
         }
 
         internal void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,

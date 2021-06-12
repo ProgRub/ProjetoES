@@ -52,6 +52,7 @@ namespace Forms
             {
                 Services.Instance.CreateMedicinePrescriptionItem(textBoxMedicineName.Text, textBoxMedicineDescription.Text,
                     double.Parse(textBoxMedicinePrice.Text), allergies, diseases);
+                ShowInformationMessageBox("Medicine successfully added.", "Success");
             }
 
             

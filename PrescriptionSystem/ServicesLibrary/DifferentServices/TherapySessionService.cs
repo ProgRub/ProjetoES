@@ -35,7 +35,7 @@ namespace ServicesLibrary.DifferentServices
         internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
             IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             Debug.WriteLine(patient.FullName);
             Debug.WriteLine(UserService.Instance.LoggedInUserId);
             Debug.WriteLine(((Therapist)UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId)).FullName);
