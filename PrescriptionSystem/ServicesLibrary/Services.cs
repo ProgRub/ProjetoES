@@ -316,13 +316,83 @@ namespace ServicesLibrary
             var treatmentsList = new List<Treatment>();
             foreach (var treatmentString in treatments)
             {
-                var treatmentStringSplit = treatmentString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);//Order of info: name -> bodyPart -> Duration
-                treatmentsList.Add(PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDuration(
-                    treatmentStringSplit[0], (BodyPart) Enum.Parse(typeof(BodyPart), treatmentStringSplit[1]),
-                    TimeSpan.Parse(treatmentStringSplit[2])));
+                treatmentsList.Add(
+                    PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString));
             }
+
             TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
+        }
+
+        public IEnumerable<string> GetPastTherapySessionsOfLoggedInTherapist()
+        {
+            var pastTherapySessions = _therapySessionService.GetTherapySessionsBeforeDate(
+                _therapySessionService.GetAllTherapySessionsOfTherapist(UserService.Instance.LoggedInUserId),
+                new DateTime(2022, 1, 1));
+            var therapySessionsStrings = new List<string>();
+            foreach (var pastTherapySession in pastTherapySessions)
+            {
+                therapySessionsStrings.Add(
+                    $"{pastTherapySession.Id} | {_userService.GetUserById(pastTherapySession.PatientId).FullName}{Environment.NewLine}{pastTherapySession.DateTime:dddd dd/MM/yyyy HH:mm}");
+            }
+
+            return therapySessionsStrings;
+        }
+
+        public void SelectTherapySession(string therapySessionText)
+        {
+            var therapySessionParameters =
+                therapySessionText.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
+            var therapySessionId = int.Parse(therapySessionParameters[0]);
+            _therapySessionService.SelectedTherapySessionId = therapySessionId;
+        }
+
+        public string GetSelectedTherapySessionBaseInfo()
+        {
+            var therapySession = _therapySessionService.GetSelectedTherapySession();
+            return
+                $"{therapySession.Id} | {_userService.GetUserById(therapySession.PatientId).FullName} | {therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
+        }
+
+        public IEnumerable<IEnumerable<string>> GetSelectedTherapySessionTreatments()
+        {
+            var treatments = new List<List<string>>();
+            foreach (var therapySessionHasTreatmentsInstance in _therapySessionService
+                .GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(_therapySessionService
+                    .SelectedTherapySessionId))
+            {
+                var treatment =
+                    _prescriptionItemService.GetTreatmentById(therapySessionHasTreatmentsInstance.TreatmentId);
+                treatments.Add(new List<string>
+                {
+                    treatment.Name,
+                    treatment.Description,
+                    treatment.BodyPart.ToString(),
+                    $"{treatment.Duration:hh\\:mm\\:ss}"
+                });
+            }
+
+            return treatments;
+        }
+
+        public string GetTreatmentNote(string treatmentString)
+        {
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
+                _therapySessionService.SelectedTherapySessionId,
+                _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id).Note;
+        }
+
+        public bool GetTreatmentCompletedStatus(string treatmentString)
+        {
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
+                    _therapySessionService.SelectedTherapySessionId,
+                    _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id)
+                .CompletedTreatment;
+        }
+
+        public string GetSelectedTherapySessionNote()
+        {
+            return _therapySessionService.GetSelectedTherapySession().Note;
         }
     }
 }

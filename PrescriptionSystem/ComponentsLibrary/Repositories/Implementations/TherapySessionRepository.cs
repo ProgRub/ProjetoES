@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
@@ -33,6 +34,18 @@ namespace ComponentsLibrary.Repositories.Implementations
                     TherapySession = therapySession, Treatment = treatment
                 });
             }
+        }
+
+        public IEnumerable<TherapySessionHasTreatments> GetTherapySessionHasTreatmentsEnumerableBySessionId(int id)
+        {
+            return _therapySessionHasTreatmentsRepository.Find(e => e.TherapySessionId == id);
+        }
+
+        public TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdTreatmentId(int sessionId,
+            int treatmentId)
+        {
+            return _therapySessionHasTreatmentsRepository.Find(e =>
+                e.TherapySessionId == sessionId && e.TreatmentId == treatmentId).First();
         }
     }
 }

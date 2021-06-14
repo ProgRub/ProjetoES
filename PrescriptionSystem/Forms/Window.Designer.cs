@@ -37,23 +37,22 @@ namespace Forms
             this.loginScreen1.AutoSize = true;
             this.loginScreen1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.loginScreen1.BackColor = System.Drawing.Color.Transparent;
-            this.loginScreen1.Location = new System.Drawing.Point(1, -5);
-            this.loginScreen1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
-            this.loginScreen1.MinimumSize = new System.Drawing.Size(743, 339);
+            this.loginScreen1.Location = new System.Drawing.Point(1, -4);
+            this.loginScreen1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.loginScreen1.MinimumSize = new System.Drawing.Size(650, 254);
             this.loginScreen1.Name = "loginScreen1";
-            this.loginScreen1.Size = new System.Drawing.Size(743, 339);
+            this.loginScreen1.Size = new System.Drawing.Size(650, 254);
             this.loginScreen1.TabIndex = 0;
             // 
             // Window
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(914, 600);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.loginScreen1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Window";
             this.Text = "PrescriptionSystem";
             this.ResumeLayout(false);
