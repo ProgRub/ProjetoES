@@ -30,8 +30,12 @@ namespace Forms
         private void InitializeComponent()
         {
             this.ButtonExampleTherapySession = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LabelTitle = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // ButtonBack
+            // 
+            this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // ButtonExampleTherapySession
             // 
@@ -45,27 +49,27 @@ namespace Forms
             this.ButtonExampleTherapySession.UseVisualStyleBackColor = true;
             this.ButtonExampleTherapySession.Visible = false;
             // 
-            // label1
+            // LabelTitle
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(106, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(379, 46);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Click a Therapy Session to annotate it, its treatments and check which treatments" +
+            this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelTitle.Location = new System.Drawing.Point(106, 4);
+            this.LabelTitle.Name = "LabelTitle";
+            this.LabelTitle.Size = new System.Drawing.Size(379, 46);
+            this.LabelTitle.TabIndex = 7;
+            this.LabelTitle.Text = "Click a Therapy Session to annotate it, its treatments and check which treatments" +
     " we\'re completed.";
             // 
             // SelectPastTherapySessionScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonExampleTherapySession);
             this.Name = "SelectPastTherapySessionScreen";
             this.Load += new System.EventHandler(this.SelectPastTherapySessionScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.ButtonExampleTherapySession, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.LabelTitle, 0);
             this.ResumeLayout(false);
 
         }
@@ -73,6 +77,6 @@ namespace Forms
         #endregion
 
         private System.Windows.Forms.Button ButtonExampleTherapySession;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelTitle;
     }
 }

@@ -15,6 +15,7 @@ namespace ServicesLibrary.DifferentServices
     public class TherapySessionService
     {
         private ITherapySessionRepository _therapySessionRepository;
+        internal int SelectedTherapySessionId { get; set; }
 
         private TherapySessionService()
         {
@@ -41,11 +42,11 @@ namespace ServicesLibrary.DifferentServices
         internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
             IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             var therapySession = new TherapySession
             {
                 PatientId = patient.Id,
-                TherapistId = ((Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId)).Id,
+                TherapistId = UserService.Instance.LoggedInUserId,
                 DateTime = sessionDateTime,
                 EstimatedDuration = estimatedDuration
             };
@@ -61,6 +62,28 @@ namespace ServicesLibrary.DifferentServices
             DateTime date)
         {
             return therapySessions.Where(e => e.DateTime < date);
+        }
+
+        internal TherapySession GetSelectedTherapySession()
+        {
+            return _therapySessionRepository.GetById(SelectedTherapySessionId);
+        }
+
+        internal IEnumerable<TherapySessionHasTreatments>
+            GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(int id)
+        {
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
+        }
+
+        internal TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdTreatmentId(int sessionId,
+            int treatmentId)
+        {
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(sessionId, treatmentId);
+        }
+
+        internal void SaveChanges()
+        {
+            _therapySessionRepository.SaveChanges();
         }
     }
 }
