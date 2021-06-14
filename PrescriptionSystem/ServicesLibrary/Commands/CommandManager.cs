@@ -1,20 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace ServicesLibrary.Commands
 {
     public class CommandsManager
     {
-        #region Singleton object holds the state for the lifetime of the application
-
-        private CommandsManager()
-        {
-        }
-
+        private CommandsManager() { }
         public static CommandsManager Instance { get; } = new CommandsManager();
 
-        #endregion
-
+        public event EventHandler Notify;
 
         private readonly List<ICommand> _commands = new List<ICommand>();
 
@@ -26,7 +21,6 @@ namespace ServicesLibrary.Commands
 
         public void Execute(ICommand command)
         {
-            Debug.Assert(command != null);
 
             if (HasRedo)
             {
@@ -37,6 +31,7 @@ namespace ServicesLibrary.Commands
             _commands.Add(command);
             _position++;
 
+            Notify?.Invoke(this, EventArgs.Empty);
         }
 
         public void Undo()
@@ -46,12 +41,15 @@ namespace ServicesLibrary.Commands
             var command = _commands[_position];
             command.Undo();
             _position--;
+            Notify?.Invoke(this, EventArgs.Empty);
         }
 
         public void Redo()
         {
             if (!HasRedo) return;
             _commands[++_position].Redo();
+
+            Notify?.Invoke(this, EventArgs.Empty);
         }
     }
 }

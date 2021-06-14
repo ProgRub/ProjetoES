@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
@@ -14,6 +15,7 @@ namespace ServicesLibrary.DifferentServices
     public class TherapySessionService
     {
         private ITherapySessionRepository _therapySessionRepository;
+        internal int SelectedTherapySessionId { get; set; }
 
         private TherapySessionService()
         {
@@ -32,17 +34,19 @@ namespace ServicesLibrary.DifferentServices
             return _therapySessionRepository.Find(e => e.Therapist == therapist);
         }
 
+        internal IEnumerable<TherapySession> GetAllTherapySessionsOfTherapist(int therapistId)
+        {
+            return _therapySessionRepository.Find(e => e.TherapistId == therapistId);
+        }
+
         internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
             IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
         {
-            throw new NotImplementedException();
-            Debug.WriteLine(patient.FullName);
-            Debug.WriteLine(UserService.Instance.LoggedInUserId);
-            Debug.WriteLine(((Therapist)UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId)).FullName);
+            //throw new NotImplementedException();
             var therapySession = new TherapySession
             {
                 PatientId = patient.Id,
-                TherapistId = ((Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId)).Id,
+                TherapistId = UserService.Instance.LoggedInUserId,
                 DateTime = sessionDateTime,
                 EstimatedDuration = estimatedDuration
             };
@@ -51,6 +55,34 @@ namespace ServicesLibrary.DifferentServices
             {
                 _therapySessionRepository.AddTreatmentToTherapySession(therapySession,treatment);
             }
+            _therapySessionRepository.SaveChanges();
+        }
+
+        internal IEnumerable<TherapySession> GetTherapySessionsBeforeDate(IEnumerable<TherapySession> therapySessions,
+            DateTime date)
+        {
+            return therapySessions.Where(e => e.DateTime < date);
+        }
+
+        internal TherapySession GetSelectedTherapySession()
+        {
+            return _therapySessionRepository.GetById(SelectedTherapySessionId);
+        }
+
+        internal IEnumerable<TherapySessionHasTreatments>
+            GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(int id)
+        {
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
+        }
+
+        internal TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdTreatmentId(int sessionId,
+            int treatmentId)
+        {
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(sessionId, treatmentId);
+        }
+
+        internal void SaveChanges()
+        {
             _therapySessionRepository.SaveChanges();
         }
     }
