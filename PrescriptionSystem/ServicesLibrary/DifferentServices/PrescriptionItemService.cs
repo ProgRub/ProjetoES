@@ -123,11 +123,6 @@ namespace ServicesLibrary.DifferentServices
             return _exerciseRepository.Find(e => e.Name == name).First();
         }
 
-        internal Treatment GetTreatmentByNameBodyPartAndDuration(string name, BodyPart bodyPart,TimeSpan duration)
-        {
-            return _treatmentRepository.GetById(id);
-        }
-
         internal Treatment GetTreatmentByNameBodyPartAndDurationString(string treatmentString)
         {
             var treatmentStringSplit =
