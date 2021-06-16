@@ -24,7 +24,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal User GetUserById(int id)
         {
-            return _userRepository.GetById(id);
+            return _userRepository.Find(e => e.Id == id).First();
         }
 
         internal bool IsHealthUserNumberUnique(int healthUserNumber)

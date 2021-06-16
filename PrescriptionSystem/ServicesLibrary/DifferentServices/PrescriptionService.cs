@@ -43,5 +43,17 @@ namespace ServicesLibrary.DifferentServices
 
             _prescriptionRepository.SaveChanges();
         }
+
+        internal IEnumerable<Prescription> GetPrescriptionByPatientId()
+        {
+            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId).OrderBy(e => e.StartDate);
+        }
+
+        internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        {
+            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= _date && e.EndDate >= _date);
+        }
+
+
     }
 }

@@ -85,5 +85,15 @@ namespace ServicesLibrary.DifferentServices
         {
             _therapySessionRepository.SaveChanges();
         }
+
+        internal IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
+        {
+            return _therapySessionRepository.Find(e => e.TherapistId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date).OrderBy(e => e.DateTime);
+        }
+
+        internal IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
+        {
+            return _therapySessionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date).OrderBy(e => e.DateTime);
+        }
     }
 }

@@ -394,5 +394,59 @@ namespace ServicesLibrary
         {
             return _therapySessionService.GetSelectedTherapySession().Note;
         }
+
+
+        public IEnumerable<Prescription> GetPrescriptionByPatientId()
+        {
+            return _prescriptionService.GetPrescriptionByPatientId();
+
+        }
+
+        public IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        {
+            return _prescriptionService.GetPrescriptionByDate(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByTherapistId(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByPatientId(_date);
+        }
+
+        public User GetUserById(int id)
+        {
+            return _userService.GetUserById(id);
+        }
+
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionItemService.GetPrescriptionItems(pres_id);
+        }
+
+        public Medicine GetMedicineByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetMedicineByItemId(item_id);
+        }
+
+        public Exercise GetExerciseByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetExerciseByItemId(item_id);
+        }
+
+        public bool VerifyIfIsMedicine(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsMedicine(item_id);
+        }
+
+        public bool VerifyIfIsExercise(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsExercise(item_id);
+        }
+
+
     }
 }

@@ -14,12 +14,14 @@ namespace ServicesLibrary.DifferentServices
         private readonly IMedicineRepository _medicineRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ITreatmentRepository _treatmentRepository;
+        private readonly PrescriptionHasItemsRepository _prescriptionRepository;
 
         private PrescriptionItemService()
         {
             _medicineRepository = new MedicineRepository(Database.GetContext());
             _exerciseRepository = new ExerciseRepository(Database.GetContext());
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
+            _prescriptionRepository = new PrescriptionHasItemsRepository(Database.GetContext());
         }
 
         internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
@@ -136,6 +138,36 @@ namespace ServicesLibrary.DifferentServices
         internal Treatment GetTreatmentById(int id)
         {
             return _treatmentRepository.GetById(id);
+        }
+
+        internal Medicine GetMedicinetByItemId(int id)
+        {
+            return _medicineRepository.Find(e => e.Id == id).First();
+        }
+
+        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionRepository.Find(e => e.PrescriptionId == pres_id);
+        }
+
+        internal Medicine GetMedicineByItemId(int item_id)
+        {
+            return _medicineRepository.Find(e => e.Id == item_id).First();
+        }
+
+        internal Exercise GetExerciseByItemId(int item_id)
+        {
+            return _exerciseRepository.Find(e => e.Id == item_id).First();
+        }
+
+        internal bool VerifyIfIsMedicine(int item_id)
+        {
+            return _medicineRepository.Find(e => e.Id == item_id).Any();
+        }
+
+        internal bool VerifyIfIsExercise(int item_id)
+        {
+            return _exerciseRepository.Find(e => e.Id == item_id).Any();
         }
     }
 }
