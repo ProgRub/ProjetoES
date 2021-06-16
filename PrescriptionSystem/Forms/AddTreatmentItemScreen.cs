@@ -85,6 +85,7 @@ namespace Forms
             {
                 Services.Instance.CreateTreatmentPrescriptionItem(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
                     int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyPart);
+                ShowInformationMessageBox("Treatment successfully added.", "Success");
             }
             
         }

@@ -128,6 +128,31 @@ namespace ServicesLibrary
                 password, allergies, diseases, missingBodyParts, userType);
         }
 
+        public void CreatePrescription(string patient, string description, DateTime startDate, DateTime endDate,
+            ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises)
+        {
+            var prescriptionItems = new List<PrescriptionItem>();
+
+            foreach (var exerciseString in exercises)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetExerciseByName(exerciseString));
+            }
+
+            foreach (var treatmentString in treatments)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetTreatmentByName(treatmentString));
+            }
+
+            foreach (var medicineString in medicines)
+            {
+                prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineByName(medicineString));
+            }
+
+            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+
+            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description, startDate, endDate, prescriptionItems);
+        }
+
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
             TimeSpan duration, IEnumerable<string> bodyParts)
         {
@@ -188,6 +213,21 @@ namespace ServicesLibrary
         public IEnumerable<string> GetAllergies()
         {
             return _medicalConditionService.GetAllergies().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetExercises()
+        {
+            return _prescriptionItemService.GetAllExercises().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetMedicine()
+        {
+            return _prescriptionItemService.GetAllMedicine().Select(e => e.Name);
+        }
+
+        public IEnumerable<string> GetTreatments()
+        {
+            return _prescriptionItemService.GetAllTreatments().Select(e => e.Name);
         }
 
         public IEnumerable<string> GetDiseases()
@@ -353,6 +393,58 @@ namespace ServicesLibrary
         public string GetSelectedTherapySessionNote()
         {
             return _therapySessionService.GetSelectedTherapySession().Note;
+        }
+
+
+        public IEnumerable<Prescription> GetPrescriptionByPatientId()
+        {
+            return _prescriptionService.GetPrescriptionByPatientId();
+
+        }
+
+        public IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        {
+            return _prescriptionService.GetPrescriptionByDate(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByTherapistId(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByPatientId(_date);
+        }
+
+        public User GetUserById(int id)
+        {
+            return _userService.GetUserById(id);
+        }
+
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionItemService.GetPrescriptionItems(pres_id);
+        }
+
+        public Medicine GetMedicineByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetMedicineByItemId(item_id);
+        }
+
+        public Exercise GetExerciseByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetExerciseByItemId(item_id);
+        }
+
+        public bool VerifyIfIsMedicine(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsMedicine(item_id);
+        }
+
+        public bool VerifyIfIsExercise(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsExercise(item_id);
         }
 
         public IEnumerable<string> GetPatientPrescriptions()

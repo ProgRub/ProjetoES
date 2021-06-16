@@ -120,5 +120,10 @@ namespace Forms
                     .ToString();
             }
         }
+
+        private void CheckedListBoxTreatments_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

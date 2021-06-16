@@ -14,12 +14,14 @@ namespace ServicesLibrary.DifferentServices
         private readonly IMedicineRepository _medicineRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ITreatmentRepository _treatmentRepository;
+        private readonly PrescriptionHasItemsRepository _prescriptionRepository;
 
         private PrescriptionItemService()
         {
             _medicineRepository = new MedicineRepository(Database.GetContext());
             _exerciseRepository = new ExerciseRepository(Database.GetContext());
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
+            _prescriptionRepository = new PrescriptionHasItemsRepository(Database.GetContext());
         }
 
         internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
@@ -34,7 +36,7 @@ namespace ServicesLibrary.DifferentServices
             };
             _exerciseRepository.Add(exercise);
             AddBodyPartsToExercise(exercise, bodyParts);
-            _treatmentRepository.SaveChanges();
+            _exerciseRepository.SaveChanges();
         }
 
         internal void CreateMedicinePrescriptionItem(string name, string description, double price,
@@ -49,7 +51,7 @@ namespace ServicesLibrary.DifferentServices
 
             _medicineRepository.Add(medicine);
             AddMedicalConditionsToMedicine(medicine, allergies, diseases);
-            _treatmentRepository.SaveChanges();
+            _medicineRepository.SaveChanges();
         }
 
         internal void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
@@ -98,6 +100,31 @@ namespace ServicesLibrary.DifferentServices
             return _treatmentRepository.GetAll();
         }
 
+        internal IEnumerable<Medicine> GetAllMedicine()
+        {
+            return _medicineRepository.GetAll();
+        }
+
+        internal IEnumerable<Exercise> GetAllExercises()
+        {
+            return _exerciseRepository.GetAll();
+        }
+
+        internal Treatment GetTreatmentByName(string name)
+        {
+            return _treatmentRepository.Find(e => e.Name == name).First();
+        }
+
+        internal Medicine GetMedicineByName(string name)
+        {
+            return _medicineRepository.Find(e => e.Name == name).First();
+        }
+
+        internal Exercise GetExerciseByName(string name)
+        {
+            return _exerciseRepository.Find(e => e.Name == name).First();
+        }
+
         internal Treatment GetTreatmentByNameBodyPartAndDurationString(string treatmentString)
         {
             var treatmentStringSplit =
@@ -111,6 +138,36 @@ namespace ServicesLibrary.DifferentServices
         internal Treatment GetTreatmentById(int id)
         {
             return _treatmentRepository.GetById(id);
+        }
+
+        internal Medicine GetMedicinetByItemId(int id)
+        {
+            return _medicineRepository.Find(e => e.Id == id).First();
+        }
+
+        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionRepository.Find(e => e.PrescriptionId == pres_id);
+        }
+
+        internal Medicine GetMedicineByItemId(int item_id)
+        {
+            return _medicineRepository.Find(e => e.Id == item_id).First();
+        }
+
+        internal Exercise GetExerciseByItemId(int item_id)
+        {
+            return _exerciseRepository.Find(e => e.Id == item_id).First();
+        }
+
+        internal bool VerifyIfIsMedicine(int item_id)
+        {
+            return _medicineRepository.Find(e => e.Id == item_id).Any();
+        }
+
+        internal bool VerifyIfIsExercise(int item_id)
+        {
+            return _exerciseRepository.Find(e => e.Id == item_id).Any();
         }
     }
 }

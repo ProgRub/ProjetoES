@@ -33,7 +33,7 @@ namespace Forms
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.ButtonSignUp = new System.Windows.Forms.Button();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.monthCalendarPatient = new System.Windows.Forms.MonthCalendar();
             this.SuspendLayout();
             // 
             // ButtonBack
@@ -87,13 +87,14 @@ namespace Forms
             this.ButtonSignUp.UseVisualStyleBackColor = true;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
-            // monthCalendar1
+            // monthCalendarPatient
             // 
-            this.monthCalendar1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.monthCalendar1.Location = new System.Drawing.Point(0, 55);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 28;
+            this.monthCalendarPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.monthCalendarPatient.Location = new System.Drawing.Point(0, 55);
+            this.monthCalendarPatient.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
+            this.monthCalendarPatient.Name = "monthCalendarPatient";
+            this.monthCalendarPatient.TabIndex = 28;
+            this.monthCalendarPatient.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendarPatient_DateChanged);
             // 
             // CalendarScreenPatient
             // 
@@ -104,11 +105,11 @@ namespace Forms
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ButtonSignUp);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.monthCalendarPatient);
             this.Name = "CalendarScreenPatient";
             this.Size = new System.Drawing.Size(511, 527);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.monthCalendar1, 0);
+            this.Controls.SetChildIndex(this.monthCalendarPatient, 0);
             this.Controls.SetChildIndex(this.ButtonSignUp, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
@@ -124,6 +125,6 @@ namespace Forms
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button ButtonSignUp;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar monthCalendarPatient;
     }
 }
