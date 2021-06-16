@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using ServicesLibrary;
+
+namespace Forms
+{
+    public partial class SelectHealthCareProfessionalsScreen : BaseControl
+    {
+        public SelectHealthCareProfessionalsScreen()
+        {
+            InitializeComponent();
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new SelectPrescriptionsScreen());
+        }
+
+        private void SelectHealthCareProfessionalsScreen_Load(object sender, EventArgs e)
+        {
+
+            var professionals = Services.Instance.GetHealthCareProfessionals();
+            if (!professionals.Any()) LabelTitle.Text = "There are no Health Care Professionals registered...";
+            else
+            {
+                CheckBoxSelectAll.Enabled = true;
+                ButtonAddViewers.Enabled = true;
+                foreach (var professional in professionals)
+                {
+                    CheckedListBoxProfessionals.Items.Add(professional);
+                }
+            }
+        }
+
+        private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                for (var i = 0; i < CheckedListBoxProfessionals.Items.Count; i++)
+                {
+                    CheckedListBoxProfessionals.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < CheckedListBoxProfessionals.Items.Count; i++)
+                {
+                    CheckedListBoxProfessionals.SetItemChecked(i, true);
+                }
+            }
+        }
+
+        private void CheckedListBoxProfessionals_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Unchecked)
+            {
+                CheckBoxSelectAll.Checked = false;
+            }
+            else if (e.NewValue == CheckState.Checked && CheckedListBoxProfessionals.CheckedItems.Count ==
+                CheckedListBoxProfessionals.Items.Count - 1)
+            {
+                CheckBoxSelectAll.Checked = true;
+            }
+        }
+
+        private void ButtonSelectHealthCareProfessionals_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new SelectPrescriptionsScreen());
+        }
+    }
+}

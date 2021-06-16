@@ -354,5 +354,28 @@ namespace ServicesLibrary
         {
             return _therapySessionService.GetSelectedTherapySession().Note;
         }
+
+        public IEnumerable<string> GetPatientPrescriptions()
+        {
+            var prescriptions = new List<string>();
+            foreach (var prescription in
+                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId))
+            {
+                prescriptions.Add(
+                    $"{prescription.Id} | Author: {_userService.GetUserById(prescription.AuthorId).FullName} | From {prescription.StartDate:dd/MM/yyyy} To {prescription.EndDate:dd/MM/yyyy}");
+            }
+
+            return prescriptions;
+        }
+
+        public void SelectPrescriptions(IEnumerable<string> checkedPrescriptions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> GetHealthCareProfessionals()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

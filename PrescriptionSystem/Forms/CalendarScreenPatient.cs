@@ -27,7 +27,7 @@ namespace Forms
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddPermission());
+            MoveToScreen(new SelectPrescriptionsScreen());
         }
     }
 }

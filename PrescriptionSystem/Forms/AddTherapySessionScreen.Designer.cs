@@ -146,11 +146,11 @@ namespace Forms
             // 
             this.labelAddTreatmentSession.AutoSize = true;
             this.labelAddTreatmentSession.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelAddTreatmentSession.Location = new System.Drawing.Point(183, 4);
+            this.labelAddTreatmentSession.Location = new System.Drawing.Point(201, 1);
             this.labelAddTreatmentSession.Name = "labelAddTreatmentSession";
-            this.labelAddTreatmentSession.Size = new System.Drawing.Size(207, 25);
+            this.labelAddTreatmentSession.Size = new System.Drawing.Size(189, 25);
             this.labelAddTreatmentSession.TabIndex = 13;
-            this.labelAddTreatmentSession.Text = "Add Treatment Session";
+            this.labelAddTreatmentSession.Text = "Add Therapy Session";
             // 
             // LabelEstimatedDuration
             // 
