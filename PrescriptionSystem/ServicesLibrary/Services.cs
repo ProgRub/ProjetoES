@@ -8,6 +8,8 @@ using System.Net;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
+using ServicesLibrary.Validators;
+using ServicesLibrary.Validators.FormValidators;
 using ServicesLibrary.Validators.TherapySessionValidators;
 
 namespace ServicesLibrary
@@ -90,31 +92,58 @@ namespace ServicesLibrary
             var healthUserNumberString = string.Join("",
                 healthUserNumberParameter.Split(new char[0], StringSplitOptions.RemoveEmptyEntries));
             var errorCodes = new List<int>();
-            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            if (string.IsNullOrWhiteSpace(phoneNumberString)) errorCodes.Add(PhoneNumberRequired);
-            else if (phoneNumberString.Length < PhoneNumberMinimumLength ||
-                     phoneNumberString.Length > PhoneNumberMaximumLength)
-                errorCodes.Add(PhoneNumberWrongLength);
-            else if (!int.TryParse(phoneNumberString, out _)) errorCodes.Add(PhoneNumberNotANumber);
-            if (string.IsNullOrWhiteSpace(healthUserNumberString)) errorCodes.Add(HealthUserNumberRequired);
-            else if (healthUserNumberString.Length < HealthUserNumberMinimumLength ||
-                     healthUserNumberString.Length > HealthUserNumberMaximumLength)
-                errorCodes.Add(HealthUserNumberWrongLength);
-            else if (!int.TryParse(healthUserNumberString, out var healthUserNumber))
-                errorCodes.Add(HealthUserNumberNotANumber);
-            else if (!_userService.IsHealthUserNumberUnique(healthUserNumber))
-                errorCodes.Add(HealthUserNumberAlreadyExists);
-            if (string.IsNullOrWhiteSpace(email)) errorCodes.Add(EmailRequired);
-            else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
-            else if (!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
-            if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
-            if (userType == "Therapist")
+            BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
+            validator.Validate(name);
+            validator = new StringEmptyValidator(PhoneNumberRequired, ref errorCodes);
+            validator.SetNext(new StringLengthValidator(PhoneNumberWrongLength, ref errorCodes,
+                PhoneNumberMinimumLength,
+                PhoneNumberMaximumLength)).SetNext(new StringIsNumberValidator(PhoneNumberNotANumber, ref errorCodes));
+            validator.Validate(phoneNumberString);
+            validator = new StringEmptyValidator(HealthUserNumberRequired, ref errorCodes);
+            validator.SetNext(new StringLengthValidator(HealthUserNumberWrongLength, ref errorCodes,
+                    HealthUserNumberMinimumLength, HealthUserNumberMaximumLength))
+                .SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes)).SetNext(
+                    new ObjectUniqueValidator(HealthUserNumberAlreadyExists, ref errorCodes,
+                        _userService.GetAllUsers().Select(e => e.HealthUserNumber)));
+            validator.Validate(healthUserNumberString);
+            validator = new StringEmptyValidator(EmailRequired, ref errorCodes);
+            validator.SetNext(new EmailFormatValidator(EmailNotValid, ref errorCodes)).SetNext(
+                new ObjectUniqueValidator(EmailAlreadyExists, ref errorCodes,
+                    _userService.GetAllUsers().Select(e => e.Email)));
+            validator.Validate(email);
+            validator = new StringEmptyValidator(PasswordRequired, ref errorCodes);
+            validator.Validate(password);
+            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            //if (string.IsNullOrWhiteSpace(phoneNumberString)) errorCodes.Add(PhoneNumberRequired);
+            //else if (phoneNumberString.Length < PhoneNumberMinimumLength ||
+            //         phoneNumberString.Length > PhoneNumberMaximumLength)
+            //    errorCodes.Add(PhoneNumberWrongLength);
+            //else if (!int.TryParse(phoneNumberString, out _)) errorCodes.Add(PhoneNumberNotANumber);
+            //if (string.IsNullOrWhiteSpace(healthUserNumberString)) errorCodes.Add(HealthUserNumberRequired);
+            //else if (healthUserNumberString.Length < HealthUserNumberMinimumLength ||
+            //         healthUserNumberString.Length > HealthUserNumberMaximumLength)
+            //    errorCodes.Add(HealthUserNumberWrongLength);
+            //else if (!int.TryParse(healthUserNumberString, out var healthUserNumber))
+            //    errorCodes.Add(HealthUserNumberNotANumber);
+            //else if (!_userService.IsHealthUserNumberUnique(healthUserNumber))
+            //    errorCodes.Add(HealthUserNumberAlreadyExists);
+            //if (string.IsNullOrWhiteSpace(email)) errorCodes.Add(EmailRequired);
+            //else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
+            //else if (!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
+            //if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
+            //if (userType == "Therapist")
+            //{
+            //    if (!_userService.IsTherapistOldEnough(dateOfBirth))
+            //    {
+            //        errorCodes.Add(TherapistNotOldEnough);
+            //    }
+            //}
+            foreach (var errorCode in errorCodes)
             {
-                if (!_userService.IsTherapistOldEnough(dateOfBirth))
-                {
-                    errorCodes.Add(TherapistNotOldEnough);
-                }
+                Debug.Write(errorCode + " ");
             }
+
+            Debug.WriteLine("");
 
             return errorCodes;
         }
@@ -150,7 +179,7 @@ namespace ServicesLibrary
 
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
 
-            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
+            _prescriptionService.CreatePrescription((Patient) UserService.Instance.GetUserById(patientId), description,
                 startDate, endDate, prescriptionItems);
         }
 
@@ -281,8 +310,8 @@ namespace ServicesLibrary
                 //{
                 //    errorCodes.Add(PatientUnavailable);
                 //}
-                var validator = new PatientAvailabilityValidator();
-                validator.SetNext(new TherapistAvailabilityValidator());
+                var validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
+                validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
                 var validateResult = validator.Validate(new List<object>
                 {
                     new TherapySession
@@ -294,7 +323,7 @@ namespace ServicesLibrary
                     errorCodes
                 });
                 //List<object> validateResultList = (List<object>) validateResult;
-                errorCodes = (List<int>)validateResult;
+                errorCodes = (List<int>) validateResult;
             }
 
             //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
@@ -321,7 +350,7 @@ namespace ServicesLibrary
                     PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString));
             }
 
-            TherapySessionService.Instance.AddTherapySession((Patient)UserService.Instance.GetUserById(patientId),
+            TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
         }
 
@@ -490,10 +519,12 @@ namespace ServicesLibrary
                 {
                     var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
                     var healthCareProfessional =
-                        (HealthCareProfessional)_userService.GetUserById(int.Parse(professionalSplit[0]));
-                    if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional))
+                        (HealthCareProfessional) _userService.GetUserById(int.Parse(professionalSplit[0]));
+                    if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription,
+                        healthCareProfessional))
                     {
-                        _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription, healthCareProfessional);
+                        _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription,
+                            healthCareProfessional);
                     }
                 }
             }

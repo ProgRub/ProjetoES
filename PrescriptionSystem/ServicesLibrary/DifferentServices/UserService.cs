@@ -129,6 +129,11 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAllPatients();
         }
 
+        internal IEnumerable<User> GetAllUsers()
+        {
+            return _userRepository.GetAll();
+        }
+
         internal bool IsPatientAvailable(int patientId, DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
         {
             return false;

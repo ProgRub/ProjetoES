@@ -1,11 +1,17 @@
-﻿namespace ServicesLibrary.Validators.Prescription
+﻿using System.Collections.Generic;
+
+namespace ServicesLibrary.Validators.Prescription
 {
     public class AllergyValidator : BaseValidator
     {
-        public override object Validate(object request)
+
+        public AllergyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
-            return null;
         }
 
+        public override bool RequestIsValid(object request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
