@@ -25,6 +25,23 @@ namespace Forms
             MoveToScreen(new CalendarScreenTherapist());
         }
 
+        private void AddTherapySessionScreen_Load(object sender, EventArgs e)
+        {
+            DateTimePickerDate.MinDate = DateTime.Today;
+            foreach (var patient in Services.Instance.GetAllPatients())
+            {
+                ComboBoxPatient.Items.Add(patient);
+            }
+
+            _treatmentDurations = Services.Instance.GetAllTreatments();
+            foreach (var treatment in _treatmentDurations.Keys)
+            {
+                CheckedListBoxTreatments.Items.Add(treatment);
+            }
+
+            SetFormAcceptButton(ButtonAddTherapySession);
+        }
+
         private void ButtonAddTherapySession_Click(object sender, EventArgs e)
         {
             var treatments = new List<string>();
@@ -86,23 +103,6 @@ namespace Forms
                 }
             }
             ShowInformationMessageBox(errorMessage, "Error");
-        }
-
-        private void AddTherapySessionScreen_Load(object sender, EventArgs e)
-        {
-            DateTimePickerDate.MinDate = DateTime.Today;
-            foreach (var patient in Services.Instance.GetAllPatients())
-            {
-                ComboBoxPatient.Items.Add(patient);
-            }
-
-            _treatmentDurations = Services.Instance.GetAllTreatments();
-            foreach (var treatment in _treatmentDurations.Keys)
-            {
-                CheckedListBoxTreatments.Items.Add(treatment);
-            }
-
-            SetFormAcceptButton(ButtonAddTherapySession);
         }
 
         private void CheckedListBoxTreatments_ItemCheck(object sender, ItemCheckEventArgs e)

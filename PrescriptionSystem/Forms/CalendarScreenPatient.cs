@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using ServicesLibrary.Commands;
 
 namespace Forms
 {
@@ -14,6 +15,7 @@ namespace Forms
         public CalendarScreenPatient()
         {
             InitializeComponent();
+            CommandsManager.Instance.ResetCommandsList();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,7 +30,7 @@ namespace Forms
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddPermission());
+            MoveToScreen(new SelectPrescriptionsScreen());
         }
 
         private void monthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)

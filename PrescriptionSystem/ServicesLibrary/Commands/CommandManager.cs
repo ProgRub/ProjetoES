@@ -51,5 +51,10 @@ namespace ServicesLibrary.Commands
 
             Notify?.Invoke(this, EventArgs.Empty);
         }
+
+        public void ResetCommandsList()
+        {
+            _commands.Clear();
+        }
     }
 }

@@ -146,7 +146,7 @@ namespace Forms
             this.labelAddTreatmentSession.Name = "labelAddTreatmentSession";
             this.labelAddTreatmentSession.Size = new System.Drawing.Size(252, 31);
             this.labelAddTreatmentSession.TabIndex = 13;
-            this.labelAddTreatmentSession.Text = "Add Treatment Session";
+            this.labelAddTreatmentSession.Text = "Add Therapy Session";
             // 
             // LabelEstimatedDuration
             // 

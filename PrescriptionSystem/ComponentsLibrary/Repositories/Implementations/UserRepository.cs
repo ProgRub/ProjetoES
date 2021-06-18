@@ -6,17 +6,17 @@ namespace ComponentsLibrary.Repositories.Implementations
 {
     public class UserRepository:BaseRepository<User>,IUserRepository
     {
-        private UserHasMedicalConditionRepository _userHasMedicalConditionRepository;
         private UserHasMissingBodyPartRepository _userHasMissingBodyPartRepository;
-        private PatientRepository _patientRepository;
-        private TherapistRepository _therapistRepository;
+        private IPatientRepository _patientRepository;
+        private ITherapistRepository _therapistRepository;
+        private IHealthCareProfessionalRepository _healthCareProfessionalRepository;
 
         public UserRepository(PrescriptionSystemDbContext context) : base(context)
         {
-            _userHasMedicalConditionRepository = new UserHasMedicalConditionRepository(context);
             _userHasMissingBodyPartRepository = new UserHasMissingBodyPartRepository(context);
             _patientRepository = new PatientRepository(context);
             _therapistRepository = new TherapistRepository(context);
+            _healthCareProfessionalRepository = new HealthCareProfessionalRepository(context);
         }
 
         public void AddPatient(Patient patient)
@@ -67,6 +67,11 @@ namespace ComponentsLibrary.Repositories.Implementations
         public IEnumerable<Therapist> GetAllTherapists()
         {
             return _therapistRepository.GetAll();
+        }
+
+        public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
+        {
+            return _healthCareProfessionalRepository.GetAll();
         }
     }
 }

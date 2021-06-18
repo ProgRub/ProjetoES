@@ -150,7 +150,8 @@ namespace ServicesLibrary
 
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
 
-            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description, startDate, endDate, prescriptionItems);
+            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
+                startDate, endDate, prescriptionItems);
         }
 
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
@@ -293,7 +294,7 @@ namespace ServicesLibrary
                     errorCodes
                 });
                 //List<object> validateResultList = (List<object>) validateResult;
-                errorCodes = (List<int>) validateResult;
+                errorCodes = (List<int>)validateResult;
             }
 
             //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
@@ -320,7 +321,7 @@ namespace ServicesLibrary
                     PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString));
             }
 
-            TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
+            TherapySessionService.Instance.AddTherapySession((Patient)UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
         }
 
@@ -399,7 +400,6 @@ namespace ServicesLibrary
         public IEnumerable<Prescription> GetPrescriptionByPatientId()
         {
             return _prescriptionService.GetPrescriptionByPatientId();
-
         }
 
         public IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
@@ -447,6 +447,56 @@ namespace ServicesLibrary
             return _prescriptionItemService.VerifyIfIsExercise(item_id);
         }
 
+        public IEnumerable<string> GetPatientPrescriptions()
+        {
+            var prescriptions = new List<string>();
+            foreach (var prescription in
+                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId)
+                    .OrderBy(e => e.StartDate))
+            {
+                prescriptions.Add(
+                    $"{prescription.Id} | Author: {_userService.GetUserById(prescription.AuthorId).FullName} | From {prescription.StartDate:dd/MM/yyyy} To {prescription.EndDate:dd/MM/yyyy}");
+            }
 
+            return prescriptions;
+        }
+
+        public void SelectPrescriptions(IEnumerable<string> prescriptions)
+        {
+            _prescriptionService.SelectedPrescriptions = new List<Prescription>();
+            foreach (var prescription in prescriptions)
+            {
+                var prescriptionSplit = prescription.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
+                _prescriptionService.AddSelectedPrescriptionById(int.Parse(prescriptionSplit[0]));
+            }
+        }
+
+        public IEnumerable<string> GetHealthCareProfessionals()
+        {
+            var professionals = new List<string>();
+            foreach (var healthCareProfessional in _userService.GetAllHealthCareProfessionals())
+            {
+                professionals.Add($"{healthCareProfessional.Id} - {healthCareProfessional.FullName}");
+            }
+
+            return professionals;
+        }
+
+        public void AddPermissionToHealthCareProfessionals(IEnumerable<string> professionals)
+        {
+            foreach (var prescription in _prescriptionService.SelectedPrescriptions)
+            {
+                foreach (var professional in professionals)
+                {
+                    var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
+                    var healthCareProfessional =
+                        (HealthCareProfessional)_userService.GetUserById(int.Parse(professionalSplit[0]));
+                    if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional))
+                    {
+                        _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription, healthCareProfessional);
+                    }
+                }
+            }
+        }
     }
 }
