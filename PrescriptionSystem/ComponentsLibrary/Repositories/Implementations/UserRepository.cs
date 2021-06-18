@@ -68,5 +68,11 @@ namespace ComponentsLibrary.Repositories.Implementations
         {
             return _therapistRepository.GetAll();
         }
+
+        public IEnumerable<UserHasMissingBodyPart> GetAllMissingBodyParts()
+        {
+            return _userHasMissingBodyPartRepository.GetAll();
+        }
+
     }
 }

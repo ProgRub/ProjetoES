@@ -1,13 +1,46 @@
-﻿
-using ServicesLibrary.Validators.Prescription;
+﻿using System;
+using System.Collections.Generic;
+using ComponentsLibrary.Entities;
+using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary.DifferentServices;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class AgeValidator:BaseValidator
     {
-        public override object Validate(object request)
+        public override object Validate(object requestListParameter)
         {
-            return null;
+            var requestList = (List<object>)requestListParameter;
+            var request = requestList[0];
+            var prescriptionItems = (List<PrescriptionItem>) requestList[1];
+            var errorCodes = (List<int>)requestList[2];
+
+            if (request is  Prescription prescription)
+            {
+                var today = DateTime.Today;
+                var patientsAge = today.Year - prescription.Patient.DateOfBirth.Year;
+
+                if (prescription.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
+
+                //ACEDER AOS PRESCRIPTION ITEMS DA PRESCRIÇÃO
+
+                foreach (var item in prescriptionItems)
+                {
+                    if( item is Treatment treatment)
+                    {
+                        if(patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) errorCodes.Add(Services.TreatmentInvalidAge);
+                    }
+                    else if (item is Exercise exercise)
+                    {
+                        if (patientsAge < exercise.AgeMinimum || patientsAge > exercise.AgeMaximum) errorCodes.Add(Services.ExerciseInvalidAge);
+                    }
+                }
+
+                requestList = new List<object> { request, prescriptionItems, errorCodes };
+                return base.Validate(requestList) ?? errorCodes;
+            }
+
+            throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
     }
 }

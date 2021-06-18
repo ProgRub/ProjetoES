@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ComponentsLibrary.Migrations
 {
-    public partial class Prescription : Migration
+    public partial class PrescriptionCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

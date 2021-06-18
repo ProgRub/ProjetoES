@@ -101,6 +101,7 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.Find(e => e.Email == email).Any();
         }
 
+
         internal bool DoesPasswordCorrespondToEmail(string email, string password)
         {
             return _userRepository.Find(e => e.Email == email && e.Password == password).Any();
@@ -127,6 +128,12 @@ namespace ServicesLibrary.DifferentServices
         {
             return _userRepository.GetAllPatients();
         }
+
+        internal IEnumerable<UserHasMissingBodyPart> GetMissingBodyParts()
+        {
+            return _userRepository.GetAllMissingBodyParts();
+        }
+
 
         internal bool IsPatientAvailable(int patientId, DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
         {
