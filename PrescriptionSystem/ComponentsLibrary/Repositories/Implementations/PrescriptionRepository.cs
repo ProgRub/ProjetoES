@@ -2,6 +2,7 @@
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ComponentsLibrary.Repositories.Implementations
 {
@@ -36,6 +37,36 @@ namespace ComponentsLibrary.Repositories.Implementations
                     PrescriptionItem = item
                 });
             }
+        }
+
+        public void AddViewerToPrescription(Prescription prescription, HealthCareProfessional healthCareProfessional)
+        {
+            if (prescription.PrescriptionHasViewersCollection == null)
+            {
+                prescription.PrescriptionHasViewersCollection = new List<PrescriptionHasViewers>
+                {
+                    new PrescriptionHasViewers()
+                    {
+                        Prescription = prescription,
+                        HealthCareProfessional = healthCareProfessional
+                    }
+                };
+            }
+            else
+            {
+                prescription.PrescriptionHasViewersCollection.Add(new PrescriptionHasViewers
+                {
+                    Prescription = prescription,
+                    HealthCareProfessional = healthCareProfessional
+                });
+            }
+        }
+
+        public bool IsHealthCareProfessionalPrescriptionViewer(Prescription prescription,
+            HealthCareProfessional healthCareProfessional)
+        {
+            return _prescriptionHasViewersRepository.Find(e =>
+                e.HealthCareProfessionalId == healthCareProfessional.Id && e.PrescriptionId == prescription.Id).Any();
         }
     }
 }

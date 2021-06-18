@@ -36,6 +36,17 @@ namespace Forms
                     CheckedListBoxProfessionals.Items.Add(professional);
                 }
             }
+
+            var columnWidth = 0;
+            foreach (string item in CheckedListBoxProfessionals.Items)
+            {
+                var width = TextRenderer.MeasureText(item, CheckedListBoxProfessionals.Font).Width;
+                if (width > columnWidth)
+                {
+                    columnWidth = width + 20;
+                }
+            }
+            CheckedListBoxProfessionals.ColumnWidth = columnWidth;
         }
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
@@ -51,7 +62,7 @@ namespace Forms
             {
                 for (var i = 0; i < CheckedListBoxProfessionals.Items.Count; i++)
                 {
-                    CheckedListBoxProfessionals.SetItemChecked(i, true);
+                    CheckedListBoxProfessionals.SetItemChecked(i, false);
                 }
             }
         }
@@ -71,7 +82,21 @@ namespace Forms
 
         private void ButtonSelectHealthCareProfessionals_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new SelectPrescriptionsScreen());
+            if (CheckedListBoxProfessionals.CheckedItems.Count > 0)
+            {
+                var checkedProfessionals = new List<string>();
+                foreach (var checkedItem in CheckedListBoxProfessionals.CheckedItems)
+                {
+                    checkedProfessionals.Add(checkedItem.ToString());
+                }
+                Services.Instance.AddPermissionToHealthCareProfessionals(checkedProfessionals);
+                ShowInformationMessageBox("The selected Health Care Professionals now have access to your prescription details.", "Success");
+                MoveToScreen(new SelectPrescriptionsScreen());
+            }
+            else
+            {
+                ShowInformationMessageBox("You have to select at least one Health Care Professional!", "Error");
+            }
         }
     }
 }

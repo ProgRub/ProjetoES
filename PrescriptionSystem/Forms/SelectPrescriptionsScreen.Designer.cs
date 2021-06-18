@@ -42,7 +42,7 @@ namespace Forms
             // CheckedListBoxPrescriptions
             // 
             this.CheckedListBoxPrescriptions.CheckOnClick = true;
-            this.CheckedListBoxPrescriptions.ColumnWidth = 300;
+            this.CheckedListBoxPrescriptions.ColumnWidth = 500;
             this.CheckedListBoxPrescriptions.FormattingEnabled = true;
             this.CheckedListBoxPrescriptions.Location = new System.Drawing.Point(0, 76);
             this.CheckedListBoxPrescriptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

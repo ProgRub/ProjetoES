@@ -35,10 +35,35 @@ namespace Forms
                     CheckedListBoxPrescriptions.Items.Add(prescription);
                 }
             }
+
+            var columnWidth = 0;
+            foreach (string item in CheckedListBoxPrescriptions.Items)
+            {
+                var width = TextRenderer.MeasureText(item, CheckedListBoxPrescriptions.Font).Width;
+                if (width > columnWidth)
+                {
+                    columnWidth = width + 20;
+                }
+            }
+            CheckedListBoxPrescriptions.ColumnWidth = columnWidth;
         }
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
         {
+            if (((CheckBox)sender).Checked)
+            {
+                for (var i = 0; i < CheckedListBoxPrescriptions.Items.Count; i++)
+                {
+                    CheckedListBoxPrescriptions.SetItemChecked(i, true);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < CheckedListBoxPrescriptions.Items.Count; i++)
+                {
+                    CheckedListBoxPrescriptions.SetItemChecked(i, false);
+                }
+            }
         }
 
         private void CheckedListBoxPrescriptions_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -63,12 +88,13 @@ namespace Forms
                 {
                     checkedPrescriptions.Add(checkedItem.ToString());
                 }
+
                 Services.Instance.SelectPrescriptions(checkedPrescriptions);
                 MoveToScreen(new SelectHealthCareProfessionalsScreen());
             }
             else
             {
-                ShowInformationMessageBox("You have to select at least one prescription!","Error");
+                ShowInformationMessageBox("You have to select at least one prescription!", "Error");
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -136,6 +137,11 @@ namespace ServicesLibrary.DifferentServices
         internal bool IsTherapistAvailable(DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
         {
             return false;
+        }
+
+        public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
+        {
+            return _userRepository.GetAllHealthCareProfessionals();
         }
     }
 }

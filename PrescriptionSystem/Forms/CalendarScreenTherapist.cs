@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
 using ComponentsLibrary.Entities;
+using ServicesLibrary.Commands;
 using ServicesLibrary.DifferentServices;
 
 namespace Forms
@@ -16,7 +17,7 @@ namespace Forms
         public CalendarScreenTherapist()
         {
             InitializeComponent();
-
+            CommandsManager.Instance.ResetCommandsList();
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)

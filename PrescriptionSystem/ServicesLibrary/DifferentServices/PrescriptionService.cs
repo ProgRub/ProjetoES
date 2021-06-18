@@ -7,10 +7,6 @@ using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -25,9 +21,11 @@ namespace ServicesLibrary.DifferentServices
 
         internal static PrescriptionService Instance { get; } = new PrescriptionService();
 
-        internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate, ICollection<PrescriptionItem> prescriptionItems)
-        {
+        internal List<Prescription> SelectedPrescriptions { get; set; }
 
+        internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate,
+            ICollection<PrescriptionItem> prescriptionItems)
+        {
             var prescription = new Prescription
             {
                 AuthorId = UserService.Instance.LoggedInUserId,
@@ -49,12 +47,14 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<Prescription> GetPrescriptionByPatientId()
         {
-            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId).OrderBy(e => e.StartDate);
+            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId)
+                .OrderBy(e => e.StartDate);
         }
 
         internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
         {
-            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= _date && e.EndDate >= _date);
+            return _prescriptionRepository.Find(e =>
+                e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= _date && e.EndDate >= _date);
         }
 
         public IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)
@@ -66,6 +66,26 @@ namespace ServicesLibrary.DifferentServices
             DateTime date)
         {
             return prescriptions.Where(e => e.StartDate < date);
+        }
+
+        public void AddSelectedPrescriptionById(int id)
+        {
+            SelectedPrescriptions.Add(_prescriptionRepository.GetById(id));
+        }
+
+        public void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
+            HealthCareProfessional healthCareProfessional)
+        {
+            if (prescription.AuthorId == healthCareProfessional.Id) return;
+            _prescriptionRepository.AddViewerToPrescription(prescription, healthCareProfessional);
+            _prescriptionRepository.SaveChanges();
+        }
+
+        public bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
+            HealthCareProfessional healthCareProfessional)
+        {
+            return _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
+                healthCareProfessional);
         }
     }
 }
