@@ -103,6 +103,7 @@ namespace ComponentsLibrary
                 .HasKey(e => new { e.MedicalConditionId, e.UserId });
 
             #endregion
+
             #region Initial Data
 
             modelBuilder.Entity<Medicine>().HasData(new Medicine {Id = 1,Zombie = false,Name = "Penicillin", Description = "", Price = 2.32},
@@ -249,7 +250,7 @@ namespace ComponentsLibrary
 
             modelBuilder.Entity<TherapySession>().HasData(new TherapySession
             {
-                Id = 21,
+                Id = 60,
                 Zombie = false,
                 PatientId = 16,
                 TherapistId = 18,
@@ -261,7 +262,7 @@ namespace ComponentsLibrary
             modelBuilder.Entity<TherapySessionHasTreatments>().HasData(new TherapySessionHasTreatments
             {
                 CompletedTreatment = false,
-                TherapySessionId = 21,
+                TherapySessionId = 60,
                 Note = "",
                 TreatmentId = 7,
                 Zombie = false

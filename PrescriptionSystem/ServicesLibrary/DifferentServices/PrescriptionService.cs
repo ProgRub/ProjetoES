@@ -1,13 +1,12 @@
-﻿using ComponentsLibrary;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -22,9 +21,11 @@ namespace ServicesLibrary.DifferentServices
 
         internal static PrescriptionService Instance { get; } = new PrescriptionService();
 
-        internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate, ICollection<PrescriptionItem> prescriptionItems)
-        {
+        internal List<Prescription> SelectedPrescriptions { get; set; }
 
+        internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate,
+            ICollection<PrescriptionItem> prescriptionItems)
+        {
             var prescription = new Prescription
             {
                 AuthorId = UserService.Instance.LoggedInUserId,
@@ -42,6 +43,49 @@ namespace ServicesLibrary.DifferentServices
             }
 
             _prescriptionRepository.SaveChanges();
+        }
+
+        internal IEnumerable<Prescription> GetPrescriptionByPatientId()
+        {
+            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId)
+                .OrderBy(e => e.StartDate);
+        }
+
+        internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        {
+            return _prescriptionRepository.Find(e =>
+                e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= _date && e.EndDate >= _date);
+        }
+
+        public IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)
+        {
+            return _prescriptionRepository.Find(e => e.PatientId == patientId);
+        }
+
+        public IEnumerable<Prescription> GetPrescriptionsStartedBeforeDate(IEnumerable<Prescription> prescriptions,
+            DateTime date)
+        {
+            return prescriptions.Where(e => e.StartDate < date);
+        }
+
+        public void AddSelectedPrescriptionById(int id)
+        {
+            SelectedPrescriptions.Add(_prescriptionRepository.GetById(id));
+        }
+
+        public void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
+            HealthCareProfessional healthCareProfessional)
+        {
+            if (prescription.AuthorId == healthCareProfessional.Id) return;
+            _prescriptionRepository.AddViewerToPrescription(prescription, healthCareProfessional);
+            _prescriptionRepository.SaveChanges();
+        }
+
+        public bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
+            HealthCareProfessional healthCareProfessional)
+        {
+            return _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
+                healthCareProfessional);
         }
     }
 }

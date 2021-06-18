@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal User GetUserById(int id)
         {
-            return _userRepository.GetById(id);
+            return _userRepository.Find(e => e.Id == id).First();
         }
 
         internal bool IsHealthUserNumberUnique(int healthUserNumber)
@@ -143,6 +144,11 @@ namespace ServicesLibrary.DifferentServices
         internal bool IsTherapistAvailable(DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
         {
             return false;
+        }
+
+        public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
+        {
+            return _userRepository.GetAllHealthCareProfessionals();
         }
     }
 }

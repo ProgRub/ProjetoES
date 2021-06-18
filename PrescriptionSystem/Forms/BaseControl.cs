@@ -18,7 +18,7 @@ namespace Forms
 
         protected void MoveToScreen(BaseControl newControl)
         {
-            var window = ((Window)Parent);
+            var window = (Window)Parent;
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);

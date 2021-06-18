@@ -127,7 +127,6 @@ namespace Forms
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(590, 244);
             this.Load += new System.EventHandler(this.LoginScreen_Load);
-            this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.LabelPassword, 0);
             this.Controls.SetChildIndex(this.TextBoxEmail, 0);
@@ -135,6 +134,7 @@ namespace Forms
             this.Controls.SetChildIndex(this.ButtonLogin, 0);
             this.Controls.SetChildIndex(this.ButtonSignUp, 0);
             this.Controls.SetChildIndex(this.LabelNoAccount, 0);
+            this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 

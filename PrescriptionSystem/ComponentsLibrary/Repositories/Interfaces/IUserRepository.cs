@@ -12,5 +12,6 @@ namespace ComponentsLibrary.Repositories.Interfaces
         IEnumerable<Patient> GetAllPatients();
         IEnumerable<Therapist> GetAllTherapists();
         IEnumerable<UserHasMissingBodyPart> GetAllMissingBodyParts();
+        IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals();
     }
 }

@@ -174,7 +174,7 @@ namespace ServicesLibrary
             {
                 var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
                 var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
-
+                
                 var validator = new AgeValidator();
 
                 var allergyValidator = new AllergyValidator();
@@ -207,6 +207,8 @@ namespace ServicesLibrary
             //}
 
             return errorCodes;
+            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
+                startDate, endDate, prescriptionItems);
         }
 
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
@@ -350,7 +352,7 @@ namespace ServicesLibrary
                     errorCodes
                 });
                 //List<object> validateResultList = (List<object>) validateResult;
-                errorCodes = (List<int>) validateResult;
+                errorCodes = (List<int>)validateResult;
             }
 
             //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
@@ -373,13 +375,186 @@ namespace ServicesLibrary
             var treatmentsList = new List<Treatment>();
             foreach (var treatmentString in treatments)
             {
-                var treatmentStringSplit = treatmentString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);//Order of info: name -> bodyPart -> Duration
-                treatmentsList.Add(PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDuration(
-                    treatmentStringSplit[0], (BodyPart) Enum.Parse(typeof(BodyPart), treatmentStringSplit[1]),
-                    TimeSpan.Parse(treatmentStringSplit[2])));
+                treatmentsList.Add(
+                    PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString));
             }
-            TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
+
+            TherapySessionService.Instance.AddTherapySession((Patient)UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
+        }
+
+        public IEnumerable<string> GetPastTherapySessionsOfLoggedInTherapist()
+        {
+            var pastTherapySessions = _therapySessionService.GetTherapySessionsBeforeDate(
+                _therapySessionService.GetAllTherapySessionsOfTherapist(UserService.Instance.LoggedInUserId),
+                new DateTime(2022, 1, 1));
+            var therapySessionsStrings = new List<string>();
+            foreach (var pastTherapySession in pastTherapySessions)
+            {
+                therapySessionsStrings.Add(
+                    $"{pastTherapySession.Id} | {_userService.GetUserById(pastTherapySession.PatientId).FullName}{Environment.NewLine}{pastTherapySession.DateTime:dddd dd/MM/yyyy HH:mm}");
+            }
+
+            return therapySessionsStrings;
+        }
+
+        public void SelectTherapySession(string therapySessionText)
+        {
+            var therapySessionParameters =
+                therapySessionText.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
+            var therapySessionId = int.Parse(therapySessionParameters[0]);
+            _therapySessionService.SelectedTherapySessionId = therapySessionId;
+        }
+
+        public string GetSelectedTherapySessionBaseInfo()
+        {
+            var therapySession = _therapySessionService.GetSelectedTherapySession();
+            return
+                $"{therapySession.Id} | {_userService.GetUserById(therapySession.PatientId).FullName} | {therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
+        }
+
+        public IEnumerable<IEnumerable<string>> GetSelectedTherapySessionTreatments()
+        {
+            var treatments = new List<List<string>>();
+            foreach (var therapySessionHasTreatmentsInstance in _therapySessionService
+                .GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(_therapySessionService
+                    .SelectedTherapySessionId))
+            {
+                var treatment =
+                    _prescriptionItemService.GetTreatmentById(therapySessionHasTreatmentsInstance.TreatmentId);
+                treatments.Add(new List<string>
+                {
+                    treatment.Name,
+                    treatment.Description,
+                    treatment.BodyPart.ToString(),
+                    $"{treatment.Duration:hh\\:mm\\:ss}"
+                });
+            }
+
+            return treatments;
+        }
+
+        public string GetTreatmentNote(string treatmentString)
+        {
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
+                _therapySessionService.SelectedTherapySessionId,
+                _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id).Note;
+        }
+
+        public bool GetTreatmentCompletedStatus(string treatmentString)
+        {
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
+                    _therapySessionService.SelectedTherapySessionId,
+                    _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id)
+                .CompletedTreatment;
+        }
+
+        public string GetSelectedTherapySessionNote()
+        {
+            return _therapySessionService.GetSelectedTherapySession().Note;
+        }
+
+
+        public IEnumerable<Prescription> GetPrescriptionByPatientId()
+        {
+            return _prescriptionService.GetPrescriptionByPatientId();
+        }
+
+        public IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        {
+            return _prescriptionService.GetPrescriptionByDate(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByTherapistId(_date);
+        }
+
+        public IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
+        {
+            return _therapySessionService.GetSessionsByPatientId(_date);
+        }
+
+        public User GetUserById(int id)
+        {
+            return _userService.GetUserById(id);
+        }
+
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionItemService.GetPrescriptionItems(pres_id);
+        }
+
+        public Medicine GetMedicineByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetMedicineByItemId(item_id);
+        }
+
+        public Exercise GetExerciseByItemId(int item_id)
+        {
+            return _prescriptionItemService.GetExerciseByItemId(item_id);
+        }
+
+        public bool VerifyIfIsMedicine(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsMedicine(item_id);
+        }
+
+        public bool VerifyIfIsExercise(int item_id)
+        {
+            return _prescriptionItemService.VerifyIfIsExercise(item_id);
+        }
+
+        public IEnumerable<string> GetPatientPrescriptions()
+        {
+            var prescriptions = new List<string>();
+            foreach (var prescription in
+                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId)
+                    .OrderBy(e => e.StartDate))
+            {
+                prescriptions.Add(
+                    $"{prescription.Id} | Author: {_userService.GetUserById(prescription.AuthorId).FullName} | From {prescription.StartDate:dd/MM/yyyy} To {prescription.EndDate:dd/MM/yyyy}");
+            }
+
+            return prescriptions;
+        }
+
+        public void SelectPrescriptions(IEnumerable<string> prescriptions)
+        {
+            _prescriptionService.SelectedPrescriptions = new List<Prescription>();
+            foreach (var prescription in prescriptions)
+            {
+                var prescriptionSplit = prescription.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
+                _prescriptionService.AddSelectedPrescriptionById(int.Parse(prescriptionSplit[0]));
+            }
+        }
+
+        public IEnumerable<string> GetHealthCareProfessionals()
+        {
+            var professionals = new List<string>();
+            foreach (var healthCareProfessional in _userService.GetAllHealthCareProfessionals())
+            {
+                professionals.Add($"{healthCareProfessional.Id} - {healthCareProfessional.FullName}");
+            }
+
+            return professionals;
+        }
+
+        public void AddPermissionToHealthCareProfessionals(IEnumerable<string> professionals)
+        {
+            foreach (var prescription in _prescriptionService.SelectedPrescriptions)
+            {
+                foreach (var professional in professionals)
+                {
+                    var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
+                    var healthCareProfessional =
+                        (HealthCareProfessional)_userService.GetUserById(int.Parse(professionalSplit[0]));
+                    if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional))
+                    {
+                        _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription, healthCareProfessional);
+                    }
+                }
+            }
         }
     }
 }
