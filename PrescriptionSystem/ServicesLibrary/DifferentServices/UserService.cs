@@ -135,6 +135,11 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAllMissingBodyParts();
         }
 
+        internal IEnumerable<UserHasMedicalCondition> GetMedicalConditions()
+        {
+            return _userRepository.GetMedicalConditions();
+        }
+
 
         internal bool IsPatientAvailable(int patientId, DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
         {
@@ -146,7 +151,7 @@ namespace ServicesLibrary.DifferentServices
             return false;
         }
 
-        public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
+        internal IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
         {
             return _userRepository.GetAllHealthCareProfessionals();
         }

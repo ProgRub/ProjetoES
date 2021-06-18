@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
@@ -21,8 +22,6 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                 var patientsAge = today.Year - prescription.Patient.DateOfBirth.Year;
 
                 if (prescription.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
-
-                //ACEDER AOS PRESCRIPTION ITEMS DA PRESCRIÇÃO
 
                 foreach (var item in prescriptionItems)
                 {

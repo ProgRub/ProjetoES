@@ -13,5 +13,6 @@ namespace ComponentsLibrary.Repositories.Interfaces
         IEnumerable<Therapist> GetAllTherapists();
         IEnumerable<UserHasMissingBodyPart> GetAllMissingBodyParts();
         IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals();
+        IEnumerable<UserHasMedicalCondition> GetMedicalConditions();
     }
 }

@@ -26,7 +26,7 @@ namespace Forms
             {
                 CheckedListBoxDiseases.Items.Add(disease);
             }
-            SetFormAcceptButton(ButtonSignUp);
+            //SetFormAcceptButton(ButtonSignUp);
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)
@@ -145,6 +145,16 @@ namespace Forms
                         break;
                 }
             }
+        }
+
+        private void SignUpScreen_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckedListBoxMissingBodyParts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

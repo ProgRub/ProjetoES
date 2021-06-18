@@ -196,19 +196,14 @@ namespace ServicesLibrary
                     },
                     prescriptionItems,
                     errorCodes
-                }); ;
-                //List<object> validateResultList = (List<object>) validateResult;
+                });
+
                 errorCodes = (List<int>)validateResult;
             }
 
-            //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
-            //{
-            //    errorCodes.Add(TherapistUnavailable);
-            //}
-
             return errorCodes;
-            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
-                startDate, endDate, prescriptionItems);
+            //_prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
+            //    startDate, endDate, prescriptionItems);
         }
 
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,

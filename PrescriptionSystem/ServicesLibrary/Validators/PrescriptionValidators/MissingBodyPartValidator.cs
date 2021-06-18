@@ -5,6 +5,8 @@ using ServicesLibrary.DifferentServices;
 using ServicesLibrary.Validators;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 public class MissingBodyPartValidator : BaseValidator
 {
     public override object Validate(object requestListParameter)
@@ -22,7 +24,7 @@ public class MissingBodyPartValidator : BaseValidator
                 {
                    foreach(var missingBodyPart in UserService.Instance.GetMissingBodyParts())
                     {
-                        if(missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) errorCodes.Add(Services.MissingBodyPart);
+                        if (missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) errorCodes.Add(Services.MissingBodyPart);
                     }
                 }
             }

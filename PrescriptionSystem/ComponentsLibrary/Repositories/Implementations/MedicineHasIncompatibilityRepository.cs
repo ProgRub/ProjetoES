@@ -1,4 +1,5 @@
 ﻿using ComponentsLibrary.Entities.PrescriptionItems;
+using System.Collections.Generic;
 
 namespace ComponentsLibrary.Repositories.Implementations
 {
@@ -7,5 +8,6 @@ namespace ComponentsLibrary.Repositories.Implementations
         public MedicineHasIncompatibilityRepository(PrescriptionSystemDbContext context) : base(context)
         {
         }
+
     }
 }

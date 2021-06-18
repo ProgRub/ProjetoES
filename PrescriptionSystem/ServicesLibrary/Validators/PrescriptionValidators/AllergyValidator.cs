@@ -1,7 +1,9 @@
 ﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary.DifferentServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
@@ -23,14 +25,14 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                 {
                     if(item is Medicine medicine)
                     {
-                        foreach(var incompatibleMedicalConditions in medicine.MedicineHasIncompatibleMedicalConditionsList)
+                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
+                        var userMedicalConditions = UserService.Instance.GetMedicalConditions();
+
+                        foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
                         {
-                            if(incompatibleMedicalConditions.MedicalCondition.Type == Allergy)
+                            foreach(var patientMedicalCondition in userMedicalConditions)
                             {
-                                foreach(var patientMedicalCondition in prescription.Patient.UserHasMedicalConditions)
-                                {
-                                    if (patientMedicalCondition.MedicalCondition == incompatibleMedicalConditions.MedicalCondition) errorCodes.Add(Services.IncompatibleMedicine);
-                                }
+                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsAllergy(patientMedicalCondition.MedicalConditionId)) errorCodes.Add(Services.IncompatibleMedicine);
                             }
                         }
                     }
@@ -41,6 +43,17 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
+        }
+
+        public bool MedicalConditionIsAllergy(int id)
+        {
+            var allergies = MedicalConditionService.Instance.GetAllergies();
+
+            foreach (var allergy in allergies)
+            {
+                if (allergy.Id == id) return true;
+            }
+            return false;
         }
 
     }

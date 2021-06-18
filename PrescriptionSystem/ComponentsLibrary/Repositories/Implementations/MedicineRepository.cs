@@ -15,15 +15,43 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition)
         {
-
-            medicine.MedicineHasIncompatibleMedicalConditionsList = new List<MedicineHasIncompatibleMedicalConditions>
+            if(medicine.MedicineHasIncompatibleMedicalConditionsList == null)
             {
-                new MedicineHasIncompatibleMedicalConditions
+                medicine.MedicineHasIncompatibleMedicalConditionsList = new List<MedicineHasIncompatibleMedicalConditions>{
+                    new MedicineHasIncompatibleMedicalConditions
+                    {
+                        Medicine = medicine, MedicalCondition = medicalCondition
+                    }
+                };
+            }
+            else
+            {
+                medicine.MedicineHasIncompatibleMedicalConditionsList.Add(new MedicineHasIncompatibleMedicalConditions
                 {
-                    Medicine = medicine, MedicalCondition = medicalCondition
-                }
-            };
+                    Medicine = medicine,
+                    MedicalCondition = medicalCondition
+                });
+            }
+            
         }
-        
+
+
+        public IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditions(int id)
+        {
+            return _medicineHasIncompatibilityRepository.Find(e => e.MedicineId == id);
+        }
+
+        public IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
+        {
+            var ids = new List<int>();
+
+            foreach (var medicalCondition in medicineIncompatibleMedicalConditions)
+            {
+                ids.Add(medicalCondition.MedicalConditionId);
+            }
+
+            return ids;
+        }
+
     }
 }

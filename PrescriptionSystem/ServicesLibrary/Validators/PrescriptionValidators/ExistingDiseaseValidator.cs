@@ -1,7 +1,9 @@
 ﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary.DifferentServices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
@@ -15,20 +17,21 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             var prescriptionItems = (List<PrescriptionItem>)requestList[1];
             var errorCodes = (List<int>)requestList[2];
 
+            
             if (request is Prescription prescription)
             {
                 foreach (var item in prescriptionItems)
                 {
                     if (item is Medicine medicine)
                     {
-                        foreach (var incompatibleMedicalConditions in medicine.MedicineHasIncompatibleMedicalConditionsList)
+                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
+                        var userMedicalConditions = UserService.Instance.GetMedicalConditions();
+
+                        foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
                         {
-                            if (incompatibleMedicalConditions.MedicalCondition.Type == Disease)
+                            foreach (var patientMedicalCondition in userMedicalConditions)
                             {
-                                foreach (var patientMedicalCondition in prescription.Patient.UserHasMedicalConditions)
-                                {
-                                    if (patientMedicalCondition.MedicalCondition == incompatibleMedicalConditions.MedicalCondition) errorCodes.Add(Services.IncompatibleDisease);
-                                }
+                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsDisease(patientMedicalCondition.MedicalConditionId)) errorCodes.Add(Services.IncompatibleMedicine);
                             }
                         }
                     }
@@ -41,5 +44,15 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
 
+        private bool MedicalConditionIsDisease(int id)
+        {
+            var diseases = MedicalConditionService.Instance.GetDiseases();
+
+            foreach (var disease in diseases)
+            {
+                if (disease.Id == id) return true;
+            }
+            return false;
+        }
     }
 }
