@@ -8,6 +8,7 @@ using System.Net;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
+using ServicesLibrary.DTOs;
 using ServicesLibrary.Validators;
 using ServicesLibrary.Validators.FormValidators;
 using ServicesLibrary.Validators.TherapySessionValidators;
@@ -113,37 +114,17 @@ namespace ServicesLibrary
             validator.Validate(email);
             validator = new StringEmptyValidator(PasswordRequired, ref errorCodes);
             validator.Validate(password);
-            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            //if (string.IsNullOrWhiteSpace(phoneNumberString)) errorCodes.Add(PhoneNumberRequired);
-            //else if (phoneNumberString.Length < PhoneNumberMinimumLength ||
-            //         phoneNumberString.Length > PhoneNumberMaximumLength)
-            //    errorCodes.Add(PhoneNumberWrongLength);
-            //else if (!int.TryParse(phoneNumberString, out _)) errorCodes.Add(PhoneNumberNotANumber);
-            //if (string.IsNullOrWhiteSpace(healthUserNumberString)) errorCodes.Add(HealthUserNumberRequired);
-            //else if (healthUserNumberString.Length < HealthUserNumberMinimumLength ||
-            //         healthUserNumberString.Length > HealthUserNumberMaximumLength)
-            //    errorCodes.Add(HealthUserNumberWrongLength);
-            //else if (!int.TryParse(healthUserNumberString, out var healthUserNumber))
-            //    errorCodes.Add(HealthUserNumberNotANumber);
-            //else if (!_userService.IsHealthUserNumberUnique(healthUserNumber))
-            //    errorCodes.Add(HealthUserNumberAlreadyExists);
-            //if (string.IsNullOrWhiteSpace(email)) errorCodes.Add(EmailRequired);
-            //else if (!(new EmailAddressAttribute().IsValid(email))) errorCodes.Add(EmailNotValid);
-            //else if (!_userService.IsEmailUnique(email)) errorCodes.Add(EmailAlreadyExists);
-            //if (string.IsNullOrWhiteSpace(password)) errorCodes.Add(PasswordRequired);
-            //if (userType == "Therapist")
-            //{
-            //    if (!_userService.IsTherapistOldEnough(dateOfBirth))
-            //    {
-            //        errorCodes.Add(TherapistNotOldEnough);
-            //    }
-            //}
-            foreach (var errorCode in errorCodes)
+            if (userType == "Therapist")
             {
-                Debug.Write(errorCode + " ");
+                validator = new TherapistOldEnoughValidator(TherapistNotOldEnough, ref errorCodes);
+                validator.Validate(new TherapistDTO {DateOfBirth = dateOfBirth});
             }
+            //foreach (var errorCode in errorCodes)
+            //{
+            //    Debug.Write(errorCode + " ");
+            //}
 
-            Debug.WriteLine("");
+            //Debug.WriteLine("");
 
             return errorCodes;
         }
