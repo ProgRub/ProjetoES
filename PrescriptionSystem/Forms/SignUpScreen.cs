@@ -62,11 +62,7 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            TextBoxPassword.PlaceholderText = "";
-            TextBoxEmail.PlaceholderText = "";
-            TextBoxHealthUserNumber.PlaceholderText = "";
-            TextBoxPhoneNumber.PlaceholderText = "";
-            TextBoxName.PlaceholderText = "";
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)

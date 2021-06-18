@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
@@ -38,8 +39,8 @@ namespace ServicesLibrary
             HealthUserNumberAlreadyExists = 13,
             TherapistNotOldEnough = 14,
             DescriptionRequired = 15,
-            AgeMininumNotValid = 16,
-            AgeMaxinumNotValid = 17,
+            AgeMinimumNotValid = 16,
+            AgeMaximumNotValid = 17,
             PriceNotValid = 18;
 
         #endregion
@@ -96,20 +97,21 @@ namespace ServicesLibrary
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
             validator = new StringEmptyValidator(PhoneNumberRequired, ref errorCodes);
-            validator.SetNext(new StringLengthValidator(PhoneNumberWrongLength, ref errorCodes,
-                PhoneNumberMinimumLength,
-                PhoneNumberMaximumLength)).SetNext(new StringIsNumberValidator(PhoneNumberNotANumber, ref errorCodes));
+            validator.SetNext(new StringIsNumberValidator(PhoneNumberNotANumber, ref errorCodes)).SetNext(
+                new StringLengthValidator(PhoneNumberWrongLength, ref errorCodes,
+                    PhoneNumberMinimumLength,
+                    PhoneNumberMaximumLength));
             validator.Validate(phoneNumberString);
             validator = new StringEmptyValidator(HealthUserNumberRequired, ref errorCodes);
-            validator.SetNext(new StringLengthValidator(HealthUserNumberWrongLength, ref errorCodes,
-                    HealthUserNumberMinimumLength, HealthUserNumberMaximumLength))
-                .SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes)).SetNext(
-                    new ObjectUniqueValidator(HealthUserNumberAlreadyExists, ref errorCodes,
-                        _userService.GetAllUsers().Select(e => e.HealthUserNumber)));
+            validator.SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes) )
+                .SetNext(new StringLengthValidator(HealthUserNumberWrongLength, ref errorCodes,
+                    HealthUserNumberMinimumLength, HealthUserNumberMaximumLength)).SetNext(
+                    new StringUniqueValidator(HealthUserNumberAlreadyExists, ref errorCodes,
+                        _userService.GetAllUsers().Select(e => e.HealthUserNumber.ToString())));
             validator.Validate(healthUserNumberString);
             validator = new StringEmptyValidator(EmailRequired, ref errorCodes);
             validator.SetNext(new EmailFormatValidator(EmailNotValid, ref errorCodes)).SetNext(
-                new ObjectUniqueValidator(EmailAlreadyExists, ref errorCodes,
+                new StringUniqueValidator(EmailAlreadyExists, ref errorCodes,
                     _userService.GetAllUsers().Select(e => e.Email)));
             validator.Validate(email);
             validator = new StringEmptyValidator(PasswordRequired, ref errorCodes);
@@ -119,12 +121,7 @@ namespace ServicesLibrary
                 validator = new TherapistOldEnoughValidator(TherapistNotOldEnough, ref errorCodes);
                 validator.Validate(new TherapistDTO {DateOfBirth = dateOfBirth});
             }
-            //foreach (var errorCode in errorCodes)
-            //{
-            //    Debug.Write(errorCode + " ");
-            //}
 
-            //Debug.WriteLine("");
 
             return errorCodes;
         }
@@ -184,19 +181,28 @@ namespace ServicesLibrary
                 duration, bodyPart);
         }
 
-        public IEnumerable<int> CheckExerciseAndTreatmentCreation(string name, string description, string ageMinimum,
+        public IEnumerable<int> CheckExerciseOrTreatmentCreation(string name, string description, string ageMinimum,
             string ageMaximum)
         {
             var errorCodes = new List<int>();
+            BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
+            validator.Validate(name);
+            validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
+            validator.Validate(description);
+            validator = new StringEmptyValidator(AgeMinimumNotValid, ref errorCodes);
+            validator.SetNext(new StringIsNumberValidator(AgeMinimumNotValid, ref errorCodes));
+            validator.Validate(ageMinimum);
+            validator = new StringEmptyValidator(AgeMaximumNotValid, ref errorCodes);
+            validator.SetNext(new StringIsNumberValidator(AgeMaximumNotValid, ref errorCodes));
+            validator.Validate(ageMaximum);
+            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            //if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
 
-            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
+            //if (!int.TryParse(ageMinimum, out _)) errorCodes.Add(AgeMinimumNotValid);
+            //else if (string.IsNullOrWhiteSpace(ageMinimum)) errorCodes.Add(AgeMinimumNotValid);
 
-            if (!int.TryParse(ageMinimum, out _)) errorCodes.Add(AgeMininumNotValid);
-            else if (string.IsNullOrWhiteSpace(ageMinimum)) errorCodes.Add(AgeMininumNotValid);
-
-            if (!int.TryParse(ageMaximum, out _)) errorCodes.Add(AgeMaxinumNotValid);
-            else if (string.IsNullOrWhiteSpace(ageMaximum)) errorCodes.Add(AgeMaxinumNotValid);
+            //if (!int.TryParse(ageMaximum, out _)) errorCodes.Add(AgeMaximumNotValid);
+            //else if (string.IsNullOrWhiteSpace(ageMaximum)) errorCodes.Add(AgeMaximumNotValid);
 
             return errorCodes;
         }
@@ -204,12 +210,19 @@ namespace ServicesLibrary
         public IEnumerable<int> CheckMedicineCreation(string name, string description, string price)
         {
             var errorCodes = new List<int>();
+            BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
+            validator.Validate(name);
+            validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
+            validator.Validate(description);
+            validator = new StringEmptyValidator(PriceNotValid, ref errorCodes);
+            validator.SetNext(new StringIsNumberValidator(PriceNotValid, ref errorCodes));
+            validator.Validate(price);
 
-            if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
+            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
+            //if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
 
-            if (!double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
-            else if (string.IsNullOrWhiteSpace(price)) errorCodes.Add(PriceNotValid);
+            //if (!double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
+            //else if (string.IsNullOrWhiteSpace(price)) errorCodes.Add(PriceNotValid);
 
             return errorCodes;
         }
@@ -280,42 +293,34 @@ namespace ServicesLibrary
             IEnumerable<string> treatments, TimeSpan estimatedDuration)
         {
             var errorCodes = new List<int>();
-            if (patient == "")
+
+            BaseValidator validator = new StringEmptyValidator(PatientRequired, ref errorCodes);
+            validator.Validate(patient);
+            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+            //if (!_userService.IsPatientAvailable(patientId, sessionDate, sessionTime, estimatedDuration))
+            //{
+            //    errorCodes.Add(PatientUnavailable);
+            //}
+            validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
+            validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
+            validator.Validate(new TherapySession()
             {
-                errorCodes.Add(PatientRequired);
-            }
-            else
-            {
-                var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-                //if (!_userService.IsPatientAvailable(patientId, sessionDate, sessionTime, estimatedDuration))
-                //{
-                //    errorCodes.Add(PatientUnavailable);
-                //}
-                var validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
-                validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
-                var validateResult = validator.Validate(new List<object>
-                {
-                    new TherapySession
-                    {
-                        Patient = (Patient) UserService.Instance.GetUserById(patientId),
-                        Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
-                        DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay), EstimatedDuration = estimatedDuration
-                    },
-                    errorCodes
-                });
-                //List<object> validateResultList = (List<object>) validateResult;
-                errorCodes = (List<int>) validateResult;
-            }
+                Patient = (Patient) UserService.Instance.GetUserById(patientId),
+                Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
+                DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay), EstimatedDuration = estimatedDuration
+            });
+            //List<object> validateResultList = (List<object>) validateResult;
 
             //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
             //{
             //    errorCodes.Add(TherapistUnavailable);
             //}
-
-            if (!treatments.Any())
-            {
-                errorCodes.Add(AtLeastOneTreatment);
-            }
+            validator = new EnumerableEmptyValidator(AtLeastOneTreatment, ref errorCodes);
+            validator.Validate(treatments);
+            //if (!treatments.Any())
+            //{
+            //    errorCodes.Add(AtLeastOneTreatment);
+            //}
 
             return errorCodes;
         }

@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class StringIsNumberValidator:BaseValidator
+    public class EnumerableEmptyValidator:BaseValidator
     {
-        public StringIsNumberValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public EnumerableEmptyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
         }
 
         public override bool RequestIsValid(object request)
         {
 
-            if (request is string requestString)
+            if (request is IEnumerable<object> enumerable)
             {
-                return int.TryParse(requestString,out _);
+                return enumerable.Any();
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
