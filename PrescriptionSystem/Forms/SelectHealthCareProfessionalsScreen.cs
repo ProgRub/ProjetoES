@@ -37,8 +37,16 @@ namespace Forms
                 }
             }
 
-
-            SetCheckedListBoxColumnWidth(CheckedListBoxProfessionals);
+            var columnWidth = 0;
+            foreach (string item in CheckedListBoxProfessionals.Items)
+            {
+                var width = TextRenderer.MeasureText(item, CheckedListBoxProfessionals.Font).Width;
+                if (width > columnWidth)
+                {
+                    columnWidth = width + 20;
+                }
+            }
+            CheckedListBoxProfessionals.ColumnWidth = columnWidth;
         }
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)

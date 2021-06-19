@@ -39,29 +39,32 @@ namespace Forms
             // 
             // ButtonExampleTherapySession
             // 
+            this.ButtonExampleTherapySession.BackColor = System.Drawing.Color.CornflowerBlue;
             this.ButtonExampleTherapySession.Enabled = false;
-            this.ButtonExampleTherapySession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonExampleTherapySession.Location = new System.Drawing.Point(106, 53);
+            this.ButtonExampleTherapySession.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonExampleTherapySession.ForeColor = System.Drawing.Color.White;
+            this.ButtonExampleTherapySession.Location = new System.Drawing.Point(92, 70);
+            this.ButtonExampleTherapySession.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonExampleTherapySession.Name = "ButtonExampleTherapySession";
-            this.ButtonExampleTherapySession.Size = new System.Drawing.Size(379, 50);
+            this.ButtonExampleTherapySession.Size = new System.Drawing.Size(433, 67);
             this.ButtonExampleTherapySession.TabIndex = 6;
             this.ButtonExampleTherapySession.Text = "button1";
-            this.ButtonExampleTherapySession.UseVisualStyleBackColor = true;
+            this.ButtonExampleTherapySession.UseVisualStyleBackColor = false;
             this.ButtonExampleTherapySession.Visible = false;
             // 
             // LabelTitle
             // 
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(106, 4);
+            this.LabelTitle.Location = new System.Drawing.Point(92, 5);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(379, 46);
+            this.LabelTitle.Size = new System.Drawing.Size(469, 61);
             this.LabelTitle.TabIndex = 7;
             this.LabelTitle.Text = "Click a Therapy Session to annotate it, its treatments and check which treatments" +
-    " we\'re completed.";
+    " were completed.";
             // 
             // SelectPastTherapySessionScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonExampleTherapySession);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ComponentsLibrary.Entities.PrescriptionItems;
 
 namespace ComponentsLibrary.Entities
@@ -13,6 +14,6 @@ namespace ComponentsLibrary.Entities
         public Prescription Prescription { get; set; }
         public int PrescriptionItemId { get; set; }
         public PrescriptionItem PrescriptionItem { get; set; }
-        public TimeSpan RecommendedTime { get; set; }
+        public ICollection<TimeSpan> RecommendedTimes { get; set; }
     }
 }

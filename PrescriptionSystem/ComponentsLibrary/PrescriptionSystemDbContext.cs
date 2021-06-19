@@ -292,6 +292,13 @@ namespace ComponentsLibrary
             //});
 
             #endregion
+
+            var timeSpanValueConverter = new TimeSpanListToStringValueConverter();
+
+            modelBuilder
+                .Entity<PrescriptionHasPrescriptionItems>()
+                .Property(e => e.RecommendedTimes)//Property
+                .HasConversion(timeSpanValueConverter);
         }
 
         public DbSet<Patient> Patients { get; set; }

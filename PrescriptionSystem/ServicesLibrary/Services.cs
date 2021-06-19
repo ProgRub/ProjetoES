@@ -335,7 +335,6 @@ namespace ServicesLibrary
 
         public IEnumerable<TreatmentDTO> GetAllTreatments()
         {
-
             return _prescriptionItemService.GetAllTreatments().Select(e=>TreatmentDTO.ConvertTreatmentToDTO(e));
         }
 

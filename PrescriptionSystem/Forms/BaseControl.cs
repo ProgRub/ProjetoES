@@ -32,14 +32,6 @@ namespace Forms
         }
         protected void ClearTextbox(TextBox textBox) => textBox.Text = "";
 
-        protected void ClearAllTextboxesPlaceholderText()
-        {
-            foreach (var textBox in Controls.OfType<TextBox>())
-            {
-                textBox.PlaceholderText = "";
-            }
-        }
-
         protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(textBox.PlaceholderText))
@@ -60,6 +52,7 @@ namespace Forms
             ((Window)Parent).AcceptButton = button;
         }
 
+
         protected void SetCheckedListBoxColumnWidth(CheckedListBox checkedListBox)
         {
 
@@ -73,6 +66,15 @@ namespace Forms
                 }
             }
             checkedListBox.ColumnWidth = columnWidth;
+        }
+
+
+        protected void ClearAllTextboxesPlaceholderText()
+        {
+            foreach (var textBox in Controls.OfType<TextBox>())
+            {
+                textBox.PlaceholderText = "";
+            }
         }
     }
 }

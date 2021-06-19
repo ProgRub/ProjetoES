@@ -141,7 +141,7 @@ namespace Forms
             // 
             this.TextBoxTreatmentNote.AcceptsReturn = true;
             this.TextBoxTreatmentNote.Enabled = false;
-            this.TextBoxTreatmentNote.Location = new System.Drawing.Point(237, 668);
+            this.TextBoxTreatmentNote.Location = new System.Drawing.Point(218, 668);
             this.TextBoxTreatmentNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxTreatmentNote.Multiline = true;
             this.TextBoxTreatmentNote.Name = "TextBoxTreatmentNote";
@@ -152,7 +152,7 @@ namespace Forms
             // 
             this.LabelTreatmentNote.AutoSize = true;
             this.LabelTreatmentNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTreatmentNote.Location = new System.Drawing.Point(95, 668);
+            this.LabelTreatmentNote.Location = new System.Drawing.Point(64, 664);
             this.LabelTreatmentNote.Name = "LabelTreatmentNote";
             this.LabelTreatmentNote.Size = new System.Drawing.Size(148, 28);
             this.LabelTreatmentNote.TabIndex = 11;
@@ -185,7 +185,7 @@ namespace Forms
             // 
             this.LabelTherapySessionNote.AutoSize = true;
             this.LabelTherapySessionNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTherapySessionNote.Location = new System.Drawing.Point(51, 479);
+            this.LabelTherapySessionNote.Location = new System.Drawing.Point(11, 477);
             this.LabelTherapySessionNote.Name = "LabelTherapySessionNote";
             this.LabelTherapySessionNote.Size = new System.Drawing.Size(201, 28);
             this.LabelTherapySessionNote.TabIndex = 15;
@@ -194,7 +194,7 @@ namespace Forms
             // TextBoxTherapySessionNote
             // 
             this.TextBoxTherapySessionNote.AcceptsReturn = true;
-            this.TextBoxTherapySessionNote.Location = new System.Drawing.Point(237, 481);
+            this.TextBoxTherapySessionNote.Location = new System.Drawing.Point(218, 483);
             this.TextBoxTherapySessionNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxTherapySessionNote.Multiline = true;
             this.TextBoxTherapySessionNote.Name = "TextBoxTherapySessionNote";
@@ -203,27 +203,31 @@ namespace Forms
             // 
             // ButtonAddSessionNote
             // 
-            this.ButtonAddSessionNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonAddSessionNote.Location = new System.Drawing.Point(1091, 529);
+            this.ButtonAddSessionNote.BackColor = System.Drawing.Color.LimeGreen;
+            this.ButtonAddSessionNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddSessionNote.ForeColor = System.Drawing.Color.White;
+            this.ButtonAddSessionNote.Location = new System.Drawing.Point(1091, 540);
             this.ButtonAddSessionNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonAddSessionNote.Name = "ButtonAddSessionNote";
             this.ButtonAddSessionNote.Size = new System.Drawing.Size(160, 72);
             this.ButtonAddSessionNote.TabIndex = 16;
             this.ButtonAddSessionNote.Text = "Add Session Note";
-            this.ButtonAddSessionNote.UseVisualStyleBackColor = true;
+            this.ButtonAddSessionNote.UseVisualStyleBackColor = false;
             this.ButtonAddSessionNote.Click += new System.EventHandler(this.ButtonAddSessionNote_Click);
             // 
             // ButtonAddTreatmentNote
             // 
+            this.ButtonAddTreatmentNote.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddTreatmentNote.Enabled = false;
-            this.ButtonAddTreatmentNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonAddTreatmentNote.Location = new System.Drawing.Point(1091, 697);
+            this.ButtonAddTreatmentNote.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddTreatmentNote.ForeColor = System.Drawing.Color.White;
+            this.ButtonAddTreatmentNote.Location = new System.Drawing.Point(1091, 684);
             this.ButtonAddTreatmentNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonAddTreatmentNote.Name = "ButtonAddTreatmentNote";
-            this.ButtonAddTreatmentNote.Size = new System.Drawing.Size(160, 108);
+            this.ButtonAddTreatmentNote.Size = new System.Drawing.Size(212, 130);
             this.ButtonAddTreatmentNote.TabIndex = 17;
             this.ButtonAddTreatmentNote.Text = "Add Treatment Note && Set Completed State";
-            this.ButtonAddTreatmentNote.UseVisualStyleBackColor = true;
+            this.ButtonAddTreatmentNote.UseVisualStyleBackColor = false;
             this.ButtonAddTreatmentNote.Click += new System.EventHandler(this.ButtonAddTreatmentNote_Click);
             // 
             // TherapySessionCompletedScreen
@@ -244,7 +248,7 @@ namespace Forms
             this.Controls.Add(this.ListViewTreatments);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "TherapySessionCompletedScreen";
-            this.Size = new System.Drawing.Size(1255, 893);
+            this.Size = new System.Drawing.Size(1306, 893);
             this.Load += new System.EventHandler(this.TherapySessionCompletedScreen_Load);
             this.Controls.SetChildIndex(this.ListViewTreatments, 0);
             this.Controls.SetChildIndex(this.LabelTreatments, 0);

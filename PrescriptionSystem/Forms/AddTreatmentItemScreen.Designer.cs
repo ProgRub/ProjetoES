@@ -61,15 +61,15 @@ namespace Forms
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.ForestGreen;
-            this.button1.Location = new System.Drawing.Point(217, 543);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(226, 550);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 43);
             this.button1.TabIndex = 6;
             this.button1.Text = "Add Prescription";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
@@ -100,7 +100,7 @@ namespace Forms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(117, 85);
+            this.label2.Location = new System.Drawing.Point(116, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 20);
             this.label2.TabIndex = 16;
@@ -147,7 +147,6 @@ namespace Forms
             // textBoxMinAge
             // 
             this.textBoxMinAge.Location = new System.Drawing.Point(174, 305);
-            this.textBoxMinAge.MaxLength = 3;
             this.textBoxMinAge.Name = "textBoxMinAge";
             this.textBoxMinAge.Size = new System.Drawing.Size(45, 27);
             this.textBoxMinAge.TabIndex = 25;
@@ -155,7 +154,6 @@ namespace Forms
             // textBoxMaxAge
             // 
             this.textBoxMaxAge.Location = new System.Drawing.Point(247, 308);
-            this.textBoxMaxAge.MaxLength = 3;
             this.textBoxMaxAge.Name = "textBoxMaxAge";
             this.textBoxMaxAge.Size = new System.Drawing.Size(45, 27);
             this.textBoxMaxAge.TabIndex = 26;
@@ -207,7 +205,7 @@ namespace Forms
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(133, 117);
+            this.radioButton7.Location = new System.Drawing.Point(133, 118);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(95, 24);
             this.radioButton7.TabIndex = 7;
@@ -240,7 +238,7 @@ namespace Forms
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(133, 27);
+            this.radioButton4.Location = new System.Drawing.Point(133, 26);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(79, 24);
             this.radioButton4.TabIndex = 4;
@@ -262,7 +260,7 @@ namespace Forms
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 85);
+            this.radioButton2.Location = new System.Drawing.Point(6, 86);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(93, 24);
             this.radioButton2.TabIndex = 2;
@@ -284,7 +282,7 @@ namespace Forms
             // Head
             // 
             this.Head.AutoSize = true;
-            this.Head.Location = new System.Drawing.Point(6, 27);
+            this.Head.Location = new System.Drawing.Point(6, 26);
             this.Head.Name = "Head";
             this.Head.Size = new System.Drawing.Size(66, 24);
             this.Head.TabIndex = 0;
@@ -312,9 +310,8 @@ namespace Forms
             this.Controls.Add(this.textBoxTreatmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddTreatmentItemScreen";
-            this.Size = new System.Drawing.Size(533, 612);
+            this.Size = new System.Drawing.Size(532, 612);
             this.Load += new System.EventHandler(this.AddMedicineItem_Load);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
