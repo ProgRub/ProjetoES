@@ -40,11 +40,19 @@ namespace Forms
 
             var data = new List<KeyValuePair<TimeSpan, string>>();
 
+            var prescriptions = new List<ComponentsLibrary.Entities.Prescription>();
+
             foreach (var prescription in Services.Instance.GetPrescriptionByDate(monthCalendarPatient.SelectionRange.Start))
             {
-                foreach (var item in Services.Instance.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescription.Id))
+                prescriptions.Add(prescription);
+            }
+
+
+            foreach (var presc in prescriptions)
+            {
+                foreach (var item in Services.Instance.GetPrescriptionHasItemsEnumerableByPrescriptionId(presc.Id))
                 {
-                    if(Services.Instance.IsMedicine(item.PrescriptionItemId))
+                    if (Services.Instance.IsMedicine(item.PrescriptionItemId))
                     {
                         string data_string = "Take " + Services.Instance.GetMedicineByItemId(item.PrescriptionItemId).Name + " medicine.";
                         data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
