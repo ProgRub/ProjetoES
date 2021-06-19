@@ -59,6 +59,7 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
+        
         private bool MedicalConditionIsDisease(int id)
         {
             return MedicalConditionService.Instance.GetDiseases().Any(e => e.Id == id);

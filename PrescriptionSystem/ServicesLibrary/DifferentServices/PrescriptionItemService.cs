@@ -141,6 +141,16 @@ namespace ServicesLibrary.DifferentServices
             return _treatmentRepository.GetById(id);
         }
 
+        internal Medicine GetMedicinetByItemId(int id)
+        {
+            return _medicineRepository.Find(e => e.Id == id).First();
+        }
+
+        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        {
+            return _prescriptionRepository.Find(e => e.PrescriptionId == pres_id);
+        }
+
         internal IEnumerable<MedicineHasIncompatibleMedicalConditions> GetMedicineIncompatibleMedicalConditions(int id)
         {
             return _medicineRepository.GetIncompatibleMedicalConditions(id);

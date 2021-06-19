@@ -134,7 +134,7 @@ namespace ServicesLibrary.DifferentServices
         {
             return _userRepository.GetAllMissingBodyParts().Select(userHasMissingBodyPart => userHasMissingBodyPart.BodyPart).ToList();
         }
-
+        
         internal IEnumerable<MedicalCondition> GetUsersMedicalConditionsByUserId(int userId)
         {
             var medicalConditions = new List<MedicalCondition>();

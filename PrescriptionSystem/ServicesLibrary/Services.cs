@@ -561,6 +561,15 @@ namespace ServicesLibrary
             }
         }
 
+        internal void AddErrorCode(List<int> errorCodes, int errorCode)
+        {
+            if (!errorCodes.Contains(errorCode))
+            {
+                errorCodes.Add(errorCode);
+            }
+            return;
+        }
+        
         public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
         {
             return _prescriptionService.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescriptionId);

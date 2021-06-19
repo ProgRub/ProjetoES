@@ -32,7 +32,6 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
                 foreach (var prescriptionTreatment in prescription.Treatments)
                 {
-
                     if (patientsAge < prescriptionTreatment.AgeMinimum || patientsAge > prescriptionTreatment.AgeMaximum) return false;
                 }
 
