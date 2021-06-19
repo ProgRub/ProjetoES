@@ -333,21 +333,14 @@ namespace ServicesLibrary
             return patientsAsStrings;
         }
 
-        public IDictionary<string, TimeSpan> GetAllTreatments()
+        public IEnumerable<TreatmentDTO> GetAllTreatments()
         {
-            var treatments = _prescriptionItemService.GetAllTreatments();
-            var treatmentsAsDict = new Dictionary<string, TimeSpan>();
-            foreach (var treatment in treatments)
-            {
-                treatmentsAsDict.Add($"{treatment.Name} | {treatment.BodyPart} | {treatment.Duration}",
-                    treatment.Duration);
-            }
 
-            return treatmentsAsDict;
+            return _prescriptionItemService.GetAllTreatments().Select(e=>TreatmentDTO.ConvertTreatmentToDTO(e));
         }
 
         public IEnumerable<int> CheckTherapySessionCreation(string patient, DateTime sessionDate, DateTime sessionTime,
-            IEnumerable<string> treatments, TimeSpan estimatedDuration)
+            IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration)
         {
             var errorCodes = new List<int>();
 
@@ -384,16 +377,10 @@ namespace ServicesLibrary
         }
 
         public void CreateTherapySession(string patient, DateTime sessionDate, DateTime sessionTime,
-            IEnumerable<string> treatments, TimeSpan estimatedDuration)
+            IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration)
         {
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-            var treatmentsList = new List<Treatment>();
-            foreach (var treatmentString in treatments)
-            {
-                treatmentsList.Add(
-                    PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString));
-            }
-
+            var treatmentsList = treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id));
             TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
         }

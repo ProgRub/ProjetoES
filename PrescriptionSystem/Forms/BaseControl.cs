@@ -59,5 +59,20 @@ namespace Forms
         {
             ((Window)Parent).AcceptButton = button;
         }
+
+        protected void SetCheckedListBoxColumnWidth(CheckedListBox checkedListBox)
+        {
+
+            var columnWidth = 0;
+            foreach (string item in checkedListBox.Items)
+            {
+                var width = TextRenderer.MeasureText(item, checkedListBox.Font).Width;
+                if (width > columnWidth)
+                {
+                    columnWidth = width + 20;
+                }
+            }
+            checkedListBox.ColumnWidth = columnWidth;
+        }
     }
 }
