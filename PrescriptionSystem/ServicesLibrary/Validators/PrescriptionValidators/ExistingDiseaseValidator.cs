@@ -1,58 +1,68 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System.Collections.Generic;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class ExistingDiseaseValidator : BaseValidator
     {
-        public const int Disease = 1;
-        public override object Validate(object requestListParameter)
+
+        public ExistingDiseaseValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
-            var requestList = (List<object>)requestListParameter;
-            var request = requestList[0];
-            var prescriptionItems = (List<PrescriptionItem>)requestList[1];
-            var errorCodes = (List<int>)requestList[2];
+        }
 
-            
-            if (request is Prescription prescription)
+        public override bool RequestIsValid(object request)
+        {
+
+            if (request is PrescriptionDTO prescription)
             {
-                foreach (var item in prescriptionItems)
+                foreach (var medicine in prescription.Medicines)
                 {
-                    if (item is Medicine medicine)
+                    foreach (var incompatibleMedicalCondition in medicine.IncompatibleMedicalConditions)
                     {
-                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(medicine.Id);
-                        var userMedicalConditions = UserService.Instance.GetMedicalConditions();
-
-                        foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
+                        foreach (var disease in prescription.Patient.Diseases)
                         {
-                            foreach (var patientMedicalCondition in userMedicalConditions)
-                            {
-                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsDisease(patientMedicalCondition.MedicalConditionId)) Services.Instance.AddErrorCode(errorCodes, Services.IncompatibleDisease);
-                            }
+                            if (disease.Id == incompatibleMedicalCondition.Id) return false;
                         }
                     }
                 }
 
-                requestList = new List<object> { request, prescriptionItems, errorCodes };
-                return base.Validate(requestList) ?? errorCodes;
+                return true;
             }
+            //if (request is ComponentsLibrary.Entities.Prescription prescription)
+            //{
+            //    foreach (var item in PrescriptionService.Instance.GetPrescriptionItemsOfPrescriptionById(prescription.Id))
+            //    {
+            //        if (item is Medicine medicine)
+            //        {
+            //            var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
+            //            var userMedicalConditions = UserService.Instance.GetUsersMedicalConditionsByUserId(prescription.PatientId);
+
+            //            foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
+            //            {
+            //                foreach (var patientMedicalCondition in userMedicalConditions)
+            //                {
+            //                    if (patientMedicalCondition.Id == incompatibleMedicalConditionId &&
+            //                        MedicalConditionIsDisease(patientMedicalCondition.Id)) return false;
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    return true;
+            //}
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
-
+        
         private bool MedicalConditionIsDisease(int id)
         {
-            var diseases = MedicalConditionService.Instance.GetDiseases();
-
-            foreach (var disease in diseases)
-            {
-                if (disease.Id == id) return true;
-            }
-            return false;
+            return MedicalConditionService.Instance.GetDiseases().Any(e => e.Id == id);
         }
     }
 }

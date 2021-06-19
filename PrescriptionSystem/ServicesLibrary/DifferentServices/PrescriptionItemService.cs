@@ -95,6 +95,7 @@ namespace ServicesLibrary.DifferentServices
             }
         }
 
+
         internal IEnumerable<Treatment> GetAllTreatments()
         {
             return _treatmentRepository.GetAll();
@@ -155,24 +156,29 @@ namespace ServicesLibrary.DifferentServices
             return _medicineRepository.GetMedicineIncompatibleMedicalConditionsIds(medicineId);
         }
 
-        internal Medicine GetMedicineByItemId(int item_id)
+        internal Medicine GetMedicineById(int item_id)
         {
-            return _medicineRepository.Find(e => e.Id == item_id).First();
+            return _medicineRepository.GetById(item_id);
         }
 
-        internal Exercise GetExerciseByItemId(int item_id)
+        internal Exercise GetExerciseById(int item_id)
         {
-            return _exerciseRepository.Find(e => e.Id == item_id).First();
+            return _exerciseRepository.GetById(item_id);
         }
 
-        internal bool VerifyIfIsMedicine(int item_id)
+        internal bool IsMedicine(int item_id)
         {
             return _medicineRepository.Find(e => e.Id == item_id).Any();
         }
 
-        internal bool VerifyIfIsExercise(int item_id)
+        internal bool IsExercise(int item_id)
         {
             return _exerciseRepository.Find(e => e.Id == item_id).Any();
+        }
+
+        public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
+        {
+           return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
         }
     }
 }

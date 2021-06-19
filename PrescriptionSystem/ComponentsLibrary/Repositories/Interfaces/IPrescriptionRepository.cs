@@ -1,4 +1,5 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System.Collections.Generic;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 
 namespace ComponentsLibrary.Repositories.Interfaces
@@ -10,5 +11,10 @@ namespace ComponentsLibrary.Repositories.Interfaces
 
         bool IsHealthCareProfessionalPrescriptionViewer(Prescription prescription,
             HealthCareProfessional healthCareProfessional);
+
+        IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerable(
+            int prescriptionId);
+
+        IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id);
     }
 }
