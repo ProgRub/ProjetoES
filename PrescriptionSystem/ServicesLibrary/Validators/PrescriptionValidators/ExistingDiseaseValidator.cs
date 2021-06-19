@@ -24,14 +24,14 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                 {
                     if (item is Medicine medicine)
                     {
-                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(medicine.Id);
+                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
                         var userMedicalConditions = UserService.Instance.GetMedicalConditions();
 
                         foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
                         {
                             foreach (var patientMedicalCondition in userMedicalConditions)
                             {
-                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsDisease(patientMedicalCondition.MedicalConditionId)) Services.Instance.AddErrorCode(errorCodes, Services.IncompatibleDisease);
+                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsDisease(patientMedicalCondition.MedicalConditionId)) errorCodes.Add(Services.IncompatibleMedicine);
                             }
                         }
                     }

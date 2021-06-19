@@ -34,26 +34,22 @@ namespace Forms
             // 
             // ButtonBack
             // 
-            this.ButtonBack.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.ButtonBack.Font = new System.Drawing.Font("Showcard Gothic", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonBack.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ButtonBack.Location = new System.Drawing.Point(0, 12);
-            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonBack.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonBack.Location = new System.Drawing.Point(0, 0);
             this.ButtonBack.Name = "ButtonBack";
-            this.ButtonBack.Size = new System.Drawing.Size(48, 55);
+            this.ButtonBack.Size = new System.Drawing.Size(59, 29);
             this.ButtonBack.TabIndex = 5;
-            this.ButtonBack.Text = "<";
-            this.ButtonBack.UseVisualStyleBackColor = false;
+            this.ButtonBack.Text = "Back";
+            this.ButtonBack.UseVisualStyleBackColor = true;
             // 
             // BaseControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.ButtonBack);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BaseControl";
-            this.Size = new System.Drawing.Size(657, 559);
+            this.Size = new System.Drawing.Size(575, 419);
             this.ResumeLayout(false);
 
         }

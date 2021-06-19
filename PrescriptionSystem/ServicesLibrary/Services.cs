@@ -551,14 +551,5 @@ namespace ServicesLibrary
                 }
             }
         }
-
-        internal void AddErrorCode(List<int> errorCodes, int errorCode)
-        {
-            if (!errorCodes.Contains(errorCode))
-            {
-                errorCodes.Add(errorCode);
-            }
-            return;
-        }
     }
 }

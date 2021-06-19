@@ -38,15 +38,12 @@ namespace Forms
             // 
             // ButtonBack
             // 
-            this.ButtonBack.BackColor = System.Drawing.Color.Teal;
-            this.ButtonBack.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonBack.Size = new System.Drawing.Size(94, 40);
+            this.ButtonBack.Size = new System.Drawing.Size(94, 39);
             this.ButtonBack.Text = "Logout";
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(0, 287);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -57,48 +54,41 @@ namespace Forms
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Turquoise;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button2.Location = new System.Drawing.Point(285, 159);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(222, 44);
             this.button2.TabIndex = 31;
             this.button2.Text = "Export Calendar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.Turquoise;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(285, 107);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(222, 44);
             this.button1.TabIndex = 30;
             this.button1.Text = "Get Prescription History";
-            this.button1.UseVisualStyleBackColor = false;
+            this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ButtonSignUp
             // 
-            this.ButtonSignUp.BackColor = System.Drawing.Color.Turquoise;
-            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonSignUp.ForeColor = System.Drawing.Color.White;
+            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonSignUp.Location = new System.Drawing.Point(285, 55);
             this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSignUp.Name = "ButtonSignUp";
             this.ButtonSignUp.Size = new System.Drawing.Size(222, 44);
             this.ButtonSignUp.TabIndex = 29;
             this.ButtonSignUp.Text = "Add Permission";
-            this.ButtonSignUp.UseVisualStyleBackColor = false;
+            this.ButtonSignUp.UseVisualStyleBackColor = true;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // monthCalendarPatient
             // 
-            this.monthCalendarPatient.BackColor = System.Drawing.SystemColors.Window;
             this.monthCalendarPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.monthCalendarPatient.Location = new System.Drawing.Point(0, 55);
             this.monthCalendarPatient.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);

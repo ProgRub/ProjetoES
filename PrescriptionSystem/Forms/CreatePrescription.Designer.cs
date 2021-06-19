@@ -125,12 +125,11 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.BackColor = System.Drawing.Color.ForestGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(292, 519);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(253, 39);
+            this.button1.Size = new System.Drawing.Size(253, 38);
             this.button1.TabIndex = 14;
             this.button1.Text = "Create";
             this.button1.UseVisualStyleBackColor = false;

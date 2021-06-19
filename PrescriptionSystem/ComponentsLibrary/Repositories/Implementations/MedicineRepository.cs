@@ -35,18 +35,22 @@ namespace ComponentsLibrary.Repositories.Implementations
             
         }
 
-        public IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(int medicineId)
-        {
-            var medicineIncompatibleMedicalConditions = _medicineHasIncompatibilityRepository.Find(e => e.MedicineId == medicineId);
 
-            var medicalConditionsIds = new List<int>();
+        public IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditions(int id)
+        {
+            return _medicineHasIncompatibilityRepository.Find(e => e.MedicineId == id);
+        }
+
+        public IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
+        {
+            var ids = new List<int>();
 
             foreach (var medicalCondition in medicineIncompatibleMedicalConditions)
             {
-                medicalConditionsIds.Add(medicalCondition.MedicalConditionId);
+                ids.Add(medicalCondition.MedicalConditionId);
             }
 
-            return medicalConditionsIds;
+            return ids;
         }
 
     }

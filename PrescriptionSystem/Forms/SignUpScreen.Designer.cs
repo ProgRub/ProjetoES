@@ -223,16 +223,14 @@ namespace Forms
             // 
             // ButtonSignUp
             // 
-            this.ButtonSignUp.BackColor = System.Drawing.Color.LimeGreen;
-            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonSignUp.ForeColor = System.Drawing.Color.White;
+            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonSignUp.Location = new System.Drawing.Point(358, 888);
             this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSignUp.Name = "ButtonSignUp";
             this.ButtonSignUp.Size = new System.Drawing.Size(110, 44);
             this.ButtonSignUp.TabIndex = 12;
             this.ButtonSignUp.Text = "Sign Up";
-            this.ButtonSignUp.UseVisualStyleBackColor = false;
+            this.ButtonSignUp.UseVisualStyleBackColor = true;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // CheckedListBoxAllergies
@@ -316,7 +314,7 @@ namespace Forms
             this.Controls.Add(this.LabelPhoneNumber);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "SignUpScreen";
-            this.Size = new System.Drawing.Size(698, 1000);
+            this.Size = new System.Drawing.Size(641, 1000);
             this.Load += new System.EventHandler(this.SignUpScreen_Load);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);

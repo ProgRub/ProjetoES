@@ -135,7 +135,6 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAllMissingBodyParts();
         }
 
-
         internal IEnumerable<UserHasMedicalCondition> GetMedicalConditions()
         {
             return _userRepository.GetMedicalConditions();

@@ -60,12 +60,11 @@ namespace Forms
             // 
             // ButtonAddTherapySession
             // 
-            this.ButtonAddTherapySession.BackColor = System.Drawing.Color.LimeGreen;
-            this.ButtonAddTherapySession.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonAddTherapySession.ForeColor = System.Drawing.Color.White;
+            this.ButtonAddTherapySession.BackColor = System.Drawing.Color.ForestGreen;
+            this.ButtonAddTherapySession.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddTherapySession.Location = new System.Drawing.Point(225, 444);
             this.ButtonAddTherapySession.Name = "ButtonAddTherapySession";
-            this.ButtonAddTherapySession.Size = new System.Drawing.Size(221, 43);
+            this.ButtonAddTherapySession.Size = new System.Drawing.Size(221, 29);
             this.ButtonAddTherapySession.TabIndex = 23;
             this.ButtonAddTherapySession.Text = "Add Therapy Session";
             this.ButtonAddTherapySession.UseVisualStyleBackColor = false;
@@ -145,7 +144,7 @@ namespace Forms
             this.labelAddTreatmentSession.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelAddTreatmentSession.Location = new System.Drawing.Point(209, 5);
             this.labelAddTreatmentSession.Name = "labelAddTreatmentSession";
-            this.labelAddTreatmentSession.Size = new System.Drawing.Size(232, 31);
+            this.labelAddTreatmentSession.Size = new System.Drawing.Size(252, 31);
             this.labelAddTreatmentSession.TabIndex = 13;
             this.labelAddTreatmentSession.Text = "Add Therapy Session";
             // 

@@ -68,10 +68,5 @@ namespace Forms
             }
             textBox1.Text = sessions;
         }
-
-        private void CalendarScreenTherapist_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
