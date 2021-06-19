@@ -52,44 +52,46 @@ namespace Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(122, 258);
+            this.label6.Location = new System.Drawing.Point(107, 194);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 20);
+            this.label6.Size = new System.Drawing.Size(61, 15);
             this.label6.TabIndex = 35;
             this.label6.Text = "Body Part:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(109, 142);
+            this.label3.Location = new System.Drawing.Point(95, 106);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 20);
+            this.label3.Size = new System.Drawing.Size(70, 15);
             this.label3.TabIndex = 34;
             this.label3.Text = "Description:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(145, 82);
+            this.label2.Location = new System.Drawing.Point(127, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 20);
+            this.label2.Size = new System.Drawing.Size(42, 15);
             this.label2.TabIndex = 33;
             this.label2.Text = "Name:";
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(203, 142);
+            this.textBoxDescription.Location = new System.Drawing.Point(178, 106);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(250, 27);
+            this.textBoxDescription.Size = new System.Drawing.Size(219, 23);
             this.textBoxDescription.TabIndex = 31;
             // 
             // textBoxName
             // 
             this.textBoxName.BackColor = System.Drawing.Color.White;
             this.textBoxName.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBoxName.Location = new System.Drawing.Point(203, 82);
+            this.textBoxName.Location = new System.Drawing.Point(178, 62);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(250, 27);
+            this.textBoxName.Size = new System.Drawing.Size(219, 23);
             this.textBoxName.TabIndex = 30;
             this.textBoxName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -97,9 +99,9 @@ namespace Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(170, 27);
+            this.label1.Location = new System.Drawing.Point(149, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(310, 28);
+            this.label1.Size = new System.Drawing.Size(251, 21);
             this.label1.TabIndex = 29;
             this.label1.Text = "Create Exercise Prescription Item";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -110,7 +112,7 @@ namespace Forms
             this.button1.ForeColor = System.Drawing.Color.ForestGreen;
             this.button1.Location = new System.Drawing.Point(254, 471);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 43);
+            this.button1.Size = new System.Drawing.Size(130, 32);
             this.button1.TabIndex = 28;
             this.button1.Text = "Add Prescription";
             this.button1.UseVisualStyleBackColor = true;
@@ -119,19 +121,20 @@ namespace Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(127, 199);
+            this.label4.Location = new System.Drawing.Point(111, 149);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 20);
+            this.label4.Size = new System.Drawing.Size(56, 15);
             this.label4.TabIndex = 41;
             this.label4.Text = "Duration:";
             // 
             // dateTimePickerDuration
             // 
             this.dateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerDuration.Location = new System.Drawing.Point(203, 199);
+            this.dateTimePickerDuration.Location = new System.Drawing.Point(178, 149);
+            this.dateTimePickerDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerDuration.Name = "dateTimePickerDuration";
             this.dateTimePickerDuration.ShowUpDown = true;
-            this.dateTimePickerDuration.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePickerDuration.Size = new System.Drawing.Size(219, 23);
             this.dateTimePickerDuration.TabIndex = 42;
             // 
             // checkedListBoxBodyPart
@@ -147,47 +150,52 @@ namespace Forms
             "RightFoot",
             "RightLeg",
             "Torso"});
-            this.checkedListBoxBodyPart.Location = new System.Drawing.Point(203, 258);
+            this.checkedListBoxBodyPart.Location = new System.Drawing.Point(178, 194);
+            this.checkedListBoxBodyPart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkedListBoxBodyPart.MultiColumn = true;
             this.checkedListBoxBodyPart.Name = "checkedListBoxBodyPart";
-            this.checkedListBoxBodyPart.Size = new System.Drawing.Size(250, 114);
+            this.checkedListBoxBodyPart.Size = new System.Drawing.Size(219, 76);
             this.checkedListBoxBodyPart.TabIndex = 43;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(254, 394);
+            this.label8.Location = new System.Drawing.Point(222, 296);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(15, 20);
+            this.label8.Size = new System.Drawing.Size(12, 15);
             this.label8.TabIndex = 49;
             this.label8.Text = "-";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(155, 391);
+            this.label5.Location = new System.Drawing.Point(136, 293);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 20);
+            this.label5.Size = new System.Drawing.Size(31, 15);
             this.label5.TabIndex = 48;
             this.label5.Text = "Age:";
             // 
             // textBoxMaxAge
             // 
-            this.textBoxMaxAge.Location = new System.Drawing.Point(275, 391);
+            this.textBoxMaxAge.Location = new System.Drawing.Point(241, 293);
+            this.textBoxMaxAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxMaxAge.MaxLength = 3;
             this.textBoxMaxAge.Name = "textBoxMaxAge";
-            this.textBoxMaxAge.Size = new System.Drawing.Size(45, 27);
+            this.textBoxMaxAge.Size = new System.Drawing.Size(40, 23);
             this.textBoxMaxAge.TabIndex = 47;
             // 
             // textBoxMinAge
             // 
-            this.textBoxMinAge.Location = new System.Drawing.Point(200, 391);
+            this.textBoxMinAge.Location = new System.Drawing.Point(175, 293);
+            this.textBoxMinAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxMinAge.MaxLength = 3;
             this.textBoxMinAge.Name = "textBoxMinAge";
-            this.textBoxMinAge.Size = new System.Drawing.Size(45, 27);
+            this.textBoxMinAge.Size = new System.Drawing.Size(40, 23);
             this.textBoxMinAge.TabIndex = 46;
             // 
             // AddExerciseItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.label8);
@@ -204,8 +212,9 @@ namespace Forms
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddExerciseItemScreen";
-            this.Size = new System.Drawing.Size(612, 617);
+            this.Size = new System.Drawing.Size(536, 463);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.textBoxName, 0);

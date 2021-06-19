@@ -1,38 +1,43 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System.Collections.Generic;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary;
 using ServicesLibrary.DifferentServices;
 using ServicesLibrary.Validators;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using ServicesLibrary.DTOs;
 
-public class MissingBodyPartValidator : BaseValidator
+namespace ServicesLibrary.Validators.PrescriptionValidators
 {
-    public override object Validate(object requestListParameter)
+    public class MissingBodyPartValidator : BaseValidator
     {
-        var requestList = (List<object>)requestListParameter;
-        var request = requestList[0];
-        var prescriptionItems = (List<PrescriptionItem>)requestList[1];
-        var errorCodes = (List<int>)requestList[2];
-
-        if (request is Prescription prescription)
+        public MissingBodyPartValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
-            foreach (var item in prescriptionItems)
-            {
-                if (item is Treatment treatment)
-                {
-                   foreach(var missingBodyPart in UserService.Instance.GetMissingBodyParts())
-                    {
-                        if (missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) errorCodes.Add(Services.MissingBodyPart);
-                    }
-                }
-            }
-
-            requestList = new List<object> { request, prescriptionItems, errorCodes };
-            return base.Validate(requestList) ?? errorCodes;
         }
 
-        throw new NotSupportedException($"Invalid type {request.GetType()}!");
+        public override bool RequestIsValid(object request)
+        {
+            if (request is PrescriptionDTO prescription)
+            {
+                foreach (var treatment in prescription.Treatments)
+                {
+                    foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
+                    {
+                        if (missingBodyPart == treatment.BodyPart) return false;
+                    }
+                        //foreach (var missingBodyPart in UserService.Instance.GetUserMissingBodyPartsByUserId(TODO))
+                        //{
+                        //    if (missingBodyPart.User == prescription.Patient &&
+                        //        missingBodyPart.BodyPart == treatment.BodyPart)
+                        //        return false;
+                        //}
+                }
+
+                return true;
+            }
+
+            throw new NotSupportedException($"Invalid type {request.GetType()}!");
+        }
     }
 }

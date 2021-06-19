@@ -42,14 +42,14 @@ namespace Forms
 
             foreach (var prescription in Services.Instance.GetPrescriptionByDate(monthCalendarPatient.SelectionRange.Start))
             {
-                foreach (var item in Services.Instance.GetPrescriptionItems(prescription.Id))
+                foreach (var item in Services.Instance.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescription.Id))
                 {
-                    if(Services.Instance.VerifyIfIsMedicine(item.PrescriptionItemId))
+                    if(Services.Instance.IsMedicine(item.PrescriptionItemId))
                     {
                         string data_string = "Take " + Services.Instance.GetMedicineByItemId(item.PrescriptionItemId).Name + " medicine.";
                         data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
                     }
-                    if (Services.Instance.VerifyIfIsExercise(item.PrescriptionItemId))
+                    if (Services.Instance.IsExercise(item.PrescriptionItemId))
                     {
                         string data_string = "Do " + Services.Instance.GetExerciseByItemId(item.PrescriptionItemId).Name + " exercise.";
                         data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));

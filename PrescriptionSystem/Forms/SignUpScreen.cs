@@ -15,18 +15,6 @@ namespace Forms
         public SignUpScreen()
         {
             InitializeComponent();
-            DateTimePickerDOB.MaxDate = DateTime.Today;
-            DateTimePickerDOB.Value = DateTime.Today;
-            foreach (var allergy in Services.Instance.GetAllergies())
-            {
-                CheckedListBoxAllergies.Items.Add(allergy);
-            }
-
-            foreach (var disease in Services.Instance.GetDiseases())
-            {
-                CheckedListBoxDiseases.Items.Add(disease);
-            }
-            //SetFormAcceptButton(ButtonSignUp);
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)
@@ -43,6 +31,12 @@ namespace Forms
                 DateTimePickerDOB.Value,
                 TextBoxPhoneNumber.Text, TextBoxHealthUserNumber.Text, TextBoxEmail.Text, TextBoxPassword.Text,
                 userType);
+            if (errorCodes.Any())
+            {
+                ShowErrorMessages(errorCodes);
+                return;
+            }
+
             var allergies = new List<string>();
             foreach (var checkedItem in CheckedListBoxAllergies.CheckedItems)
             {
@@ -58,23 +52,17 @@ namespace Forms
             {
                 missingBodyParts.Add(checkedItem.ToString());
             }
-            if (errorCodes.Any())
-            {
-                ShowErrorMessages(errorCodes);
-            }
-            else
-            {
-                Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
-                    int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
-                    TextBoxPassword.Text,
-                    allergies, diseases, missingBodyParts, userType);
-                ShowInformationMessageBox("User registered successively.", "Success");
-                MoveToScreen(new LoginScreen());
-            }
+            Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
+                int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
+                TextBoxPassword.Text,
+                allergies, diseases, missingBodyParts, userType);
+            ShowInformationMessageBox("User registered successively.", "Success");
+            MoveToScreen(new LoginScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
@@ -149,12 +137,18 @@ namespace Forms
 
         private void SignUpScreen_Load(object sender, EventArgs e)
         {
+            DateTimePickerDOB.MaxDate = DateTime.Today;
+            DateTimePickerDOB.Value = DateTime.Today;
+            foreach (var allergy in Services.Instance.GetAllergies())
+            {
+                CheckedListBoxAllergies.Items.Add(allergy);
+            }
 
-        }
-
-        private void CheckedListBoxMissingBodyParts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            foreach (var disease in Services.Instance.GetDiseases())
+            {
+                CheckedListBoxDiseases.Items.Add(disease);
+            }
+            SetFormAcceptButton(ButtonSignUp);
         }
     }
 }
