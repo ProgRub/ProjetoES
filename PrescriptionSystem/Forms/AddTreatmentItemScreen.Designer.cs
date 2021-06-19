@@ -61,14 +61,15 @@ namespace Forms
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.ForestGreen;
-            this.button1.Location = new System.Drawing.Point(226, 551);
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(226, 550);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(149, 43);
             this.button1.TabIndex = 6;
             this.button1.Text = "Add Prescription";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1

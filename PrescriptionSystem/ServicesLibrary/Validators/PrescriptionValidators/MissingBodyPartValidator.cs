@@ -24,7 +24,7 @@ public class MissingBodyPartValidator : BaseValidator
                 {
                    foreach(var missingBodyPart in UserService.Instance.GetMissingBodyParts())
                     {
-                        if (missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) errorCodes.Add(Services.MissingBodyPart);
+                        if (missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) Services.Instance.AddErrorCode(errorCodes, Services.MissingBodyPart);
                     }
                 }
             }

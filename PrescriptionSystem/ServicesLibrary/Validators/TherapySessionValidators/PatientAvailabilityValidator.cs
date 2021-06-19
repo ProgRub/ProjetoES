@@ -28,7 +28,7 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
                         if ((startTimeChecking >= startTimeInDatabase && startTimeChecking <= endTimeInDatabase) ||
                             (endTimeChecking <= endTimeInDatabase && endTimeChecking >= startTimeInDatabase))
                         {
-                            errorCodes.Add(Services.PatientUnavailable);
+                            Services.Instance.AddErrorCode(errorCodes, Services.PatientUnavailable);
                             break;
                         }
                     }

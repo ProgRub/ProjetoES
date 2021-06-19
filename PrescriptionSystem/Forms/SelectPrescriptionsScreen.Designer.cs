@@ -44,20 +44,19 @@ namespace Forms
             this.CheckedListBoxPrescriptions.CheckOnClick = true;
             this.CheckedListBoxPrescriptions.ColumnWidth = 500;
             this.CheckedListBoxPrescriptions.FormattingEnabled = true;
-            this.CheckedListBoxPrescriptions.Location = new System.Drawing.Point(0, 76);
-            this.CheckedListBoxPrescriptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CheckedListBoxPrescriptions.Location = new System.Drawing.Point(0, 101);
             this.CheckedListBoxPrescriptions.MultiColumn = true;
             this.CheckedListBoxPrescriptions.Name = "CheckedListBoxPrescriptions";
-            this.CheckedListBoxPrescriptions.Size = new System.Drawing.Size(746, 328);
+            this.CheckedListBoxPrescriptions.Size = new System.Drawing.Size(852, 422);
             this.CheckedListBoxPrescriptions.TabIndex = 25;
             this.CheckedListBoxPrescriptions.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBoxPrescriptions_ItemCheck);
             // 
             // LabelTitle
             // 
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(218, 4);
+            this.LabelTitle.Location = new System.Drawing.Point(207, 4);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(414, 47);
+            this.LabelTitle.Size = new System.Drawing.Size(526, 63);
             this.LabelTitle.TabIndex = 26;
             this.LabelTitle.Text = "Select the prescriptions to which you want to give vieweing permissions to other " +
     "Health Care Professionals";
@@ -67,9 +66,10 @@ namespace Forms
             this.CheckBoxSelectAll.AutoSize = true;
             this.CheckBoxSelectAll.Enabled = false;
             this.CheckBoxSelectAll.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CheckBoxSelectAll.Location = new System.Drawing.Point(0, 46);
+            this.CheckBoxSelectAll.Location = new System.Drawing.Point(0, 61);
+            this.CheckBoxSelectAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CheckBoxSelectAll.Name = "CheckBoxSelectAll";
-            this.CheckBoxSelectAll.Size = new System.Drawing.Size(92, 25);
+            this.CheckBoxSelectAll.Size = new System.Drawing.Size(114, 32);
             this.CheckBoxSelectAll.TabIndex = 27;
             this.CheckBoxSelectAll.Text = "Select All";
             this.CheckBoxSelectAll.UseVisualStyleBackColor = true;
@@ -77,26 +77,30 @@ namespace Forms
             // 
             // ButtonSelectHealthCareProfessionals
             // 
+            this.ButtonSelectHealthCareProfessionals.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonSelectHealthCareProfessionals.Enabled = false;
-            this.ButtonSelectHealthCareProfessionals.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ButtonSelectHealthCareProfessionals.Location = new System.Drawing.Point(752, 203);
+            this.ButtonSelectHealthCareProfessionals.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonSelectHealthCareProfessionals.ForeColor = System.Drawing.Color.White;
+            this.ButtonSelectHealthCareProfessionals.Location = new System.Drawing.Point(869, 248);
+            this.ButtonSelectHealthCareProfessionals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSelectHealthCareProfessionals.Name = "ButtonSelectHealthCareProfessionals";
-            this.ButtonSelectHealthCareProfessionals.Size = new System.Drawing.Size(146, 57);
+            this.ButtonSelectHealthCareProfessionals.Size = new System.Drawing.Size(196, 101);
             this.ButtonSelectHealthCareProfessionals.TabIndex = 28;
             this.ButtonSelectHealthCareProfessionals.Text = "Select Health Care Professionals";
-            this.ButtonSelectHealthCareProfessionals.UseVisualStyleBackColor = true;
+            this.ButtonSelectHealthCareProfessionals.UseVisualStyleBackColor = false;
             this.ButtonSelectHealthCareProfessionals.Click += new System.EventHandler(this.ButtonSelectHealthCareProfessionals_Click);
             // 
             // SelectPrescriptionsScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ButtonSelectHealthCareProfessionals);
             this.Controls.Add(this.CheckBoxSelectAll);
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.CheckedListBoxPrescriptions);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "SelectPrescriptionsScreen";
-            this.Size = new System.Drawing.Size(955, 419);
+            this.Size = new System.Drawing.Size(1091, 559);
             this.Load += new System.EventHandler(this.SelectPrescriptionsScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.CheckedListBoxPrescriptions, 0);

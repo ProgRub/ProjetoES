@@ -43,11 +43,6 @@ namespace ServicesLibrary.DifferentServices
             return _medicalConditionRepository.Find(e => e.Type == Allergy);
         }
 
-        internal bool GetTypeOfMedicalCondition(int id)
-        {
-            return _medicalConditionRepository.Find(e => e.Type == Allergy && e.Id == id).Any();
-        }
-
         internal IEnumerable<MedicalCondition> GetDiseases()
         {
 

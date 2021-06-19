@@ -40,6 +40,8 @@ namespace Forms
             // 
             // ButtonBack
             // 
+            this.ButtonBack.BackColor = System.Drawing.Color.Teal;
+            this.ButtonBack.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ButtonBack.Size = new System.Drawing.Size(93, 39);
             this.ButtonBack.Text = "Logout";
@@ -56,53 +58,62 @@ namespace Forms
             // 
             // ButtonSignUp
             // 
-            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ButtonSignUp.BackColor = System.Drawing.Color.Turquoise;
+            this.ButtonSignUp.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonSignUp.ForeColor = System.Drawing.Color.White;
             this.ButtonSignUp.Location = new System.Drawing.Point(285, 55);
             this.ButtonSignUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonSignUp.Name = "ButtonSignUp";
             this.ButtonSignUp.Size = new System.Drawing.Size(222, 44);
             this.ButtonSignUp.TabIndex = 23;
             this.ButtonSignUp.Text = "Create Prescription Item";
-            this.ButtonSignUp.UseVisualStyleBackColor = true;
+            this.ButtonSignUp.UseVisualStyleBackColor = false;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.BackColor = System.Drawing.Color.Turquoise;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(285, 107);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(222, 44);
             this.button1.TabIndex = 24;
             this.button1.Text = "Create Therapy Session";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button2.BackColor = System.Drawing.Color.Turquoise;
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(285, 159);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(222, 44);
             this.button2.TabIndex = 25;
             this.button2.Text = "Therapy Session History";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button3.BackColor = System.Drawing.Color.Turquoise;
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Location = new System.Drawing.Point(285, 211);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(222, 44);
             this.button3.TabIndex = 26;
             this.button3.Text = "Export Calendar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.Color.White;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox1.Location = new System.Drawing.Point(0, 287);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -113,8 +124,9 @@ namespace Forms
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.Transparent;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button4.BackColor = System.Drawing.Color.Turquoise;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Location = new System.Drawing.Point(285, 3);
             this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button4.Name = "button4";
@@ -139,7 +151,8 @@ namespace Forms
             this.Controls.Add(this.monthCalendar1);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "CalendarScreenTherapist";
-            this.Size = new System.Drawing.Size(510, 520);
+            this.Size = new System.Drawing.Size(510, 519);
+            this.Load += new System.EventHandler(this.CalendarScreenTherapist_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.monthCalendar1, 0);
             this.Controls.SetChildIndex(this.ButtonSignUp, 0);

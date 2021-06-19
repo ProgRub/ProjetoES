@@ -27,11 +27,11 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                 {
                     if( item is Treatment treatment)
                     {
-                        if(patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) errorCodes.Add(Services.TreatmentInvalidAge);
+                        if(patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) Services.Instance.AddErrorCode(errorCodes, Services.TreatmentInvalidAge);
                     }
                     else if (item is Exercise exercise)
                     {
-                        if (patientsAge < exercise.AgeMinimum || patientsAge > exercise.AgeMaximum) errorCodes.Add(Services.ExerciseInvalidAge);
+                        if (patientsAge < exercise.AgeMinimum || patientsAge > exercise.AgeMaximum) Services.Instance.AddErrorCode(errorCodes, Services.ExerciseInvalidAge);
                     }
                 }
 

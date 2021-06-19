@@ -90,12 +90,12 @@ namespace Forms
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.button1.Location = new System.Drawing.Point(227, 465);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 48);
+            this.button1.Size = new System.Drawing.Size(150, 42);
             this.button1.TabIndex = 46;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = false;

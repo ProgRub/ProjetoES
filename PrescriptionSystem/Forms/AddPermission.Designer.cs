@@ -33,7 +33,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-			// 
+            // 
             // ButtonBack
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
@@ -61,18 +61,19 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(106, 136);
+            this.comboBox1.Location = new System.Drawing.Point(82, 135);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(270, 28);
+            this.comboBox1.Size = new System.Drawing.Size(306, 28);
             this.comboBox1.TabIndex = 8;
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(177, 189);
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(153, 183);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 29);
+            this.button1.Size = new System.Drawing.Size(168, 39);
             this.button1.TabIndex = 9;
             this.button1.Text = "Add permission";
             this.button1.UseVisualStyleBackColor = false;
