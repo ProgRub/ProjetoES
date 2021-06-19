@@ -263,7 +263,6 @@ namespace Forms
             this.CheckedListBoxMissingBodyParts.Name = "CheckedListBoxMissingBodyParts";
             this.CheckedListBoxMissingBodyParts.Size = new System.Drawing.Size(457, 92);
             this.CheckedListBoxMissingBodyParts.TabIndex = 11;
-            this.CheckedListBoxMissingBodyParts.SelectedIndexChanged += new System.EventHandler(this.CheckedListBoxMissingBodyParts_SelectedIndexChanged);
             // 
             // CheckedListBoxDiseases
             // 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,7 @@ using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
 using ServicesLibrary.DTOs;
+using ServicesLibrary.Validators;
 using ServicesLibrary.Validators.FormValidators;
 using ServicesLibrary.Validators.PrescriptionValidators;
 using ServicesLibrary.Validators.TherapySessionValidators;
@@ -55,7 +57,7 @@ namespace ServicesLibrary
 
         #region PrescriptionCreation
 
-        public const int TreatmentInvalidAge = 1, ExerciseInvalidAge = 2, IncompatibleMedicine = 3, IncompatibleDisease = 4, MissingBodyPart = 5;
+        public const int InvalidAge = 1, IncompatibleMedicine = 2, IncompatibleDisease = 5, MissingBodyPart = 6;
 
         #endregion
 
@@ -105,7 +107,7 @@ namespace ServicesLibrary
                     PhoneNumberMaximumLength));
             validator.Validate(phoneNumberString);
             validator = new StringEmptyValidator(HealthUserNumberRequired, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes) )
+            validator.SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes))
                 .SetNext(new StringLengthValidator(HealthUserNumberWrongLength, ref errorCodes,
                     HealthUserNumberMinimumLength, HealthUserNumberMaximumLength)).SetNext(
                     new StringUniqueValidator(HealthUserNumberAlreadyExists, ref errorCodes,
@@ -144,10 +146,12 @@ namespace ServicesLibrary
 
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
 
-            _prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description, startDate, endDate, prescriptionItems);
+            _prescriptionService.CreatePrescription((Patient) UserService.Instance.GetUserById(patientId), description,
+                startDate, endDate, prescriptionItems);
         }
 
-        public ICollection<PrescriptionItem> GetPrescriptionItemsFromStrings(ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises)
+        public ICollection<PrescriptionItem> GetPrescriptionItemsFromStrings(ICollection<string> treatments,
+            ICollection<string> medicines, ICollection<string> exercises)
         {
             var prescriptionItems = new List<PrescriptionItem>();
 
@@ -165,50 +169,52 @@ namespace ServicesLibrary
             {
                 prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineByName(medicineString));
             }
+
             return prescriptionItems;
         }
 
-        public IEnumerable<int> CheckPrescriptionCreation(string patient, string description, DateTime startDate, DateTime endDate, ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises)
+        public IEnumerable<int> CheckPrescriptionCreation(string patient, string description, DateTime startDate,
+            DateTime endDate, ICollection<string> treatments, ICollection<string> medicines,
+            ICollection<string> exercises)
         {
             var errorCodes = new List<int>();
-            if (patient == "")
+            BaseValidator validator = new StringEmptyValidator(PatientRequired, ref errorCodes);
+            validator.Validate(patient);
+            if (errorCodes.Any()) return errorCodes;
+            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
+            var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
+            var prescriptionDTO = new PrescriptionDTO
             {
-                errorCodes.Add(PatientRequired);
-            }
-            else
-            {
-                var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-                var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
-                
-                var validator = new AgeValidator();
+                Patient = PatientDTO.ConvertPatientToDTO((Patient) UserService.Instance.GetUserById(patientId)),
+                Author = HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
+                    (HealthCareProfessional) UserService.Instance.GetUserById(UserService.Instance
+                        .LoggedInUserId)),
+                StartDate = startDate,
+                EndDate = endDate,
 
-                var allergyValidator = new AllergyValidator();
-                var existingDiseaseValidator = new ExistingDiseaseValidator();
-                var missingBodyPartValidator = new MissingBodyPartValidator();
-                //var timeConstraintsValidator = new TimeConstraintsValidator();
-                //missingBodyPartValidator.SetNext(timeConstraintsValidator);
-                existingDiseaseValidator.SetNext(missingBodyPartValidator);
-                allergyValidator.SetNext(existingDiseaseValidator);
-                validator.SetNext(allergyValidator);
+            };
+            PrescriptionDTO.AddPrescriptionItemsToDTO(prescriptionDTO,prescriptionItems);
+            validator = new AgeValidator(InvalidAge, ref errorCodes);
+            validator.SetNext(new AllergyValidator(IncompatibleMedicine, ref errorCodes))
+                .SetNext(new ExistingDiseaseValidator(IncompatibleMedicine, ref errorCodes)).SetNext(new MissingBodyPartValidator(MissingBodyPart,ref errorCodes));
+            validator.Validate(prescriptionDTO);
 
-                var validateResult = validator.Validate(new List<object>
-                {
-                    new Prescription
-                    {
-                        Patient = (Patient) UserService.Instance.GetUserById(patientId),
-                        Author = (HealthCareProfessional) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
-                        StartDate = startDate, EndDate = endDate
-                    },
-                    prescriptionItems,
-                    errorCodes
-                });
+           // var validateResult = validator.Validate(new List<object>
+           //{
+           //     new Prescription
+           //     {
+           //         Patient = (Patient) UserService.Instance.GetUserById(patientId),
+           //         Author = (HealthCareProfessional) UserService.Instance.GetUserById(UserService.Instance
+           //             .LoggedInUserId),
+           //         StartDate = startDate, EndDate = endDate
+           //     },
+           //     prescriptionItems,
+           //     errorCodes
+           // });
 
-                errorCodes = (List<int>)validateResult;
-            }
+           // errorCodes = (List<int>) validateResult;
 
             return errorCodes;
-            //_prescriptionService.CreatePrescription((Patient)UserService.Instance.GetUserById(patientId), description,
-            //    startDate, endDate, prescriptionItems);
         }
 
         public void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
@@ -218,7 +224,7 @@ namespace ServicesLibrary
                 bodyParts);
         }
 
-        
+
         public void CreateMedicinePrescriptionItem(string name, string description, double price,
             IEnumerable<string> allergies, IEnumerable<string> diseases)
         {
@@ -347,6 +353,7 @@ namespace ServicesLibrary
 
             BaseValidator validator = new StringEmptyValidator(PatientRequired, ref errorCodes);
             validator.Validate(patient);
+            if (errorCodes.Any()) return errorCodes;
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
             //if (!_userService.IsPatientAvailable(patientId, sessionDate, sessionTime, estimatedDuration))
             //{
@@ -488,29 +495,29 @@ namespace ServicesLibrary
             return _userService.GetUserById(id);
         }
 
-        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        public IEnumerable<PrescriptionItem> GetPrescriptionItems(int pres_id)
         {
-            return _prescriptionItemService.GetPrescriptionItems(pres_id);
+            return _prescriptionService.GetPrescriptionItemsOfPrescriptionById(pres_id);
         }
 
         public Medicine GetMedicineByItemId(int item_id)
         {
-            return _prescriptionItemService.GetMedicineByItemId(item_id);
+            return _prescriptionItemService.GetMedicineById(item_id);
         }
 
         public Exercise GetExerciseByItemId(int item_id)
         {
-            return _prescriptionItemService.GetExerciseByItemId(item_id);
+            return _prescriptionItemService.GetExerciseById(item_id);
         }
 
-        public bool VerifyIfIsMedicine(int item_id)
+        public bool IsMedicine(int item_id)
         {
-            return _prescriptionItemService.VerifyIfIsMedicine(item_id);
+            return _prescriptionItemService.IsMedicine(item_id);
         }
 
-        public bool VerifyIfIsExercise(int item_id)
+        public bool IsExercise(int item_id)
         {
-            return _prescriptionItemService.VerifyIfIsExercise(item_id);
+            return _prescriptionItemService.IsExercise(item_id);
         }
 
         public IEnumerable<string> GetPatientPrescriptions()
@@ -565,6 +572,11 @@ namespace ServicesLibrary
                     }
                 }
             }
+        }
+
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
+        {
+            return _prescriptionService.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescriptionId);
         }
     }
 }

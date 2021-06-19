@@ -76,9 +76,9 @@ namespace ComponentsLibrary.Repositories.Implementations
             return _userHasMissingBodyPartRepository.GetAll();
         }
 
-        public IEnumerable<UserHasMedicalCondition> GetMedicalConditions()
+        public IEnumerable<UserHasMedicalCondition> GetUserHasMedicalConditionsEnumerableByUserId(int userId)
         {
-            return _userHasMedicalConditionRepository.GetAll();
+            return _userHasMedicalConditionRepository.Find(e=>e.UserId==userId);
         }
 
         public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()

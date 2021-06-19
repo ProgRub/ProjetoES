@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-
-namespace ServicesLibrary.Validators.Prescription
-using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
@@ -16,43 +13,42 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
         public AllergyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
-
-        public const int Allergy = 0;
-
+        }
         public bool MedicalConditionIsAllergy(int id)
         {
-            var allergies = MedicalConditionService.Instance.GetAllergies();
-
-            foreach (var allergy in allergies)
-            {
-                if (allergy.Id == id) return true;
-            }
-            return false;
+            return MedicalConditionService.Instance.GetAllergies().Any(e => e.Id == id);
         }
 
         public override bool RequestIsValid(object request)
         {
-            if (request is Prescription prescription)
+            if (request is PrescriptionDTO prescription)
             {
-                foreach (var item in prescriptionItems)
+                foreach (var medicine in prescription.Medicines)
                 {
-                    if (item is Medicine medicine)
+                    foreach (var allergenic in medicine.IncompatibleMedicalConditions)
                     {
-                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
-                        var userMedicalConditions = UserService.Instance.GetMedicalConditions();
-
-                        foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
+                        foreach (var allergy in prescription.Patient.Allergies)
                         {
-                            foreach (var patientMedicalCondition in userMedicalConditions)
-                            {
-                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsAllergy(patientMedicalCondition.MedicalConditionId)) errorCodes.Add(Services.IncompatibleMedicine);
-                            }
+                            if (allergy.Id == allergenic.Id) return false;
                         }
                     }
+                        //var medicineIncompatibleMedicalConditionsIds =
+                        //    PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(
+                        //        PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
+                        //var userMedicalConditions = UserService.Instance.GetUsersMedicalConditionsByUserId(prescription.PatientId);
+
+                        //foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
+                        //{
+                        //    foreach (var patientMedicalCondition in userMedicalConditions)
+                        //    {
+                        //        if (patientMedicalCondition.Id== incompatibleMedicalConditionId &&
+                        //            MedicalConditionIsAllergy(patientMedicalCondition.Id))
+                        //            return false;
+                        //    }
+                        //}
                 }
 
-                requestList = new List<object> { request, prescriptionItems, errorCodes };
-                return base.Validate(requestList) ?? errorCodes;
+                return true;
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

@@ -130,14 +130,20 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAllPatients();
         }
 
-        internal IEnumerable<UserHasMissingBodyPart> GetMissingBodyParts()
+        internal IEnumerable<BodyPart> GetUserMissingBodyPartsByUserId(int id)
         {
-            return _userRepository.GetAllMissingBodyParts();
+            return _userRepository.GetAllMissingBodyParts().Select(userHasMissingBodyPart => userHasMissingBodyPart.BodyPart).ToList();
         }
 
-        internal IEnumerable<UserHasMedicalCondition> GetMedicalConditions()
+        internal IEnumerable<MedicalCondition> GetUsersMedicalConditionsByUserId(int userId)
         {
-            return _userRepository.GetMedicalConditions();
+            var medicalConditions = new List<MedicalCondition>();
+            foreach (var userHasMedicalCondition in
+                _userRepository.GetUserHasMedicalConditionsEnumerableByUserId(userId))
+            {
+                medicalConditions.Add(MedicalConditionService.Instance.GetMedicalConditionById(userHasMedicalCondition.MedicalConditionId));
+            }
+            return medicalConditions;
         }
 
         internal IEnumerable<User> GetAllUsers()

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-
-namespace ServicesLibrary.Validators.Prescription
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class TimeConstraintsValidator : BaseValidator
