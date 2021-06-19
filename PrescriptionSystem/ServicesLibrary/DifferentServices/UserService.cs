@@ -102,6 +102,7 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.Find(e => e.Email == email).Any();
         }
 
+
         internal bool DoesPasswordCorrespondToEmail(string email, string password)
         {
             return _userRepository.Find(e => e.Email == email && e.Password == password).Any();
@@ -129,6 +130,16 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAllPatients();
         }
 
+        internal IEnumerable<UserHasMissingBodyPart> GetMissingBodyParts()
+        {
+            return _userRepository.GetAllMissingBodyParts();
+        }
+
+        internal IEnumerable<UserHasMedicalCondition> GetMedicalConditions()
+        {
+            return _userRepository.GetMedicalConditions();
+        }
+
         internal IEnumerable<User> GetAllUsers()
         {
             return _userRepository.GetAll();
@@ -144,7 +155,7 @@ namespace ServicesLibrary.DifferentServices
             return false;
         }
 
-        public IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
+        internal IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
         {
             return _userRepository.GetAllHealthCareProfessionals();
         }

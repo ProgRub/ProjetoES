@@ -6,6 +6,9 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using System.Linq;
+using ComponentsLibrary.Entities.PrescriptionItems;
+using ServicesLibrary.DifferentServices;
 
 namespace Forms
 {
@@ -41,16 +44,65 @@ namespace Forms
                 exercises.Add(checkedItem.ToString());
             }
 
+
             string patient = "";
             if (comboBoxPatient.SelectedItem != null)
             {
                 patient += comboBoxPatient.SelectedItem.ToString();
             }
 
-            Services.Instance.CreatePrescription(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date, dateTimePickerEndDate.Value.Date, treatments, medicines, exercises);
+            IEnumerable<int> errorCodes = Services.Instance.CheckPrescriptionCreation(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date,
+               dateTimePickerEndDate.Value.Date, treatments, medicines, exercises); //SÓ FALTA TESTAR
 
-            ShowInformationMessageBox("Prescription successfully created.", "Success");
+            if (errorCodes.Any())
+            {
+                ShowErrorMessages(errorCodes);
+            }
+            else
+            {
+                Services.Instance.CreatePrescription(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date, dateTimePickerEndDate.Value.Date, treatments, medicines, exercises);
 
+                ShowInformationMessageBox("Prescription successfully created.", "Success");
+                MoveToScreen(new CalendarScreenTherapist());
+            }
+
+        }
+
+        private void ShowErrorMessages(IEnumerable<int> errorCodes)
+        {
+            bool first = true;
+            string errorMessage = "";
+            foreach (var errorCode in errorCodes)
+            {
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    errorMessage += Environment.NewLine;
+                }
+                switch (errorCode)
+                {
+                    case Services.TreatmentInvalidAge:
+                        errorMessage += "A treatment is not recommended for the patient's age.";
+                        break;
+                    case Services.ExerciseInvalidAge:
+                        errorMessage += "An exercise is not recommended for the patient's age.";
+                        break;
+                    case Services.IncompatibleMedicine:
+                        errorMessage += "A medicine can cause an allergic reaction.";
+                        break;
+                    case Services.IncompatibleDisease:
+                        errorMessage += "A medicine is contraindicated.";
+                        break;
+                    case Services.MissingBodyPart:
+                        errorMessage += "The patient can't do an exercise.";
+                        break;
+
+                }
+            }
+            ShowInformationMessageBox(errorMessage, "Error");
         }
 
         private void CreatePrescription_Load(object sender, EventArgs e)

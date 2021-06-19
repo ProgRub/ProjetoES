@@ -82,6 +82,7 @@
             // 
             // textBoxDescription
             // 
+            this.textBoxDescription.AcceptsReturn = true;
             this.textBoxDescription.Location = new System.Drawing.Point(155, 171);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
@@ -136,6 +137,7 @@
             // 
             // comboBoxPatient
             // 
+            this.comboBoxPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPatient.FormattingEnabled = true;
             this.comboBoxPatient.Location = new System.Drawing.Point(155, 96);
             this.comboBoxPatient.Name = "comboBoxPatient";

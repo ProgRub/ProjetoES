@@ -1,5 +1,6 @@
 ﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
+using System.Collections.Generic;
 
 namespace ComponentsLibrary.Repositories.Interfaces
 {
@@ -7,5 +8,7 @@ namespace ComponentsLibrary.Repositories.Interfaces
     {
 
         void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition);
+        IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditions(int id);
+        IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions);
     }
 }

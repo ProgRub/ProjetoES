@@ -11,6 +11,8 @@ namespace ComponentsLibrary.Repositories.Interfaces
         void AddMissingBodyPartToUser(User user, BodyPart bodyPart);
         IEnumerable<Patient> GetAllPatients();
         IEnumerable<Therapist> GetAllTherapists();
+        IEnumerable<UserHasMissingBodyPart> GetAllMissingBodyParts();
         IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals();
+        IEnumerable<UserHasMedicalCondition> GetMedicalConditions();
     }
 }
