@@ -21,8 +21,19 @@ namespace ComponentsLibrary
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region Tables
+            TablesConfiguration(modelBuilder);
 
+            PropertiesConfiguration(modelBuilder);
+            
+            ManyToManyTablesConfiguration(modelBuilder);
+            
+            SeedData(modelBuilder);
+
+            ConvertersConfiguration(modelBuilder);
+        }
+
+        private void TablesConfiguration(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Item>().ToTable("Item");
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Patient>().ToTable("Patient");
@@ -43,12 +54,10 @@ namespace ComponentsLibrary
             modelBuilder.Entity<TherapySessionHasTreatments>().ToTable("TherapySessionHasTreatments");
             modelBuilder.Entity<UserHasMedicalCondition>().ToTable("UserHasMedicalCondition");
             modelBuilder.Entity<UserHasMissingBodyPart>().ToTable("UserHasMissingBodyPart");
+        }
 
-            #endregion
-
-
-            #region Properties Config
-
+        private void PropertiesConfiguration(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Item>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<Item>().Property(e => e.Zombie).HasDefaultValue(false);
             modelBuilder.Entity<Item>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
@@ -77,11 +86,10 @@ namespace ComponentsLibrary
 
             //modelBuilder.Entity<TherapySession>().HasOne<Patient>().WithOne().HasForeignKey<Patient>(e => e.Id);
             //modelBuilder.Entity<TherapySession>().HasOne<Therapist>().WithOne().HasForeignKey<Therapist>(e => e.Id);
+        }
 
-            #endregion
-
-            #region Many-To-Many Tables Config
-
+        private void ManyToManyTablesConfiguration(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.Zombie)
                 .HasDefaultValue(false);
             modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.TimeStamp)
@@ -108,11 +116,10 @@ namespace ComponentsLibrary
                 .ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<UserHasMedicalCondition>()
                 .HasKey(e => new {e.MedicalConditionId, e.UserId});
+        }
 
-            #endregion
-
-            #region Initial Data
-
+        private void SeedData(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Medicine>().HasData(
                 new Medicine {Id = 1, Zombie = false, Name = "Penicillin", Description = "", Price = 2.32},
                 new Medicine {Id = 2, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
@@ -290,14 +297,15 @@ namespace ComponentsLibrary
             //    TreatmentId = 7,
             //    Zombie = false
             //});
+        }
 
-            #endregion
-
+        private void ConvertersConfiguration(ModelBuilder modelBuilder)
+        {
             var timeSpanValueConverter = new TimeSpanListToStringValueConverter();
 
             modelBuilder
                 .Entity<PrescriptionHasPrescriptionItems>()
-                .Property(e => e.RecommendedTimes)//Property
+                .Property(e => e.RecommendedTimes) //Property
                 .HasConversion(timeSpanValueConverter);
         }
 
