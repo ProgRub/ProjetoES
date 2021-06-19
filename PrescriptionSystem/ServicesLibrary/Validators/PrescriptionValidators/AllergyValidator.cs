@@ -25,7 +25,7 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             {
                 foreach (var medicine in prescription.Medicines)
                 {
-                    foreach (var allergenic in medicine.IncompatibleMedicalConditions)
+                    foreach (var allergenic in medicine.IncompatibleAllergies)
                     {
                         foreach (var allergy in prescription.Patient.Allergies)
                         {

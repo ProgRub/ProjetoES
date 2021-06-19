@@ -28,7 +28,7 @@ namespace Forms
 
         private void AddTherapySessionScreen_Load(object sender, EventArgs e)
         {
-            DateTimePickerDate.MinDate = DateTime.Today;
+            //DateTimePickerDate.MinDate = DateTime.Today;
             foreach (var patient in Services.Instance.GetAllPatients())
             {
                 ComboBoxPatient.Items.Add(patient);
@@ -49,17 +49,17 @@ namespace Forms
             var treatments = new List<TreatmentDTO>();
             foreach (var checkedItem in CheckedListBoxTreatments.CheckedItems)
             {
-                treatments.Add(GetCheckedTreatment(checkedItem.ToString()));
+                treatments.Add(GetTreatmentFromString(checkedItem.ToString()));
             }
 
-            TimeSpan estimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text);
-            string patient = "";
+            var estimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text);
+            var patient = "";
             if (ComboBoxPatient.SelectedItem != null)
             {
                 patient += ComboBoxPatient.SelectedItem.ToString();
             }
 
-            IEnumerable<int> errorCodes = Services.Instance.CheckTherapySessionCreation(patient,
+            var errorCodes = Services.Instance.CheckTherapySessionCreation(patient,
                 DateTimePickerDate.Value,
                 DateTimePickerSessionHour.Value, treatments, estimatedDuration);
             if (errorCodes.Any())
@@ -76,8 +76,8 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            bool first = true;
-            string errorMessage = "";
+            var first = true;
+            var errorMessage = "";
             foreach (var errorCode in errorCodes)
             {
                 if (first)
@@ -115,29 +115,22 @@ namespace Forms
             {
                 LabelSessionDuration.Text =
                     (TimeSpan.Parse(LabelSessionDuration.Text) +
-                     GetCheckedTreatment(CheckedListBoxTreatments.Items[e.Index].ToString()).Duration).ToString();
+                     GetTreatmentFromString(CheckedListBoxTreatments.Items[e.Index].ToString()).Duration).ToString();
             }
             else if (e.NewValue == CheckState.Unchecked)
             {
                 LabelSessionDuration.Text =
                     (TimeSpan.Parse(LabelSessionDuration.Text) -
-                     GetCheckedTreatment(CheckedListBoxTreatments.Items[e.Index].ToString()).Duration).ToString();
+                     GetTreatmentFromString(CheckedListBoxTreatments.Items[e.Index].ToString()).Duration).ToString();
             }
         }
 
-        private TreatmentDTO GetCheckedTreatment(string treatmentString)
+        private TreatmentDTO GetTreatmentFromString(string treatmentString)
         {
             var treatmentSplit = treatmentString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
-            foreach (var treatment in _treatments)
-            {
-                if (treatment.Name == treatmentSplit[0] && treatment.BodyPart.ToString() == treatmentSplit[1] &&
-                    treatment.Duration.ToString() == treatmentSplit[2])
-                {
-                    return treatment;
-                }
-            }
-
-            return null;
+            return _treatments.FirstOrDefault(treatment =>
+                treatment.Name == treatmentSplit[0] && treatment.BodyPart.ToString() == treatmentSplit[1] &&
+                treatment.Duration.ToString() == treatmentSplit[2]);
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
@@ -196,7 +197,7 @@ namespace ServicesLibrary
             PrescriptionDTO.AddPrescriptionItemsToDTO(prescriptionDTO,prescriptionItems);
             validator = new AgeValidator(InvalidAge, ref errorCodes);
             validator.SetNext(new AllergyValidator(IncompatibleMedicine, ref errorCodes))
-                .SetNext(new ExistingDiseaseValidator(IncompatibleMedicine, ref errorCodes)).SetNext(new MissingBodyPartValidator(MissingBodyPart,ref errorCodes));
+                .SetNext(new ExistingDiseaseValidator(IncompatibleDisease, ref errorCodes)).SetNext(new MissingBodyPartValidator(MissingBodyPart,ref errorCodes));
             validator.Validate(prescriptionDTO);
 
            // var validateResult = validator.Validate(new List<object>
@@ -385,27 +386,16 @@ namespace ServicesLibrary
                 sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
         }
 
-        public IEnumerable<string> GetPastTherapySessionsOfLoggedInTherapist()
+        public IEnumerable<TherapySessionDTO> GetPastTherapySessionsOfLoggedInTherapist()
         {
-            var pastTherapySessions = _therapySessionService.GetTherapySessionsBeforeDate(
+            return _therapySessionService.GetTherapySessionsBeforeDate(
                 _therapySessionService.GetAllTherapySessionsOfTherapist(UserService.Instance.LoggedInUserId),
-                new DateTime(2022, 1, 1));
-            var therapySessionsStrings = new List<string>();
-            foreach (var pastTherapySession in pastTherapySessions)
-            {
-                therapySessionsStrings.Add(
-                    $"{pastTherapySession.Id} | {_userService.GetUserById(pastTherapySession.PatientId).FullName}{Environment.NewLine}{pastTherapySession.DateTime:dddd dd/MM/yyyy HH:mm}");
-            }
-
-            return therapySessionsStrings;
+                new DateTime(2022, 1, 1)).Select(e => TherapySessionDTO.ConvertTherapySessionToDTO(e));
         }
 
-        public void SelectTherapySession(string therapySessionText)
+        public void SelectTherapySession(TherapySessionDTO session)
         {
-            var therapySessionParameters =
-                therapySessionText.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
-            var therapySessionId = int.Parse(therapySessionParameters[0]);
-            _therapySessionService.SelectedTherapySessionId = therapySessionId;
+            _therapySessionService.SelectedTherapySessionId = session.Id;
         }
 
         public string GetSelectedTherapySessionBaseInfo()
@@ -436,18 +426,14 @@ namespace ServicesLibrary
             return treatments;
         }
 
-        public string GetTreatmentNote(string treatmentString)
+        public string GetTreatmentNote(int sessionId,int treatmentId)
         {
-            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
-                _therapySessionService.SelectedTherapySessionId,
-                _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id).Note;
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId, treatmentId).Note;
         }
 
-        public bool GetTreatmentCompletedStatus(string treatmentString)
+        public bool GetTreatmentCompletedStatus(int sessionId,int treatmentId)
         {
-            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
-                    _therapySessionService.SelectedTherapySessionId,
-                    _prescriptionItemService.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id)
+            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId,treatmentId)
                 .CompletedTreatment;
         }
 
@@ -564,6 +550,11 @@ namespace ServicesLibrary
         public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
         {
             return _prescriptionService.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescriptionId);
+        }
+
+        public TherapySessionDTO GetSelectedTherapySession()
+        {
+            return TherapySessionDTO.ConvertTherapySessionToDTO(_therapySessionService.GetSelectedTherapySession());
         }
     }
 }

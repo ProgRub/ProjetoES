@@ -53,8 +53,9 @@ namespace ServicesLibrary.DifferentServices
             _therapySessionRepository.Add(therapySession);
             foreach (var treatment in treatments)
             {
-                _therapySessionRepository.AddTreatmentToTherapySession(therapySession,treatment);
+                _therapySessionRepository.AddTreatmentToTherapySession(therapySession, treatment);
             }
+
             _therapySessionRepository.SaveChanges();
         }
 
@@ -75,10 +76,11 @@ namespace ServicesLibrary.DifferentServices
             return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
         }
 
-        internal TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdTreatmentId(int sessionId,
+        internal TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(int sessionId,
             int treatmentId)
         {
-            return _therapySessionRepository.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(sessionId, treatmentId);
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(sessionId,
+                treatmentId);
         }
 
         internal void SaveChanges()
@@ -88,18 +90,23 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
         {
-            return _therapySessionRepository.Find(e => e.TherapistId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date).OrderBy(e => e.DateTime);
+            return _therapySessionRepository
+                .Find(e => e.TherapistId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date)
+                .OrderBy(e => e.DateTime);
         }
 
         internal IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
         {
-            return _therapySessionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date).OrderBy(e => e.DateTime);
+            return _therapySessionRepository
+                .Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date)
+                .OrderBy(e => e.DateTime);
         }
 
         public IEnumerable<Treatment> GetTherapySessionTreatmentsBySessionId(int id)
         {
-            var therapySessionHasTreatmentsEnumerable=_therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
-            return therapySessionHasTreatmentsEnumerable.Select(therapySessionHasTreatments => PrescriptionItemService.Instance.GetTreatmentById(therapySessionHasTreatments.TreatmentId)).ToList();
+            //var therapySessionHasTreatmentsEnumerable = .ToList();
+
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id).Select(therapySessionTreatment => PrescriptionItemService.Instance.GetTreatmentById(therapySessionTreatment.TreatmentId)).ToList();
         }
     }
 }

@@ -45,13 +45,13 @@ namespace Forms
             }
 
 
-            string patient = "";
+            var patient = "";
             if (comboBoxPatient.SelectedItem != null)
             {
                 patient += comboBoxPatient.SelectedItem.ToString();
             }
 
-            IEnumerable<int> errorCodes = Services.Instance.CheckPrescriptionCreation(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date,
+            var errorCodes = Services.Instance.CheckPrescriptionCreation(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date,
                dateTimePickerEndDate.Value.Date, treatments, medicines, exercises); //SÓ FALTA TESTAR
 
             if (errorCodes.Any())
@@ -70,8 +70,8 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            bool first = true;
-            string errorMessage = "";
+            var first = true;
+            var errorMessage = "";
             foreach (var errorCode in errorCodes)
             {
                 if (first)

@@ -19,7 +19,7 @@ namespace Forms
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
-            int code = Services.Instance.Login(TextBoxEmail.Text, TextBoxPassword.Text);
+            var code = Services.Instance.Login(TextBoxEmail.Text, TextBoxPassword.Text);
             switch (code)
             {
                 case Services.EmailDoesntExist:

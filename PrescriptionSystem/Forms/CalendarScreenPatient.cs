@@ -35,8 +35,8 @@ namespace Forms
 
         private void monthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)
         {
-            string sessions = "";
-            string newLine = Environment.NewLine;
+            var sessions = "";
+            var newLine = Environment.NewLine;
 
             var data = new List<KeyValuePair<TimeSpan, string>>();
 
@@ -46,12 +46,12 @@ namespace Forms
                 {
                     if(Services.Instance.IsMedicine(item.PrescriptionItemId))
                     {
-                        string data_string = "Take " + Services.Instance.GetMedicineByItemId(item.PrescriptionItemId).Name + " medicine.";
+                        var data_string = "Take " + Services.Instance.GetMedicineByItemId(item.PrescriptionItemId).Name + " medicine.";
                         data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
                     }
                     if (Services.Instance.IsExercise(item.PrescriptionItemId))
                     {
-                        string data_string = "Do " + Services.Instance.GetExerciseByItemId(item.PrescriptionItemId).Name + " exercise.";
+                        var data_string = "Do " + Services.Instance.GetExerciseByItemId(item.PrescriptionItemId).Name + " exercise.";
                         data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
                     }
                 }
@@ -59,7 +59,7 @@ namespace Forms
 
             foreach (var session in Services.Instance.GetSessionsByPatientId(monthCalendarPatient.SelectionRange.Start))
             {
-                string data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.TherapistId).FullName + ".";
+                var data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.TherapistId).FullName + ".";
                 data.Add(new KeyValuePair<TimeSpan, string>(session.DateTime.TimeOfDay, data_string));
             }
 

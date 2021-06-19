@@ -52,12 +52,12 @@ namespace Forms
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            string sessions = "";
-            string newLine = Environment.NewLine;
+            var sessions = "";
+            var newLine = Environment.NewLine;
 
             foreach (var session in Services.Instance.GetSessionsByTherapistId(monthCalendar1.SelectionRange.Start))
             {
-                TimeSpan endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
+                var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
                 sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSession + newLine 
                     + "Therapy session with patient " + Services.Instance.GetUserById(session.PatientId).FullName + newLine + newLine;
             }
