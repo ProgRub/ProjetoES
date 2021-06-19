@@ -65,7 +65,7 @@ namespace Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
+            var errorCodes = Services.Instance.CheckExerciseAndTreatmentCreation(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
                textBoxMinAge.Text, textBoxMaxAge.Text);
 
             var bodyPart = "";
@@ -92,22 +92,25 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
                 {
                     case Services.NameRequired:
                         ShowTextBoxErrorMessage(textBoxTreatmentName, "Name is required!");
+                        textBoxTreatmentName.BackColor = Color.Salmon;
                         break;
                     case Services.DescriptionRequired:
                         ShowTextBoxErrorMessage(textBoxTreatmentDescription, "Description is required!");
+                        textBoxTreatmentDescription.BackColor = Color.Salmon;
                         break;
-                    case Services.AgeMinimumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMinAge, "Age minimum is required!");
+                    case Services.AgeMininumNotValid:
+                        ShowTextBoxErrorMessage(textBoxMinAge, "Age mininum is required!");
+                        textBoxMinAge.BackColor = Color.Salmon;
                         break;
-                    case Services.AgeMaximumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maximum is required!");
+                    case Services.AgeMaxinumNotValid:
+                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maxinum is required!");
+                        textBoxMaxAge.BackColor = Color.Salmon;
                         break;
                 }
             }

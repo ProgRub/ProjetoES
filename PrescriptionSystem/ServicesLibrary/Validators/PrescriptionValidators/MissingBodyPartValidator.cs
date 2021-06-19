@@ -1,43 +1,38 @@
-﻿using System.Collections.Generic;
-using ComponentsLibrary.Entities;
+﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary;
 using ServicesLibrary.DifferentServices;
 using ServicesLibrary.Validators;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using ServicesLibrary.DTOs;
 
-namespace ServicesLibrary.Validators.PrescriptionValidators
+public class MissingBodyPartValidator : BaseValidator
 {
-    public class MissingBodyPartValidator : BaseValidator
+    public override object Validate(object requestListParameter)
     {
-        public MissingBodyPartValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
-        {
-        }
+        var requestList = (List<object>)requestListParameter;
+        var request = requestList[0];
+        var prescriptionItems = (List<PrescriptionItem>)requestList[1];
+        var errorCodes = (List<int>)requestList[2];
 
-        public override bool RequestIsValid(object request)
+        if (request is Prescription prescription)
         {
-            if (request is PrescriptionDTO prescription)
+            foreach (var item in prescriptionItems)
             {
-                foreach (var treatment in prescription.Treatments)
+                if (item is Treatment treatment)
                 {
-                    foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
+                   foreach(var missingBodyPart in UserService.Instance.GetMissingBodyParts())
                     {
-                        if (missingBodyPart == treatment.BodyPart) return false;
+                        if (missingBodyPart.User == prescription.Patient && missingBodyPart.BodyPart == treatment.BodyPart) Services.Instance.AddErrorCode(errorCodes, Services.MissingBodyPart);
                     }
-                        //foreach (var missingBodyPart in UserService.Instance.GetUserMissingBodyPartsByUserId(TODO))
-                        //{
-                        //    if (missingBodyPart.User == prescription.Patient &&
-                        //        missingBodyPart.BodyPart == treatment.BodyPart)
-                        //        return false;
-                        //}
                 }
-
-                return true;
             }
 
-            throw new NotSupportedException($"Invalid type {request.GetType()}!");
+            requestList = new List<object> { request, prescriptionItems, errorCodes };
+            return base.Validate(requestList) ?? errorCodes;
         }
+
+        throw new NotSupportedException($"Invalid type {request.GetType()}!");
     }
 }

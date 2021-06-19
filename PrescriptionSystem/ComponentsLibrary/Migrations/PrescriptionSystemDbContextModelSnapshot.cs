@@ -148,6 +148,16 @@ namespace ComponentsLibrary.Migrations
                     b.HasIndex("TreatmentId");
 
                     b.ToTable("TherapySessionHasTreatments");
+
+                    b.HasData(
+                        new
+                        {
+                            TherapySessionId = 21,
+                            TreatmentId = 7,
+                            CompletedTreatment = false,
+                            Note = "",
+                            Zombie = false
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMedicalCondition", b =>
@@ -266,77 +276,12 @@ namespace ComponentsLibrary.Migrations
                     b.Property<int>("BodyPart")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExerciseId")
+                    b.Property<int?>("ExerciseId")
                         .HasColumnType("int");
 
                     b.HasIndex("ExerciseId");
 
                     b.ToTable("ExerciseHasBodyParts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 100,
-                            Zombie = false,
-                            BodyPart = 3,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 101,
-                            Zombie = false,
-                            BodyPart = 2,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 102,
-                            Zombie = false,
-                            BodyPart = 4,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 103,
-                            Zombie = false,
-                            BodyPart = 5,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 104,
-                            Zombie = false,
-                            BodyPart = 3,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 105,
-                            Zombie = false,
-                            BodyPart = 2,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 106,
-                            Zombie = false,
-                            BodyPart = 1,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 107,
-                            Zombie = false,
-                            BodyPart = 4,
-                            ExerciseId = 10
-                        },
-                        new
-                        {
-                            Id = 108,
-                            Zombie = false,
-                            BodyPart = 5,
-                            ExerciseId = 10
-                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
@@ -377,6 +322,18 @@ namespace ComponentsLibrary.Migrations
                     b.HasIndex("TherapistId");
 
                     b.ToTable("TherapySession");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 21,
+                            Zombie = false,
+                            DateTime = new DateTime(2021, 6, 2, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedDuration = new TimeSpan(0, 1, 0, 0, 0),
+                            Note = "",
+                            PatientId = 16,
+                            TherapistId = 18
+                        });
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.User", b =>
@@ -781,9 +738,7 @@ namespace ComponentsLibrary.Migrations
                 {
                     b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Exercise", "Exercise")
                         .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExerciseId");
 
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
                         .WithOne()

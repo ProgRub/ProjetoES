@@ -62,19 +62,21 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
                 {
                     case Services.NameRequired:
                         ShowTextBoxErrorMessage(textBoxMedicineName, "Name is required!");
+                        textBoxMedicineName.BackColor = Color.Salmon;
                         break;
                     case Services.DescriptionRequired:
                         ShowTextBoxErrorMessage(textBoxMedicineDescription, "Description is required!");
+                        textBoxMedicineDescription.BackColor = Color.Salmon;
                         break;
                     case Services.PriceNotValid:
                         ShowTextBoxErrorMessage(textBoxMedicinePrice, "Price is required!");
+                        textBoxMedicinePrice.BackColor = Color.Salmon;
                         break;
                 }
             }

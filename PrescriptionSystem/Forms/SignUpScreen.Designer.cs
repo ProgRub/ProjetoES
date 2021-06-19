@@ -265,6 +265,7 @@ namespace Forms
             this.CheckedListBoxMissingBodyParts.Name = "CheckedListBoxMissingBodyParts";
             this.CheckedListBoxMissingBodyParts.Size = new System.Drawing.Size(457, 92);
             this.CheckedListBoxMissingBodyParts.TabIndex = 11;
+            this.CheckedListBoxMissingBodyParts.SelectedIndexChanged += new System.EventHandler(this.CheckedListBoxMissingBodyParts_SelectedIndexChanged);
             // 
             // CheckedListBoxDiseases
             // 
@@ -291,7 +292,7 @@ namespace Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Transparent;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.CheckedListBoxDiseases);
             this.Controls.Add(this.LabelDiseases);
             this.Controls.Add(this.CheckedListBoxMissingBodyParts);

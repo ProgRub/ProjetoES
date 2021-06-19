@@ -95,11 +95,5 @@ namespace ServicesLibrary.DifferentServices
         {
             return _therapySessionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date).OrderBy(e => e.DateTime);
         }
-
-        public IEnumerable<Treatment> GetTherapySessionTreatmentsBySessionId(int id)
-        {
-            var therapySessionHasTreatmentsEnumerable=_therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
-            return therapySessionHasTreatmentsEnumerable.Select(therapySessionHasTreatments => PrescriptionItemService.Instance.GetTreatmentById(therapySessionHasTreatments.TreatmentId)).ToList();
-        }
     }
 }

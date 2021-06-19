@@ -4,38 +4,39 @@ using System.Diagnostics;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
-using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class AgeValidator:BaseValidator
     {
-
-        public AgeValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public override object Validate(object requestListParameter)
         {
-        }
+            var requestList = (List<object>)requestListParameter;
+            var request = requestList[0];
+            var prescriptionItems = (List<PrescriptionItem>) requestList[1];
+            var errorCodes = (List<int>)requestList[2];
 
-        public override bool RequestIsValid(object request)
-        {
-
-            if (request is  PrescriptionDTO prescription)
+            if (request is  Prescription prescription)
             {
                 var today = DateTime.Today;
                 var patientsAge = today.Year - prescription.Patient.DateOfBirth.Year;
 
                 if (prescription.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
-                
-                foreach (var prescriptionExercise in prescription.Exercises)
+
+                foreach (var item in prescriptionItems)
                 {
-                        if (patientsAge < prescriptionExercise.AgeMinimum || patientsAge > prescriptionExercise.AgeMaximum) return false;
+                    if( item is Treatment treatment)
+                    {
+                        if(patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) Services.Instance.AddErrorCode(errorCodes, Services.TreatmentInvalidAge);
+                    }
+                    else if (item is Exercise exercise)
+                    {
+                        if (patientsAge < exercise.AgeMinimum || patientsAge > exercise.AgeMaximum) Services.Instance.AddErrorCode(errorCodes, Services.ExerciseInvalidAge);
+                    }
                 }
 
-                foreach (var prescriptionTreatment in prescription.Treatments)
-                {
-                    if (patientsAge < prescriptionTreatment.AgeMinimum || patientsAge > prescriptionTreatment.AgeMaximum) return false;
-                }
-
-                return true;
+                requestList = new List<object> { request, prescriptionItems, errorCodes };
+                return base.Validate(requestList) ?? errorCodes;
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

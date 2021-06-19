@@ -1,57 +1,63 @@
-﻿using System.Collections.Generic;
+﻿using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ServicesLibrary.DifferentServices;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class AllergyValidator : BaseValidator
     {
 
-        public AllergyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public const int Allergy = 0;
+        public override object Validate(object requestListParameter)
         {
-        }
-        public bool MedicalConditionIsAllergy(int id)
-        {
-            return MedicalConditionService.Instance.GetAllergies().Any(e => e.Id == id);
-        }
+            var requestList = (List<object>)requestListParameter;
+            var request = requestList[0];
+            var prescriptionItems = (List<PrescriptionItem>)requestList[1];
+            var errorCodes = (List<int>)requestList[2];
 
-        public override bool RequestIsValid(object request)
-        {
-            if (request is PrescriptionDTO prescription)
+            if (request is Prescription prescription)
             {
-                foreach (var medicine in prescription.Medicines)
+                foreach (var item in prescriptionItems) 
                 {
-                    foreach (var allergenic in medicine.IncompatibleMedicalConditions)
+                    if(item is Medicine medicine)
                     {
-                        foreach (var allergy in prescription.Patient.Allergies)
+                        var medicineIncompatibleMedicalConditionsIds = PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(medicine.Id);
+                        var userMedicalConditions = UserService.Instance.GetMedicalConditions();
+
+                        foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
                         {
-                            if (allergy.Id == allergenic.Id) return false;
+                            foreach(var patientMedicalCondition in userMedicalConditions)
+                            {
+                                if (patientMedicalCondition.MedicalConditionId == incompatibleMedicalConditionId && MedicalConditionIsAllergy(patientMedicalCondition.MedicalConditionId)) Services.Instance.AddErrorCode(errorCodes, Services.IncompatibleMedicine);
+                            }
                         }
                     }
-                        //var medicineIncompatibleMedicalConditionsIds =
-                        //    PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(
-                        //        PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
-                        //var userMedicalConditions = UserService.Instance.GetUsersMedicalConditionsByUserId(prescription.PatientId);
-
-                        //foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
-                        //{
-                        //    foreach (var patientMedicalCondition in userMedicalConditions)
-                        //    {
-                        //        if (patientMedicalCondition.Id== incompatibleMedicalConditionId &&
-                        //            MedicalConditionIsAllergy(patientMedicalCondition.Id))
-                        //            return false;
-                        //    }
-                        //}
                 }
 
-                return true;
+                requestList = new List<object> { request, prescriptionItems, errorCodes };
+                return base.Validate(requestList) ?? errorCodes;
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
+
+        public bool MedicalConditionIsAllergy(int id)
+        {
+            var allergies = MedicalConditionService.Instance.GetAllergies();
+
+            foreach (var allergy in allergies)
+            {
+                if (allergy.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }

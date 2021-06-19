@@ -84,15 +84,12 @@ namespace Forms
                 }
                 switch (errorCode)
                 {
-                    case Services.PatientRequired:
-                        errorMessage += "You have to select a patient!";
+                    case Services.TreatmentInvalidAge:
+                        errorMessage += "A treatment is not recommended for the patient's age.";
                         break;
-                    case Services.InvalidAge:
-                        errorMessage += "A treatment or exercise is not recommended for the patient's age.";
+                    case Services.ExerciseInvalidAge:
+                        errorMessage += "An exercise is not recommended for the patient's age.";
                         break;
-                    //case Services.ExerciseInvalidAge:
-                    //    errorMessage += "An exercise is not recommended for the patient's age.";
-                    //    break;
                     case Services.IncompatibleMedicine:
                         errorMessage += "A medicine can cause an allergic reaction.";
                         break;
@@ -129,6 +126,11 @@ namespace Forms
             {
                 checkedListBoxMedicine.Items.Add(medicine);
             }
+        }
+
+        private void checkedListBoxMedicine_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -8,11 +8,11 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
 {
     public class PatientAvailabilityValidator : BaseValidator
     {
-        public PatientAvailabilityValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public override object Validate(object requestListParameter)
         {
-        }
-        public override bool RequestIsValid(object request)
-        {
+            var requestList = (List<object>) requestListParameter;
+            var request = requestList[0];
+            var errorCodes = (List<int>) requestList[1];
             if (request is TherapySession therapySession)
             {
                 var patientTherapySessions =
@@ -28,12 +28,14 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
                         if ((startTimeChecking >= startTimeInDatabase && startTimeChecking <= endTimeInDatabase) ||
                             (endTimeChecking <= endTimeInDatabase && endTimeChecking >= startTimeInDatabase))
                         {
-                            return false;
+                            Services.Instance.AddErrorCode(errorCodes, Services.PatientUnavailable);
+                            break;
                         }
                     }
                 }
 
-                return true;
+                requestList = new List<object> {request, errorCodes};
+                return base.Validate(requestList) ?? errorCodes;
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

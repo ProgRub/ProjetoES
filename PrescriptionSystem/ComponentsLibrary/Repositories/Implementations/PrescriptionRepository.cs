@@ -68,17 +68,5 @@ namespace ComponentsLibrary.Repositories.Implementations
             return _prescriptionHasViewersRepository.Find(e =>
                 e.HealthCareProfessionalId == healthCareProfessional.Id && e.PrescriptionId == prescription.Id).Any();
         }
-
-        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerable(
-            int prescriptionId)
-        {
-            return _prescriptionHasItemsRepository.Find(e => e.PrescriptionId == prescriptionId);
-        }
-
-        public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
-        {
-            return _prescriptionHasViewersRepository.Find(e => e.PrescriptionId == id)
-                .Select(e => e.HealthCareProfessional);
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace ServicesLibrary.Validators
 {
     public interface IValidator
     {
-         IValidator SetNext(IValidator checker);
+         void SetNext(IValidator checker);
          object Validate(object request);
     }
 }

@@ -10,10 +10,9 @@ namespace ComponentsLibrary
     {
         #region Constants
 
-        public const int Allergy = 0, Disease = 1;
+        public const int Allergy = 0, Disease = 1;        
 
         #endregion
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDb");
@@ -82,41 +81,34 @@ namespace ComponentsLibrary
 
             #region Many-To-Many Tables Config
 
-            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.Zombie)
-                .HasDefaultValue(false);
-            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.TimeStamp)
-                .IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.Zombie).HasDefaultValue(false);
+            modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>()
-                .HasKey(e => new {e.MedicineId, e.MedicalConditionId});
+                .HasKey(e => new { e.MedicineId, e.MedicalConditionId });
             modelBuilder.Entity<PrescriptionHasViewers>().Property(e => e.Zombie).HasDefaultValue(false);
-            modelBuilder.Entity<PrescriptionHasViewers>().Property(e => e.TimeStamp).IsConcurrencyToken()
-                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<PrescriptionHasViewers>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<PrescriptionHasViewers>()
-                .HasKey(e => new {e.HealthCareProfessionalId, e.PrescriptionId});
+                .HasKey(e => new { e.HealthCareProfessionalId, e.PrescriptionId });
             modelBuilder.Entity<PrescriptionHasPrescriptionItems>().Property(e => e.Zombie).HasDefaultValue(false);
-            modelBuilder.Entity<PrescriptionHasPrescriptionItems>().Property(e => e.TimeStamp).IsConcurrencyToken()
-                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<PrescriptionHasPrescriptionItems>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<PrescriptionHasPrescriptionItems>()
-                .HasKey(e => new {e.PrescriptionId, e.PrescriptionItemId});
+                .HasKey(e => new { e.PrescriptionId, e.PrescriptionItemId });
             modelBuilder.Entity<TherapySessionHasTreatments>().Property(e => e.Zombie).HasDefaultValue(false);
-            modelBuilder.Entity<TherapySessionHasTreatments>().Property(e => e.TimeStamp).IsConcurrencyToken()
-                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<TherapySessionHasTreatments>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<TherapySessionHasTreatments>()
-                .HasKey(e => new {e.TherapySessionId, e.TreatmentId});
+                .HasKey(e => new { e.TherapySessionId, e.TreatmentId });
             modelBuilder.Entity<UserHasMedicalCondition>().Property(e => e.Zombie).HasDefaultValue(false);
-            modelBuilder.Entity<UserHasMedicalCondition>().Property(e => e.TimeStamp).IsConcurrencyToken()
-                .ValueGeneratedOnAddOrUpdate();
+            modelBuilder.Entity<UserHasMedicalCondition>().Property(e => e.TimeStamp).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
             modelBuilder.Entity<UserHasMedicalCondition>()
-                .HasKey(e => new {e.MedicalConditionId, e.UserId});
+                .HasKey(e => new { e.MedicalConditionId, e.UserId });
 
             #endregion
 
             #region Initial Data
 
-            modelBuilder.Entity<Medicine>().HasData(
-                new Medicine {Id = 1, Zombie = false, Name = "Penicillin", Description = "", Price = 2.32},
-                new Medicine {Id = 2, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
-                new Medicine {Id = 3, Zombie = false, Name = "Pyrazolones", Description = "", Price = 12.40});
+            modelBuilder.Entity<Medicine>().HasData(new Medicine {Id = 1,Zombie = false,Name = "Penicillin", Description = "", Price = 2.32},
+                new Medicine { Id = 2, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
+                new Medicine { Id = 3, Zombie = false, Name = "Pyrazolones", Description = "", Price = 12.40});
             modelBuilder.Entity<Treatment>().HasData(
                 new Treatment
                 {
@@ -151,28 +143,24 @@ namespace ComponentsLibrary
                     BodyPart = BodyPart.RightLeg,
                     Duration = new TimeSpan(1, 0, 0)
                 });
-            var burpees = new Exercise
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
             {
                 Id = 8,
                 Zombie = false,
-                Name = "Burpees",
-                AgeMinimum = 15,
-                AgeMaximum = 50,
+                Name = "Burpees", AgeMinimum = 15, AgeMaximum = 50,
                 Description =
                     "From standing up, drop into a high plank and then jump your feet to your hands, stand up and jump with your arms up. Repeat.",
                 Duration = new TimeSpan(0, 10, 0)
-            };
-            var pushups = new Exercise
+            }, new Exercise
             {
                 Id = 9,
                 Zombie = false,
                 Name = "Pushups",
                 AgeMinimum = 8,
                 AgeMaximum = 78,
-                Description = "",
+                Description ="",
                 Duration = new TimeSpan(0, 20, 0)
-            };
-            var squats = new Exercise
+            }, new Exercise
             {
                 Id = 10,
                 Zombie = false,
@@ -180,18 +168,7 @@ namespace ComponentsLibrary
                 AgeMinimum = 5,
                 Description = "Make sure your knees don't go in front of your feet",
                 Duration = new TimeSpan(0, 15, 0)
-            };
-            modelBuilder.Entity<Exercise>().HasData(burpees, pushups, squats);
-            modelBuilder.Entity<ExerciseHasBodyParts>().HasData(new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.RightArm, Id = 100, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.LeftArm, Id = 101, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.LeftLeg, Id = 102, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.RightLeg, Id = 103, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.RightArm, Id = 104, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.LeftArm, Id = 105, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.Torso, Id = 106, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 10, BodyPart = BodyPart.LeftLeg, Id = 107, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 10, BodyPart = BodyPart.RightLeg, Id = 108, Zombie = false});
+            });
             modelBuilder.Entity<MedicalCondition>().HasData(new MedicalCondition
             {
                 Id = 11,
@@ -271,25 +248,26 @@ namespace ComponentsLibrary
                 Password = "ruiruirui"
             });
 
-            //modelBuilder.Entity<TherapySession>().HasData(new TherapySession
-            //{
-            //    Id = 60,
-            //    Zombie = false,
-            //    PatientId = 16,
-            //    TherapistId = 18,
-            //    DateTime = new DateTime(2021, 06, 02, 15, 00, 00),
-            //    EstimatedDuration = new TimeSpan(1, 0, 0),
-            //    Note = ""
-            //});
+            modelBuilder.Entity<TherapySession>().HasData(new TherapySession
+            {
+                Id = 60,
+                Zombie = false,
+                PatientId = 16,
+                TherapistId = 18,
+                DateTime = new DateTime(2021, 06, 02, 15,00,00),
+                EstimatedDuration = new TimeSpan(1,0,0),
+                Note = ""
+            });
 
-            //modelBuilder.Entity<TherapySessionHasTreatments>().HasData(new TherapySessionHasTreatments
-            //{
-            //    CompletedTreatment = false,
-            //    TherapySessionId = 60,
-            //    Note = "",
-            //    TreatmentId = 7,
-            //    Zombie = false
-            //});
+            modelBuilder.Entity<TherapySessionHasTreatments>().HasData(new TherapySessionHasTreatments
+            {
+                CompletedTreatment = false,
+                TherapySessionId = 60,
+                Note = "",
+                TreatmentId = 7,
+                Zombie = false
+            });
+
 
             #endregion
         }

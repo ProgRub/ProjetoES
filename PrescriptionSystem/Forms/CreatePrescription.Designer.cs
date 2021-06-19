@@ -153,6 +153,7 @@
             this.checkedListBoxMedicine.Name = "checkedListBoxMedicine";
             this.checkedListBoxMedicine.Size = new System.Drawing.Size(226, 92);
             this.checkedListBoxMedicine.TabIndex = 16;
+            this.checkedListBoxMedicine.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxMedicine_SelectedIndexChanged);
             // 
             // checkedListBoxTreatment
             // 

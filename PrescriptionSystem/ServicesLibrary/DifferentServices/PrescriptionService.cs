@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ComponentsLibrary;
@@ -87,38 +86,6 @@ namespace ServicesLibrary.DifferentServices
         {
             return _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
                 healthCareProfessional);
-        }
-
-        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
-        {
-            return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionId);
-        }
-
-        internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
-        {
-            var prescriptionItems = new List<PrescriptionItem>();
-            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionId))
-            {
-                if (PrescriptionItemService.Instance.IsExercise(prescriptionHasItems.PrescriptionItemId))
-                {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetExerciseById(prescriptionHasItems.PrescriptionItemId));
-                }
-                else if (PrescriptionItemService.Instance.IsMedicine(prescriptionHasItems.PrescriptionItemId))
-                {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineById(prescriptionHasItems.PrescriptionItemId));
-                }
-                else
-                {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetTreatmentById(prescriptionHasItems.PrescriptionItemId));
-                }
-
-            }
-            return prescriptionItems;
-        }
-
-        public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
-        {
-            return _prescriptionRepository.GetPrescriptionViewersByPrescriptionId(id);
         }
     }
 }
