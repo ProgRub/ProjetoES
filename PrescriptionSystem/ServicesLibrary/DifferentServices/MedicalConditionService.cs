@@ -26,6 +26,10 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal static MedicalConditionService Instance { get; } = new MedicalConditionService();
+        internal MedicalCondition GetMedicalConditionById(int id)
+        {
+            return _medicalConditionRepository.GetById(id);
+        }
         internal MedicalCondition GetMedicalConditionByName(string name)
         {
             try

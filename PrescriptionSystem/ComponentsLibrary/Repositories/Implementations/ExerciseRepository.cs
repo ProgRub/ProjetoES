@@ -1,4 +1,6 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
 
@@ -17,5 +19,9 @@ namespace ComponentsLibrary.Repositories.Implementations
             _exerciseHasBodyPartRepository.Add(new ExerciseHasBodyParts {Exercise = exercise, BodyPart = bodyPart});
         }
 
+        public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
+        {
+            return _exerciseHasBodyPartRepository.Find(e => e.ExerciseId == exerciseId).Select(e => e.BodyPart);
+        }
     }
 }

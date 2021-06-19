@@ -35,28 +35,13 @@ namespace ComponentsLibrary.Migrations
                 oldType: "int",
                 oldNullable: true);
 
-            migrationBuilder.InsertData(
-                table: "Item",
-                column: "Id",
-                value: 21);
-
-            migrationBuilder.InsertData(
-                table: "TherapySession",
-                columns: new[] { "Id", "DateTime", "EstimatedDuration", "Note", "PatientId", "TherapistId" },
-                values: new object[] { 21, new DateTime(2021, 6, 2, 15, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 1, 0, 0, 0), "", 16, 18 });
-
-            migrationBuilder.InsertData(
-                table: "TherapySessionHasTreatments",
-                columns: new[] { "TherapySessionId", "TreatmentId", "CompletedTreatment", "Note" },
-                values: new object[] { 21, 7, false, "" });
-
             migrationBuilder.AddForeignKey(
                 name: "FK_Prescription_HealthCareProfessional_AuthorId",
                 table: "Prescription",
                 column: "AuthorId",
                 principalTable: "HealthCareProfessional",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Prescription_Patient_PatientId",
@@ -64,7 +49,7 @@ namespace ComponentsLibrary.Migrations
                 column: "PatientId",
                 principalTable: "Patient",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -76,21 +61,6 @@ namespace ComponentsLibrary.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Prescription_Patient_PatientId",
                 table: "Prescription");
-
-            migrationBuilder.DeleteData(
-                table: "TherapySessionHasTreatments",
-                keyColumns: new[] { "TherapySessionId", "TreatmentId" },
-                keyValues: new object[] { 21, 7 });
-
-            migrationBuilder.DeleteData(
-                table: "TherapySession",
-                keyColumn: "Id",
-                keyValue: 21);
-
-            migrationBuilder.DeleteData(
-                table: "Item",
-                keyColumn: "Id",
-                keyValue: 21);
 
             migrationBuilder.AlterColumn<int>(
                 name: "PatientId",

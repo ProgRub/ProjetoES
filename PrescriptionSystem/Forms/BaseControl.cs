@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -30,6 +31,14 @@ namespace Forms
             ButtonBack.Visible = false;
         }
         protected void ClearTextbox(TextBox textBox) => textBox.Text = "";
+
+        protected void ClearAllTextboxesPlaceholderText()
+        {
+            foreach (var textBox in Controls.OfType<TextBox>())
+            {
+                textBox.PlaceholderText = "";
+            }
+        }
 
         protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
         {
