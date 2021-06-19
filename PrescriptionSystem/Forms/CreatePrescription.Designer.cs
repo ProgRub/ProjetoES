@@ -38,12 +38,11 @@
             this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxPatient = new System.Windows.Forms.ComboBox();
-            this.checkedListBoxMedicine = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBoxTreatment = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBoxExercise = new System.Windows.Forms.CheckedListBox();
-            this.labelMedicine = new System.Windows.Forms.Label();
-            this.labelTreatment = new System.Windows.Forms.Label();
-            this.labelExercise = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonBack
@@ -125,11 +124,12 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(292, 519);
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
+            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(288, 511);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(253, 38);
+            this.button1.Size = new System.Drawing.Size(253, 43);
             this.button1.TabIndex = 14;
             this.button1.Text = "Create";
             this.button1.UseVisualStyleBackColor = false;
@@ -144,73 +144,55 @@
             this.comboBoxPatient.Size = new System.Drawing.Size(250, 28);
             this.comboBoxPatient.TabIndex = 15;
             // 
-            // checkedListBoxMedicine
+            // treeView1
             // 
-            this.checkedListBoxMedicine.CheckOnClick = true;
-            this.checkedListBoxMedicine.FormattingEnabled = true;
-            this.checkedListBoxMedicine.Location = new System.Drawing.Point(468, 96);
-            this.checkedListBoxMedicine.Name = "checkedListBoxMedicine";
-            this.checkedListBoxMedicine.Size = new System.Drawing.Size(226, 92);
-            this.checkedListBoxMedicine.TabIndex = 16;
+            this.treeView1.Location = new System.Drawing.Point(486, 171);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(151, 121);
+            this.treeView1.TabIndex = 16;
             // 
-            // checkedListBoxTreatment
+            // button2
             // 
-            this.checkedListBoxTreatment.CheckOnClick = true;
-            this.checkedListBoxTreatment.FormattingEnabled = true;
-            this.checkedListBoxTreatment.Location = new System.Drawing.Point(468, 215);
-            this.checkedListBoxTreatment.Name = "checkedListBoxTreatment";
-            this.checkedListBoxTreatment.Size = new System.Drawing.Size(226, 92);
-            this.checkedListBoxTreatment.TabIndex = 17;
+            this.button2.Location = new System.Drawing.Point(657, 132);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 29);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
             // 
-            // checkedListBoxExercise
+            // comboBox1
             // 
-            this.checkedListBoxExercise.CheckOnClick = true;
-            this.checkedListBoxExercise.FormattingEnabled = true;
-            this.checkedListBoxExercise.Location = new System.Drawing.Point(468, 338);
-            this.checkedListBoxExercise.Name = "checkedListBoxExercise";
-            this.checkedListBoxExercise.Size = new System.Drawing.Size(226, 92);
-            this.checkedListBoxExercise.TabIndex = 18;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(674, 75);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(151, 28);
+            this.comboBox1.TabIndex = 18;
             // 
-            // labelMedicine
+            // dateTimePicker1
             // 
-            this.labelMedicine.AutoSize = true;
-            this.labelMedicine.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelMedicine.Location = new System.Drawing.Point(465, 73);
-            this.labelMedicine.Name = "labelMedicine";
-            this.labelMedicine.Size = new System.Drawing.Size(76, 20);
-            this.labelMedicine.TabIndex = 19;
-            this.labelMedicine.Text = "Medicine:";
+            this.dateTimePicker1.Location = new System.Drawing.Point(745, 208);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePicker1.TabIndex = 19;
             // 
-            // labelTreatment
+            // button3
             // 
-            this.labelTreatment.AutoSize = true;
-            this.labelTreatment.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelTreatment.Location = new System.Drawing.Point(468, 191);
-            this.labelTreatment.Name = "labelTreatment";
-            this.labelTreatment.Size = new System.Drawing.Size(82, 20);
-            this.labelTreatment.TabIndex = 20;
-            this.labelTreatment.Text = "Treatment:";
-            // 
-            // labelExercise
-            // 
-            this.labelExercise.AutoSize = true;
-            this.labelExercise.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelExercise.Location = new System.Drawing.Point(468, 315);
-            this.labelExercise.Name = "labelExercise";
-            this.labelExercise.Size = new System.Drawing.Size(68, 20);
-            this.labelExercise.TabIndex = 21;
-            this.labelExercise.Text = "Exercise:";
+            this.button3.Location = new System.Drawing.Point(745, 263);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // CreatePrescription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelExercise);
-            this.Controls.Add(this.labelTreatment);
-            this.Controls.Add(this.labelMedicine);
-            this.Controls.Add(this.checkedListBoxExercise);
-            this.Controls.Add(this.checkedListBoxTreatment);
-            this.Controls.Add(this.checkedListBoxMedicine);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.comboBoxPatient);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePickerEndDate);
@@ -222,7 +204,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CreatePrescription";
-            this.Size = new System.Drawing.Size(749, 582);
+            this.Size = new System.Drawing.Size(1041, 582);
             this.Load += new System.EventHandler(this.CreatePrescription_Load);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
@@ -234,13 +216,12 @@
             this.Controls.SetChildIndex(this.dateTimePickerEndDate, 0);
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.comboBoxPatient, 0);
-            this.Controls.SetChildIndex(this.checkedListBoxMedicine, 0);
-            this.Controls.SetChildIndex(this.checkedListBoxTreatment, 0);
-            this.Controls.SetChildIndex(this.checkedListBoxExercise, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.labelMedicine, 0);
-            this.Controls.SetChildIndex(this.labelTreatment, 0);
-            this.Controls.SetChildIndex(this.labelExercise, 0);
+            this.Controls.SetChildIndex(this.treeView1, 0);
+            this.Controls.SetChildIndex(this.button2, 0);
+            this.Controls.SetChildIndex(this.comboBox1, 0);
+            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
+            this.Controls.SetChildIndex(this.button3, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,11 +239,10 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxPatient;
-        private System.Windows.Forms.CheckedListBox checkedListBoxMedicine;
-        private System.Windows.Forms.CheckedListBox checkedListBoxTreatment;
-        private System.Windows.Forms.CheckedListBox checkedListBoxExercise;
-        private System.Windows.Forms.Label labelMedicine;
-        private System.Windows.Forms.Label labelTreatment;
-        private System.Windows.Forms.Label labelExercise;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button3;
     }
 }

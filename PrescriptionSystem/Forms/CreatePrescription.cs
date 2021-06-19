@@ -26,45 +26,45 @@ namespace Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var treatments = new List<string>();
-            foreach (var checkedItem in checkedListBoxTreatment.CheckedItems)
-            {
-                treatments.Add(checkedItem.ToString());
-            }
+            //var treatments = new List<string>();
+            //foreach (var checkedItem in checkedListBoxTreatment.CheckedItems)
+            //{
+            //    treatments.Add(checkedItem.ToString());
+            //}
 
-            var medicines = new List<string>();
-            foreach (var checkedItem in checkedListBoxMedicine.CheckedItems)
-            {
-                medicines.Add(checkedItem.ToString());
-            }
+            //var medicines = new List<string>();
+            //foreach (var checkedItem in checkedListBoxMedicine.CheckedItems)
+            //{
+            //    medicines.Add(checkedItem.ToString());
+            //}
 
-            var exercises = new List<string>();
-            foreach (var checkedItem in checkedListBoxExercise.CheckedItems)
-            {
-                exercises.Add(checkedItem.ToString());
-            }
+            //var exercises = new List<string>();
+            //foreach (var checkedItem in checkedListBoxExercise.CheckedItems)
+            //{
+            //    exercises.Add(checkedItem.ToString());
+            //}
 
 
-            string patient = "";
-            if (comboBoxPatient.SelectedItem != null)
-            {
-                patient += comboBoxPatient.SelectedItem.ToString();
-            }
+            //string patient = "";
+            //if (comboBoxPatient.SelectedItem != null)
+            //{
+            //    patient += comboBoxPatient.SelectedItem.ToString();
+            //}
 
-            IEnumerable<int> errorCodes = Services.Instance.CheckPrescriptionCreation(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date,
-               dateTimePickerEndDate.Value.Date, treatments, medicines, exercises); //SÓ FALTA TESTAR
+            //IEnumerable<int> errorCodes = Services.Instance.CheckPrescriptionCreation(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date,
+            //   dateTimePickerEndDate.Value.Date, treatments, medicines, exercises); //SÓ FALTA TESTAR
 
-            if (errorCodes.Any())
-            {
-                ShowErrorMessages(errorCodes);
-            }
-            else
-            {
-                Services.Instance.CreatePrescription(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date, dateTimePickerEndDate.Value.Date, treatments, medicines, exercises);
+            //if (errorCodes.Any())
+            //{
+            //    ShowErrorMessages(errorCodes);
+            //}
+            //else
+            //{
+            //    Services.Instance.CreatePrescription(patient, textBoxDescription.Text, dateTimePickerStartDate.Value.Date, dateTimePickerEndDate.Value.Date, treatments, medicines, exercises);
 
-                ShowInformationMessageBox("Prescription successfully created.", "Success");
-                MoveToScreen(new CalendarScreenTherapist());
-            }
+            //    ShowInformationMessageBox("Prescription successfully created.", "Success");
+            //    MoveToScreen(new CalendarScreenTherapist());
+            //}
 
         }
 
@@ -110,25 +110,25 @@ namespace Forms
 
         private void CreatePrescription_Load(object sender, EventArgs e)
         {
-            foreach (var patient in Services.Instance.GetAllPatients())
-            {
-                comboBoxPatient.Items.Add(patient);
-            }
+            //foreach (var patient in Services.Instance.GetAllPatients())
+            //{
+            //    comboBoxPatient.Items.Add(patient);
+            //}
 
-            foreach (var treatment in Services.Instance.GetTreatments())
-            {
-                checkedListBoxTreatment.Items.Add(treatment);
-            }
+            //foreach (var treatment in Services.Instance.GetTreatments())
+            //{
+            //    checkedListBoxTreatment.Items.Add(treatment);
+            //}
 
-            foreach (var exercise in Services.Instance.GetExercises())
-            {
-                checkedListBoxExercise.Items.Add(exercise);
-            }
+            //foreach (var exercise in Services.Instance.GetExercises())
+            //{
+            //    checkedListBoxExercise.Items.Add(exercise);
+            //}
 
-            foreach (var medicine in Services.Instance.GetMedicine())
-            {
-                checkedListBoxMedicine.Items.Add(medicine);
-            }
+            //foreach (var medicine in Services.Instance.GetMedicine())
+            //{
+            //    checkedListBoxMedicine.Items.Add(medicine);
+            //}
         }
     }
 }
