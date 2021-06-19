@@ -54,16 +54,5 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
 
-        public bool MedicalConditionIsAllergy(int id)
-        {
-            var allergies = MedicalConditionService.Instance.GetAllergies();
-
-            foreach (var allergy in allergies)
-            {
-                if (allergy.Id == id) return true;
-            }
-            return false;
-        }
-
     }
 }
