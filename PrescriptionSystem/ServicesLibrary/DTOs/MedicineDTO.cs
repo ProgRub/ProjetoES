@@ -9,7 +9,8 @@ namespace ServicesLibrary.DTOs
     public class MedicineDTO : PrescriptionItemDTO
     {
         public double Price { get; set; }
-        public IEnumerable<MedicalConditionDTO> IncompatibleMedicalConditions { get; set; }
+        public IEnumerable<MedicalConditionDTO> IncompatibleAllergies { get; set; }
+        public IEnumerable<MedicalConditionDTO> IncompatibleDiseases { get; set; }
 
         public static MedicineDTO ConvertMedicineToDTO(Medicine medicine)
         {
@@ -22,7 +23,8 @@ namespace ServicesLibrary.DTOs
                     MedicalConditionService.Instance.GetMedicalConditionById(medicalConditionId)).ToList();
             var medicalConditionDTOs = medicalConditions.Select(medicalCondition =>
                 MedicalConditionDTO.ConvertMedicalConditionToDTO(medicalCondition)).ToList();
-            medicineDTO.IncompatibleMedicalConditions = medicalConditionDTOs;
+            medicineDTO.IncompatibleAllergies = medicalConditionDTOs.FindAll(e=>e.Type==MedicalConditionDTO.Allergy);
+            medicineDTO.IncompatibleDiseases = medicalConditionDTOs.FindAll(e => e.Type == MedicalConditionDTO.Disease);
             return medicineDTO;
         }
     }

@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using ServicesLibrary;
 using ServicesLibrary.Commands;
 using ServicesLibrary.Commands.FinishedTherapySession;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
     public partial class TherapySessionCompletedScreen : BaseControl
     {
+        private TherapySessionDTO _therapySession;
+
         public TherapySessionCompletedScreen()
         {
             InitializeComponent();
@@ -22,6 +25,7 @@ namespace Forms
 
         private void TherapySessionCompletedScreen_Load(object sender, EventArgs e)
         {
+            _therapySession = Services.Instance.GetSelectedTherapySession();
             CommandsManager.Instance.Notify += (sender, args) =>
             {
                 ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
@@ -30,16 +34,18 @@ namespace Forms
             {
                 ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
             };
-            LabelSessionInfo.Text = Services.Instance.GetSelectedTherapySessionBaseInfo();
-            foreach (var treatment in Services.Instance.GetSelectedTherapySessionTreatments())
+            LabelSessionInfo.Text =
+                $"{_therapySession.Id} | {_therapySession.Patient.FullName} | {_therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
+            foreach (var treatment in _therapySession.Treatments)
             {
-                var listViewItem = new ListViewItem(treatment.First());
-                listViewItem.SubItems.Add(treatment.ElementAt(1));
-                listViewItem.SubItems.Add(treatment.ElementAt(2));
-                listViewItem.SubItems.Add(treatment.ElementAt(3));
+                var listViewItem = new ListViewItem(treatment.Name);
+                listViewItem.SubItems.Add(treatment.Description);
+                listViewItem.SubItems.Add(treatment.BodyPart.ToString());
+                listViewItem.SubItems.Add(treatment.Duration.ToString());
                 ListViewTreatments.Items.Add(listViewItem);
             }
-            TextBoxTherapySessionNote.Text = Services.Instance.GetSelectedTherapySessionNote();
+
+            TextBoxTherapySessionNote.Text = _therapySession.Note;
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)
@@ -62,15 +68,17 @@ namespace Forms
             if (ListViewTreatments.SelectedIndices.Count == 1)
             {
                 SetEnabledTreatmentNoteControls(true);
-                TextBoxTreatmentNote.Text = Services.Instance.GetTreatmentNote(GetSelectedTreatmentString());
+                TextBoxTreatmentNote.Text = Services.Instance.GetTreatmentNote(_therapySession.Id,
+                    _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id);
                 CheckBoxCompletedTreatment.Checked =
-                    Services.Instance.GetTreatmentCompletedStatus(GetSelectedTreatmentString());
+                    Services.Instance.GetTreatmentCompletedStatus(_therapySession.Id,
+                        _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id);
             }
             else
             {
                 SetEnabledTreatmentNoteControls(false);
                 TextBoxTreatmentNote.Text = "";
-                CheckBoxCompletedTreatment.Checked =false;
+                CheckBoxCompletedTreatment.Checked = false;
             }
         }
 
@@ -81,17 +89,12 @@ namespace Forms
             CheckBoxCompletedTreatment.Enabled = state;
         }
 
-        private string GetSelectedTreatmentString()
-        {
-            return
-                $"{ListViewTreatments.SelectedItems[0].Text} | {ListViewTreatments.SelectedItems[0].SubItems[2].Text} | {ListViewTreatments.SelectedItems[0].SubItems[3].Text}";
-        }
-
         private void ButtonAddTreatmentNote_Click(object sender, EventArgs e)
         {
             SetEnabledTreatmentNoteControls(false);
             CommandsManager.Instance.Execute(new CommandAddTreatmentNoteSetCompleted(TextBoxTreatmentNote.Text,
-                CheckBoxCompletedTreatment.Checked, GetSelectedTreatmentString()));
+                CheckBoxCompletedTreatment.Checked, _therapySession.Id,
+                _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id));
             TextBoxTreatmentNote.Text = "";
             CheckBoxCompletedTreatment.Checked = false;
         }

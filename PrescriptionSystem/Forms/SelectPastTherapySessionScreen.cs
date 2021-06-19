@@ -8,11 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
     public partial class SelectPastTherapySessionScreen : BaseControl
     {
+        private IEnumerable<TherapySessionDTO> _therapySessions;
+
         public SelectPastTherapySessionScreen()
         {
             InitializeComponent();
@@ -20,22 +23,26 @@ namespace Forms
 
         private void SelectPastTherapySessionScreen_Load(object sender, EventArgs e)
         {
-            var therapySessions = Services.Instance.GetPastTherapySessionsOfLoggedInTherapist();
-            if (!therapySessions.Any())
+            _therapySessions = Services.Instance.GetPastTherapySessionsOfLoggedInTherapist();
+            if (!_therapySessions.Any())
             {
                 LabelTitle.Text = "You haven't completed any therapy sessions yet...";
                 return;
             }
-            for (int index = 0; index < therapySessions.Count(); index++)
+
+            for (var index = 0; index < _therapySessions.Count(); index++)
             {
-                Button button = new Button();
-                button.AutoSize = false;
-                button.Font = ButtonExampleTherapySession.Font;
-                button.ForeColor = ButtonExampleTherapySession.ForeColor;
-                button.Text = therapySessions.ElementAt(index);
-                button.Size = ButtonExampleTherapySession.Size;
-                button.Location = new Point(ButtonExampleTherapySession.Location.X,
-                    ButtonExampleTherapySession.Location.Y + index * ButtonExampleTherapySession.Size.Height);
+                var button = new Button
+                {
+                    AutoSize = false,
+                    Font = ButtonExampleTherapySession.Font,
+                    ForeColor = ButtonExampleTherapySession.ForeColor,
+                    Text =
+                        $"{_therapySessions.ElementAt(index).Id} | {_therapySessions.ElementAt(index).Patient.FullName}{Environment.NewLine}{_therapySessions.ElementAt(index).DateTime:dddd dd/MM/yyyy HH:mm}",
+                    Size = ButtonExampleTherapySession.Size,
+                    Location = new Point(ButtonExampleTherapySession.Location.X + (index/8) * (ButtonExampleTherapySession.Size.Width + 25),
+                        ButtonExampleTherapySession.Location.Y + (index %8) * (ButtonExampleTherapySession.Size.Height+25))
+                };
                 button.MouseClick += ButtonClicked;
                 Controls.Add(button);
             }
@@ -43,8 +50,15 @@ namespace Forms
 
         private void ButtonClicked(object sender, EventArgs e)
         {
-            Services.Instance.SelectTherapySession(((Button)sender).Text);
+            Services.Instance.SelectTherapySession(GetSessionFromString(((Button) sender).Text));
             MoveToScreen(new TherapySessionCompletedScreen());
+        }
+
+        private TherapySessionDTO GetSessionFromString(string therapySessionString)
+        {
+            var therapySessionSplit = therapySessionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
+            return _therapySessions.FirstOrDefault(treatment =>
+                treatment.Id.ToString() == therapySessionSplit[0]);
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)

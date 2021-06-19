@@ -70,8 +70,8 @@ namespace Forms
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
-            bool first = true;
-            string errorMessage = "";
+            var first = true;
+            var errorMessage = "";
             foreach (var errorCode in errorCodes)
             {
                 if (first)

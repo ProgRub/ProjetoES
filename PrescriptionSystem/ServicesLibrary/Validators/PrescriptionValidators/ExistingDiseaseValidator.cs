@@ -23,7 +23,7 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             {
                 foreach (var medicine in prescription.Medicines)
                 {
-                    foreach (var incompatibleMedicalCondition in medicine.IncompatibleMedicalConditions)
+                    foreach (var incompatibleMedicalCondition in medicine.IncompatibleDiseases)
                     {
                         foreach (var disease in prescription.Patient.Diseases)
                         {

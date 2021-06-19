@@ -10,12 +10,10 @@ namespace ServicesLibrary.Commands.FinishedTherapySession
         private bool _treatmentOldCompletedState, _treatmentNewCompletedState;
         private TherapySessionHasTreatments _therapySessionHasTreatments;
 
-        public CommandAddTreatmentNoteSetCompleted(string note, bool completedState, string treatmentString)
+        public CommandAddTreatmentNoteSetCompleted(string note, bool completedState,int sessionId,int treatmentId)
         {
             _therapySessionHasTreatments =
-                TherapySessionService.Instance.GetTherapySessionHasTreatmentsBySessionIdTreatmentId(
-                    TherapySessionService.Instance.SelectedTherapySessionId,
-                    PrescriptionItemService.Instance.GetTreatmentByNameBodyPartAndDurationString(treatmentString).Id);
+                TherapySessionService.Instance.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId,treatmentId);
             _treatmentOldNote = _therapySessionHasTreatments.Note;
             _treatmentOldCompletedState = _therapySessionHasTreatments.CompletedTreatment;
             _treatmentNewNote = note;

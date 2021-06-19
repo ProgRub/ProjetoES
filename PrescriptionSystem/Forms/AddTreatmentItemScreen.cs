@@ -69,7 +69,7 @@ namespace Forms
                textBoxMinAge.Text, textBoxMaxAge.Text);
 
             var bodyPart = "";
-            foreach (RadioButton rdo in groupBox1.Controls.OfType<RadioButton>())
+            foreach (var rdo in groupBox1.Controls.OfType<RadioButton>())
             {
                 if (rdo.Checked)
                 {
