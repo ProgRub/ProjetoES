@@ -19,6 +19,7 @@ namespace Forms
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
+            ClearAllTextboxesPlaceholderText();
             var code = Services.Instance.Login(TextBoxEmail.Text, TextBoxPassword.Text);
             switch (code)
             {

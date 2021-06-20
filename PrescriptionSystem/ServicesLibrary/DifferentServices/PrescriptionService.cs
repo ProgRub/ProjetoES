@@ -120,5 +120,10 @@ namespace ServicesLibrary.DifferentServices
         {
             return _prescriptionRepository.GetPrescriptionViewersByPrescriptionId(id);
         }
+
+        public Prescription GetPrescriptionById(int prescriptionId)
+        {
+            return _prescriptionRepository.GetById(prescriptionId);
+        }
     }
 }

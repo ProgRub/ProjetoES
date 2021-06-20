@@ -72,6 +72,9 @@ namespace ServicesLibrary
 
         private readonly MedicalConditionService _medicalConditionService;
         private readonly UserService _userService;
+        private readonly PatientService _patientService;
+        private readonly HealthCareProfessionalService _healthCareProfessionalService;
+        private readonly TherapistService _therapistService;
         private readonly PrescriptionItemService _prescriptionItemService;
         private readonly PrescriptionService _prescriptionService;
         private readonly TherapySessionService _therapySessionService;
@@ -83,6 +86,9 @@ namespace ServicesLibrary
         {
             _medicalConditionService = MedicalConditionService.Instance;
             _userService = UserService.Instance;
+            _patientService = PatientService.Instance;
+            _healthCareProfessionalService = HealthCareProfessionalService.Instance;
+            _therapistService = TherapistService.Instance;
             _prescriptionService = PrescriptionService.Instance;
             _prescriptionItemService = PrescriptionItemService.Instance;
             _therapySessionService = TherapySessionService.Instance;
@@ -322,9 +328,10 @@ namespace ServicesLibrary
             _userService.LoadDBHelpFunction();
         }
 
+        internal void SaveChanges() => _userService.SaveChanges();
         public IEnumerable<string> GetAllPatients()
         {
-            var patients = _userService.GetAllPatients();
+            var patients = _patientService.GetAll();
             var patientsAsStrings = new List<string>();
             foreach (var patient in patients)
             {
@@ -516,32 +523,35 @@ namespace ServicesLibrary
             }
         }
 
-        public IEnumerable<string> GetHealthCareProfessionals()
+        public IEnumerable<HealthCareProfessionalDTO> GetHealthCareProfessionals()
         {
-            var professionals = new List<string>();
-            foreach (var healthCareProfessional in _userService.GetAllHealthCareProfessionals())
-            {
-                professionals.Add($"{healthCareProfessional.Id} - {healthCareProfessional.FullName}");
-            }
+            return _healthCareProfessionalService.GetAll()
+                .Select(e => HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(e));
+            //var professionals = new List<string>();
+            //foreach (var healthCareProfessional in _healthCareProfessionalService.GetAll())
+            //{
+            //    professionals.Add($"{healthCareProfessional.Id} - {healthCareProfessional.FullName}");
+            //}
 
-            return professionals;
+            //return professionals;
         }
 
-        public void AddPermissionToHealthCareProfessionals(IEnumerable<string> professionals)
+        public void AddPermissionToHealthCareProfessionals(IEnumerable<HealthCareProfessionalDTO> professionals)
         {
             foreach (var prescription in _prescriptionService.SelectedPrescriptions)
             {
                 foreach (var professional in professionals)
                 {
-                    var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
-                    var healthCareProfessional =
-                        (HealthCareProfessional) _userService.GetUserById(int.Parse(professionalSplit[0]));
-                    if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription,
-                        healthCareProfessional))
-                    {
-                        _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription,
-                            healthCareProfessional);
-                    }
+                    _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(_prescriptionService.GetPrescriptionById(prescription.Id),_healthCareProfessionalService.GetById(professional.Id));
+                    //var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
+                    //var healthCareProfessional =
+                    //    (HealthCareProfessional) _userService.GetUserById(int.Parse(professionalSplit[0]));
+                    //if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription,
+                    //    healthCareProfessional))
+                    //{
+                    //    _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription,
+                    //        healthCareProfessional);
+                    //}
                 }
             }
         }
