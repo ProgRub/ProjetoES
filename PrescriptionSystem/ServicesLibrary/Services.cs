@@ -141,14 +141,14 @@ namespace ServicesLibrary
         }
 
         public void CreatePrescription(string patient, string description, DateTime startDate, DateTime endDate,
-            ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises)
+            ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises, List<KeyValuePair<string, string>> recommendedTimes)
         {
             var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
 
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
 
             _prescriptionService.CreatePrescription((Patient) UserService.Instance.GetUserById(patientId), description,
-                startDate, endDate, prescriptionItems);
+                startDate, endDate, prescriptionItems, recommendedTimes);
         }
 
         public ICollection<PrescriptionItem> GetPrescriptionItemsFromStrings(ICollection<string> treatments,
@@ -490,6 +490,21 @@ namespace ServicesLibrary
         public bool IsExercise(int item_id)
         {
             return _prescriptionItemService.IsExercise(item_id);
+        }
+
+        public bool IsMedicineByName(string name)
+        {
+            return _prescriptionItemService.IsMedicineByName(name);
+        }
+
+        public bool IsExerciseByName(string name)
+        {
+            return _prescriptionItemService.IsExerciseByName(name);
+        }
+
+        public bool IsTreatmentByName(string name)
+        {
+            return _prescriptionItemService.IsTreatmentByName(name);
         }
 
         public IEnumerable<string> GetPatientPrescriptions()

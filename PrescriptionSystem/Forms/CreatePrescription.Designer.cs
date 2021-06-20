@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreatePrescription));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,11 +39,15 @@
             this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxPatient = new System.Windows.Forms.ComboBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button3 = new System.Windows.Forms.Button();
+            this.treeViewPrescriptionItems = new System.Windows.Forms.TreeView();
+            this.buttonAddPrescriptionItem = new System.Windows.Forms.Button();
+            this.comboBoxItems = new System.Windows.Forms.ComboBox();
+            this.buttonAddTime = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ButtonRedo = new System.Windows.Forms.Button();
+            this.ButtonUndo = new System.Windows.Forms.Button();
+            this.DateTimePickerRecommendedTime = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // ButtonBack
@@ -133,7 +138,7 @@
             this.button1.TabIndex = 14;
             this.button1.Text = "Create";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // comboBoxPatient
             // 
@@ -144,55 +149,121 @@
             this.comboBoxPatient.Size = new System.Drawing.Size(250, 28);
             this.comboBoxPatient.TabIndex = 15;
             // 
-            // treeView1
+            // treeViewPrescriptionItems
             // 
-            this.treeView1.Location = new System.Drawing.Point(486, 171);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(151, 121);
-            this.treeView1.TabIndex = 16;
+            this.treeViewPrescriptionItems.Location = new System.Drawing.Point(475, 171);
+            this.treeViewPrescriptionItems.Name = "treeViewPrescriptionItems";
+            this.treeViewPrescriptionItems.Size = new System.Drawing.Size(203, 259);
+            this.treeViewPrescriptionItems.TabIndex = 16;
             // 
-            // button2
+            // buttonAddPrescriptionItem
             // 
-            this.button2.Location = new System.Drawing.Point(657, 132);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonAddPrescriptionItem.BackColor = System.Drawing.Color.Aquamarine;
+            this.buttonAddPrescriptionItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddPrescriptionItem.Location = new System.Drawing.Point(616, 92);
+            this.buttonAddPrescriptionItem.Name = "buttonAddPrescriptionItem";
+            this.buttonAddPrescriptionItem.Size = new System.Drawing.Size(62, 29);
+            this.buttonAddPrescriptionItem.TabIndex = 17;
+            this.buttonAddPrescriptionItem.Text = "Add";
+            this.buttonAddPrescriptionItem.UseVisualStyleBackColor = false;
+            this.buttonAddPrescriptionItem.Click += new System.EventHandler(this.ButtonAddPrescriptionItem_Click);
             // 
-            // comboBox1
+            // comboBoxItems
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(674, 75);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(151, 28);
-            this.comboBox1.TabIndex = 18;
+            this.comboBoxItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxItems.FormattingEnabled = true;
+            this.comboBoxItems.Location = new System.Drawing.Point(475, 127);
+            this.comboBoxItems.Name = "comboBoxItems";
+            this.comboBoxItems.Size = new System.Drawing.Size(203, 28);
+            this.comboBoxItems.TabIndex = 18;
+            this.comboBoxItems.SelectedIndexChanged += new System.EventHandler(this.ComboBoxItems_SelectedIndexChanged);
             // 
-            // dateTimePicker1
+            // buttonAddTime
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(745, 208);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(250, 27);
-            this.dateTimePicker1.TabIndex = 19;
+            this.buttonAddTime.BackColor = System.Drawing.Color.Gold;
+            this.buttonAddTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddTime.Location = new System.Drawing.Point(776, 278);
+            this.buttonAddTime.Name = "buttonAddTime";
+            this.buttonAddTime.Size = new System.Drawing.Size(94, 29);
+            this.buttonAddTime.TabIndex = 20;
+            this.buttonAddTime.Text = "Add Time";
+            this.buttonAddTime.UseVisualStyleBackColor = false;
+            this.buttonAddTime.Click += new System.EventHandler(this.ButtonAddTime_Click);
             // 
-            // button3
+            // label6
             // 
-            this.button3.Location = new System.Drawing.Point(745, 263);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(475, 95);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(135, 20);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Prescription Items:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(718, 198);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(152, 20);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Recommended Time:";
+            // 
+            // ButtonRedo
+            // 
+            this.ButtonRedo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ButtonRedo.Enabled = false;
+            this.ButtonRedo.FlatAppearance.BorderSize = 0;
+            this.ButtonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRedo.Image")));
+            this.ButtonRedo.Location = new System.Drawing.Point(579, 437);
+            this.ButtonRedo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonRedo.Name = "ButtonRedo";
+            this.ButtonRedo.Size = new System.Drawing.Size(41, 31);
+            this.ButtonRedo.TabIndex = 24;
+            this.ButtonRedo.UseVisualStyleBackColor = true;
+            this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click_1);
+            // 
+            // ButtonUndo
+            // 
+            this.ButtonUndo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ButtonUndo.Enabled = false;
+            this.ButtonUndo.FlatAppearance.BorderSize = 0;
+            this.ButtonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonUndo.Image")));
+            this.ButtonUndo.Location = new System.Drawing.Point(532, 437);
+            this.ButtonUndo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonUndo.Name = "ButtonUndo";
+            this.ButtonUndo.Size = new System.Drawing.Size(41, 31);
+            this.ButtonUndo.TabIndex = 23;
+            this.ButtonUndo.UseVisualStyleBackColor = true;
+            this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click_1);
+            // 
+            // DateTimePickerRecommendedTime
+            // 
+            this.DateTimePickerRecommendedTime.CustomFormat = "HH:mm";
+            this.DateTimePickerRecommendedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DateTimePickerRecommendedTime.Location = new System.Drawing.Point(718, 233);
+            this.DateTimePickerRecommendedTime.Name = "DateTimePickerRecommendedTime";
+            this.DateTimePickerRecommendedTime.ShowUpDown = true;
+            this.DateTimePickerRecommendedTime.Size = new System.Drawing.Size(222, 27);
+            this.DateTimePickerRecommendedTime.TabIndex = 25;
+            this.DateTimePickerRecommendedTime.ValueChanged += new System.EventHandler(this.DateTimePickerRecommendedTime_ValueChanged);
             // 
             // CreatePrescription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.DateTimePickerRecommendedTime);
+            this.Controls.Add(this.ButtonRedo);
+            this.Controls.Add(this.ButtonUndo);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.buttonAddTime);
+            this.Controls.Add(this.comboBoxItems);
+            this.Controls.Add(this.buttonAddPrescriptionItem);
+            this.Controls.Add(this.treeViewPrescriptionItems);
             this.Controls.Add(this.comboBoxPatient);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePickerEndDate);
@@ -217,11 +288,15 @@
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.comboBoxPatient, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.treeView1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
-            this.Controls.SetChildIndex(this.button3, 0);
+            this.Controls.SetChildIndex(this.treeViewPrescriptionItems, 0);
+            this.Controls.SetChildIndex(this.buttonAddPrescriptionItem, 0);
+            this.Controls.SetChildIndex(this.comboBoxItems, 0);
+            this.Controls.SetChildIndex(this.buttonAddTime, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.ButtonUndo, 0);
+            this.Controls.SetChildIndex(this.ButtonRedo, 0);
+            this.Controls.SetChildIndex(this.DateTimePickerRecommendedTime, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,10 +314,14 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxPatient;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TreeView treeViewPrescriptionItems;
+        private System.Windows.Forms.Button buttonAddPrescriptionItem;
+        private System.Windows.Forms.ComboBox comboBoxItems;
+        private System.Windows.Forms.Button buttonAddTime;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button ButtonRedo;
+        private System.Windows.Forms.Button ButtonUndo;
+        private System.Windows.Forms.DateTimePicker DateTimePickerRecommendedTime;
     }
 }

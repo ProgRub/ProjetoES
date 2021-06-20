@@ -25,7 +25,7 @@ namespace ServicesLibrary.DifferentServices
         internal List<Prescription> SelectedPrescriptions { get; set; }
 
         internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate,
-            ICollection<PrescriptionItem> prescriptionItems)
+            ICollection<PrescriptionItem> prescriptionItems, List<KeyValuePair<string, string>> recommendedTimes)
         {
             var prescription = new Prescription
             {
@@ -37,13 +37,25 @@ namespace ServicesLibrary.DifferentServices
             };
 
             _prescriptionRepository.Add(prescription);
-
+            
             foreach (var item in prescriptionItems)
             {
-                _prescriptionRepository.AddPrescriptionItemToPrescription(prescription, item);
+                _prescriptionRepository.AddPrescriptionItemToPrescription(prescription, item, RecommendedTimesOfPrescriptionItem(item, recommendedTimes));
             }
 
             _prescriptionRepository.SaveChanges();
+        }
+
+        internal List<TimeSpan> RecommendedTimesOfPrescriptionItem(PrescriptionItem prescriptionItem,
+            List<KeyValuePair<string, string>> recommendedTimes)
+        {
+            var recommendedTimesList = new List<TimeSpan>();
+            foreach (var recommendedTime in recommendedTimes)
+            {
+                if(recommendedTime.Key == prescriptionItem.Name) recommendedTimesList.Add(TimeSpan.Parse(recommendedTime.Value));
+            }
+
+            return recommendedTimesList;
         }
 
         internal IEnumerable<Prescription> GetPrescriptionByPatientId()
@@ -52,10 +64,10 @@ namespace ServicesLibrary.DifferentServices
                 .OrderBy(e => e.StartDate);
         }
 
-        internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime date)
         {
             return _prescriptionRepository.Find(e =>
-                e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= _date && e.EndDate >= _date);
+                e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= date && e.EndDate >= date);
         }
 
         public IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)

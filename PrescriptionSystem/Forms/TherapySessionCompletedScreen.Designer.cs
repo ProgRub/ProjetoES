@@ -200,6 +200,7 @@ namespace Forms
             this.TextBoxTherapySessionNote.Name = "TextBoxTherapySessionNote";
             this.TextBoxTherapySessionNote.Size = new System.Drawing.Size(847, 177);
             this.TextBoxTherapySessionNote.TabIndex = 14;
+            this.TextBoxTherapySessionNote.TextChanged += new System.EventHandler(this.TextBoxTherapySessionNote_TextChanged);
             // 
             // ButtonAddSessionNote
             // 

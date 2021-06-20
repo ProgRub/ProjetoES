@@ -1,7 +1,10 @@
-﻿using ComponentsLibrary.Entities;
+﻿using System;
+using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ComponentsLibrary.Repositories.Implementations
@@ -16,8 +19,14 @@ namespace ComponentsLibrary.Repositories.Implementations
             _prescriptionHasViewersRepository = new PrescriptionHasViewersRepository(context);
         }
 
-        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item)
+        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTime)
         {
+            //Debug.WriteLine(item.Name + " : ");
+            //foreach (var t in recommendedTime)
+            //{
+            //    Debug.WriteLine(" - " + t.ToString());
+            //}
+
             if (prescription.PrescriptionHasPrescriptionItemsCollection == null)
             {
                 prescription.PrescriptionHasPrescriptionItemsCollection = new List<PrescriptionHasPrescriptionItems>
@@ -25,7 +34,8 @@ namespace ComponentsLibrary.Repositories.Implementations
                     new PrescriptionHasPrescriptionItems
                     {
                         Prescription = prescription,
-                        PrescriptionItem = item
+                        PrescriptionItem = item,
+                        RecommendedTimes = recommendedTime
                     }
                 };
             }
@@ -34,7 +44,8 @@ namespace ComponentsLibrary.Repositories.Implementations
                 prescription.PrescriptionHasPrescriptionItemsCollection.Add(new PrescriptionHasPrescriptionItems
                 {
                     Prescription = prescription,
-                    PrescriptionItem = item
+                    PrescriptionItem = item,
+                    RecommendedTimes = recommendedTime
                 });
             }
         }

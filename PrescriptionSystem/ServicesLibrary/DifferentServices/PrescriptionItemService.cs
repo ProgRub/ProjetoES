@@ -181,6 +181,21 @@ namespace ServicesLibrary.DifferentServices
             return _exerciseRepository.Find(e => e.Id == item_id).Any();
         }
 
+        internal bool IsMedicineByName(string name)
+        {
+            return _medicineRepository.Find(e => e.Name == name).Any();
+        }
+
+        internal bool IsExerciseByName(string name)
+        {
+            return _exerciseRepository.Find(e => e.Name == name).Any();
+        }
+
+        internal bool IsTreatmentByName(string name)
+        {
+            return _treatmentRepository.Find(e => e.Name == name).Any();
+        }
+
         public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
         {
            return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);

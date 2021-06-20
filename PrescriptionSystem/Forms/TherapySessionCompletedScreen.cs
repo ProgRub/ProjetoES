@@ -103,5 +103,10 @@ namespace Forms
         {
             CommandsManager.Instance.Execute(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text));
         }
+
+        private void TextBoxTherapySessionNote_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
