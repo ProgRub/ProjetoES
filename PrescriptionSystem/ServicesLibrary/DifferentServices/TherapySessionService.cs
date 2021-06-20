@@ -29,6 +29,11 @@ namespace ServicesLibrary.DifferentServices
             return _therapySessionRepository.Find(e => e.Patient == patient);
         }
 
+        internal IEnumerable<TherapySession> GetAllTherapySessionsOfPatient(int patientId)
+        {
+            return _therapySessionRepository.Find(e => e.PatientId == patientId);
+        }
+
         internal IEnumerable<TherapySession> GetAllTherapySessionsOfTherapist(Therapist therapist)
         {
             return _therapySessionRepository.Find(e => e.Therapist == therapist);
@@ -88,25 +93,17 @@ namespace ServicesLibrary.DifferentServices
             _therapySessionRepository.SaveChanges();
         }
 
-        internal IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
-        {
-            return _therapySessionRepository
-                .Find(e => e.TherapistId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date)
-                .OrderBy(e => e.DateTime);
-        }
-
-        internal IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
-        {
-            return _therapySessionRepository
-                .Find(e => e.PatientId == UserService.Instance.LoggedInUserId && e.DateTime.Date == _date)
-                .OrderBy(e => e.DateTime);
-        }
-
         public IEnumerable<Treatment> GetTherapySessionTreatmentsBySessionId(int id)
         {
-            //var therapySessionHasTreatmentsEnumerable = .ToList();
+            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id)
+                .Select(therapySessionTreatment =>
+                    PrescriptionItemService.Instance.GetTreatmentById(therapySessionTreatment.TreatmentId)).ToList();
+        }
 
-            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id).Select(therapySessionTreatment => PrescriptionItemService.Instance.GetTreatmentById(therapySessionTreatment.TreatmentId)).ToList();
+        public IEnumerable<TherapySession> GetTherapySessionsAtDate(
+            IEnumerable<TherapySession> therapySessions, DateTime date)
+        {
+            return therapySessions.Where(e => e.DateTime.Date == date.Date);
         }
     }
 }

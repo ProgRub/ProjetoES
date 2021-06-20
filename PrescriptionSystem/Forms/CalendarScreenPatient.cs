@@ -40,24 +40,24 @@ namespace Forms
 
         //    var data = new List<KeyValuePair<TimeSpan, string>>();
 
-        //    foreach (var prescription in Services.Instance.GetPrescriptionByDate(monthCalendarPatient.SelectionRange.Start))
+        //    foreach (var prescription in Services.Instance.GetPatientsPrescriptionByDate(monthCalendarPatient.SelectionRange.Start))
         //    {
         //        foreach (var item in Services.Instance.GetPrescriptionItems(prescription.Id))
         //        {
         //            if(Services.Instance.IsMedicine(item.Id))
         //            {
-        //                string data_string = "Take " + Services.Instance.GetMedicineByItemId(item.Id).Name + " medicine.";
+        //                string data_string = "Take " + Services.Instance.GetMedicineById(item.Id).Name + " medicine.";
         //                data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
         //            }
         //            if (Services.Instance.IsExercise(item.Id))
         //            {
-        //                string data_string = "Do " + Services.Instance.GetExerciseByItemId(item.Id).Name + " exercise.";
+        //                string data_string = "Do " + Services.Instance.GetExerciseById(item.Id).Name + " exercise.";
         //                data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
         //            }
         //        }
         //    }
 
-        //    foreach (var session in Services.Instance.GetSessionsByPatientId(monthCalendarPatient.SelectionRange.Start))
+        //    foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(monthCalendarPatient.SelectionRange.Start))
         //    {
         //        string data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.TherapistId).FullName + ".";
         //        data.Add(new KeyValuePair<TimeSpan, string>(session.DateTime.TimeOfDay, data_string));

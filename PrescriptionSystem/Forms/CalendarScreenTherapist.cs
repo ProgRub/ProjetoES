@@ -50,7 +50,7 @@ namespace Forms
             var sessions = "";
             var newLine = Environment.NewLine;
 
-            foreach (var session in Services.Instance.GetSessionsByTherapistId(MonthCalendarTherapist.SelectionRange.Start))
+            foreach (var session in Services.Instance.GetLoggedInTherapistsTherapySessionsAtDate(MonthCalendarTherapist.SelectionRange.Start))
             {
                 var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
                 sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSession + newLine 

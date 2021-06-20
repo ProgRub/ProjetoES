@@ -15,15 +15,16 @@ namespace ServicesLibrary.DTOs
         public static MedicineDTO ConvertMedicineToDTO(Medicine medicine)
         {
             var medicineDTO = new MedicineDTO
-                { Id = medicine.Id,Name = medicine.Name, Description = medicine.Description, Price = medicine.Price};
+                {Id = medicine.Id, Name = medicine.Name, Description = medicine.Description, Price = medicine.Price};
             var medicalConditions = PrescriptionItemService.Instance
-                .GetMedicineIncompatibleMedicalConditionsIds(
-                    PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicineDTO.Id))
-                .Select(medicalConditionId =>
-                    MedicalConditionService.Instance.GetMedicalConditionById(medicalConditionId)).ToList();
+                .GetMedicineIncompatibleMedicalConditionsEnumerableByMedicineId(medicineDTO.Id)
+                .Select(medicineHasIncompatibleMedicalConditions =>
+                    MedicalConditionService.Instance.GetMedicalConditionById(medicineHasIncompatibleMedicalConditions
+                        .MedicalConditionId)).ToList();
             var medicalConditionDTOs = medicalConditions.Select(medicalCondition =>
                 MedicalConditionDTO.ConvertMedicalConditionToDTO(medicalCondition)).ToList();
-            medicineDTO.IncompatibleAllergies = medicalConditionDTOs.FindAll(e=>e.Type==MedicalConditionDTO.Allergy);
+            medicineDTO.IncompatibleAllergies =
+                medicalConditionDTOs.FindAll(e => e.Type == MedicalConditionDTO.Allergy);
             medicineDTO.IncompatibleDiseases = medicalConditionDTOs.FindAll(e => e.Type == MedicalConditionDTO.Disease);
             return medicineDTO;
         }

@@ -108,13 +108,13 @@ namespace ServicesLibrary
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
             validator = new StringEmptyValidator(PhoneNumberRequired, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(PhoneNumberNotANumber, ref errorCodes)).SetNext(
+            validator.SetNext(new StringIsIntegerValidator(PhoneNumberNotANumber, ref errorCodes)).SetNext(
                 new StringLengthValidator(PhoneNumberWrongLength, ref errorCodes,
                     PhoneNumberMinimumLength,
                     PhoneNumberMaximumLength));
             validator.Validate(phoneNumberString);
             validator = new StringEmptyValidator(HealthUserNumberRequired, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(HealthUserNumberNotANumber, ref errorCodes))
+            validator.SetNext(new StringIsIntegerValidator(HealthUserNumberNotANumber, ref errorCodes))
                 .SetNext(new StringLengthValidator(HealthUserNumberWrongLength, ref errorCodes,
                     HealthUserNumberMinimumLength, HealthUserNumberMaximumLength)).SetNext(
                     new StringUniqueValidator(HealthUserNumberAlreadyExists, ref errorCodes,
@@ -198,28 +198,13 @@ namespace ServicesLibrary
                         .LoggedInUserId)),
                 StartDate = startDate,
                 EndDate = endDate,
-
             };
-            PrescriptionDTO.AddPrescriptionItemsToDTO(prescriptionDTO,prescriptionItems);
+            PrescriptionDTO.AddPrescriptionItemsToDTO(prescriptionDTO, prescriptionItems);
             validator = new AgeValidator(InvalidAge, ref errorCodes);
             validator.SetNext(new AllergyValidator(IncompatibleMedicine, ref errorCodes))
-                .SetNext(new ExistingDiseaseValidator(IncompatibleDisease, ref errorCodes)).SetNext(new MissingBodyPartValidator(MissingBodyPart,ref errorCodes));
+                .SetNext(new ExistingDiseaseValidator(IncompatibleDisease, ref errorCodes))
+                .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes));
             validator.Validate(prescriptionDTO);
-
-           // var validateResult = validator.Validate(new List<object>
-           //{
-           //     new Prescription
-           //     {
-           //         Patient = (Patient) UserService.Instance.GetUserById(patientId),
-           //         Author = (HealthCareProfessional) UserService.Instance.GetUserById(UserService.Instance
-           //             .LoggedInUserId),
-           //         StartDate = startDate, EndDate = endDate
-           //     },
-           //     prescriptionItems,
-           //     errorCodes
-           // });
-
-           // errorCodes = (List<int>) validateResult;
 
             return errorCodes;
         }
@@ -254,19 +239,11 @@ namespace ServicesLibrary
             validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
             validator.Validate(description);
             validator = new StringEmptyValidator(AgeMinimumNotValid, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(AgeMinimumNotValid, ref errorCodes));
+            validator.SetNext(new StringIsIntegerValidator(AgeMinimumNotValid, ref errorCodes));
             validator.Validate(ageMinimum);
             validator = new StringEmptyValidator(AgeMaximumNotValid, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(AgeMaximumNotValid, ref errorCodes));
+            validator.SetNext(new StringIsIntegerValidator(AgeMaximumNotValid, ref errorCodes));
             validator.Validate(ageMaximum);
-            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            //if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
-
-            //if (!int.TryParse(ageMinimum, out _)) errorCodes.Add(AgeMinimumNotValid);
-            //else if (string.IsNullOrWhiteSpace(ageMinimum)) errorCodes.Add(AgeMinimumNotValid);
-
-            //if (!int.TryParse(ageMaximum, out _)) errorCodes.Add(AgeMaximumNotValid);
-            //else if (string.IsNullOrWhiteSpace(ageMaximum)) errorCodes.Add(AgeMaximumNotValid);
 
             return errorCodes;
         }
@@ -279,14 +256,8 @@ namespace ServicesLibrary
             validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
             validator.Validate(description);
             validator = new StringEmptyValidator(PriceNotValid, ref errorCodes);
-            validator.SetNext(new StringIsNumberValidator(PriceNotValid, ref errorCodes));
+            validator.SetNext(new StringIsFloatValidator(PriceNotValid, ref errorCodes));
             validator.Validate(price);
-
-            //if (string.IsNullOrWhiteSpace(name)) errorCodes.Add(NameRequired);
-            //if (string.IsNullOrWhiteSpace(description)) errorCodes.Add(DescriptionRequired);
-
-            //if (!double.TryParse(price, out _)) errorCodes.Add(PriceNotValid);
-            //else if (string.IsNullOrWhiteSpace(price)) errorCodes.Add(PriceNotValid);
 
             return errorCodes;
         }
@@ -329,6 +300,7 @@ namespace ServicesLibrary
         }
 
         internal void SaveChanges() => _userService.SaveChanges();
+
         public IEnumerable<string> GetAllPatients()
         {
             var patients = _patientService.GetAll();
@@ -343,7 +315,7 @@ namespace ServicesLibrary
 
         public IEnumerable<TreatmentDTO> GetAllTreatments()
         {
-            return _prescriptionItemService.GetAllTreatments().Select(e=>TreatmentDTO.ConvertTreatmentToDTO(e));
+            return _prescriptionItemService.GetAllTreatments().Select(e => TreatmentDTO.ConvertTreatmentToDTO(e));
         }
 
         public IEnumerable<int> CheckTherapySessionCreation(string patient, DateTime sessionDate, DateTime sessionTime,
@@ -355,10 +327,6 @@ namespace ServicesLibrary
             validator.Validate(patient);
             if (errorCodes.Any()) return errorCodes;
             var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-            //if (!_userService.IsPatientAvailable(patientId, sessionDate, sessionTime, estimatedDuration))
-            //{
-            //    errorCodes.Add(PatientUnavailable);
-            //}
             validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
             validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
             validator.Validate(new TherapySession()
@@ -367,18 +335,8 @@ namespace ServicesLibrary
                 Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
                 DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay), EstimatedDuration = estimatedDuration
             });
-            //List<object> validateResultList = (List<object>) validateResult;
-
-            //if (!_userService.IsTherapistAvailable(sessionDate, sessionTime, estimatedDuration))
-            //{
-            //    errorCodes.Add(TherapistUnavailable);
-            //}
             validator = new EnumerableEmptyValidator(AtLeastOneTreatment, ref errorCodes);
             validator.Validate(treatments);
-            //if (!treatments.Any())
-            //{
-            //    errorCodes.Add(AtLeastOneTreatment);
-            //}
 
             return errorCodes;
         }
@@ -432,41 +390,41 @@ namespace ServicesLibrary
             return treatments;
         }
 
-        public string GetTreatmentNote(int sessionId,int treatmentId)
+        public string GetTreatmentNote(int sessionId, int treatmentId)
         {
-            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId, treatmentId).Note;
+            return _therapySessionService
+                .GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId, treatmentId).Note;
         }
 
-        public bool GetTreatmentCompletedStatus(int sessionId,int treatmentId)
+        public bool GetTreatmentCompletedStatus(int sessionId, int treatmentId)
         {
-            return _therapySessionService.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId,treatmentId)
+            return _therapySessionService
+                .GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId, treatmentId)
                 .CompletedTreatment;
         }
 
-        public string GetSelectedTherapySessionNote()
+
+        public IEnumerable<Prescription> GetLoggedInPatientsPrescriptions()
         {
-            return _therapySessionService.GetSelectedTherapySession().Note;
+            return _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId);
         }
 
-
-        public IEnumerable<Prescription> GetPrescriptionByPatientId()
+        public IEnumerable<Prescription> GetLoggedInPatientsPrescriptionsAtDate(DateTime date)
         {
-            return _prescriptionService.GetPrescriptionByPatientId();
+            return _prescriptionService.GetPrescriptionsStartedBeforeDate(
+                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId),date);
         }
 
-        public IEnumerable<Prescription> GetPrescriptionByDate(DateTime _date)
+        public IEnumerable<TherapySession> GetLoggedInTherapistsTherapySessionsAtDate(DateTime date)
         {
-            return _prescriptionService.GetPrescriptionByDate(_date);
+            return _therapySessionService.GetTherapySessionsAtDate(
+                _therapySessionService.GetAllTherapySessionsOfTherapist(_userService.LoggedInUserId), date);
         }
 
-        public IEnumerable<TherapySession> GetSessionsByTherapistId(DateTime _date)
+        public IEnumerable<TherapySession> GetLoggedInPatientsTherapySessionsAtDate(DateTime date)
         {
-            return _therapySessionService.GetSessionsByTherapistId(_date);
-        }
-
-        public IEnumerable<TherapySession> GetSessionsByPatientId(DateTime _date)
-        {
-            return _therapySessionService.GetSessionsByPatientId(_date);
+            return _therapySessionService.GetTherapySessionsAtDate(
+                _therapySessionService.GetAllTherapySessionsOfPatient(_userService.LoggedInUserId), date);
         }
 
         public User GetUserById(int id)
@@ -479,24 +437,24 @@ namespace ServicesLibrary
             return _prescriptionService.GetPrescriptionItemsOfPrescriptionById(pres_id);
         }
 
-        public Medicine GetMedicineByItemId(int item_id)
+        public Medicine GetMedicineById(int id)
         {
-            return _prescriptionItemService.GetMedicineById(item_id);
+            return _prescriptionItemService.GetMedicineById(id);
         }
 
-        public Exercise GetExerciseByItemId(int item_id)
+        public Exercise GetExerciseById(int id)
         {
-            return _prescriptionItemService.GetExerciseById(item_id);
+            return _prescriptionItemService.GetExerciseById(id);
         }
 
-        public bool IsMedicine(int item_id)
+        public bool IsMedicine(int id)
         {
-            return _prescriptionItemService.IsMedicine(item_id);
+            return _prescriptionItemService.IsMedicine(id);
         }
 
-        public bool IsExercise(int item_id)
+        public bool IsExercise(int id)
         {
-            return _prescriptionItemService.IsExercise(item_id);
+            return _prescriptionItemService.IsExercise(id);
         }
 
         public IEnumerable<string> GetPatientPrescriptions()
@@ -527,13 +485,6 @@ namespace ServicesLibrary
         {
             return _healthCareProfessionalService.GetAll()
                 .Select(e => HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(e));
-            //var professionals = new List<string>();
-            //foreach (var healthCareProfessional in _healthCareProfessionalService.GetAll())
-            //{
-            //    professionals.Add($"{healthCareProfessional.Id} - {healthCareProfessional.FullName}");
-            //}
-
-            //return professionals;
         }
 
         public void AddPermissionToHealthCareProfessionals(IEnumerable<HealthCareProfessionalDTO> professionals)
@@ -542,30 +493,15 @@ namespace ServicesLibrary
             {
                 foreach (var professional in professionals)
                 {
-                    _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(_prescriptionService.GetPrescriptionById(prescription.Id),_healthCareProfessionalService.GetById(professional.Id));
-                    //var professionalSplit = professional.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
-                    //var healthCareProfessional =
-                    //    (HealthCareProfessional) _userService.GetUserById(int.Parse(professionalSplit[0]));
-                    //if (!_prescriptionService.CanHealthCareProfessionalViewPrescription(prescription,
-                    //    healthCareProfessional))
-                    //{
-                    //    _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(prescription,
-                    //        healthCareProfessional);
-                    //}
+                    _prescriptionService.AddHealthCareProfessionalAsViewerToPrescription(
+                        _prescriptionService.GetPrescriptionById(prescription.Id),
+                        _healthCareProfessionalService.GetById(professional.Id));
                 }
             }
         }
 
-        internal void AddErrorCode(List<int> errorCodes, int errorCode)
-        {
-            if (!errorCodes.Contains(errorCode))
-            {
-                errorCodes.Add(errorCode);
-            }
-            return;
-        }
-        
-        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(
+            int prescriptionId)
         {
             return _prescriptionService.GetPrescriptionHasItemsEnumerableByPrescriptionId(prescriptionId);
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class StringIsNumberValidator:BaseValidator
+    public class StringIsIntegerValidator:BaseValidator
     {
-        public StringIsNumberValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public StringIsIntegerValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
         }
 
