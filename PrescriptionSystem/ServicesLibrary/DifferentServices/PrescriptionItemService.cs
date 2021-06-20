@@ -6,6 +6,7 @@ using ComponentsLibrary.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -14,85 +15,78 @@ namespace ServicesLibrary.DifferentServices
         private readonly IMedicineRepository _medicineRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ITreatmentRepository _treatmentRepository;
-        private readonly PrescriptionHasItemsRepository _prescriptionRepository;
+        //private readonly PrescriptionHasItemsRepository _prescriptionRepository;
 
         private PrescriptionItemService()
         {
             _medicineRepository = new MedicineRepository(Database.GetContext());
             _exerciseRepository = new ExerciseRepository(Database.GetContext());
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
-            _prescriptionRepository = new PrescriptionHasItemsRepository(Database.GetContext());
+            //_prescriptionRepository = new PrescriptionHasItemsRepository(Database.GetContext());
         }
 
         internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
 
-        internal void CreateExercisePrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
-            TimeSpan duration, IEnumerable<string> bodyParts)
+        public void CreateExercisePrescriptionItem(ExerciseDTO exerciseDTO)
         {
             var exercise = new Exercise
             {
-                Name = name, Description = description, AgeMinimum = ageMinimum, AgeMaximum = ageMaximum,
-                Duration = duration,
+                Name = exerciseDTO.Name,
+                Description = exerciseDTO.Description,
+                AgeMinimum = exerciseDTO.AgeMinimum,
+                AgeMaximum = exerciseDTO.AgeMaximum,
+                Duration = exerciseDTO.Duration,
+                BodyParts = exerciseDTO.BodyParts.ToList()
             };
             _exerciseRepository.Add(exercise);
-            AddBodyPartsToExercise(exercise, bodyParts);
             _exerciseRepository.SaveChanges();
         }
 
-        internal void CreateMedicinePrescriptionItem(string name, string description, double price,
-            IEnumerable<MedicalCondition> allergies, IEnumerable<MedicalCondition> diseases)
+        public void CreateMedicinePrescriptionItem(MedicineDTO medicineDTO)
         {
             var medicine = new Medicine
             {
-                Name = name,
-                Description = description,
-                Price = price
+                Name = medicineDTO.Name,
+                Description = medicineDTO.Description,
+                Price = medicineDTO.Price
             };
 
             _medicineRepository.Add(medicine);
-            AddIncompatibleMedicalConditionsToMedicine(medicine, allergies, diseases);
+            AddIncompatibleMedicalConditionsToMedicine(medicine, medicineDTO.IncompatibleAllergies,
+                medicineDTO.IncompatibleDiseases);
             _medicineRepository.SaveChanges();
         }
 
-        internal void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
-            TimeSpan duration, string bodyPart)
-        {
-            var treatment = new Treatment
-            {
-                Name = name,
-                Description = description,
-                AgeMinimum = ageMinimum,
-                AgeMaximum = ageMaximum,
-                Duration = duration,
-                BodyPart = (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart)
-            };
-            _treatmentRepository.Add(treatment);
-            _treatmentRepository.SaveChanges();
-        }
-
-        private void AddIncompatibleMedicalConditionsToMedicine(Medicine medicine, IEnumerable<MedicalCondition> allergies,
-            IEnumerable<MedicalCondition> diseases)
+        private void AddIncompatibleMedicalConditionsToMedicine(Medicine medicine,
+            IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases)
         {
             foreach (var allergy in allergies)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine,allergy);
+                _medicineRepository.AddMedicalConditionToMedicine(medicine,
+                    MedicalConditionService.Instance.GetMedicalConditionById(allergy.Id));
             }
 
             foreach (var disease in diseases)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine, disease);
+                _medicineRepository.AddMedicalConditionToMedicine(medicine,
+                    MedicalConditionService.Instance.GetMedicalConditionById(disease.Id));
             }
         }
 
-        private void AddBodyPartsToExercise(Exercise exercise, IEnumerable<string> bodyParts)
+        internal void CreateTreatmentPrescriptionItem(TreatmentDTO treatmentDTO)
         {
-            foreach (var bodyPartString in bodyParts)
+            var treatment = new Treatment
             {
-                _exerciseRepository.AddBodyPartsToExercise(exercise,
-                    (BodyPart) Enum.Parse(typeof(BodyPart), bodyPartString));
-            }
+                Name = treatmentDTO.Name,
+                Description = treatmentDTO.Description,
+                AgeMinimum = treatmentDTO.AgeMinimum,
+                AgeMaximum = treatmentDTO.AgeMaximum,
+                Duration = treatmentDTO.Duration,
+                BodyPart = treatmentDTO.BodyPart
+            };
+            _treatmentRepository.Add(treatment);
+            _treatmentRepository.SaveChanges();
         }
-
 
         internal IEnumerable<Treatment> GetAllTreatments()
         {
@@ -129,12 +123,8 @@ namespace ServicesLibrary.DifferentServices
             return _treatmentRepository.GetById(id);
         }
 
-        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
-        {
-            return _prescriptionRepository.Find(e => e.PrescriptionId == prescriptionId);
-        }
-
-        internal IEnumerable<MedicineHasIncompatibleMedicalConditions> GetMedicineIncompatibleMedicalConditionsEnumerableByMedicineId(int id)
+        internal IEnumerable<MedicineHasIncompatibleMedicalConditions>
+            GetMedicineIncompatibleMedicalConditionsEnumerableByMedicineId(int id)
         {
             return _medicineRepository.GetIncompatibleMedicalConditionsOfMedicineByMedicineId(id);
         }
@@ -166,7 +156,7 @@ namespace ServicesLibrary.DifferentServices
 
         public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
         {
-           return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
+            return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
         }
     }
 }

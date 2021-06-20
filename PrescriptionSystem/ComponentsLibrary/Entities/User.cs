@@ -13,5 +13,6 @@ namespace ComponentsLibrary.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public ICollection<UserHasMedicalCondition> UserHasMedicalConditions { get; set; }
+        public ICollection<BodyPart> MissingBodyParts { get; set; }
     }
 }

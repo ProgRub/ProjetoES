@@ -21,23 +21,41 @@ namespace ServicesLibrary.DifferentServices
 
 
 
-        internal void RegisterTherapist(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber, string email,
-            string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases, IEnumerable<string> missingBodyParts)
+        //internal void RegisterTherapist(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber, string email,
+        //    string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases, IEnumerable<string> missingBodyParts)
+        //{
+        //    var therapist = new Therapist
+        //    {
+        //        FullName = name,
+        //        DateOfBirth = dateOfBirth,
+        //        Email = email,
+        //        HealthUserNumber = healthUserNumber,
+        //        Password = password,
+        //        PhoneNumber = phoneNumber
+        //    };
+        //    _therapistRepository.Add(therapist);
+        //    AddMedicalConditionsToUser(therapist, allergies, diseases);
+        //    AddMissingBodyPartsToUser(therapist, missingBodyParts);
+        //    _therapistRepository.SaveChanges();
+        //    UserService.Instance.SaveChanges();
+        //}
+
+        public void RegisterTherapist(UserDTO user, string email, string password)
         {
             var therapist = new Therapist
             {
-                FullName = name,
-                DateOfBirth = dateOfBirth,
+                FullName = user.FullName,
+                DateOfBirth = user.DateOfBirth,
                 Email = email,
-                HealthUserNumber = healthUserNumber,
                 Password = password,
-                PhoneNumber = phoneNumber
+                HealthUserNumber = user.HealthUserNumber,
+                PhoneNumber = user.PhoneNumber
             };
             _therapistRepository.Add(therapist);
-            AddMedicalConditionsToUser(therapist, allergies, diseases);
-            AddMissingBodyPartsToUser(therapist, missingBodyParts);
+            AddMedicalConditionsToUser(therapist, user.Allergies, user.Diseases);
+            AddMissingBodyPartsToUser(therapist, user.MissingBodyParts);
             _therapistRepository.SaveChanges();
-            Services.Instance.SaveChanges();
+            UserService.Instance.SaveChanges();
         }
     }
 }

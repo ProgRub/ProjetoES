@@ -4,14 +4,16 @@ using ComponentsLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    partial class PrescriptionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210620165119_BodyPartLists")]
+    partial class BodyPartLists
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,6 +330,21 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
+
+                    b.Property<int>("BodyPart")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHasMissingBodyPart");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
@@ -729,6 +746,21 @@ namespace ComponentsLibrary.Migrations
                         .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMissingBodyPart", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>

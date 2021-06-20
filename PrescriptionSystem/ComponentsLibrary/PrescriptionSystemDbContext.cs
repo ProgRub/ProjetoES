@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using Microsoft.EntityFrameworkCore;
@@ -46,14 +47,12 @@ namespace ComponentsLibrary
             modelBuilder.Entity<TherapySession>().ToTable("TherapySession");
             modelBuilder.Entity<Prescription>().ToTable("Prescription");
             modelBuilder.Entity<Exercise>().ToTable("Exercise");
-            modelBuilder.Entity<ExerciseHasBodyParts>().ToTable("ExerciseHasBodyParts");
             modelBuilder.Entity<MedicineHasIncompatibleMedicalConditions>()
                 .ToTable("MedicineHasIncompatibleMedicalConditions");
             modelBuilder.Entity<PrescriptionHasPrescriptionItems>().ToTable("PrescriptionHasPrescriptionItems");
             modelBuilder.Entity<PrescriptionHasViewers>().ToTable("PrescriptionHasViewers");
             modelBuilder.Entity<TherapySessionHasTreatments>().ToTable("TherapySessionHasTreatments");
             modelBuilder.Entity<UserHasMedicalCondition>().ToTable("UserHasMedicalCondition");
-            modelBuilder.Entity<UserHasMissingBodyPart>().ToTable("UserHasMissingBodyPart");
         }
 
         private void PropertiesConfiguration(ModelBuilder modelBuilder)
@@ -189,16 +188,16 @@ namespace ComponentsLibrary
                 Duration = new TimeSpan(0, 15, 0)
             };
             modelBuilder.Entity<Exercise>().HasData(burpees, pushups, squats);
-            modelBuilder.Entity<ExerciseHasBodyParts>().HasData(new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.RightArm, Id = 100, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.LeftArm, Id = 101, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.LeftLeg, Id = 102, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 8, BodyPart = BodyPart.RightLeg, Id = 103, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.RightArm, Id = 104, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.LeftArm, Id = 105, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 9, BodyPart = BodyPart.Torso, Id = 106, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 10, BodyPart = BodyPart.LeftLeg, Id = 107, Zombie = false}, new ExerciseHasBodyParts
-                {ExerciseId = 10, BodyPart = BodyPart.RightLeg, Id = 108, Zombie = false});
+            //modelBuilder.Entity<ExerciseHasBodyParts>().HasData(new ExerciseHasBodyParts
+            //    {ExerciseId = 8, BodyPart = BodyPart.RightArm, Id = 100, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 8, BodyPart = BodyPart.LeftArm, Id = 101, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 8, BodyPart = BodyPart.LeftLeg, Id = 102, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 8, BodyPart = BodyPart.RightLeg, Id = 103, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 9, BodyPart = BodyPart.RightArm, Id = 104, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 9, BodyPart = BodyPart.LeftArm, Id = 105, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 9, BodyPart = BodyPart.Torso, Id = 106, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 10, BodyPart = BodyPart.LeftLeg, Id = 107, Zombie = false}, new ExerciseHasBodyParts
+            //    {ExerciseId = 10, BodyPart = BodyPart.RightLeg, Id = 108, Zombie = false});
             modelBuilder.Entity<MedicalCondition>().HasData(new MedicalCondition
             {
                 Id = 11,
@@ -305,8 +304,30 @@ namespace ComponentsLibrary
 
             modelBuilder
                 .Entity<PrescriptionHasPrescriptionItems>()
-                .Property(e => e.RecommendedTimes) //Property
+                .Property(e => e.RecommendedTimes) 
                 .HasConversion(timeSpanValueConverter);
+
+            modelBuilder
+                .Entity<User>()
+                .Property(e => e.MissingBodyParts) 
+                .HasConversion(
+                    v => string.Join(',',v.Select(e => e.ToString("D")).ToArray()),
+                    v => v.Split(new[] { ',' })
+                        .Select(e => Enum.Parse(typeof(BodyPart), e))
+                        .Cast<BodyPart>()
+                        .ToList()
+                );
+
+            modelBuilder
+                .Entity<Exercise>()
+                .Property(e => e.BodyParts)
+                .HasConversion(
+                    v => string.Join(',', v.Select(e => e.ToString("D")).ToArray()),
+                    v => v.Split(new[] { ',' })
+                        .Select(e => Enum.Parse(typeof(BodyPart), e))
+                        .Cast<BodyPart>()
+                        .ToList()
+                );
         }
 
         public DbSet<Patient> Patients { get; set; }
@@ -319,7 +340,6 @@ namespace ComponentsLibrary
         public DbSet<TherapySession> TherapySessions { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
-        public DbSet<ExerciseHasBodyParts> ExerciseHasBodyPartsEnumerable { get; set; }
 
         public DbSet<MedicineHasIncompatibleMedicalConditions> MedicineHasIncompatibleMedicalConditionsEnumerable
         {
@@ -331,7 +351,6 @@ namespace ComponentsLibrary
         public DbSet<PrescriptionHasViewers> PrescriptionHasViewersEnumerable { get; set; }
         public DbSet<TherapySessionHasTreatments> TherapySessionHasTreatmentsEnumerable { get; set; }
         public DbSet<UserHasMedicalCondition> UserHasMedicalConditionsEnumerable { get; set; }
-        public DbSet<UserHasMissingBodyPart> UserHasMissingBodyPartsEnumerable { get; set; }
 
         //Comando na Package Manager Console para adicionar modificações no contexto à DB => Add-Migration 
         //Comando na Package Manager Console para atualizar DB => Update-Database

@@ -119,10 +119,11 @@ namespace ServicesLibrary.DifferentServices
             return _prescriptionRepository.GetById(prescriptionId);
         }
 
-        public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByItemId(int prescriptionItemId)
+        public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(int prescriptionID,
+            int prescriptionItemId)
         {
-#warning TODO: Implementar isto
-            return new List<TimeSpan>();
+            return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionID)
+                .First(e => e.PrescriptionItemId == prescriptionItemId).RecommendedTimes;
         }
     }
 }

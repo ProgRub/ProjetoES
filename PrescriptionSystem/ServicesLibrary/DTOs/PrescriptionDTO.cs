@@ -55,19 +55,19 @@ namespace ServicesLibrary.DTOs
                 {
                     var exerciseDto = ExerciseDTO.ConvertExerciseToDTO((Exercise) prescriptionItem);
                     exerciseDtos.Add(exerciseDto);
-                    recommendedTimes.Add(exerciseDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
+                    recommendedTimes.Add(exerciseDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(TODO, prescriptionItem.Id));
                 }
                 else if (PrescriptionItemService.Instance.IsMedicine(prescriptionItem.Id))
                 {
                     var medicineDto = MedicineDTO.ConvertMedicineToDTO((Medicine) prescriptionItem);
                     medicineDtos.Add(medicineDto);
-                    recommendedTimes.Add(medicineDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
+                    recommendedTimes.Add(medicineDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(TODO, prescriptionItem.Id));
                 }
                 else
                 {
                     var treatmentDto = TreatmentDTO.ConvertTreatmentToDTO((Treatment) prescriptionItem);
                     treatmentDtos.Add(treatmentDto);
-                    recommendedTimes.Add(treatmentDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
+                    recommendedTimes.Add(treatmentDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(TODO, prescriptionItem.Id));
                 }
             }
 

@@ -75,8 +75,13 @@ namespace Forms
                 diseases.Add(GetDiseaseFromString(checkedItem.ToString()));
             }
 
-            Services.Instance.CreateMedicinePrescriptionItem(TextBoxMedicineName.Text, TextBoxMedicineDescription.Text,
-                double.Parse(TextBoxMedicinePrice.Text), allergies, diseases);
+            //Services.Instance.CreateMedicinePrescriptionItem(TextBoxMedicineName.Text, TextBoxMedicineDescription.Text,
+            //    double.Parse(TextBoxMedicinePrice.Text), allergies, diseases);
+            Services.Instance.CreateMedicinePrescriptionItem(new MedicineDTO
+            {
+                Name = TextBoxMedicineName.Text,Description = TextBoxMedicineDescription.Text,Price = double.Parse(TextBoxMedicinePrice.Text),
+                IncompatibleAllergies = allergies,IncompatibleDiseases = diseases
+            });
             ShowInformationMessageBox("Medicine successfully added.", "Success");
             MoveToScreen(new AddPrescriptionItemScreen());
         }

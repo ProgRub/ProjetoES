@@ -26,20 +26,32 @@ namespace ServicesLibrary.DifferentServices
 
         internal User GetUserById(int id)
         {
-            return _userRepository.Find(e => e.Id == id).First();
+            return _userRepository.GetById(id);
         }
 
-        internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
-            string email, string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
-            IEnumerable<string> missingBodyParts, string type)
+        //internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
+        //    string email, string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
+        //    IEnumerable<string> missingBodyParts, string userType)
+        //{
+        //    switch (userType)
+        //    {
+        //        case "Patient":
+        //            PatientService.Instance.RegisterPatient(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
+        //            return;
+        //        case "Therapist":
+        //            TherapistService.Instance.RegisterTherapist(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
+        //            return;
+        //    }
+        //}
+        public void RegisterUser(UserDTO user, string email, string password, string userType)
         {
-            switch (type)
+            switch (userType)
             {
                 case "Patient":
-                    PatientService.Instance.RegisterPatient(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
+                    PatientService.Instance.RegisterPatient(user,email,password);
                     return;
                 case "Therapist":
-                    TherapistService.Instance.RegisterTherapist(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
+                    TherapistService.Instance.RegisterTherapist(user, email, password);
                     return;
             }
         }
@@ -59,12 +71,21 @@ namespace ServicesLibrary.DifferentServices
             }
         }
 
-        protected void AddMissingBodyPartsToUser(User user, IEnumerable<string> missingBodyParts)
+        //protected void AddMissingBodyPartsToUser(User user, IEnumerable<string> missingBodyParts)
+        //{
+        //    foreach (var bodyPartString in missingBodyParts)
+        //    {
+        //        _userRepository.AddMissingBodyPartToUser(user, (BodyPart) Enum.Parse(typeof(BodyPart), bodyPartString));
+        //    }
+        //}
+
+        protected void AddMissingBodyPartsToUser(User user, IEnumerable<BodyPart> missingBodyParts)
         {
-            foreach (var bodyPartString in missingBodyParts)
-            {
-                _userRepository.AddMissingBodyPartToUser(user, (BodyPart) Enum.Parse(typeof(BodyPart), bodyPartString));
-            }
+            user.MissingBodyParts = missingBodyParts.ToList();
+            //foreach (var bodyPart in missingBodyParts)
+            //{
+            //    _userRepository.AddMissingBodyPartToUser(user, bodyPart);
+            //}
         }
 
         internal bool IsUserEmailInDatabase(string email)
@@ -92,7 +113,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<BodyPart> GetUserMissingBodyPartsByUserId(int id)
         {
-            return _userRepository.GetUserHasMissingBodyPartEnumerableByUserId(id).Select(userHasMissingBodyPart => userHasMissingBodyPart.BodyPart).ToList();
+            return _userRepository.GetById(id).MissingBodyParts;
         }
         
         internal IEnumerable<MedicalCondition> GetUsersMedicalConditionsByUserId(int userId)
@@ -106,5 +127,6 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal void SaveChanges() => _userRepository.SaveChanges();
+
     }
 }
