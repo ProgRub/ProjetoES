@@ -15,6 +15,16 @@ namespace Forms
         public GetPrescriptionHistoryScreen()
         {
             InitializeComponent();
+        }
+
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new CalendarScreenPatient());
+        }
+
+        private void GetPrescriptionHistoryScreen_Load(object sender, EventArgs e)
+        {
 
             foreach (var prescription in Services.Instance.GetPrescriptionByPatientId())
             {
@@ -25,12 +35,6 @@ namespace Forms
                 listViewItem.SubItems.Add("Show more details");
                 listViewPrescriptionHistory.Items.Add(listViewItem);
             }
-        }
-
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenPatient());
         }
     }
 }

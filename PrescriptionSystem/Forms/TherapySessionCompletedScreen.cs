@@ -26,14 +26,8 @@ namespace Forms
         private void TherapySessionCompletedScreen_Load(object sender, EventArgs e)
         {
             _therapySession = Services.Instance.GetSelectedTherapySession();
-            CommandsManager.Instance.Notify += (sender, args) =>
-            {
-                ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
-            };
-            CommandsManager.Instance.Notify += (sender, args) =>
-            {
-                ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
-            };
+            CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
+            CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
             LabelSessionInfo.Text =
                 $"{_therapySession.Id} | {_therapySession.Patient.FullName} | {_therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
             foreach (var treatment in _therapySession.Treatments)
@@ -85,18 +79,18 @@ namespace Forms
         private void SetEnabledTreatmentNoteControls(bool state)
         {
             TextBoxTreatmentNote.Enabled = state;
-            ButtonAddTreatmentNote.Enabled = state;
+            ButtonAddTreatmentNoteSetCompletedState.Enabled = state;
             CheckBoxCompletedTreatment.Enabled = state;
         }
 
-        private void ButtonAddTreatmentNote_Click(object sender, EventArgs e)
+        private void ButtonAddTreatmentNoteSetCompletedState_Click(object sender, EventArgs e)
         {
-            SetEnabledTreatmentNoteControls(false);
             CommandsManager.Instance.Execute(new CommandAddTreatmentNoteSetCompleted(TextBoxTreatmentNote.Text,
                 CheckBoxCompletedTreatment.Checked, _therapySession.Id,
                 _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id));
             TextBoxTreatmentNote.Text = "";
             CheckBoxCompletedTreatment.Checked = false;
+            SetEnabledTreatmentNoteControls(false);
         }
 
         private void ButtonAddSessionNote_Click(object sender, EventArgs e)

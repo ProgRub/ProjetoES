@@ -46,9 +46,9 @@ namespace Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(388, 53);
+            this.label1.Location = new System.Drawing.Point(340, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 31);
+            this.label1.Size = new System.Drawing.Size(193, 25);
             this.label1.TabIndex = 6;
             this.label1.Text = "Prescription\'s History";
             // 
@@ -65,10 +65,11 @@ namespace Forms
             this.listViewPrescriptionHistory.GridLines = true;
             this.listViewPrescriptionHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPrescriptionHistory.HideSelection = false;
-            this.listViewPrescriptionHistory.Location = new System.Drawing.Point(33, 117);
+            this.listViewPrescriptionHistory.Location = new System.Drawing.Point(29, 88);
+            this.listViewPrescriptionHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewPrescriptionHistory.MultiSelect = false;
             this.listViewPrescriptionHistory.Name = "listViewPrescriptionHistory";
-            this.listViewPrescriptionHistory.Size = new System.Drawing.Size(969, 632);
+            this.listViewPrescriptionHistory.Size = new System.Drawing.Size(848, 475);
             this.listViewPrescriptionHistory.TabIndex = 6;
             this.listViewPrescriptionHistory.UseCompatibleStateImageBehavior = false;
             this.listViewPrescriptionHistory.View = System.Windows.Forms.View.Details;
@@ -100,13 +101,15 @@ namespace Forms
             // 
             // GetPrescriptionHistoryScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.listViewPrescriptionHistory);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "GetPrescriptionHistoryScreen";
-            this.Size = new System.Drawing.Size(1091, 785);
+            this.Size = new System.Drawing.Size(955, 589);
+            this.Load += new System.EventHandler(this.GetPrescriptionHistoryScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.listViewPrescriptionHistory, 0);

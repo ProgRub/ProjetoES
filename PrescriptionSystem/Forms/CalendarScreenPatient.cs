@@ -18,7 +18,7 @@ namespace Forms
             CommandsManager.Instance.ResetCommandsList();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonGetPrescriptionHistory_Click(object sender, EventArgs e)
         {
             MoveToScreen(new GetPrescriptionHistoryScreen());
         }
@@ -28,12 +28,12 @@ namespace Forms
             MoveToScreen(new LoginScreen());
         }
 
-        private void ButtonSignUp_Click(object sender, EventArgs e)
+        private void ButtonAddPermission_Click(object sender, EventArgs e)
         {
             MoveToScreen(new SelectPrescriptionsScreen());
         }
 
-        private void monthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)
+        private void MonthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)
         {
         //    string sessions = "";
         //    string newLine = Environment.NewLine;

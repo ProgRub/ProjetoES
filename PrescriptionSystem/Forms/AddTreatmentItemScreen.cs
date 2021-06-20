@@ -18,58 +18,13 @@ namespace Forms
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void ButtonAddTreatment_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddMedicineItem_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
-               textBoxMinAge.Text, textBoxMaxAge.Text);
+            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
+               TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
 
             var bodyPart = "";
-            foreach (var radioButton in groupBox1.Controls.OfType<RadioButton>())
+            foreach (var radioButton in GroupBoxBodyPart.Controls.OfType<RadioButton>())
             {
                 if (radioButton.Checked)
                 {
@@ -82,10 +37,10 @@ namespace Forms
                 ShowErrorMessages(errorCodes);
                 return;
             }
-            Services.Instance.CreateTreatmentPrescriptionItem(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
-                int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyPart);
+            Services.Instance.CreateTreatmentPrescriptionItem(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
+                int.Parse(TextBoxMinimumAge.Text), int.Parse(TextBoxMaximumAge.Text), DateTimePickerDuration.Value.TimeOfDay, bodyPart);
             ShowInformationMessageBox("Treatment successfully added.", "Success");
-
+            MoveToScreen(new AddPrescriptionItemScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
@@ -96,34 +51,19 @@ namespace Forms
                 switch (error)
                 {
                     case Services.NameRequired:
-                        ShowTextBoxErrorMessage(textBoxTreatmentName, "Name is required!");
+                        ShowTextBoxErrorMessage(TextBoxTreatmentName, "Name is required!");
                         break;
                     case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(textBoxTreatmentDescription, "Description is required!");
+                        ShowTextBoxErrorMessage(TextBoxTreatmentDescription, "Description is required!");
                         break;
                     case Services.AgeMinimumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMinAge, "Age minimum is required!");
+                        ShowTextBoxErrorMessage(TextBoxMinimumAge, "Age minimum is required!");
                         break;
                     case Services.AgeMaximumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maximum is required!");
+                        ShowTextBoxErrorMessage(TextBoxMaximumAge, "Age maximum is required!");
                         break;
                 }
             }
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)

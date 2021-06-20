@@ -21,11 +21,6 @@ namespace Forms
             InitializeComponent();
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
-        }
-
         private void AddTherapySessionScreen_Load(object sender, EventArgs e)
         {
             //DateTimePickerDate.MinDate = DateTime.Today;
@@ -42,6 +37,12 @@ namespace Forms
 
             SetFormAcceptButton(ButtonAddTherapySession);
             SetCheckedListBoxColumnWidth(CheckedListBoxTreatments);
+        }
+
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new CalendarScreenTherapist());
         }
 
         private void ButtonAddTherapySession_Click(object sender, EventArgs e)

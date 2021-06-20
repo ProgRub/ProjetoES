@@ -18,6 +18,10 @@ namespace Forms
         public AddMedicineItemScreen()
         {
             InitializeComponent();
+        }
+
+        private void AddMedicineItemScreen_Load(object sender, EventArgs e)
+        {
             foreach (var allergy in Services.Instance.GetAllergies())
             {
                 CheckedListBoxAllergies.Items.Add(allergy);
@@ -27,17 +31,22 @@ namespace Forms
             {
                 CheckedListBoxDiseases.Items.Add(disease);
             }
+
+            SetCheckedListBoxColumnWidth(CheckedListBoxAllergies);
+            SetCheckedListBoxColumnWidth(CheckedListBoxDiseases);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonAddMedicine_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckMedicineCreation(textBoxMedicineName.Text, textBoxMedicineDescription.Text, textBoxMedicinePrice.Text);
+            var errorCodes = Services.Instance.CheckMedicineCreation(TextBoxMedicineName.Text,
+                TextBoxMedicineDescription.Text, TextBoxMedicinePrice.Text);
 
             var allergies = new List<string>();
             foreach (var checkedItem in CheckedListBoxAllergies.CheckedItems)
             {
                 allergies.Add(checkedItem.ToString());
             }
+
             var diseases = new List<string>();
             foreach (var checkedItem in CheckedListBoxDiseases.CheckedItems)
             {
@@ -47,36 +56,30 @@ namespace Forms
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
-            }
-            else
-            {
-                Services.Instance.CreateMedicinePrescriptionItem(textBoxMedicineName.Text, textBoxMedicineDescription.Text,
-                    double.Parse(textBoxMedicinePrice.Text), allergies, diseases);
-                ShowInformationMessageBox("Medicine successfully added.", "Success");
+                return;
             }
 
-            
-
-
+            Services.Instance.CreateMedicinePrescriptionItem(TextBoxMedicineName.Text, TextBoxMedicineDescription.Text,
+                double.Parse(TextBoxMedicinePrice.Text), allergies, diseases);
+            ShowInformationMessageBox("Medicine successfully added.", "Success");
+            MoveToScreen(new AddPrescriptionItemScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
                 {
                     case Services.NameRequired:
-                        ShowTextBoxErrorMessage(textBoxMedicineName, "Name is required!");
-                        textBoxMedicineName.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMedicineName, "Name is required!");
                         break;
                     case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(textBoxMedicineDescription, "Description is required!");
-                        textBoxMedicineDescription.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMedicineDescription, "Description is required!");
                         break;
                     case Services.PriceNotValid:
-                        ShowTextBoxErrorMessage(textBoxMedicinePrice, "Price is required!");
-                        textBoxMedicinePrice.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMedicinePrice, "Price is required!");
                         break;
                 }
             }

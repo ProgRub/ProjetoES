@@ -25,37 +25,32 @@ namespace Forms
             MoveToScreen(new LoginScreen());
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void ButtonCreatePrescription_Click(object sender, EventArgs e)
         {
             MoveToScreen(new CreatePrescription());
         }
 
-        private void ButtonSignUp_Click(object sender, EventArgs e)
+        private void ButtonCreatePrescriptionItem_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddPrescriptionItemScreen());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonCreateTherapySession_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddTherapySessionScreen());
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ButtonTherapySessionHistory_Click(object sender, EventArgs e)
         {
             MoveToScreen(new SelectPastTherapySessionScreen());
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            MoveToScreen(new AddTherapySessionScreen());
-        }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void MonthCalendarTherapist_DateChanged(object sender, DateRangeEventArgs e)
         {
             var sessions = "";
             var newLine = Environment.NewLine;
 
-            foreach (var session in Services.Instance.GetSessionsByTherapistId(monthCalendar1.SelectionRange.Start))
+            foreach (var session in Services.Instance.GetSessionsByTherapistId(MonthCalendarTherapist.SelectionRange.Start))
             {
                 var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
                 sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSession + newLine 
@@ -66,7 +61,7 @@ namespace Forms
             {
                 sessions = "There are no therapy sessions scheduled for today!";
             }
-            textBox1.Text = sessions;
+            TextBoxDayEvents.Text = sessions;
         }
 
         private void CalendarScreenTherapist_Load(object sender, EventArgs e)

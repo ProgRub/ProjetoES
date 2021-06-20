@@ -29,304 +29,300 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonAddTreatment = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxTreatmentName = new System.Windows.Forms.TextBox();
-            this.textBoxTreatmentDescription = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxMinAge = new System.Windows.Forms.TextBox();
-            this.textBoxMaxAge = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dateTimePickerDuration = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.Head = new System.Windows.Forms.RadioButton();
-            this.groupBox1.SuspendLayout();
+            this.TextBoxTreatmentName = new System.Windows.Forms.TextBox();
+            this.TextBoxTreatmentDescription = new System.Windows.Forms.TextBox();
+            this.LabelName = new System.Windows.Forms.Label();
+            this.LabelDescription = new System.Windows.Forms.Label();
+            this.LabelDuration = new System.Windows.Forms.Label();
+            this.TextBoxMinimumAge = new System.Windows.Forms.TextBox();
+            this.TextBoxMaximumAge = new System.Windows.Forms.TextBox();
+            this.LabelAge = new System.Windows.Forms.Label();
+            this.LabelHifenMinimumMaximumAge = new System.Windows.Forms.Label();
+            this.DateTimePickerDuration = new System.Windows.Forms.DateTimePicker();
+            this.GroupBoxBodyPart = new System.Windows.Forms.GroupBox();
+            this.RadioButtonRightFoot = new System.Windows.Forms.RadioButton();
+            this.RadioButtonLeftFoot = new System.Windows.Forms.RadioButton();
+            this.RadioButtonRightLeg = new System.Windows.Forms.RadioButton();
+            this.RadioButtonLeftLeg = new System.Windows.Forms.RadioButton();
+            this.RadioButtonTorso = new System.Windows.Forms.RadioButton();
+            this.RadioButtonRightArm = new System.Windows.Forms.RadioButton();
+            this.RadioButtonLeftArm = new System.Windows.Forms.RadioButton();
+            this.RadioButtonHead = new System.Windows.Forms.RadioButton();
+            this.GroupBoxBodyPart.SuspendLayout();
             this.SuspendLayout();
             // 
             // ButtonBack
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // button1
+            // ButtonAddTreatment
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(198, 412);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 32);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Add Prescription";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonAddTreatment.BackColor = System.Drawing.Color.LimeGreen;
+            this.ButtonAddTreatment.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddTreatment.ForeColor = System.Drawing.Color.White;
+            this.ButtonAddTreatment.Location = new System.Drawing.Point(268, 409);
+            this.ButtonAddTreatment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddTreatment.Name = "ButtonAddTreatment";
+            this.ButtonAddTreatment.Size = new System.Drawing.Size(130, 32);
+            this.ButtonAddTreatment.TabIndex = 6;
+            this.ButtonAddTreatment.Text = "Add Treatment";
+            this.ButtonAddTreatment.UseVisualStyleBackColor = false;
+            this.ButtonAddTreatment.Click += new System.EventHandler(this.ButtonAddTreatment_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(113, 25);
+            this.label1.Location = new System.Drawing.Point(198, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(267, 21);
             this.label1.TabIndex = 7;
             this.label1.Text = "Create Treatment Prescription Item";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBoxTreatmentName
+            // TextBoxTreatmentName
             // 
-            this.textBoxTreatmentName.Location = new System.Drawing.Point(152, 64);
-            this.textBoxTreatmentName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxTreatmentName.Name = "textBoxTreatmentName";
-            this.textBoxTreatmentName.Size = new System.Drawing.Size(219, 23);
-            this.textBoxTreatmentName.TabIndex = 10;
+            this.TextBoxTreatmentName.Location = new System.Drawing.Point(152, 64);
+            this.TextBoxTreatmentName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxTreatmentName.Name = "TextBoxTreatmentName";
+            this.TextBoxTreatmentName.Size = new System.Drawing.Size(372, 23);
+            this.TextBoxTreatmentName.TabIndex = 10;
             // 
-            // textBoxTreatmentDescription
+            // TextBoxTreatmentDescription
             // 
-            this.textBoxTreatmentDescription.AcceptsReturn = true;
-            this.textBoxTreatmentDescription.Location = new System.Drawing.Point(152, 109);
-            this.textBoxTreatmentDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxTreatmentDescription.Multiline = true;
-            this.textBoxTreatmentDescription.Name = "textBoxTreatmentDescription";
-            this.textBoxTreatmentDescription.Size = new System.Drawing.Size(219, 66);
-            this.textBoxTreatmentDescription.TabIndex = 11;
+            this.TextBoxTreatmentDescription.AcceptsReturn = true;
+            this.TextBoxTreatmentDescription.Location = new System.Drawing.Point(152, 109);
+            this.TextBoxTreatmentDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxTreatmentDescription.Multiline = true;
+            this.TextBoxTreatmentDescription.Name = "TextBoxTreatmentDescription";
+            this.TextBoxTreatmentDescription.Size = new System.Drawing.Size(372, 66);
+            this.TextBoxTreatmentDescription.TabIndex = 11;
             // 
-            // label2
+            // LabelName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(102, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 15);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Name:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.LabelName.AutoSize = true;
+            this.LabelName.Location = new System.Drawing.Point(104, 64);
+            this.LabelName.Name = "LabelName";
+            this.LabelName.Size = new System.Drawing.Size(42, 15);
+            this.LabelName.TabIndex = 16;
+            this.LabelName.Text = "Name:";
             // 
-            // label3
+            // LabelDescription
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(70, 109);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 15);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Description:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.LabelDescription.AutoSize = true;
+            this.LabelDescription.Location = new System.Drawing.Point(76, 109);
+            this.LabelDescription.Name = "LabelDescription";
+            this.LabelDescription.Size = new System.Drawing.Size(70, 15);
+            this.LabelDescription.TabIndex = 17;
+            this.LabelDescription.Text = "Description:";
             // 
-            // label4
+            // LabelDuration
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(86, 194);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 15);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "Duration:";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.LabelDuration.AutoSize = true;
+            this.LabelDuration.Location = new System.Drawing.Point(90, 194);
+            this.LabelDuration.Name = "LabelDuration";
+            this.LabelDuration.Size = new System.Drawing.Size(56, 15);
+            this.LabelDuration.TabIndex = 24;
+            this.LabelDuration.Text = "Duration:";
             // 
-            // textBoxMinAge
+            // TextBoxMinimumAge
             // 
-            this.textBoxMinAge.Location = new System.Drawing.Point(152, 229);
-            this.textBoxMinAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxMinAge.Name = "textBoxMinAge";
-            this.textBoxMinAge.Size = new System.Drawing.Size(40, 23);
-            this.textBoxMinAge.TabIndex = 25;
+            this.TextBoxMinimumAge.Location = new System.Drawing.Point(284, 234);
+            this.TextBoxMinimumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMinimumAge.Name = "TextBoxMinimumAge";
+            this.TextBoxMinimumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMinimumAge.TabIndex = 25;
             // 
-            // textBoxMaxAge
+            // TextBoxMaximumAge
             // 
-            this.textBoxMaxAge.Location = new System.Drawing.Point(216, 231);
-            this.textBoxMaxAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxMaxAge.Name = "textBoxMaxAge";
-            this.textBoxMaxAge.Size = new System.Drawing.Size(40, 23);
-            this.textBoxMaxAge.TabIndex = 26;
+            this.TextBoxMaximumAge.Location = new System.Drawing.Point(348, 234);
+            this.TextBoxMaximumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMaximumAge.Name = "TextBoxMaximumAge";
+            this.TextBoxMaximumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMaximumAge.TabIndex = 26;
             // 
-            // label5
+            // LabelAge
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(111, 231);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 15);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Age:";
+            this.LabelAge.AutoSize = true;
+            this.LabelAge.Location = new System.Drawing.Point(247, 234);
+            this.LabelAge.Name = "LabelAge";
+            this.LabelAge.Size = new System.Drawing.Size(31, 15);
+            this.LabelAge.TabIndex = 27;
+            this.LabelAge.Text = "Age:";
             // 
-            // label8
+            // LabelHifenMinimumMaximumAge
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(198, 233);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(12, 15);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "-";
+            this.LabelHifenMinimumMaximumAge.AutoSize = true;
+            this.LabelHifenMinimumMaximumAge.Location = new System.Drawing.Point(330, 237);
+            this.LabelHifenMinimumMaximumAge.Name = "LabelHifenMinimumMaximumAge";
+            this.LabelHifenMinimumMaximumAge.Size = new System.Drawing.Size(12, 15);
+            this.LabelHifenMinimumMaximumAge.TabIndex = 28;
+            this.LabelHifenMinimumMaximumAge.Text = "-";
             // 
-            // dateTimePickerDuration
+            // DateTimePickerDuration
             // 
-            this.dateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerDuration.Location = new System.Drawing.Point(152, 194);
-            this.dateTimePickerDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePickerDuration.Name = "dateTimePickerDuration";
-            this.dateTimePickerDuration.ShowUpDown = true;
-            this.dateTimePickerDuration.Size = new System.Drawing.Size(219, 23);
-            this.dateTimePickerDuration.TabIndex = 29;
+            this.DateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.DateTimePickerDuration.Location = new System.Drawing.Point(152, 194);
+            this.DateTimePickerDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerDuration.Name = "DateTimePickerDuration";
+            this.DateTimePickerDuration.ShowUpDown = true;
+            this.DateTimePickerDuration.Size = new System.Drawing.Size(219, 23);
+            this.DateTimePickerDuration.TabIndex = 29;
+            this.DateTimePickerDuration.Value = new System.DateTime(2021, 6, 20, 0, 0, 0, 0);
             // 
-            // groupBox1
+            // GroupBoxBodyPart
             // 
-            this.groupBox1.Controls.Add(this.radioButton7);
-            this.groupBox1.Controls.Add(this.radioButton6);
-            this.groupBox1.Controls.Add(this.radioButton5);
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.Head);
-            this.groupBox1.Location = new System.Drawing.Point(152, 271);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(219, 118);
-            this.groupBox1.TabIndex = 31;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Body Part:";
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonRightFoot);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonLeftFoot);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonRightLeg);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonLeftLeg);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonTorso);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonRightArm);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonLeftArm);
+            this.GroupBoxBodyPart.Controls.Add(this.RadioButtonHead);
+            this.GroupBoxBodyPart.Location = new System.Drawing.Point(226, 272);
+            this.GroupBoxBodyPart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GroupBoxBodyPart.Name = "GroupBoxBodyPart";
+            this.GroupBoxBodyPart.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GroupBoxBodyPart.Size = new System.Drawing.Size(204, 118);
+            this.GroupBoxBodyPart.TabIndex = 31;
+            this.GroupBoxBodyPart.TabStop = false;
+            this.GroupBoxBodyPart.Text = "Body Part:";
             // 
-            // radioButton7
+            // RadioButtonRightFoot
             // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(116, 88);
-            this.radioButton7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(77, 19);
-            this.radioButton7.TabIndex = 7;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "RightFoot";
-            this.radioButton7.UseVisualStyleBackColor = true;
+            this.RadioButtonRightFoot.AutoSize = true;
+            this.RadioButtonRightFoot.Location = new System.Drawing.Point(116, 88);
+            this.RadioButtonRightFoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightFoot.Name = "RadioButtonRightFoot";
+            this.RadioButtonRightFoot.Size = new System.Drawing.Size(77, 19);
+            this.RadioButtonRightFoot.TabIndex = 7;
+            this.RadioButtonRightFoot.TabStop = true;
+            this.RadioButtonRightFoot.Text = "RightFoot";
+            this.RadioButtonRightFoot.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // RadioButtonLeftFoot
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(116, 65);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(69, 19);
-            this.radioButton6.TabIndex = 6;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "LeftFoot";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.RadioButtonLeftFoot.AutoSize = true;
+            this.RadioButtonLeftFoot.Location = new System.Drawing.Point(116, 65);
+            this.RadioButtonLeftFoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftFoot.Name = "RadioButtonLeftFoot";
+            this.RadioButtonLeftFoot.Size = new System.Drawing.Size(69, 19);
+            this.RadioButtonLeftFoot.TabIndex = 6;
+            this.RadioButtonLeftFoot.TabStop = true;
+            this.RadioButtonLeftFoot.Text = "LeftFoot";
+            this.RadioButtonLeftFoot.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // RadioButtonRightLeg
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(116, 42);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(72, 19);
-            this.radioButton5.TabIndex = 5;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "RightLeg";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.RadioButtonRightLeg.AutoSize = true;
+            this.RadioButtonRightLeg.Location = new System.Drawing.Point(116, 42);
+            this.RadioButtonRightLeg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightLeg.Name = "RadioButtonRightLeg";
+            this.RadioButtonRightLeg.Size = new System.Drawing.Size(72, 19);
+            this.RadioButtonRightLeg.TabIndex = 5;
+            this.RadioButtonRightLeg.TabStop = true;
+            this.RadioButtonRightLeg.Text = "RightLeg";
+            this.RadioButtonRightLeg.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // RadioButtonLeftLeg
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(116, 20);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(64, 19);
-            this.radioButton4.TabIndex = 4;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "LeftLeg";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.RadioButtonLeftLeg.AutoSize = true;
+            this.RadioButtonLeftLeg.Location = new System.Drawing.Point(116, 20);
+            this.RadioButtonLeftLeg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftLeg.Name = "RadioButtonLeftLeg";
+            this.RadioButtonLeftLeg.Size = new System.Drawing.Size(64, 19);
+            this.RadioButtonLeftLeg.TabIndex = 4;
+            this.RadioButtonLeftLeg.TabStop = true;
+            this.RadioButtonLeftLeg.Text = "LeftLeg";
+            this.RadioButtonLeftLeg.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // RadioButtonTorso
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 88);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(53, 19);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Torso";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.RadioButtonTorso.AutoSize = true;
+            this.RadioButtonTorso.Location = new System.Drawing.Point(6, 88);
+            this.RadioButtonTorso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonTorso.Name = "RadioButtonTorso";
+            this.RadioButtonTorso.Size = new System.Drawing.Size(53, 19);
+            this.RadioButtonTorso.TabIndex = 3;
+            this.RadioButtonTorso.TabStop = true;
+            this.RadioButtonTorso.Text = "Torso";
+            this.RadioButtonTorso.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // RadioButtonRightArm
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(5, 64);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(76, 19);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "RightArm";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.RadioButtonRightArm.AutoSize = true;
+            this.RadioButtonRightArm.Location = new System.Drawing.Point(5, 64);
+            this.RadioButtonRightArm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightArm.Name = "RadioButtonRightArm";
+            this.RadioButtonRightArm.Size = new System.Drawing.Size(76, 19);
+            this.RadioButtonRightArm.TabIndex = 2;
+            this.RadioButtonRightArm.TabStop = true;
+            this.RadioButtonRightArm.Text = "RightArm";
+            this.RadioButtonRightArm.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // RadioButtonLeftArm
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(5, 42);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(68, 19);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "LeftArm";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.RadioButtonLeftArm.AutoSize = true;
+            this.RadioButtonLeftArm.Location = new System.Drawing.Point(5, 42);
+            this.RadioButtonLeftArm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftArm.Name = "RadioButtonLeftArm";
+            this.RadioButtonLeftArm.Size = new System.Drawing.Size(68, 19);
+            this.RadioButtonLeftArm.TabIndex = 1;
+            this.RadioButtonLeftArm.TabStop = true;
+            this.RadioButtonLeftArm.Text = "LeftArm";
+            this.RadioButtonLeftArm.UseVisualStyleBackColor = true;
             // 
-            // Head
+            // RadioButtonHead
             // 
-            this.Head.AutoSize = true;
-            this.Head.Location = new System.Drawing.Point(5, 20);
-            this.Head.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Head.Name = "Head";
-            this.Head.Size = new System.Drawing.Size(53, 19);
-            this.Head.TabIndex = 0;
-            this.Head.TabStop = true;
-            this.Head.Text = "Head";
-            this.Head.UseVisualStyleBackColor = true;
+            this.RadioButtonHead.AutoSize = true;
+            this.RadioButtonHead.Location = new System.Drawing.Point(5, 20);
+            this.RadioButtonHead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonHead.Name = "RadioButtonHead";
+            this.RadioButtonHead.Size = new System.Drawing.Size(53, 19);
+            this.RadioButtonHead.TabIndex = 0;
+            this.RadioButtonHead.TabStop = true;
+            this.RadioButtonHead.Text = "Head";
+            this.RadioButtonHead.UseVisualStyleBackColor = true;
             // 
             // AddTreatmentItemScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dateTimePickerDuration);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBoxMaxAge);
-            this.Controls.Add(this.textBoxMinAge);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxTreatmentDescription);
-            this.Controls.Add(this.textBoxTreatmentName);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.GroupBoxBodyPart);
+            this.Controls.Add(this.DateTimePickerDuration);
+            this.Controls.Add(this.LabelHifenMinimumMaximumAge);
+            this.Controls.Add(this.LabelAge);
+            this.Controls.Add(this.TextBoxMaximumAge);
+            this.Controls.Add(this.TextBoxMinimumAge);
+            this.Controls.Add(this.LabelDuration);
+            this.Controls.Add(this.LabelDescription);
+            this.Controls.Add(this.LabelName);
+            this.Controls.Add(this.TextBoxTreatmentDescription);
+            this.Controls.Add(this.TextBoxTreatmentName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ButtonAddTreatment);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddTreatmentItemScreen";
-            this.Size = new System.Drawing.Size(466, 459);
-            this.Load += new System.EventHandler(this.AddMedicineItem_Load);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Size = new System.Drawing.Size(667, 459);
+            this.Controls.SetChildIndex(this.ButtonAddTreatment, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.textBoxTreatmentName, 0);
-            this.Controls.SetChildIndex(this.textBoxTreatmentDescription, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.TextBoxTreatmentName, 0);
+            this.Controls.SetChildIndex(this.TextBoxTreatmentDescription, 0);
+            this.Controls.SetChildIndex(this.LabelName, 0);
+            this.Controls.SetChildIndex(this.LabelDescription, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.textBoxMinAge, 0);
-            this.Controls.SetChildIndex(this.textBoxMaxAge, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
-            this.Controls.SetChildIndex(this.dateTimePickerDuration, 0);
-            this.Controls.SetChildIndex(this.groupBox1, 0);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Controls.SetChildIndex(this.LabelDuration, 0);
+            this.Controls.SetChildIndex(this.TextBoxMinimumAge, 0);
+            this.Controls.SetChildIndex(this.TextBoxMaximumAge, 0);
+            this.Controls.SetChildIndex(this.LabelAge, 0);
+            this.Controls.SetChildIndex(this.LabelHifenMinimumMaximumAge, 0);
+            this.Controls.SetChildIndex(this.DateTimePickerDuration, 0);
+            this.Controls.SetChildIndex(this.GroupBoxBodyPart, 0);
+            this.GroupBoxBodyPart.ResumeLayout(false);
+            this.GroupBoxBodyPart.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,26 +330,26 @@ namespace Forms
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonAddTreatment;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxTreatmentName;
-        private System.Windows.Forms.TextBox textBoxTreatmentDescription;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxMinAge;
-        private System.Windows.Forms.TextBox textBoxMaxAge;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDuration;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton Head;
+        private System.Windows.Forms.TextBox TextBoxTreatmentName;
+        private System.Windows.Forms.TextBox TextBoxTreatmentDescription;
+        private System.Windows.Forms.Label LabelName;
+        private System.Windows.Forms.Label LabelDescription;
+        private System.Windows.Forms.Label LabelDuration;
+        private System.Windows.Forms.TextBox TextBoxMinimumAge;
+        private System.Windows.Forms.TextBox TextBoxMaximumAge;
+        private System.Windows.Forms.Label LabelAge;
+        private System.Windows.Forms.Label LabelHifenMinimumMaximumAge;
+        private System.Windows.Forms.DateTimePicker DateTimePickerDuration;
+        private System.Windows.Forms.GroupBox GroupBoxBodyPart;
+        private System.Windows.Forms.RadioButton RadioButtonRightFoot;
+        private System.Windows.Forms.RadioButton RadioButtonLeftFoot;
+        private System.Windows.Forms.RadioButton RadioButtonRightLeg;
+        private System.Windows.Forms.RadioButton RadioButtonLeftLeg;
+        private System.Windows.Forms.RadioButton RadioButtonTorso;
+        private System.Windows.Forms.RadioButton RadioButtonRightArm;
+        private System.Windows.Forms.RadioButton RadioButtonLeftArm;
+        private System.Windows.Forms.RadioButton RadioButtonHead;
     }
 }

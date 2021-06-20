@@ -29,16 +29,16 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxMedicineName = new System.Windows.Forms.TextBox();
-            this.textBoxMedicineDescription = new System.Windows.Forms.TextBox();
-            this.textBoxMedicinePrice = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.ButtonAddMedicine = new System.Windows.Forms.Button();
+            this.LabelTitle = new System.Windows.Forms.Label();
+            this.TextBoxMedicineName = new System.Windows.Forms.TextBox();
+            this.TextBoxMedicineDescription = new System.Windows.Forms.TextBox();
+            this.TextBoxMedicinePrice = new System.Windows.Forms.TextBox();
+            this.LabelName = new System.Windows.Forms.Label();
+            this.LabelDescription = new System.Windows.Forms.Label();
+            this.LabelPrice = new System.Windows.Forms.Label();
+            this.LabelAllergenics = new System.Windows.Forms.Label();
+            this.LabelIncompatibleDiseases = new System.Windows.Forms.Label();
             this.CheckedListBoxDiseases = new System.Windows.Forms.CheckedListBox();
             this.CheckedListBoxAllergies = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
@@ -47,149 +47,153 @@ namespace Forms
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // button1
+            // ButtonAddMedicine
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(218, 632);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 45);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Add Prescription";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonAddMedicine.BackColor = System.Drawing.Color.LimeGreen;
+            this.ButtonAddMedicine.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddMedicine.ForeColor = System.Drawing.Color.White;
+            this.ButtonAddMedicine.Location = new System.Drawing.Point(271, 465);
+            this.ButtonAddMedicine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddMedicine.Name = "ButtonAddMedicine";
+            this.ButtonAddMedicine.Size = new System.Drawing.Size(130, 34);
+            this.ButtonAddMedicine.TabIndex = 6;
+            this.ButtonAddMedicine.Text = "Add Medicine";
+            this.ButtonAddMedicine.UseVisualStyleBackColor = false;
+            this.ButtonAddMedicine.Click += new System.EventHandler(this.ButtonAddMedicine_Click);
             // 
-            // label1
+            // LabelTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(139, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(321, 28);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Create Medicine Prescription Item";
+            this.LabelTitle.AutoSize = true;
+            this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelTitle.Location = new System.Drawing.Point(201, 24);
+            this.LabelTitle.Name = "LabelTitle";
+            this.LabelTitle.Size = new System.Drawing.Size(260, 21);
+            this.LabelTitle.TabIndex = 7;
+            this.LabelTitle.Text = "Create Medicine Prescription Item";
             // 
-            // textBoxMedicineName
+            // TextBoxMedicineName
             // 
-            this.textBoxMedicineName.Location = new System.Drawing.Point(174, 85);
-            this.textBoxMedicineName.Name = "textBoxMedicineName";
-            this.textBoxMedicineName.Size = new System.Drawing.Size(250, 27);
-            this.textBoxMedicineName.TabIndex = 10;
+            this.TextBoxMedicineName.Location = new System.Drawing.Point(152, 64);
+            this.TextBoxMedicineName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicineName.Name = "TextBoxMedicineName";
+            this.TextBoxMedicineName.Size = new System.Drawing.Size(382, 23);
+            this.TextBoxMedicineName.TabIndex = 10;
             // 
-            // textBoxMedicineDescription
+            // TextBoxMedicineDescription
             // 
-            this.textBoxMedicineDescription.Location = new System.Drawing.Point(174, 139);
-            this.textBoxMedicineDescription.Multiline = true;
-            this.textBoxMedicineDescription.Name = "textBoxMedicineDescription";
-            this.textBoxMedicineDescription.Size = new System.Drawing.Size(250, 93);
-            this.textBoxMedicineDescription.TabIndex = 11;
+            this.TextBoxMedicineDescription.AcceptsReturn = true;
+            this.TextBoxMedicineDescription.Location = new System.Drawing.Point(152, 104);
+            this.TextBoxMedicineDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicineDescription.Multiline = true;
+            this.TextBoxMedicineDescription.Name = "TextBoxMedicineDescription";
+            this.TextBoxMedicineDescription.Size = new System.Drawing.Size(382, 71);
+            this.TextBoxMedicineDescription.TabIndex = 11;
             // 
-            // textBoxMedicinePrice
+            // TextBoxMedicinePrice
             // 
-            this.textBoxMedicinePrice.Location = new System.Drawing.Point(174, 253);
-            this.textBoxMedicinePrice.Name = "textBoxMedicinePrice";
-            this.textBoxMedicinePrice.Size = new System.Drawing.Size(250, 27);
-            this.textBoxMedicinePrice.TabIndex = 12;
+            this.TextBoxMedicinePrice.Location = new System.Drawing.Point(152, 190);
+            this.TextBoxMedicinePrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicinePrice.Name = "TextBoxMedicinePrice";
+            this.TextBoxMedicinePrice.Size = new System.Drawing.Size(382, 23);
+            this.TextBoxMedicinePrice.TabIndex = 12;
             // 
-            // label2
+            // LabelName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(117, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 20);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Name:";
+            this.LabelName.AutoSize = true;
+            this.LabelName.Location = new System.Drawing.Point(104, 67);
+            this.LabelName.Name = "LabelName";
+            this.LabelName.Size = new System.Drawing.Size(42, 15);
+            this.LabelName.TabIndex = 16;
+            this.LabelName.Text = "Name:";
             // 
-            // label3
+            // LabelDescription
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(80, 139);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 20);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "Description:";
+            this.LabelDescription.AutoSize = true;
+            this.LabelDescription.Location = new System.Drawing.Point(76, 107);
+            this.LabelDescription.Name = "LabelDescription";
+            this.LabelDescription.Size = new System.Drawing.Size(70, 15);
+            this.LabelDescription.TabIndex = 17;
+            this.LabelDescription.Text = "Description:";
             // 
-            // label6
+            // LabelPrice
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(123, 253);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 20);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Price:";
+            this.LabelPrice.AutoSize = true;
+            this.LabelPrice.Location = new System.Drawing.Point(110, 193);
+            this.LabelPrice.Name = "LabelPrice";
+            this.LabelPrice.Size = new System.Drawing.Size(36, 15);
+            this.LabelPrice.TabIndex = 20;
+            this.LabelPrice.Text = "Price:";
             // 
-            // label8
+            // LabelAllergenics
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(80, 301);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(85, 20);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Allergenics:";
+            this.LabelAllergenics.AutoSize = true;
+            this.LabelAllergenics.Location = new System.Drawing.Point(78, 226);
+            this.LabelAllergenics.Name = "LabelAllergenics";
+            this.LabelAllergenics.Size = new System.Drawing.Size(68, 15);
+            this.LabelAllergenics.TabIndex = 23;
+            this.LabelAllergenics.Text = "Allergenics:";
             // 
-            // label9
+            // LabelIncompatibleDiseases
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(7, 471);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(161, 20);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Incompatible Diseases:";
+            this.LabelIncompatibleDiseases.AutoSize = true;
+            this.LabelIncompatibleDiseases.Location = new System.Drawing.Point(19, 353);
+            this.LabelIncompatibleDiseases.Name = "LabelIncompatibleDiseases";
+            this.LabelIncompatibleDiseases.Size = new System.Drawing.Size(127, 15);
+            this.LabelIncompatibleDiseases.TabIndex = 24;
+            this.LabelIncompatibleDiseases.Text = "Incompatible Diseases:";
             // 
             // CheckedListBoxDiseases
             // 
             this.CheckedListBoxDiseases.CheckOnClick = true;
             this.CheckedListBoxDiseases.FormattingEnabled = true;
-            this.CheckedListBoxDiseases.Location = new System.Drawing.Point(174, 471);
-            this.CheckedListBoxDiseases.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CheckedListBoxDiseases.Location = new System.Drawing.Point(152, 353);
             this.CheckedListBoxDiseases.MultiColumn = true;
             this.CheckedListBoxDiseases.Name = "CheckedListBoxDiseases";
-            this.CheckedListBoxDiseases.Size = new System.Drawing.Size(250, 114);
+            this.CheckedListBoxDiseases.Size = new System.Drawing.Size(382, 94);
             this.CheckedListBoxDiseases.TabIndex = 31;
             // 
             // CheckedListBoxAllergies
             // 
             this.CheckedListBoxAllergies.CheckOnClick = true;
             this.CheckedListBoxAllergies.FormattingEnabled = true;
-            this.CheckedListBoxAllergies.Location = new System.Drawing.Point(174, 301);
-            this.CheckedListBoxAllergies.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CheckedListBoxAllergies.Location = new System.Drawing.Point(152, 226);
             this.CheckedListBoxAllergies.MultiColumn = true;
             this.CheckedListBoxAllergies.Name = "CheckedListBoxAllergies";
-            this.CheckedListBoxAllergies.Size = new System.Drawing.Size(250, 114);
+            this.CheckedListBoxAllergies.Size = new System.Drawing.Size(382, 94);
             this.CheckedListBoxAllergies.TabIndex = 28;
             // 
             // AddMedicineItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.CheckedListBoxDiseases);
             this.Controls.Add(this.CheckedListBoxAllergies);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxMedicinePrice);
-            this.Controls.Add(this.textBoxMedicineDescription);
-            this.Controls.Add(this.textBoxMedicineName);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Controls.Add(this.LabelIncompatibleDiseases);
+            this.Controls.Add(this.LabelAllergenics);
+            this.Controls.Add(this.LabelPrice);
+            this.Controls.Add(this.LabelDescription);
+            this.Controls.Add(this.LabelName);
+            this.Controls.Add(this.TextBoxMedicinePrice);
+            this.Controls.Add(this.TextBoxMedicineDescription);
+            this.Controls.Add(this.TextBoxMedicineName);
+            this.Controls.Add(this.LabelTitle);
+            this.Controls.Add(this.ButtonAddMedicine);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddMedicineItemScreen";
-            this.Size = new System.Drawing.Size(533, 707);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.textBoxMedicineName, 0);
-            this.Controls.SetChildIndex(this.textBoxMedicineDescription, 0);
-            this.Controls.SetChildIndex(this.textBoxMedicinePrice, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Size = new System.Drawing.Size(693, 530);
+            this.Load += new System.EventHandler(this.AddMedicineItemScreen_Load);
+            this.Controls.SetChildIndex(this.ButtonAddMedicine, 0);
+            this.Controls.SetChildIndex(this.LabelTitle, 0);
+            this.Controls.SetChildIndex(this.TextBoxMedicineName, 0);
+            this.Controls.SetChildIndex(this.TextBoxMedicineDescription, 0);
+            this.Controls.SetChildIndex(this.TextBoxMedicinePrice, 0);
+            this.Controls.SetChildIndex(this.LabelName, 0);
+            this.Controls.SetChildIndex(this.LabelDescription, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.label8, 0);
-            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.LabelPrice, 0);
+            this.Controls.SetChildIndex(this.LabelAllergenics, 0);
+            this.Controls.SetChildIndex(this.LabelIncompatibleDiseases, 0);
             this.Controls.SetChildIndex(this.CheckedListBoxAllergies, 0);
             this.Controls.SetChildIndex(this.CheckedListBoxDiseases, 0);
             this.ResumeLayout(false);
@@ -199,16 +203,16 @@ namespace Forms
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxMedicineName;
-        private System.Windows.Forms.TextBox textBoxMedicineDescription;
-        private System.Windows.Forms.TextBox textBoxMedicinePrice;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button ButtonAddMedicine;
+        private System.Windows.Forms.Label LabelTitle;
+        private System.Windows.Forms.TextBox TextBoxMedicineName;
+        private System.Windows.Forms.TextBox TextBoxMedicineDescription;
+        private System.Windows.Forms.TextBox TextBoxMedicinePrice;
+        private System.Windows.Forms.Label LabelName;
+        private System.Windows.Forms.Label LabelDescription;
+        private System.Windows.Forms.Label LabelPrice;
+        private System.Windows.Forms.Label LabelAllergenics;
+        private System.Windows.Forms.Label LabelIncompatibleDiseases;
         private System.Windows.Forms.CheckedListBox CheckedListBoxDiseases;
         private System.Windows.Forms.CheckedListBox CheckedListBoxAllergies;
     }

@@ -17,6 +17,26 @@ namespace Forms
             InitializeComponent();
         }
 
+        private void SignUpScreen_Load(object sender, EventArgs e)
+        {
+            DateTimePickerDOB.MaxDate = DateTime.Today;
+            DateTimePickerDOB.Value = DateTime.Today;
+            foreach (var allergy in Services.Instance.GetAllergies())
+            {
+                CheckedListBoxAllergies.Items.Add(allergy);
+            }
+
+            foreach (var disease in Services.Instance.GetDiseases())
+            {
+                CheckedListBoxDiseases.Items.Add(disease);
+            }
+
+            SetCheckedListBoxColumnWidth(CheckedListBoxDiseases);
+            SetCheckedListBoxColumnWidth(CheckedListBoxAllergies);
+            SetCheckedListBoxColumnWidth(CheckedListBoxMissingBodyParts);
+            SetFormAcceptButton(ButtonSignUp);
+        }
+
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             MoveToScreen(new LoginScreen());
@@ -26,7 +46,8 @@ namespace Forms
         {
             var userType =
                 Controls.OfType<RadioButton>()
-                    .FirstOrDefault(r => r.Checked).Text;
+                    .FirstOrDefault(r => r.Checked)
+                    ?.Text;
             var errorCodes = Services.Instance.CheckUserRegistration(TextBoxName.Text,
                 DateTimePickerDOB.Value,
                 TextBoxPhoneNumber.Text, TextBoxHealthUserNumber.Text, TextBoxEmail.Text, TextBoxPassword.Text,
@@ -36,33 +57,36 @@ namespace Forms
             {
                 allergies.Add(checkedItem.ToString());
             }
+
             var diseases = new List<string>();
             foreach (var checkedItem in CheckedListBoxDiseases.CheckedItems)
             {
                 diseases.Add(checkedItem.ToString());
             }
+
             var missingBodyParts = new List<string>();
             foreach (var checkedItem in CheckedListBoxMissingBodyParts.CheckedItems)
             {
                 missingBodyParts.Add(checkedItem.ToString());
             }
+
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
+                return;
             }
-            else
-            {
-                Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
-                    int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
-                    TextBoxPassword.Text,
-                    allergies, diseases, missingBodyParts, userType);
-                ShowInformationMessageBox("User registered successively.", "Success");
-                MoveToScreen(new LoginScreen());
-            }
+
+            Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
+                int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
+                TextBoxPassword.Text,
+                allergies, diseases, missingBodyParts, userType);
+            ShowInformationMessageBox("User registered successively.", "Success");
+            MoveToScreen(new LoginScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
@@ -99,7 +123,7 @@ namespace Forms
                         ShowTextBoxErrorMessage(TextBoxPhoneNumber, "Phone Number needs to be a number!");
                         break;
                     case Services.HealthUserNumberWrongLength:
-                        ClearTextbox(TextBoxHealthUserNumber);
+                        ClearTextBox(TextBoxHealthUserNumber);
                         if (Services.HealthUserNumberMinimumLength == Services.HealthUserNumberMaximumLength)
                         {
                             ShowTextBoxErrorMessage(TextBoxHealthUserNumber,
@@ -116,7 +140,8 @@ namespace Forms
                         ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number needs to be a number!");
                         break;
                     case Services.HealthUserNumberAlreadyExists:
-                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number belongs to a registered user!");
+                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber,
+                            "Health User Number belongs to a registered user!");
                         break;
                     case Services.EmailNotValid:
                         ShowTextBoxErrorMessage(TextBoxEmail, "E-mail is not in a valid format!");
@@ -133,27 +158,6 @@ namespace Forms
                         break;
                 }
             }
-        }
-
-        private void SignUpScreen_Load(object sender, EventArgs e)
-        {
-            DateTimePickerDOB.MaxDate = DateTime.Today;
-            DateTimePickerDOB.Value = DateTime.Today;
-            foreach (var allergy in Services.Instance.GetAllergies())
-            {
-                CheckedListBoxAllergies.Items.Add(allergy);
-            }
-
-            foreach (var disease in Services.Instance.GetDiseases())
-            {
-                CheckedListBoxDiseases.Items.Add(disease);
-            }
-            SetFormAcceptButton(ButtonSignUp);
-        }
-
-        private void CheckedListBoxMissingBodyParts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
