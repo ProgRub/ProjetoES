@@ -119,14 +119,15 @@ namespace ComponentsLibrary
 
         private void SeedData(ModelBuilder modelBuilder)
         {
+            int id = 1;
             modelBuilder.Entity<Medicine>().HasData(
-                new Medicine {Id = 1, Zombie = false, Name = "Penicillin", Description = "", Price = 2.32},
-                new Medicine {Id = 2, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
-                new Medicine {Id = 3, Zombie = false, Name = "Pyrazolones", Description = "", Price = 12.40});
+                new Medicine {Id = id++, Zombie = false, Name = "Penicillin", Description = "", Price = 2.32},
+                new Medicine {Id = id++, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
+                new Medicine {Id = id++, Zombie = false, Name = "Pyrazolones", Description = "", Price = 12.40});
             modelBuilder.Entity<Treatment>().HasData(
                 new Treatment
                 {
-                    Id = 4,
+                    Id = id++,
                     Zombie = false,
                     Name = "Torn Triceps",
                     Description = "Treatment given to people with torn triceps on their right arm",
@@ -134,7 +135,7 @@ namespace ComponentsLibrary
                 },
                 new Treatment
                 {
-                    Id = 5,
+                    Id = id++,
                     Zombie = false,
                     Name = "Torn Triceps",
                     Description = "Treatment given to people with torn triceps on their left arm",
@@ -143,90 +144,80 @@ namespace ComponentsLibrary
                 },
                 new Treatment
                 {
-                    Id = 6,
+                    Id = id++,
                     Zombie = false,
                     Name = "Hyper-extended Knee", Description = "An ice pack is needed for this treatment",
                     BodyPart = BodyPart.LeftLeg, Duration = new TimeSpan(1, 0, 0)
                 },
                 new Treatment
                 {
-                    Id = 7,
+                    Id = id++,
                     Zombie = false,
                     Name = "Hyper-extended Knee",
                     Description = "An ice pack is needed for this treatment",
                     BodyPart = BodyPart.RightLeg,
                     Duration = new TimeSpan(1, 0, 0)
                 });
-            var burpees = new Exercise
+            modelBuilder.Entity<Exercise>().HasData(new Exercise
             {
-                Id = 8,
+                Id = id++,
                 Zombie = false,
                 Name = "Burpees",
                 AgeMinimum = 15,
                 AgeMaximum = 50,
                 Description =
                     "From standing up, drop into a high plank and then jump your feet to your hands, stand up and jump with your arms up. Repeat.",
-                Duration = new TimeSpan(0, 10, 0)
-            };
-            var pushups = new Exercise
+                Duration = new TimeSpan(0, 10, 0),
+                BodyParts = new List<BodyPart> { BodyPart.RightArm, BodyPart.LeftArm, BodyPart.LeftLeg, BodyPart.RightLeg }
+            }, new Exercise
             {
-                Id = 9,
+                Id = id++,
                 Zombie = false,
                 Name = "Pushups",
                 AgeMinimum = 8,
                 AgeMaximum = 78,
                 Description = "",
-                Duration = new TimeSpan(0, 20, 0)
-            };
-            var squats = new Exercise
+                Duration = new TimeSpan(0, 20, 0),
+                BodyParts = new List<BodyPart> { BodyPart.RightArm, BodyPart.LeftArm, BodyPart.Torso }
+            }, new Exercise
             {
-                Id = 10,
+                Id = id++,
                 Zombie = false,
                 Name = "Squats",
                 AgeMinimum = 5,
                 Description = "Make sure your knees don't go in front of your feet",
-                Duration = new TimeSpan(0, 15, 0)
-            };
-            modelBuilder.Entity<Exercise>().HasData(burpees, pushups, squats);
-            //modelBuilder.Entity<ExerciseHasBodyParts>().HasData(new ExerciseHasBodyParts
-            //    {ExerciseId = 8, BodyPart = BodyPart.RightArm, Id = 100, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 8, BodyPart = BodyPart.LeftArm, Id = 101, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 8, BodyPart = BodyPart.LeftLeg, Id = 102, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 8, BodyPart = BodyPart.RightLeg, Id = 103, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 9, BodyPart = BodyPart.RightArm, Id = 104, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 9, BodyPart = BodyPart.LeftArm, Id = 105, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 9, BodyPart = BodyPart.Torso, Id = 106, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 10, BodyPart = BodyPart.LeftLeg, Id = 107, Zombie = false}, new ExerciseHasBodyParts
-            //    {ExerciseId = 10, BodyPart = BodyPart.RightLeg, Id = 108, Zombie = false});
+                Duration = new TimeSpan(0, 15, 0),
+                BodyParts = new List<BodyPart> { BodyPart.RightLeg, BodyPart.LeftLeg }
+            });
             modelBuilder.Entity<MedicalCondition>().HasData(new MedicalCondition
             {
-                Id = 11,
+                Id = id++,
                 Zombie = false,
                 Name = "Penicillin", Description = "", Type = Allergy
             }, new MedicalCondition
             {
-                Id = 12,
+                Id = id++,
                 Zombie = false,
                 Name = "Aspirin",
                 Description = "",
                 Type = Allergy
             }, new MedicalCondition
             {
-                Id = 13,
+                Id = id++,
                 Zombie = false,
                 Name = "Ibuprofen",
                 Description = "",
                 Type = Allergy
             }, new MedicalCondition
             {
-                Id = 14,
+                Id = id++,
                 Zombie = false,
                 Name = "Hypertension",
                 Description = "",
                 Type = Disease
             }, new MedicalCondition
             {
-                Id = 15,
+                Id = id++,
                 Zombie = false,
                 Name = "Knee Osteoarthritis",
                 Description = "This type of arthritis affects specifically the knees",
@@ -235,7 +226,7 @@ namespace ComponentsLibrary
 
             modelBuilder.Entity<Patient>().HasData(new Patient
             {
-                Id = 16,
+                Id = id++,
                 Zombie = false,
                 FullName = "Luís Brito",
                 DateOfBirth = new DateTime(1985, 10, 4),
@@ -245,7 +236,7 @@ namespace ComponentsLibrary
                 Password = "luis123"
             }, new Patient
             {
-                Id = 17,
+                Id = id++,
                 Zombie = false,
                 FullName = "Mariana Abreu",
                 DateOfBirth = new DateTime(1994, 6, 19),
@@ -257,7 +248,7 @@ namespace ComponentsLibrary
 
             modelBuilder.Entity<Therapist>().HasData(new Therapist
             {
-                Id = 18,
+                Id = id++,
                 Zombie = false,
                 FullName = "Carla Nunes",
                 DateOfBirth = new DateTime(1975, 5, 2),
@@ -267,7 +258,7 @@ namespace ComponentsLibrary
                 Password = "carlaaa"
             }, new Therapist
             {
-                Id = 19,
+                Id = id++,
                 Zombie = false,
                 FullName = "Rui Nóbrega",
                 DateOfBirth = new DateTime(1958, 11, 13),
@@ -276,26 +267,6 @@ namespace ComponentsLibrary
                 Email = "nobregarui@hotmail.com",
                 Password = "ruiruirui"
             });
-
-            //modelBuilder.Entity<TherapySession>().HasData(new TherapySession
-            //{
-            //    Id = 60,
-            //    Zombie = false,
-            //    PatientId = 16,
-            //    TherapistId = 18,
-            //    DateTime = new DateTime(2021, 06, 02, 15, 00, 00),
-            //    EstimatedDuration = new TimeSpan(1, 0, 0),
-            //    Note = ""
-            //});
-
-            //modelBuilder.Entity<TherapySessionHasTreatments>().HasData(new TherapySessionHasTreatments
-            //{
-            //    CompletedTreatment = false,
-            //    TherapySessionId = 60,
-            //    Note = "",
-            //    TreatmentId = 7,
-            //    Zombie = false
-            //});
         }
 
         private void ConvertersConfiguration(ModelBuilder modelBuilder)
