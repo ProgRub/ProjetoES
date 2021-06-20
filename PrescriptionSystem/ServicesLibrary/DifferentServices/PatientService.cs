@@ -4,6 +4,7 @@ using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -20,7 +21,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal void RegisterPatient(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
             string email,
-            string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
+            string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
             IEnumerable<string> missingBodyParts)
         {
             var patient = new Patient

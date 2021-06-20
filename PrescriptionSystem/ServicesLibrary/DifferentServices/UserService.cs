@@ -7,6 +7,7 @@ using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -29,7 +30,7 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
-            string email, string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
+            string email, string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
             IEnumerable<string> missingBodyParts, string type)
         {
             switch (type)
@@ -43,18 +44,18 @@ namespace ServicesLibrary.DifferentServices
             }
         }
 
-        protected void AddMedicalConditionsToUser(User user, IEnumerable<string> allergies, IEnumerable<string> diseases)
+        protected void AddMedicalConditionsToUser(User user, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases)
         {
-            foreach (var allergyString in allergies)
+            foreach (var allergy in allergies)
             {
                 _userRepository.AddMedicalConditionToUser(user,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
+                    MedicalConditionService.Instance.GetMedicalConditionById(allergy.Id));
             }
 
-            foreach (var diseaseString in diseases)
+            foreach (var disease in diseases)
             {
                 _userRepository.AddMedicalConditionToUser(user,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
+                    MedicalConditionService.Instance.GetMedicalConditionById(disease.Id));
             }
         }
 

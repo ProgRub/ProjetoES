@@ -139,7 +139,7 @@ namespace ServicesLibrary
 
         public void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber,
             int healthUserNumber, string email,
-            string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
+            string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
             IEnumerable<string> missingBodyParts, string userType)
         {
             _userService.RegisterUser(name, dateOfBirth, phoneNumber, healthUserNumber, email,
@@ -218,9 +218,11 @@ namespace ServicesLibrary
 
 
         public void CreateMedicinePrescriptionItem(string name, string description, double price,
-            IEnumerable<string> allergies, IEnumerable<string> diseases)
+            IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases)
         {
-            _prescriptionItemService.CreateMedicinePrescriptionItem(name, description, price, allergies, diseases);
+            _prescriptionItemService.CreateMedicinePrescriptionItem(name, description, price,
+                allergies.Select(e => _medicalConditionService.GetMedicalConditionById(e.Id)),
+                diseases.Select(e => _medicalConditionService.GetMedicalConditionById(e.Id)));
         }
 
         public void CreateTreatmentPrescriptionItem(string name, string description, int ageMinimum, int ageMaximum,
@@ -269,29 +271,31 @@ namespace ServicesLibrary
             return _userService.LogIn(email, password);
         }
 
-        public IEnumerable<string> GetAllergies()
+        public IEnumerable<MedicalConditionDTO> GetAllergies()
         {
-            return _medicalConditionService.GetAllergies().Select(e => e.Name);
+            return _medicalConditionService.GetAllergies()
+                .Select(e => MedicalConditionDTO.ConvertMedicalConditionToDTO(e));
         }
 
-        public IEnumerable<string> GetExercises()
+        public IEnumerable<ExerciseDTO> GetExercises()
         {
-            return _prescriptionItemService.GetAllExercises().Select(e => e.Name);
+            return _prescriptionItemService.GetAllExercises().Select(e => ExerciseDTO.ConvertExerciseToDTO(e));
         }
 
-        public IEnumerable<string> GetMedicine()
+        public IEnumerable<MedicineDTO> GetMedicine()
         {
-            return _prescriptionItemService.GetAllMedicine().Select(e => e.Name);
+            return _prescriptionItemService.GetAllMedicine().Select(e => MedicineDTO.ConvertMedicineToDTO(e));
         }
 
-        public IEnumerable<string> GetTreatments()
+        public IEnumerable<TreatmentDTO> GetTreatments()
         {
-            return _prescriptionItemService.GetAllTreatments().Select(e => e.Name);
+            return _prescriptionItemService.GetAllTreatments().Select(e => TreatmentDTO.ConvertTreatmentToDTO(e));
         }
 
-        public IEnumerable<string> GetDiseases()
+        public IEnumerable<MedicalConditionDTO> GetDiseases()
         {
-            return _medicalConditionService.GetDiseases().Select(e => e.Name);
+            return _medicalConditionService.GetDiseases()
+                .Select(e => MedicalConditionDTO.ConvertMedicalConditionToDTO(e));
         }
 
         public void LoadDatabase()
@@ -301,16 +305,9 @@ namespace ServicesLibrary
 
         internal void SaveChanges() => _userService.SaveChanges();
 
-        public IEnumerable<string> GetAllPatients()
+        public IEnumerable<PatientDTO> GetAllPatients()
         {
-            var patients = _patientService.GetAll();
-            var patientsAsStrings = new List<string>();
-            foreach (var patient in patients)
-            {
-                patientsAsStrings.Add($"{patient.Id} - {patient.FullName}");
-            }
-
-            return patientsAsStrings;
+            return _patientService.GetAll().Select(e => PatientDTO.ConvertPatientToDTO(e));
         }
 
         public IEnumerable<TreatmentDTO> GetAllTreatments()
@@ -318,20 +315,20 @@ namespace ServicesLibrary
             return _prescriptionItemService.GetAllTreatments().Select(e => TreatmentDTO.ConvertTreatmentToDTO(e));
         }
 
-        public IEnumerable<int> CheckTherapySessionCreation(string patient, DateTime sessionDate, DateTime sessionTime,
+        public IEnumerable<int> CheckTherapySessionCreation(PatientDTO patient, DateTime sessionDate,
+            DateTime sessionTime,
             IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration)
         {
             var errorCodes = new List<int>();
 
-            BaseValidator validator = new StringEmptyValidator(PatientRequired, ref errorCodes);
+            BaseValidator validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
             validator.Validate(patient);
             if (errorCodes.Any()) return errorCodes;
-            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
             validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
             validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
             validator.Validate(new TherapySession()
             {
-                Patient = (Patient) UserService.Instance.GetUserById(patientId),
+                Patient = _patientService.GetById(patient.Id),
                 Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
                 DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay), EstimatedDuration = estimatedDuration
             });
@@ -341,13 +338,12 @@ namespace ServicesLibrary
             return errorCodes;
         }
 
-        public void CreateTherapySession(string patient, DateTime sessionDate, DateTime sessionTime,
+        public void CreateTherapySession(PatientDTO patient, DateTime sessionDate, DateTime sessionTime,
             IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration)
         {
-            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-            var treatmentsList = treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id));
-            TherapySessionService.Instance.AddTherapySession((Patient) UserService.Instance.GetUserById(patientId),
-                sessionDate.Date.Add(sessionTime.TimeOfDay), treatmentsList, estimatedDuration);
+            TherapySessionService.Instance.AddTherapySession(_patientService.GetById(patient.Id),
+                sessionDate.Date.Add(sessionTime.TimeOfDay),
+                treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id)), estimatedDuration);
         }
 
         public IEnumerable<TherapySessionDTO> GetPastTherapySessionsOfLoggedInTherapist()
@@ -360,34 +356,6 @@ namespace ServicesLibrary
         public void SelectTherapySession(TherapySessionDTO session)
         {
             _therapySessionService.SelectedTherapySessionId = session.Id;
-        }
-
-        public string GetSelectedTherapySessionBaseInfo()
-        {
-            var therapySession = _therapySessionService.GetSelectedTherapySession();
-            return
-                $"{therapySession.Id} | {_userService.GetUserById(therapySession.PatientId).FullName} | {therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
-        }
-
-        public IEnumerable<IEnumerable<string>> GetSelectedTherapySessionTreatments()
-        {
-            var treatments = new List<List<string>>();
-            foreach (var therapySessionHasTreatmentsInstance in _therapySessionService
-                .GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(_therapySessionService
-                    .SelectedTherapySessionId))
-            {
-                var treatment =
-                    _prescriptionItemService.GetTreatmentById(therapySessionHasTreatmentsInstance.TreatmentId);
-                treatments.Add(new List<string>
-                {
-                    treatment.Name,
-                    treatment.Description,
-                    treatment.BodyPart.ToString(),
-                    $"{treatment.Duration:hh\\:mm\\:ss}"
-                });
-            }
-
-            return treatments;
         }
 
         public string GetTreatmentNote(int sessionId, int treatmentId)
@@ -403,48 +371,52 @@ namespace ServicesLibrary
                 .CompletedTreatment;
         }
 
-
-        public IEnumerable<Prescription> GetLoggedInPatientsPrescriptions()
+        public IEnumerable<PrescriptionDTO> GetLoggedInPatientsPrescriptions()
         {
-            return _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId);
+            return _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId)
+                .Select(e => PrescriptionDTO.ConvertPrescriptionToDTO(e));
         }
 
-        public IEnumerable<Prescription> GetLoggedInPatientsPrescriptionsAtDate(DateTime date)
+        public IEnumerable<PrescriptionDTO> GetLoggedInPatientsPrescriptionsStartedBeforeDate(DateTime date)
         {
             return _prescriptionService.GetPrescriptionsStartedBeforeDate(
-                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId),date);
+                    _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId), date)
+                .Select(e => PrescriptionDTO.ConvertPrescriptionToDTO(e));
         }
 
-        public IEnumerable<TherapySession> GetLoggedInTherapistsTherapySessionsAtDate(DateTime date)
+        public IEnumerable<TherapySessionDTO> GetLoggedInTherapistsTherapySessionsAtDate(DateTime date)
         {
             return _therapySessionService.GetTherapySessionsAtDate(
-                _therapySessionService.GetAllTherapySessionsOfTherapist(_userService.LoggedInUserId), date);
+                    _therapySessionService.GetAllTherapySessionsOfTherapist(_userService.LoggedInUserId), date)
+                .Select(e => TherapySessionDTO.ConvertTherapySessionToDTO(e));
         }
 
-        public IEnumerable<TherapySession> GetLoggedInPatientsTherapySessionsAtDate(DateTime date)
+        public IEnumerable<TherapySessionDTO> GetLoggedInPatientsTherapySessionsAtDate(DateTime date)
         {
             return _therapySessionService.GetTherapySessionsAtDate(
-                _therapySessionService.GetAllTherapySessionsOfPatient(_userService.LoggedInUserId), date);
+                    _therapySessionService.GetAllTherapySessionsOfPatient(_userService.LoggedInUserId), date)
+                .Select(e => TherapySessionDTO.ConvertTherapySessionToDTO(e));
         }
 
-        public User GetUserById(int id)
+        public UserDTO GetUserById(int id)
         {
-            return _userService.GetUserById(id);
+            return UserDTO.ConvertUserToDTO(_userService.GetUserById(id));
         }
 
-        public IEnumerable<PrescriptionItem> GetPrescriptionItems(int pres_id)
+        public IEnumerable<PrescriptionItemDTO> GetPrescriptionItems(int pres_id)
         {
-            return _prescriptionService.GetPrescriptionItemsOfPrescriptionById(pres_id);
+            return _prescriptionService.GetPrescriptionItemsOfPrescriptionById(pres_id)
+                .Select(e => PrescriptionItemDTO.ConvertPrescriptionItemToDTO(e));
         }
 
-        public Medicine GetMedicineById(int id)
+        public MedicineDTO GetMedicineById(int id)
         {
-            return _prescriptionItemService.GetMedicineById(id);
+            return MedicineDTO.ConvertMedicineToDTO(_prescriptionItemService.GetMedicineById(id));
         }
 
-        public Exercise GetExerciseById(int id)
+        public ExerciseDTO GetExerciseById(int id)
         {
-            return _prescriptionItemService.GetExerciseById(id);
+            return ExerciseDTO.ConvertExerciseToDTO(_prescriptionItemService.GetExerciseById(id));
         }
 
         public bool IsMedicine(int id)
@@ -457,27 +429,12 @@ namespace ServicesLibrary
             return _prescriptionItemService.IsExercise(id);
         }
 
-        public IEnumerable<string> GetPatientPrescriptions()
-        {
-            var prescriptions = new List<string>();
-            foreach (var prescription in
-                _prescriptionService.GetPrescriptionsOfPatientById(_userService.LoggedInUserId)
-                    .OrderBy(e => e.StartDate))
-            {
-                prescriptions.Add(
-                    $"{prescription.Id} | Author: {_userService.GetUserById(prescription.AuthorId).FullName} | From {prescription.StartDate:dd/MM/yyyy} To {prescription.EndDate:dd/MM/yyyy}");
-            }
-
-            return prescriptions;
-        }
-
-        public void SelectPrescriptions(IEnumerable<string> prescriptions)
+        public void SelectPrescriptions(IEnumerable<PrescriptionDTO> prescriptions)
         {
             _prescriptionService.SelectedPrescriptions = new List<Prescription>();
             foreach (var prescription in prescriptions)
             {
-                var prescriptionSplit = prescription.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
-                _prescriptionService.AddSelectedPrescriptionById(int.Parse(prescriptionSplit[0]));
+                _prescriptionService.AddSelectedPrescriptionById(prescription.Id);
             }
         }
 
@@ -509,6 +466,11 @@ namespace ServicesLibrary
         public TherapySessionDTO GetSelectedTherapySession()
         {
             return TherapySessionDTO.ConvertTherapySessionToDTO(_therapySessionService.GetSelectedTherapySession());
+        }
+
+        public BodyPart ConvertStringToBodyPart(string bodyPart)
+        {
+            return (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
         }
     }
 }

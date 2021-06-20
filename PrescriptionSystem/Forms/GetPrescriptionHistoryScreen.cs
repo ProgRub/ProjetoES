@@ -28,7 +28,7 @@ namespace Forms
 
             foreach (var prescription in Services.Instance.GetLoggedInPatientsPrescriptions())
             {
-                var listViewItem = new ListViewItem(Services.Instance.GetUserById(prescription.AuthorId).FullName);
+                var listViewItem = new ListViewItem(prescription.Author.FullName);
                 listViewItem.SubItems.Add(prescription.Description);
                 listViewItem.SubItems.Add(prescription.StartDate.ToString("MM/dd/yyyy"));
                 listViewItem.SubItems.Add(prescription.EndDate.ToString("MM/dd/yyyy"));

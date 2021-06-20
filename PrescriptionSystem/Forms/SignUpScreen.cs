@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
     public partial class SignUpScreen : BaseControl
     {
+        private IEnumerable<MedicalConditionDTO> _allergies;
+        private IEnumerable<MedicalConditionDTO> _diseases;
         public SignUpScreen()
         {
             InitializeComponent();
@@ -19,16 +22,18 @@ namespace Forms
 
         private void SignUpScreen_Load(object sender, EventArgs e)
         {
+            _allergies = Services.Instance.GetAllergies();
+            _diseases= Services.Instance.GetDiseases();
             DateTimePickerDOB.MaxDate = DateTime.Today;
             DateTimePickerDOB.Value = DateTime.Today;
-            foreach (var allergy in Services.Instance.GetAllergies())
+            foreach (var allergy in _allergies)
             {
-                CheckedListBoxAllergies.Items.Add(allergy);
+                CheckedListBoxAllergies.Items.Add($"{allergy.Id} - {allergy.Name}");
             }
 
-            foreach (var disease in Services.Instance.GetDiseases())
+            foreach (var disease in _diseases)
             {
-                CheckedListBoxDiseases.Items.Add(disease);
+                CheckedListBoxDiseases.Items.Add($"{disease.Id} - {disease.Name}");
             }
 
             SetCheckedListBoxColumnWidth(CheckedListBoxDiseases);
@@ -52,16 +57,16 @@ namespace Forms
                 DateTimePickerDOB.Value,
                 TextBoxPhoneNumber.Text, TextBoxHealthUserNumber.Text, TextBoxEmail.Text, TextBoxPassword.Text,
                 userType);
-            var allergies = new List<string>();
+            var allergies = new List<MedicalConditionDTO>();
             foreach (var checkedItem in CheckedListBoxAllergies.CheckedItems)
             {
-                allergies.Add(checkedItem.ToString());
+                allergies.Add(GetAllergyFromString(checkedItem.ToString()));
             }
 
-            var diseases = new List<string>();
+            var diseases = new List<MedicalConditionDTO>();
             foreach (var checkedItem in CheckedListBoxDiseases.CheckedItems)
             {
-                diseases.Add(checkedItem.ToString());
+                diseases.Add(GetDiseaseFromString(checkedItem.ToString()));
             }
 
             var missingBodyParts = new List<string>();
@@ -158,6 +163,15 @@ namespace Forms
                         break;
                 }
             }
+        }
+
+        private MedicalConditionDTO GetAllergyFromString(string allergyString)
+        {
+            return _allergies.First(e => e.Id.ToString() == allergyString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
+        }
+        private MedicalConditionDTO GetDiseaseFromString(string diseaseString)
+        {
+            return _diseases.First(e => e.Id.ToString() == diseaseString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
     }
 }

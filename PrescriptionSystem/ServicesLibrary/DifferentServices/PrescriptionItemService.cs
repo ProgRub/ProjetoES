@@ -40,7 +40,7 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal void CreateMedicinePrescriptionItem(string name, string description, double price,
-            IEnumerable<string> allergies, IEnumerable<string> diseases)
+            IEnumerable<MedicalCondition> allergies, IEnumerable<MedicalCondition> diseases)
         {
             var medicine = new Medicine
             {
@@ -70,19 +70,17 @@ namespace ServicesLibrary.DifferentServices
             _treatmentRepository.SaveChanges();
         }
 
-        private void AddIncompatibleMedicalConditionsToMedicine(Medicine medicine, IEnumerable<string> allergies,
-            IEnumerable<string> diseases)
+        private void AddIncompatibleMedicalConditionsToMedicine(Medicine medicine, IEnumerable<MedicalCondition> allergies,
+            IEnumerable<MedicalCondition> diseases)
         {
-            foreach (var allergyString in allergies)
+            foreach (var allergy in allergies)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine,allergy);
             }
 
-            foreach (var diseaseString in diseases)
+            foreach (var disease in diseases)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine, disease);
             }
         }
 

@@ -54,7 +54,7 @@ namespace Forms
             {
                 var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
                 sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSession + newLine 
-                    + "Therapy session with patient " + Services.Instance.GetUserById(session.PatientId).FullName + newLine + newLine;
+                    + "Therapy session with patient " + session.Patient.FullName + newLine + newLine;
             }
 
             if (sessions == "")
