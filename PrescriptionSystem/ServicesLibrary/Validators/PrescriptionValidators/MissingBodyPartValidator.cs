@@ -1,11 +1,5 @@
 ﻿using System.Collections.Generic;
-using ComponentsLibrary.Entities;
-using ComponentsLibrary.Entities.PrescriptionItems;
-using ServicesLibrary;
-using ServicesLibrary.DifferentServices;
-using ServicesLibrary.Validators;
 using System;
-using System.Diagnostics;
 using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators

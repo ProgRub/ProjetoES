@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
-using ComponentsLibrary.Repositories;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
 

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using ComponentsLibrary.Entities;
+﻿using ComponentsLibrary.Entities;
 using ServicesLibrary.DifferentServices;
 
 namespace ServicesLibrary.Commands.FinishedTherapySession
