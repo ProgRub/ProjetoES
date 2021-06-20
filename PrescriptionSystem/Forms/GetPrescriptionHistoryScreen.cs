@@ -15,22 +15,26 @@ namespace Forms
         public GetPrescriptionHistoryScreen()
         {
             InitializeComponent();
-
-            foreach (var prescription in Services.Instance.GetPrescriptionByPatientId())
-            {
-                var listViewItem = new ListViewItem(Services.Instance.GetUserById(prescription.AuthorId).FullName);
-                listViewItem.SubItems.Add(prescription.Description);
-                listViewItem.SubItems.Add(prescription.StartDate.ToString("MM/dd/yyyy"));
-                listViewItem.SubItems.Add(prescription.EndDate.ToString("MM/dd/yyyy"));
-                listViewItem.SubItems.Add("Show more details");
-                listViewPrescriptionHistory.Items.Add(listViewItem);
-            }
         }
 
 
         private void ButtonBack_Click(object sender, EventArgs e)
         {
             MoveToScreen(new CalendarScreenPatient());
+        }
+
+        private void GetPrescriptionHistoryScreen_Load(object sender, EventArgs e)
+        {
+
+            foreach (var prescription in Services.Instance.GetLoggedInPatientsPrescriptions())
+            {
+                var listViewItem = new ListViewItem(prescription.Author.FullName);
+                listViewItem.SubItems.Add(prescription.Description);
+                listViewItem.SubItems.Add(prescription.StartDate.ToString("MM/dd/yyyy"));
+                listViewItem.SubItems.Add(prescription.EndDate.ToString("MM/dd/yyyy"));
+                listViewItem.SubItems.Add("Show more details");
+                listViewPrescriptionHistory.Items.Add(listViewItem);
+            }
         }
     }
 }

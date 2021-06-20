@@ -30,14 +30,14 @@ namespace Forms
             ButtonBack.Enabled = false;
             ButtonBack.Visible = false;
         }
-        protected void ClearTextbox(TextBox textBox) => textBox.Text = "";
+        protected void ClearTextBox(TextBox textBox) => textBox.Text = "";
 
         protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(textBox.PlaceholderText))
             {
                 ((Window)Parent).ActiveControl = null;
-                ClearTextbox(textBox);
+                ClearTextBox(textBox);
                 textBox.PlaceholderText = errorMessage;
             }
         }

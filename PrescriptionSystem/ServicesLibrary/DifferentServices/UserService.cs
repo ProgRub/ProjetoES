@@ -7,6 +7,7 @@ using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -16,7 +17,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal int LoggedInUserId { get; private set; }
 
-        private UserService()
+        internal UserService()
         {
             _userRepository = new UserRepository(Database.GetContext());
         }
@@ -28,68 +29,37 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.Find(e => e.Id == id).First();
         }
 
-        internal bool IsHealthUserNumberUnique(int healthUserNumber)
-        {
-            return !_userRepository.Find(e => e.HealthUserNumber == healthUserNumber).Any();
-        }
-
-        internal bool IsEmailUnique(string email)
-        {
-            return !_userRepository.Find(e => e.Email == email).Any();
-        }
-
-        internal bool IsTherapistOldEnough(DateTime dateOfBirth)
-        {
-            return (DateTime.Today - dateOfBirth).Days >= 22 * 365.75;
-        }
-
         internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
-            string email, string password, IEnumerable<string> allergies, IEnumerable<string> diseases,
+            string email, string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
             IEnumerable<string> missingBodyParts, string type)
         {
             switch (type)
             {
                 case "Patient":
-                    var patient = new Patient
-                    {
-                        FullName = name, DateOfBirth = dateOfBirth, Email = email, HealthUserNumber = healthUserNumber,
-                        Password = password, PhoneNumber = phoneNumber
-                    };
-                    _userRepository.AddPatient(patient);
-                    AddMedicalConditionsToUser(patient, allergies, diseases);
-                    AddMissingBodyPartsToUser(patient, missingBodyParts);
-                    _userRepository.SaveChanges();
+                    PatientService.Instance.RegisterPatient(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
                     return;
                 case "Therapist":
-                    var therapist = new Therapist
-                    {
-                        FullName = name, DateOfBirth = dateOfBirth, Email = email, HealthUserNumber = healthUserNumber,
-                        Password = password, PhoneNumber = phoneNumber
-                    };
-                    _userRepository.AddTherapist(therapist);
-                    AddMedicalConditionsToUser(therapist, allergies, diseases);
-                    AddMissingBodyPartsToUser(therapist, missingBodyParts);
-                    _userRepository.SaveChanges();
+                    TherapistService.Instance.RegisterTherapist(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
                     return;
             }
         }
 
-        private void AddMedicalConditionsToUser(User user, IEnumerable<string> allergies, IEnumerable<string> diseases)
+        protected void AddMedicalConditionsToUser(User user, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases)
         {
-            foreach (var allergyString in allergies)
+            foreach (var allergy in allergies)
             {
                 _userRepository.AddMedicalConditionToUser(user,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
+                    MedicalConditionService.Instance.GetMedicalConditionById(allergy.Id));
             }
 
-            foreach (var diseaseString in diseases)
+            foreach (var disease in diseases)
             {
                 _userRepository.AddMedicalConditionToUser(user,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
+                    MedicalConditionService.Instance.GetMedicalConditionById(disease.Id));
             }
         }
 
-        private void AddMissingBodyPartsToUser(User user, IEnumerable<string> missingBodyParts)
+        protected void AddMissingBodyPartsToUser(User user, IEnumerable<string> missingBodyParts)
         {
             foreach (var bodyPartString in missingBodyParts)
             {
@@ -112,12 +82,7 @@ namespace ServicesLibrary.DifferentServices
         {
             var user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
             LoggedInUserId = user.Id;
-            if (_userRepository.GetAllPatients().Contains(user))
-            {
-                return Services.Patient;
-            }
-
-            return Services.Therapist;
+            return PatientService.Instance.GetById(LoggedInUserId)!=null ? Services.Patient : Services.Therapist;
         }
 
         internal void LoadDBHelpFunction()
@@ -125,25 +90,14 @@ namespace ServicesLibrary.DifferentServices
             _userRepository.GetAll();
         }
 
-        internal IEnumerable<Patient> GetAllPatients()
-        {
-            return _userRepository.GetAllPatients();
-        }
-
         internal IEnumerable<BodyPart> GetUserMissingBodyPartsByUserId(int id)
         {
-            return _userRepository.GetAllMissingBodyParts().Select(userHasMissingBodyPart => userHasMissingBodyPart.BodyPart).ToList();
+            return _userRepository.GetUserHasMissingBodyPartEnumerableByUserId(id).Select(userHasMissingBodyPart => userHasMissingBodyPart.BodyPart).ToList();
         }
         
         internal IEnumerable<MedicalCondition> GetUsersMedicalConditionsByUserId(int userId)
         {
-            var medicalConditions = new List<MedicalCondition>();
-            foreach (var userHasMedicalCondition in
-                _userRepository.GetUserHasMedicalConditionsEnumerableByUserId(userId))
-            {
-                medicalConditions.Add(MedicalConditionService.Instance.GetMedicalConditionById(userHasMedicalCondition.MedicalConditionId));
-            }
-            return medicalConditions;
+            return _userRepository.GetUserHasMedicalConditionsEnumerableByUserId(userId).Select(userHasMedicalCondition => MedicalConditionService.Instance.GetMedicalConditionById(userHasMedicalCondition.MedicalConditionId)).ToList();
         }
 
         internal IEnumerable<User> GetAllUsers()
@@ -151,19 +105,6 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetAll();
         }
 
-        internal bool IsPatientAvailable(int patientId, DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
-        {
-            return false;
-        }
-
-        internal bool IsTherapistAvailable(DateTime sessionDate, DateTime sessionHour, TimeSpan estimatedDuration)
-        {
-            return false;
-        }
-
-        internal IEnumerable<HealthCareProfessional> GetAllHealthCareProfessionals()
-        {
-            return _userRepository.GetAllHealthCareProfessionals();
-        }
+        internal void SaveChanges() => _userRepository.SaveChanges();
     }
 }

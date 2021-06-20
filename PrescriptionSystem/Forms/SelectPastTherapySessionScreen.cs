@@ -40,8 +40,11 @@ namespace Forms
                     Text =
                         $"{_therapySessions.ElementAt(index).Id} | {_therapySessions.ElementAt(index).Patient.FullName}{Environment.NewLine}{_therapySessions.ElementAt(index).DateTime:dddd dd/MM/yyyy HH:mm}",
                     Size = ButtonExampleTherapySession.Size,
-                    Location = new Point(ButtonExampleTherapySession.Location.X + (index/8) * (ButtonExampleTherapySession.Size.Width + 25),
-                        ButtonExampleTherapySession.Location.Y + (index %8) * (ButtonExampleTherapySession.Size.Height+25))
+                    Location = new Point(
+                        ButtonExampleTherapySession.Location.X +
+                        (index / 8) * (ButtonExampleTherapySession.Size.Width + 25),
+                        ButtonExampleTherapySession.Location.Y +
+                        (index % 8) * (ButtonExampleTherapySession.Size.Height + 25))
                 };
                 button.MouseClick += ButtonClicked;
                 Controls.Add(button);

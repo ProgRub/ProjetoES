@@ -31,14 +31,14 @@ namespace Forms
         {
             this.CheckedListBoxTreatments = new System.Windows.Forms.CheckedListBox();
             this.ButtonAddTherapySession = new System.Windows.Forms.Button();
-            this.labelTreatments = new System.Windows.Forms.Label();
+            this.LabelTreatments = new System.Windows.Forms.Label();
             this.DateTimePickerSessionHour = new System.Windows.Forms.DateTimePicker();
-            this.labelHour = new System.Windows.Forms.Label();
+            this.LabelHour = new System.Windows.Forms.Label();
             this.DateTimePickerDate = new System.Windows.Forms.DateTimePicker();
-            this.labelDate = new System.Windows.Forms.Label();
+            this.LabelDate = new System.Windows.Forms.Label();
             this.ComboBoxPatient = new System.Windows.Forms.ComboBox();
-            this.labelPatient = new System.Windows.Forms.Label();
-            this.labelAddTreatmentSession = new System.Windows.Forms.Label();
+            this.LabelPatient = new System.Windows.Forms.Label();
+            this.LabelTitle = new System.Windows.Forms.Label();
             this.LabelEstimatedDuration = new System.Windows.Forms.Label();
             this.LabelSessionDuration = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -51,9 +51,10 @@ namespace Forms
             // 
             this.CheckedListBoxTreatments.CheckOnClick = true;
             this.CheckedListBoxTreatments.FormattingEnabled = true;
-            this.CheckedListBoxTreatments.Location = new System.Drawing.Point(136, 201);
+            this.CheckedListBoxTreatments.Location = new System.Drawing.Point(119, 151);
+            this.CheckedListBoxTreatments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CheckedListBoxTreatments.Name = "CheckedListBoxTreatments";
-            this.CheckedListBoxTreatments.Size = new System.Drawing.Size(725, 180);
+            this.CheckedListBoxTreatments.Size = new System.Drawing.Size(635, 130);
             this.CheckedListBoxTreatments.TabIndex = 24;
             this.CheckedListBoxTreatments.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBoxTreatments_ItemCheck);
             // 
@@ -62,99 +63,103 @@ namespace Forms
             this.ButtonAddTherapySession.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddTherapySession.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddTherapySession.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddTherapySession.Location = new System.Drawing.Point(391, 422);
+            this.ButtonAddTherapySession.Location = new System.Drawing.Point(342, 316);
+            this.ButtonAddTherapySession.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ButtonAddTherapySession.Name = "ButtonAddTherapySession";
-            this.ButtonAddTherapySession.Size = new System.Drawing.Size(221, 44);
+            this.ButtonAddTherapySession.Size = new System.Drawing.Size(193, 33);
             this.ButtonAddTherapySession.TabIndex = 23;
             this.ButtonAddTherapySession.Text = "Add Therapy Session";
             this.ButtonAddTherapySession.UseVisualStyleBackColor = false;
             this.ButtonAddTherapySession.Click += new System.EventHandler(this.ButtonAddTherapySession_Click);
             // 
-            // labelTreatments
+            // LabelTreatments
             // 
-            this.labelTreatments.AutoSize = true;
-            this.labelTreatments.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelTreatments.Location = new System.Drawing.Point(50, 201);
-            this.labelTreatments.Name = "labelTreatments";
-            this.labelTreatments.Size = new System.Drawing.Size(88, 20);
-            this.labelTreatments.TabIndex = 22;
-            this.labelTreatments.Text = "Treatments:";
+            this.LabelTreatments.AutoSize = true;
+            this.LabelTreatments.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelTreatments.Location = new System.Drawing.Point(44, 151);
+            this.LabelTreatments.Name = "LabelTreatments";
+            this.LabelTreatments.Size = new System.Drawing.Size(69, 15);
+            this.LabelTreatments.TabIndex = 22;
+            this.LabelTreatments.Text = "Treatments:";
             // 
             // DateTimePickerSessionHour
             // 
             this.DateTimePickerSessionHour.CustomFormat = "HH:mm";
             this.DateTimePickerSessionHour.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DateTimePickerSessionHour.Location = new System.Drawing.Point(136, 155);
+            this.DateTimePickerSessionHour.Location = new System.Drawing.Point(119, 116);
+            this.DateTimePickerSessionHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateTimePickerSessionHour.Name = "DateTimePickerSessionHour";
             this.DateTimePickerSessionHour.ShowUpDown = true;
-            this.DateTimePickerSessionHour.Size = new System.Drawing.Size(222, 27);
+            this.DateTimePickerSessionHour.Size = new System.Drawing.Size(195, 23);
             this.DateTimePickerSessionHour.TabIndex = 19;
             // 
-            // labelHour
+            // LabelHour
             // 
-            this.labelHour.AutoSize = true;
-            this.labelHour.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelHour.Location = new System.Drawing.Point(87, 163);
-            this.labelHour.Name = "labelHour";
-            this.labelHour.Size = new System.Drawing.Size(49, 20);
-            this.labelHour.TabIndex = 18;
-            this.labelHour.Text = "Hour:";
+            this.LabelHour.AutoSize = true;
+            this.LabelHour.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelHour.Location = new System.Drawing.Point(76, 122);
+            this.LabelHour.Name = "LabelHour";
+            this.LabelHour.Size = new System.Drawing.Size(37, 15);
+            this.LabelHour.TabIndex = 18;
+            this.LabelHour.Text = "Hour:";
             // 
             // DateTimePickerDate
             // 
             this.DateTimePickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimePickerDate.Location = new System.Drawing.Point(136, 108);
+            this.DateTimePickerDate.Location = new System.Drawing.Point(119, 81);
+            this.DateTimePickerDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateTimePickerDate.Name = "DateTimePickerDate";
-            this.DateTimePickerDate.Size = new System.Drawing.Size(222, 27);
+            this.DateTimePickerDate.Size = new System.Drawing.Size(195, 23);
             this.DateTimePickerDate.TabIndex = 17;
             // 
-            // labelDate
+            // LabelDate
             // 
-            this.labelDate.AutoSize = true;
-            this.labelDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelDate.Location = new System.Drawing.Point(89, 116);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(45, 20);
-            this.labelDate.TabIndex = 16;
-            this.labelDate.Text = "Date:";
+            this.LabelDate.AutoSize = true;
+            this.LabelDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelDate.Location = new System.Drawing.Point(78, 87);
+            this.LabelDate.Name = "LabelDate";
+            this.LabelDate.Size = new System.Drawing.Size(35, 15);
+            this.LabelDate.TabIndex = 16;
+            this.LabelDate.Text = "Date:";
             // 
             // ComboBoxPatient
             // 
             this.ComboBoxPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxPatient.FormattingEnabled = true;
-            this.ComboBoxPatient.Location = new System.Drawing.Point(136, 59);
+            this.ComboBoxPatient.Location = new System.Drawing.Point(119, 44);
+            this.ComboBoxPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBoxPatient.Name = "ComboBoxPatient";
-            this.ComboBoxPatient.Size = new System.Drawing.Size(725, 28);
+            this.ComboBoxPatient.Size = new System.Drawing.Size(635, 23);
             this.ComboBoxPatient.Sorted = true;
             this.ComboBoxPatient.TabIndex = 15;
             // 
-            // labelPatient
+            // LabelPatient
             // 
-            this.labelPatient.AutoSize = true;
-            this.labelPatient.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelPatient.Location = new System.Drawing.Point(75, 63);
-            this.labelPatient.Name = "labelPatient";
-            this.labelPatient.Size = new System.Drawing.Size(61, 20);
-            this.labelPatient.TabIndex = 14;
-            this.labelPatient.Text = "Patient:";
+            this.LabelPatient.AutoSize = true;
+            this.LabelPatient.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelPatient.Location = new System.Drawing.Point(66, 47);
+            this.LabelPatient.Name = "LabelPatient";
+            this.LabelPatient.Size = new System.Drawing.Size(47, 15);
+            this.LabelPatient.TabIndex = 14;
+            this.LabelPatient.Text = "Patient:";
             // 
-            // labelAddTreatmentSession
+            // LabelTitle
             // 
-            this.labelAddTreatmentSession.AutoSize = true;
-            this.labelAddTreatmentSession.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelAddTreatmentSession.Location = new System.Drawing.Point(391, 12);
-            this.labelAddTreatmentSession.Name = "labelAddTreatmentSession";
-            this.labelAddTreatmentSession.Size = new System.Drawing.Size(232, 31);
-            this.labelAddTreatmentSession.TabIndex = 13;
-            this.labelAddTreatmentSession.Text = "Add Therapy Session";
+            this.LabelTitle.AutoSize = true;
+            this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelTitle.Location = new System.Drawing.Point(342, 9);
+            this.LabelTitle.Name = "LabelTitle";
+            this.LabelTitle.Size = new System.Drawing.Size(189, 25);
+            this.LabelTitle.TabIndex = 13;
+            this.LabelTitle.Text = "Add Therapy Session";
             // 
             // LabelEstimatedDuration
             // 
             this.LabelEstimatedDuration.AutoSize = true;
             this.LabelEstimatedDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelEstimatedDuration.Location = new System.Drawing.Point(869, 201);
+            this.LabelEstimatedDuration.Location = new System.Drawing.Point(760, 151);
             this.LabelEstimatedDuration.Name = "LabelEstimatedDuration";
-            this.LabelEstimatedDuration.Size = new System.Drawing.Size(144, 20);
+            this.LabelEstimatedDuration.Size = new System.Drawing.Size(112, 15);
             this.LabelEstimatedDuration.TabIndex = 25;
             this.LabelEstimatedDuration.Text = "Estimated Duration:";
             // 
@@ -162,42 +167,42 @@ namespace Forms
             // 
             this.LabelSessionDuration.AutoSize = true;
             this.LabelSessionDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelSessionDuration.Location = new System.Drawing.Point(898, 235);
+            this.LabelSessionDuration.Location = new System.Drawing.Point(786, 176);
             this.LabelSessionDuration.Name = "LabelSessionDuration";
-            this.LabelSessionDuration.Size = new System.Drawing.Size(65, 20);
+            this.LabelSessionDuration.Size = new System.Drawing.Size(55, 15);
             this.LabelSessionDuration.TabIndex = 26;
             this.LabelSessionDuration.Text = "00:00:00";
             // 
             // AddTherapySessionScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.LabelSessionDuration);
             this.Controls.Add(this.LabelEstimatedDuration);
             this.Controls.Add(this.CheckedListBoxTreatments);
             this.Controls.Add(this.ButtonAddTherapySession);
-            this.Controls.Add(this.labelTreatments);
+            this.Controls.Add(this.LabelTreatments);
             this.Controls.Add(this.DateTimePickerSessionHour);
-            this.Controls.Add(this.labelHour);
+            this.Controls.Add(this.LabelHour);
             this.Controls.Add(this.DateTimePickerDate);
-            this.Controls.Add(this.labelDate);
+            this.Controls.Add(this.LabelDate);
             this.Controls.Add(this.ComboBoxPatient);
-            this.Controls.Add(this.labelPatient);
-            this.Controls.Add(this.labelAddTreatmentSession);
-            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Controls.Add(this.LabelPatient);
+            this.Controls.Add(this.LabelTitle);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AddTherapySessionScreen";
-            this.Size = new System.Drawing.Size(1075, 675);
+            this.Size = new System.Drawing.Size(941, 506);
             this.Load += new System.EventHandler(this.AddTherapySessionScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.labelAddTreatmentSession, 0);
-            this.Controls.SetChildIndex(this.labelPatient, 0);
+            this.Controls.SetChildIndex(this.LabelTitle, 0);
+            this.Controls.SetChildIndex(this.LabelPatient, 0);
             this.Controls.SetChildIndex(this.ComboBoxPatient, 0);
-            this.Controls.SetChildIndex(this.labelDate, 0);
+            this.Controls.SetChildIndex(this.LabelDate, 0);
             this.Controls.SetChildIndex(this.DateTimePickerDate, 0);
-            this.Controls.SetChildIndex(this.labelHour, 0);
+            this.Controls.SetChildIndex(this.LabelHour, 0);
             this.Controls.SetChildIndex(this.DateTimePickerSessionHour, 0);
-            this.Controls.SetChildIndex(this.labelTreatments, 0);
+            this.Controls.SetChildIndex(this.LabelTreatments, 0);
             this.Controls.SetChildIndex(this.ButtonAddTherapySession, 0);
             this.Controls.SetChildIndex(this.CheckedListBoxTreatments, 0);
             this.Controls.SetChildIndex(this.LabelEstimatedDuration, 0);
@@ -211,14 +216,14 @@ namespace Forms
 
         private System.Windows.Forms.CheckedListBox CheckedListBoxTreatments;
         private System.Windows.Forms.Button ButtonAddTherapySession;
-        private System.Windows.Forms.Label labelTreatments;
+        private System.Windows.Forms.Label LabelTreatments;
         private System.Windows.Forms.DateTimePicker DateTimePickerSessionHour;
-        private System.Windows.Forms.Label labelHour;
+        private System.Windows.Forms.Label LabelHour;
         private System.Windows.Forms.DateTimePicker DateTimePickerDate;
-        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Label LabelDate;
         private System.Windows.Forms.ComboBox ComboBoxPatient;
-        private System.Windows.Forms.Label labelPatient;
-        private System.Windows.Forms.Label labelAddTreatmentSession;
+        private System.Windows.Forms.Label LabelPatient;
+        private System.Windows.Forms.Label LabelTitle;
         private System.Windows.Forms.Label LabelEstimatedDuration;
         private System.Windows.Forms.Label LabelSessionDuration;
     }

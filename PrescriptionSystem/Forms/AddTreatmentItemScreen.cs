@@ -18,117 +18,52 @@ namespace Forms
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void ButtonAddTreatment_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddMedicineItem_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
-               textBoxMinAge.Text, textBoxMaxAge.Text);
+            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
+               TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
 
             var bodyPart = "";
-            foreach (var rdo in groupBox1.Controls.OfType<RadioButton>())
+            foreach (var radioButton in GroupBoxBodyPart.Controls.OfType<RadioButton>())
             {
-                if (rdo.Checked)
+                if (radioButton.Checked)
                 {
-                    bodyPart = rdo.Text;
+                    bodyPart = radioButton.Text;
                     break;
                 }
             }
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
+                return;
             }
-            else
-            {
-                Services.Instance.CreateTreatmentPrescriptionItem(textBoxTreatmentName.Text, textBoxTreatmentDescription.Text,
-                    int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyPart);
-                ShowInformationMessageBox("Treatment successfully added.", "Success");
-            }
-            
+            Services.Instance.CreateTreatmentPrescriptionItem(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
+                int.Parse(TextBoxMinimumAge.Text), int.Parse(TextBoxMaximumAge.Text), DateTimePickerDuration.Value.TimeOfDay, bodyPart);
+            ShowInformationMessageBox("Treatment successfully added.", "Success");
+            MoveToScreen(new AddPrescriptionItemScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
                 {
                     case Services.NameRequired:
-                        ShowTextBoxErrorMessage(textBoxTreatmentName, "Name is required!");
-                        textBoxTreatmentName.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxTreatmentName, "Name is required!");
                         break;
                     case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(textBoxTreatmentDescription, "Description is required!");
-                        textBoxTreatmentDescription.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxTreatmentDescription, "Description is required!");
                         break;
                     case Services.AgeMinimumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMinAge, "Age mininum is required!");
-                        textBoxMinAge.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMinimumAge, "Age minimum is required!");
                         break;
                     case Services.AgeMaximumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maxinum is required!");
-                        textBoxMaxAge.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMaximumAge, "Age maximum is required!");
                         break;
                 }
             }
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)

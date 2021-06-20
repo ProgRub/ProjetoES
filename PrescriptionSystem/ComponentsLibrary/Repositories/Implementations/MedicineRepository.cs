@@ -36,7 +36,7 @@ namespace ComponentsLibrary.Repositories.Implementations
         }
 
 
-        public IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditions(int id)
+        public IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id)
         {
             return _medicineHasIncompatibilityRepository.Find(e => e.MedicineId == id);
         }

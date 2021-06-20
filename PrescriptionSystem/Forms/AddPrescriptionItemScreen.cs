@@ -15,22 +15,17 @@ namespace Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonMedicine_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddMedicineItemScreen());
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void ButtonTreatment_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddTreatmentItemScreen());
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ButtonExercise_Click(object sender, EventArgs e)
         {
             MoveToScreen(new AddExerciseItemScreen());
         }

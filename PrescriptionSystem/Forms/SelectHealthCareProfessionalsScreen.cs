@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
     public partial class SelectHealthCareProfessionalsScreen : BaseControl
     {
+        private IEnumerable<HealthCareProfessionalDTO> _healthCareProfessionals;
         public SelectHealthCareProfessionalsScreen()
         {
             InitializeComponent();
@@ -25,28 +27,21 @@ namespace Forms
         private void SelectHealthCareProfessionalsScreen_Load(object sender, EventArgs e)
         {
 
-            var professionals = Services.Instance.GetHealthCareProfessionals();
-            if (!professionals.Any()) LabelTitle.Text = "There are no Health Care Professionals registered...";
-            else
+            _healthCareProfessionals = Services.Instance.GetHealthCareProfessionals();
+            if (!_healthCareProfessionals.Any())
             {
-                CheckBoxSelectAll.Enabled = true;
-                ButtonAddViewers.Enabled = true;
-                foreach (var professional in professionals)
-                {
-                    CheckedListBoxProfessionals.Items.Add(professional);
-                }
+                LabelTitle.Text = "There are no Health Care Professionals registered...";
+                return;
             }
 
-            var columnWidth = 0;
-            foreach (string item in CheckedListBoxProfessionals.Items)
+            CheckBoxSelectAll.Enabled = true;
+            ButtonAddViewers.Enabled = true;
+            foreach (var professional in _healthCareProfessionals)
             {
-                var width = TextRenderer.MeasureText(item, CheckedListBoxProfessionals.Font).Width;
-                if (width > columnWidth)
-                {
-                    columnWidth = width + 20;
-                }
+                CheckedListBoxProfessionals.Items.Add($"{professional.Id} - {professional.FullName}");
             }
-            CheckedListBoxProfessionals.ColumnWidth = columnWidth;
+
+            SetCheckedListBoxColumnWidth(CheckedListBoxProfessionals);
         }
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
@@ -80,14 +75,21 @@ namespace Forms
             }
         }
 
+        private HealthCareProfessionalDTO GetHealthCareProfessionalByString(string professionalString)
+        {
+            var professionalSplit = professionalString.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
+            return _healthCareProfessionals.First(e => e.Id.ToString() == professionalSplit[0]);
+        }
+
         private void ButtonSelectHealthCareProfessionals_Click(object sender, EventArgs e)
         {
             if (CheckedListBoxProfessionals.CheckedItems.Count > 0)
             {
-                var checkedProfessionals = new List<string>();
+                var checkedProfessionals = new List<HealthCareProfessionalDTO>();
+
                 foreach (var checkedItem in CheckedListBoxProfessionals.CheckedItems)
                 {
-                    checkedProfessionals.Add(checkedItem.ToString());
+                    checkedProfessionals.Add(GetHealthCareProfessionalByString(checkedItem.ToString()));
                 }
                 Services.Instance.AddPermissionToHealthCareProfessionals(checkedProfessionals);
                 ShowInformationMessageBox("The selected Health Care Professionals now have access to your prescription details.", "Success");

@@ -81,11 +81,11 @@ namespace Forms
             this.ButtonAddViewers.Enabled = false;
             this.ButtonAddViewers.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddViewers.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddViewers.Location = new System.Drawing.Point(752, 235);
+            this.ButtonAddViewers.Location = new System.Drawing.Point(752, 202);
             this.ButtonAddViewers.Name = "ButtonAddViewers";
-            this.ButtonAddViewers.Size = new System.Drawing.Size(66, 32);
+            this.ButtonAddViewers.Size = new System.Drawing.Size(84, 69);
             this.ButtonAddViewers.TabIndex = 30;
-            this.ButtonAddViewers.Text = "Done";
+            this.ButtonAddViewers.Text = "Add Viewers";
             this.ButtonAddViewers.UseVisualStyleBackColor = false;
             this.ButtonAddViewers.Click += new System.EventHandler(this.ButtonSelectHealthCareProfessionals_Click);
             // 
@@ -99,7 +99,7 @@ namespace Forms
             this.Controls.Add(this.LabelTitle);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SelectHealthCareProfessionalsScreen";
-            this.Size = new System.Drawing.Size(821, 419);
+            this.Size = new System.Drawing.Size(839, 419);
             this.Load += new System.EventHandler(this.SelectHealthCareProfessionalsScreen_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

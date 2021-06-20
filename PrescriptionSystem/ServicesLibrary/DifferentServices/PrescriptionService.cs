@@ -46,6 +46,7 @@ namespace ServicesLibrary.DifferentServices
             _prescriptionRepository.SaveChanges();
         }
 
+
         internal List<TimeSpan> RecommendedTimesOfPrescriptionItem(PrescriptionItem prescriptionItem,
             List<KeyValuePair<string, string>> recommendedTimes)
         {
@@ -101,7 +102,8 @@ namespace ServicesLibrary.DifferentServices
                 healthCareProfessional);
         }
 
-        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
+        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(
+            int prescriptionId)
         {
             return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionId);
         }
@@ -109,28 +111,43 @@ namespace ServicesLibrary.DifferentServices
         internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
         {
             var prescriptionItems = new List<PrescriptionItem>();
-            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionId))
+            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(
+                prescriptionId))
             {
                 if (PrescriptionItemService.Instance.IsExercise(prescriptionHasItems.PrescriptionItemId))
                 {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetExerciseById(prescriptionHasItems.PrescriptionItemId));
+                    prescriptionItems.Add(
+                        PrescriptionItemService.Instance.GetExerciseById(prescriptionHasItems.PrescriptionItemId));
                 }
                 else if (PrescriptionItemService.Instance.IsMedicine(prescriptionHasItems.PrescriptionItemId))
                 {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineById(prescriptionHasItems.PrescriptionItemId));
+                    prescriptionItems.Add(
+                        PrescriptionItemService.Instance.GetMedicineById(prescriptionHasItems.PrescriptionItemId));
                 }
                 else
                 {
-                    prescriptionItems.Add(PrescriptionItemService.Instance.GetTreatmentById(prescriptionHasItems.PrescriptionItemId));
+                    prescriptionItems.Add(
+                        PrescriptionItemService.Instance.GetTreatmentById(prescriptionHasItems.PrescriptionItemId));
                 }
-
             }
+
             return prescriptionItems;
         }
 
         public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
         {
             return _prescriptionRepository.GetPrescriptionViewersByPrescriptionId(id);
+        }
+
+        public Prescription GetPrescriptionById(int prescriptionId)
+        {
+            return _prescriptionRepository.GetById(prescriptionId);
+        }
+
+        public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByItemId(int prescriptionItemId)
+        {
+#warning TODO: Implementar isto
+            return new List<TimeSpan>();
         }
     }
 }

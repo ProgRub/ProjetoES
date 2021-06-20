@@ -8,7 +8,7 @@ namespace ComponentsLibrary.Repositories.Interfaces
     {
 
         void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition);
-        IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditions(int id);
+        IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id);
         IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions);
     }
 }

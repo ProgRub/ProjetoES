@@ -15,26 +15,23 @@ namespace Forms
     public partial class AddTherapySessionScreen : BaseControl
     {
         private IEnumerable<TreatmentDTO> _treatments;
+        private IEnumerable<PatientDTO> _patients;
 
         public AddTherapySessionScreen()
         {
             InitializeComponent();
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
-        }
-
         private void AddTherapySessionScreen_Load(object sender, EventArgs e)
         {
+            _treatments = Services.Instance.GetAllTreatments();
+            _patients = Services.Instance.GetAllPatients();
             //DateTimePickerDate.MinDate = DateTime.Today;
-            foreach (var patient in Services.Instance.GetAllPatients())
+            foreach (var patient in _patients)
             {
-                ComboBoxPatient.Items.Add(patient);
+                ComboBoxPatient.Items.Add($"{patient.Id} - {patient.FullName}");
             }
 
-            _treatments = Services.Instance.GetAllTreatments();
             foreach (var treatment in _treatments)
             {
                 CheckedListBoxTreatments.Items.Add($"{treatment.Name} | {treatment.BodyPart} | {treatment.Duration}");
@@ -42,6 +39,12 @@ namespace Forms
 
             SetFormAcceptButton(ButtonAddTherapySession);
             SetCheckedListBoxColumnWidth(CheckedListBoxTreatments);
+        }
+
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(new CalendarScreenTherapist());
         }
 
         private void ButtonAddTherapySession_Click(object sender, EventArgs e)
@@ -53,13 +56,8 @@ namespace Forms
             }
 
             var estimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text);
-            var patient = "";
-            if (ComboBoxPatient.SelectedItem != null)
-            {
-                patient += ComboBoxPatient.SelectedItem.ToString();
-            }
 
-            var errorCodes = Services.Instance.CheckTherapySessionCreation(patient,
+            var errorCodes = Services.Instance.CheckTherapySessionCreation(GetSelectedPatientInComboBox(),
                 DateTimePickerDate.Value,
                 DateTimePickerSessionHour.Value, treatments, estimatedDuration);
             if (errorCodes.Any())
@@ -68,7 +66,7 @@ namespace Forms
                 return;
             }
 
-            Services.Instance.CreateTherapySession(patient, DateTimePickerDate.Value,
+            Services.Instance.CreateTherapySession(GetSelectedPatientInComboBox(), DateTimePickerDate.Value,
                 DateTimePickerSessionHour.Value, treatments, estimatedDuration);
             ShowInformationMessageBox("Therapy Session successfully scheduled.", "Success");
             MoveToScreen(new CalendarScreenTherapist());
@@ -131,6 +129,18 @@ namespace Forms
             return _treatments.FirstOrDefault(treatment =>
                 treatment.Name == treatmentSplit[0] && treatment.BodyPart.ToString() == treatmentSplit[1] &&
                 treatment.Duration.ToString() == treatmentSplit[2]);
+        }
+
+        private PatientDTO GetSelectedPatientInComboBox()
+        {
+            if (ComboBoxPatient.SelectedItem != null)
+            {
+                return _patients.First(e =>
+                    e.Id.ToString() == ComboBoxPatient.Text.Split(" - ", StringSplitOptions.RemoveEmptyEntries)
+                        .First());
+            }
+
+            return null;
         }
     }
 }

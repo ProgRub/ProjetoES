@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
     public partial class SelectPrescriptionsScreen : BaseControl
     {
+        private IEnumerable<PrescriptionDTO> _prescriptions;
+
         public SelectPrescriptionsScreen()
         {
             InitializeComponent();
@@ -24,33 +27,27 @@ namespace Forms
 
         private void SelectPrescriptionsScreen_Load(object sender, EventArgs e)
         {
-            var prescriptions = Services.Instance.GetPatientPrescriptions();
-            if (!prescriptions.Any()) LabelTitle.Text = "You haven't had any prescriptions prescribed to you yet...";
-            else
+            _prescriptions = Services.Instance.GetLoggedInPatientsPrescriptions();
+            if (!_prescriptions.Any())
             {
-                CheckBoxSelectAll.Enabled = true;
-                ButtonSelectHealthCareProfessionals.Enabled = true;
-                foreach (var prescription in prescriptions)
-                {
-                    CheckedListBoxPrescriptions.Items.Add(prescription);
-                }
+                LabelTitle.Text = "You haven't had any prescriptions prescribed to you yet...";
+                return;
             }
 
-            var columnWidth = 0;
-            foreach (string item in CheckedListBoxPrescriptions.Items)
+            CheckBoxSelectAll.Enabled = true;
+            ButtonSelectHealthCareProfessionals.Enabled = true;
+            foreach (var prescription in _prescriptions)
             {
-                var width = TextRenderer.MeasureText(item, CheckedListBoxPrescriptions.Font).Width;
-                if (width > columnWidth)
-                {
-                    columnWidth = width + 20;
-                }
+                CheckedListBoxPrescriptions.Items.Add(
+                    $"{prescription.Id} | Author: {prescription.Author.FullName} | From {prescription.StartDate:d} to {prescription.EndDate:d}");
             }
-            CheckedListBoxPrescriptions.ColumnWidth = columnWidth;
+
+            SetCheckedListBoxColumnWidth(CheckedListBoxPrescriptions);
         }
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
         {
-            if (((CheckBox)sender).Checked)
+            if (((CheckBox) sender).Checked)
             {
                 for (var i = 0; i < CheckedListBoxPrescriptions.Items.Count; i++)
                 {
@@ -83,10 +80,10 @@ namespace Forms
         {
             if (CheckedListBoxPrescriptions.CheckedItems.Count > 0)
             {
-                var checkedPrescriptions = new List<string>();
+                var checkedPrescriptions = new List<PrescriptionDTO>();
                 foreach (var checkedItem in CheckedListBoxPrescriptions.CheckedItems)
                 {
-                    checkedPrescriptions.Add(checkedItem.ToString());
+                    checkedPrescriptions.Add(GetPrescriptionFromString(checkedItem.ToString()));
                 }
 
                 Services.Instance.SelectPrescriptions(checkedPrescriptions);
@@ -96,6 +93,12 @@ namespace Forms
             {
                 ShowInformationMessageBox("You have to select at least one prescription!", "Error");
             }
+        }
+
+        private PrescriptionDTO GetPrescriptionFromString(string prescriptionString)
+        {
+            return _prescriptions.First(e =>
+                e.Id.ToString() == prescriptionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
     }
 }

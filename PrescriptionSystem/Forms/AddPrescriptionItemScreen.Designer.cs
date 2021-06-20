@@ -29,83 +29,86 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.ButtonMedicine = new System.Windows.Forms.Button();
+            this.ButtonTreatment = new System.Windows.Forms.Button();
+            this.ButtonExercise = new System.Windows.Forms.Button();
+            this.LabelChoosePrescriptionItem = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ButtonBack
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // button1
+            // ButtonMedicine
             // 
-            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.Lavender;
-            this.button1.Location = new System.Drawing.Point(70, 145);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 46);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Medicine";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonMedicine.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ButtonMedicine.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonMedicine.ForeColor = System.Drawing.Color.Lavender;
+            this.ButtonMedicine.Location = new System.Drawing.Point(61, 109);
+            this.ButtonMedicine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonMedicine.Name = "ButtonMedicine";
+            this.ButtonMedicine.Size = new System.Drawing.Size(102, 34);
+            this.ButtonMedicine.TabIndex = 6;
+            this.ButtonMedicine.Text = "Medicine";
+            this.ButtonMedicine.UseVisualStyleBackColor = false;
+            this.ButtonMedicine.Click += new System.EventHandler(this.ButtonMedicine_Click);
             // 
-            // button2
+            // ButtonTreatment
             // 
-            this.button2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Lavender;
-            this.button2.Location = new System.Drawing.Point(263, 145);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 46);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Treatment";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ButtonTreatment.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ButtonTreatment.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonTreatment.ForeColor = System.Drawing.Color.Lavender;
+            this.ButtonTreatment.Location = new System.Drawing.Point(230, 109);
+            this.ButtonTreatment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonTreatment.Name = "ButtonTreatment";
+            this.ButtonTreatment.Size = new System.Drawing.Size(102, 34);
+            this.ButtonTreatment.TabIndex = 7;
+            this.ButtonTreatment.Text = "Treatment";
+            this.ButtonTreatment.UseVisualStyleBackColor = false;
+            this.ButtonTreatment.Click += new System.EventHandler(this.ButtonTreatment_Click);
             // 
-            // button3
+            // ButtonExercise
             // 
-            this.button3.BackColor = System.Drawing.Color.RoyalBlue;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.Color.Lavender;
-            this.button3.Location = new System.Drawing.Point(448, 145);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(117, 46);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Exercise";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.ButtonExercise.BackColor = System.Drawing.Color.RoyalBlue;
+            this.ButtonExercise.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonExercise.ForeColor = System.Drawing.Color.Lavender;
+            this.ButtonExercise.Location = new System.Drawing.Point(392, 109);
+            this.ButtonExercise.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonExercise.Name = "ButtonExercise";
+            this.ButtonExercise.Size = new System.Drawing.Size(102, 34);
+            this.ButtonExercise.TabIndex = 8;
+            this.ButtonExercise.Text = "Exercise";
+            this.ButtonExercise.UseVisualStyleBackColor = false;
+            this.ButtonExercise.Click += new System.EventHandler(this.ButtonExercise_Click);
             // 
-            // label1
+            // LabelChoosePrescriptionItem
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(70, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(495, 31);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Choose the prescription item you want to add.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.LabelChoosePrescriptionItem.AutoSize = true;
+            this.LabelChoosePrescriptionItem.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelChoosePrescriptionItem.Location = new System.Drawing.Point(61, 55);
+            this.LabelChoosePrescriptionItem.Name = "LabelChoosePrescriptionItem";
+            this.LabelChoosePrescriptionItem.Size = new System.Drawing.Size(408, 25);
+            this.LabelChoosePrescriptionItem.TabIndex = 9;
+            this.LabelChoosePrescriptionItem.Text = "Choose the prescription item you want to add.";
+            this.LabelChoosePrescriptionItem.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // AddPrescriptionItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.LabelChoosePrescriptionItem);
+            this.Controls.Add(this.ButtonExercise);
+            this.Controls.Add(this.ButtonTreatment);
+            this.Controls.Add(this.ButtonMedicine);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddPrescriptionItemScreen";
-            this.Size = new System.Drawing.Size(649, 277);
+            this.Size = new System.Drawing.Size(568, 208);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.button3, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.ButtonMedicine, 0);
+            this.Controls.SetChildIndex(this.ButtonTreatment, 0);
+            this.Controls.SetChildIndex(this.ButtonExercise, 0);
+            this.Controls.SetChildIndex(this.LabelChoosePrescriptionItem, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,9 +116,9 @@ namespace Forms
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button ButtonMedicine;
+        private System.Windows.Forms.Button ButtonTreatment;
+        private System.Windows.Forms.Button ButtonExercise;
+        private System.Windows.Forms.Label LabelChoosePrescriptionItem;
     }
 }

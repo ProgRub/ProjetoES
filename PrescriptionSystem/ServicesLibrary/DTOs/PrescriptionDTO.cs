@@ -18,6 +18,7 @@ namespace ServicesLibrary.DTOs
         public IEnumerable<ExerciseDTO> Exercises { get; set; }
         public IEnumerable<TreatmentDTO> Treatments { get; set; }
         public IEnumerable<MedicineDTO> Medicines { get; set; }
+        public IDictionary<PrescriptionItemDTO,IEnumerable<TimeSpan>> PrescriptionItemsRecommendedTimes { get; set; }
         public IEnumerable<HealthCareProfessionalDTO> Viewers { get; set; }
 
         public static PrescriptionDTO ConvertPrescriptionToDTO(Prescription prescription)
@@ -47,25 +48,33 @@ namespace ServicesLibrary.DTOs
             var medicineDtos = new List<MedicineDTO>();
             var treatmentDtos = new List<TreatmentDTO>();
             var exerciseDtos = new List<ExerciseDTO>();
+            var recommendedTimes = new Dictionary<PrescriptionItemDTO, IEnumerable<TimeSpan>>();
             foreach (var prescriptionItem in prescriptionItems)
             {
                 if (PrescriptionItemService.Instance.IsExercise(prescriptionItem.Id))
                 {
-                    exerciseDtos.Add(ExerciseDTO.ConvertExerciseToDTO((Exercise) prescriptionItem));
+                    var exerciseDto = ExerciseDTO.ConvertExerciseToDTO((Exercise) prescriptionItem);
+                    exerciseDtos.Add(exerciseDto);
+                    recommendedTimes.Add(exerciseDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
                 }
                 else if (PrescriptionItemService.Instance.IsMedicine(prescriptionItem.Id))
                 {
-                    medicineDtos.Add(MedicineDTO.ConvertMedicineToDTO((Medicine) prescriptionItem));
+                    var medicineDto = MedicineDTO.ConvertMedicineToDTO((Medicine) prescriptionItem);
+                    medicineDtos.Add(medicineDto);
+                    recommendedTimes.Add(medicineDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
                 }
                 else
                 {
-                    treatmentDtos.Add(TreatmentDTO.ConvertTreatmentToDTO((Treatment) prescriptionItem));
+                    var treatmentDto = TreatmentDTO.ConvertTreatmentToDTO((Treatment) prescriptionItem);
+                    treatmentDtos.Add(treatmentDto);
+                    recommendedTimes.Add(treatmentDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByItemId(prescriptionItem.Id));
                 }
             }
 
             prescriptionDto.Exercises = exerciseDtos;
             prescriptionDto.Medicines = medicineDtos;
             prescriptionDto.Treatments = treatmentDtos;
+            prescriptionDto.PrescriptionItemsRecommendedTimes = recommendedTimes;
         }
     }
 }

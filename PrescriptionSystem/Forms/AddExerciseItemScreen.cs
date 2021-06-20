@@ -16,12 +16,11 @@ namespace Forms
         public AddExerciseItemScreen()
         {
             InitializeComponent();
-            
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void AddExerciseItemScreen_Load(object sender, EventArgs e)
         {
-
+            SetCheckedListBoxColumnWidth(CheckedListBoxBodyPart);
         }
 
         private void ButtonBack_Click(object sender, EventArgs e)
@@ -29,18 +28,14 @@ namespace Forms
             MoveToScreen(new AddPrescriptionItemScreen());
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void ButtonAddExercise_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(textBoxName.Text, textBoxDescription.Text,
-               textBoxMinAge.Text, textBoxMaxAge.Text);
+            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxName.Text,
+                TextBoxDescription.Text,
+                TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
 
             var bodyParts = new List<string>();
-            foreach (var checkedItem in checkedListBoxBodyPart.CheckedItems)
+            foreach (var checkedItem in CheckedListBoxBodyPart.CheckedItems)
             {
                 bodyParts.Add(checkedItem.ToString());
             }
@@ -48,38 +43,34 @@ namespace Forms
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
+                return;
             }
-            else
-            {
-                Services.Instance.CreateExercisePrescriptionItem(textBoxName.Text, textBoxDescription.Text,
-                    int.Parse(textBoxMinAge.Text), int.Parse(textBoxMaxAge.Text), dateTimePickerDuration.Value.TimeOfDay, bodyParts);
-                ShowInformationMessageBox("Exercise successfully added.", "Success");
 
-            }
-            
+            Services.Instance.CreateExercisePrescriptionItem(TextBoxName.Text, TextBoxDescription.Text,
+                int.Parse(TextBoxMinimumAge.Text), int.Parse(TextBoxMaximumAge.Text),
+                DateTimePickerDuration.Value.TimeOfDay, bodyParts);
+            ShowInformationMessageBox("Exercise successfully added.", "Success");
+            MoveToScreen(new AddPrescriptionItemScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            ClearAllTextboxesPlaceholderText();
             foreach (var error in errorCodes)
             {
                 switch (error)
                 {
                     case Services.NameRequired:
-                        ShowTextBoxErrorMessage(textBoxName, "Name is required!");
-                        textBoxName.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxName, "Name is required!");
                         break;
                     case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(textBoxDescription, "Description is required!");
-                        textBoxDescription.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxDescription, "Description is required!");
                         break;
                     case Services.AgeMinimumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMinAge, "Age mininum is required!");
-                        textBoxMinAge.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMinimumAge, "Age minimum is required!");
                         break;
                     case Services.AgeMaximumNotValid:
-                        ShowTextBoxErrorMessage(textBoxMaxAge, "Age maxinum is required!");
-                        textBoxMaxAge.BackColor = Color.Salmon;
+                        ShowTextBoxErrorMessage(TextBoxMaximumAge, "Age maximum is required!");
                         break;
                 }
             }

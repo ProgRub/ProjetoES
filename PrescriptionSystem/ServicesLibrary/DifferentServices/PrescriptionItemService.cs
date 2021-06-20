@@ -40,7 +40,7 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal void CreateMedicinePrescriptionItem(string name, string description, double price,
-            IEnumerable<string> allergies, IEnumerable<string> diseases)
+            IEnumerable<MedicalCondition> allergies, IEnumerable<MedicalCondition> diseases)
         {
             var medicine = new Medicine
             {
@@ -50,7 +50,7 @@ namespace ServicesLibrary.DifferentServices
             };
 
             _medicineRepository.Add(medicine);
-            AddMedicalConditionsToMedicine(medicine, allergies, diseases);
+            AddIncompatibleMedicalConditionsToMedicine(medicine, allergies, diseases);
             _medicineRepository.SaveChanges();
         }
 
@@ -70,19 +70,17 @@ namespace ServicesLibrary.DifferentServices
             _treatmentRepository.SaveChanges();
         }
 
-        private void AddMedicalConditionsToMedicine(Medicine medicine, IEnumerable<string> allergies,
-            IEnumerable<string> diseases)
+        private void AddIncompatibleMedicalConditionsToMedicine(Medicine medicine, IEnumerable<MedicalCondition> allergies,
+            IEnumerable<MedicalCondition> diseases)
         {
-            foreach (var allergyString in allergies)
+            foreach (var allergy in allergies)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(allergyString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine,allergy);
             }
 
-            foreach (var diseaseString in diseases)
+            foreach (var disease in diseases)
             {
-                _medicineRepository.AddMedicalConditionToMedicine(medicine,
-                    MedicalConditionService.Instance.GetMedicalConditionByName(diseaseString));
+                _medicineRepository.AddMedicalConditionToMedicine(medicine, disease);
             }
         }
 
@@ -126,40 +124,25 @@ namespace ServicesLibrary.DifferentServices
             return _exerciseRepository.Find(e => e.Name == name).First();
         }
 
-        internal Treatment GetTreatmentByNameBodyPartAndDurationString(string treatmentString)
-        {
-            var treatmentStringSplit =
-                treatmentString.Split(" | ",
-                    StringSplitOptions.RemoveEmptyEntries); //Order of info: name -> bodyPart -> Duration
-            return _treatmentRepository.Find(e =>
-                e.Name == treatmentStringSplit[0] && e.BodyPart == (BodyPart)Enum.Parse(typeof(BodyPart), treatmentStringSplit[1]) &&
-                e.Duration == TimeSpan.Parse(treatmentStringSplit[2])).First();
-        }
-
         internal Treatment GetTreatmentById(int id)
         {
             return _treatmentRepository.GetById(id);
         }
 
-        internal Medicine GetMedicinetByItemId(int id)
+        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(int prescriptionId)
         {
-            return _medicineRepository.Find(e => e.Id == id).First();
+            return _prescriptionRepository.Find(e => e.PrescriptionId == prescriptionId);
         }
 
-        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionItems(int pres_id)
+        internal IEnumerable<MedicineHasIncompatibleMedicalConditions> GetMedicineIncompatibleMedicalConditionsEnumerableByMedicineId(int id)
         {
-            return _prescriptionRepository.Find(e => e.PrescriptionId == pres_id);
+            return _medicineRepository.GetIncompatibleMedicalConditionsOfMedicineByMedicineId(id);
         }
 
-        internal IEnumerable<MedicineHasIncompatibleMedicalConditions> GetMedicineIncompatibleMedicalConditions(int id)
-        {
-            return _medicineRepository.GetIncompatibleMedicalConditions(id);
-        }
-
-        internal IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
-        {
-            return _medicineRepository.GetMedicineIncompatibleMedicalConditionsIds(medicineIncompatibleMedicalConditions);
-        }
+        //internal IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
+        //{
+        //    return _medicineRepository.GetMedicineIncompatibleMedicalConditionsIds(medicineIncompatibleMedicalConditions);
+        //}
 
         internal Medicine GetMedicineById(int item_id)
         {
