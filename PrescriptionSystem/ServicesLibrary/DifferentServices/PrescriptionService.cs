@@ -125,5 +125,11 @@ namespace ServicesLibrary.DifferentServices
         {
             return _prescriptionRepository.GetById(prescriptionId);
         }
+
+        public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByItemId(int prescriptionItemId)
+        {
+#warning TODO: Implementar isto
+            return new List<TimeSpan>();
+        }
     }
 }
