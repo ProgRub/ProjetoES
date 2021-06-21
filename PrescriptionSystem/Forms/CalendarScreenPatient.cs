@@ -38,10 +38,13 @@ namespace Forms
                 {
                     if (Services.Instance.IsMedicine(item.Id))
                     {
-                        foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                        if (prescription.PrescriptionItemsRecommendedTimes != null)
                         {
-                            var dataString = "Take " + item.Name + " medicine.";
-                            data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
+                            foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                            {
+                                var dataString = "Take " + item.Name + " medicine.";
+                                data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
+                            }
                         }
                     }
 
