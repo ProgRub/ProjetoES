@@ -15,6 +15,7 @@ namespace Forms
     {
         private IEnumerable<MedicalConditionDTO> _allergies;
         private IEnumerable<MedicalConditionDTO> _diseases;
+
         public SignUpScreen()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace Forms
         private void SignUpScreen_Load(object sender, EventArgs e)
         {
             _allergies = Services.Instance.GetAllergies();
-            _diseases= Services.Instance.GetDiseases();
+            _diseases = Services.Instance.GetDiseases();
             DateTimePickerDOB.MaxDate = DateTime.Today;
             DateTimePickerDOB.Value = DateTime.Today;
             foreach (var allergy in _allergies)
@@ -81,10 +82,17 @@ namespace Forms
                 return;
             }
 
-            Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
-                int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
-                TextBoxPassword.Text,
-                allergies, diseases, missingBodyParts, userType);
+            //Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
+            //    int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
+            //    TextBoxPassword.Text,
+            //    allergies, diseases, missingBodyParts, userType);
+            Services.Instance.RegisterUser(new UserDTO
+            {
+                Allergies = allergies, DateOfBirth = DateTimePickerDOB.Value, Diseases = diseases,
+                FullName = TextBoxName.Text, HealthUserNumber = int.Parse(TextBoxHealthUserNumber.Text),
+                MissingBodyParts = missingBodyParts.Select(e => Services.Instance.ConvertStringToBodyPart(e)),
+                PhoneNumber = int.Parse(TextBoxPhoneNumber.Text)
+            }, TextBoxEmail.Text, TextBoxPassword.Text, userType);
             ShowInformationMessageBox("User registered successively.", "Success");
             MoveToScreen(new LoginScreen());
         }
@@ -167,11 +175,14 @@ namespace Forms
 
         private MedicalConditionDTO GetAllergyFromString(string allergyString)
         {
-            return _allergies.First(e => e.Id.ToString() == allergyString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
+            return _allergies.First(e =>
+                e.Id.ToString() == allergyString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
+
         private MedicalConditionDTO GetDiseaseFromString(string diseaseString)
         {
-            return _diseases.First(e => e.Id.ToString() == diseaseString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
+            return _diseases.First(e =>
+                e.Id.ToString() == diseaseString.Split(" - ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
     }
 }

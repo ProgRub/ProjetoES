@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
@@ -34,21 +35,24 @@ namespace Forms
                 TextBoxDescription.Text,
                 TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
 
-            var bodyParts = new List<string>();
-            foreach (var checkedItem in CheckedListBoxBodyPart.CheckedItems)
-            {
-                bodyParts.Add(checkedItem.ToString());
-            }
-
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
                 return;
             }
 
-            Services.Instance.CreateExercisePrescriptionItem(TextBoxName.Text, TextBoxDescription.Text,
-                int.Parse(TextBoxMinimumAge.Text), int.Parse(TextBoxMaximumAge.Text),
-                DateTimePickerDuration.Value.TimeOfDay, bodyParts);
+            var bodyParts = new List<string>();
+            foreach (var checkedItem in CheckedListBoxBodyPart.CheckedItems)
+            {
+                bodyParts.Add(checkedItem.ToString());
+            }
+            Services.Instance.CreateExercisePrescriptionItem(new ExerciseDTO
+            {
+                Name = TextBoxName.Text, Description = TextBoxDescription.Text,
+                AgeMinimum = int.Parse(TextBoxMinimumAge.Text),
+                AgeMaximum = int.Parse(TextBoxMaximumAge.Text), Duration = TimeSpan.Parse(DateTimePickerDuration.Text),
+                BodyParts = bodyParts.Select(e => Services.Instance.ConvertStringToBodyPart(e))
+            });
             ShowInformationMessageBox("Exercise successfully added.", "Success");
             MoveToScreen(new AddPrescriptionItemScreen());
         }

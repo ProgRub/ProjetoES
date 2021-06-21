@@ -8,5 +8,6 @@ namespace ComponentsLibrary.Entities.PrescriptionItems
         public TimeSpan Duration { get; set; }
         public int AgeMinimum { get; set; }
         public int AgeMaximum { get; set; }
+        public ICollection<BodyPart> BodyParts { get; set; }
     }
 }

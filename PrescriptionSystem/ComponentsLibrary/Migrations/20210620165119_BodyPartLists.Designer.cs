@@ -4,14 +4,16 @@ using ComponentsLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    partial class PrescriptionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210620165119_BodyPartLists")]
+    partial class BodyPartLists
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,6 +332,21 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasBaseType("ComponentsLibrary.Entities.Item");
+
+                    b.Property<int>("BodyPart")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserHasMissingBodyPart");
+                });
+
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem");
@@ -361,7 +378,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Burpees",
                             AgeMaximum = 50,
                             AgeMinimum = 15,
-                            BodyParts = "3,2,4,5",
                             Duration = new TimeSpan(0, 0, 10, 0, 0)
                         },
                         new
@@ -372,7 +388,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Pushups",
                             AgeMaximum = 78,
                             AgeMinimum = 8,
-                            BodyParts = "3,2,1",
                             Duration = new TimeSpan(0, 0, 20, 0, 0)
                         },
                         new
@@ -383,7 +398,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Squats",
                             AgeMaximum = 0,
                             AgeMinimum = 5,
-                            BodyParts = "5,4",
                             Duration = new TimeSpan(0, 0, 15, 0, 0)
                         });
                 });
@@ -732,6 +746,21 @@ namespace ComponentsLibrary.Migrations
                         .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
+                {
+                    b.HasOne("ComponentsLibrary.Entities.Item", null)
+                        .WithOne()
+                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMissingBodyPart", "Id")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("ComponentsLibrary.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>

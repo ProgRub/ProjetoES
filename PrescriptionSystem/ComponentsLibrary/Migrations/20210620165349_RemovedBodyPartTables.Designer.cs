@@ -4,14 +4,16 @@ using ComponentsLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    partial class PrescriptionSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210620165349_RemovedBodyPartTables")]
+    partial class RemovedBodyPartTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,7 +363,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Burpees",
                             AgeMaximum = 50,
                             AgeMinimum = 15,
-                            BodyParts = "3,2,4,5",
                             Duration = new TimeSpan(0, 0, 10, 0, 0)
                         },
                         new
@@ -372,7 +373,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Pushups",
                             AgeMaximum = 78,
                             AgeMinimum = 8,
-                            BodyParts = "3,2,1",
                             Duration = new TimeSpan(0, 0, 20, 0, 0)
                         },
                         new
@@ -383,7 +383,6 @@ namespace ComponentsLibrary.Migrations
                             Name = "Squats",
                             AgeMaximum = 0,
                             AgeMinimum = 5,
-                            BodyParts = "5,4",
                             Duration = new TimeSpan(0, 0, 15, 0, 0)
                         });
                 });

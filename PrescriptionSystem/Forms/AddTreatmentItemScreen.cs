@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
@@ -20,8 +21,14 @@ namespace Forms
 
         private void ButtonAddTreatment_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
-               TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
+            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text,
+                TextBoxTreatmentDescription.Text,
+                TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
+            if (errorCodes.Any())
+            {
+                ShowErrorMessages(errorCodes);
+                return;
+            }
 
             var bodyPart = "";
             foreach (var radioButton in GroupBoxBodyPart.Controls.OfType<RadioButton>())
@@ -32,13 +39,13 @@ namespace Forms
                     break;
                 }
             }
-            if (errorCodes.Any())
+            Services.Instance.CreateTreatmentPrescriptionItem(new TreatmentDTO
             {
-                ShowErrorMessages(errorCodes);
-                return;
-            }
-            Services.Instance.CreateTreatmentPrescriptionItem(TextBoxTreatmentName.Text, TextBoxTreatmentDescription.Text,
-                int.Parse(TextBoxMinimumAge.Text), int.Parse(TextBoxMaximumAge.Text), DateTimePickerDuration.Value.TimeOfDay, bodyPart);
+                Name = TextBoxTreatmentName.Text, Description = TextBoxTreatmentDescription.Text,
+                AgeMinimum = int.Parse(TextBoxMinimumAge.Text),
+                AgeMaximum = int.Parse(TextBoxMaximumAge.Text), Duration = TimeSpan.Parse(DateTimePickerDuration.Text),
+                BodyPart = Services.Instance.ConvertStringToBodyPart(bodyPart)
+            });
             ShowInformationMessageBox("Treatment successfully added.", "Success");
             MoveToScreen(new AddPrescriptionItemScreen());
         }
