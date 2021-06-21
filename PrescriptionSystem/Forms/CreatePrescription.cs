@@ -141,22 +141,22 @@ namespace Forms
 
             foreach (var patient in Services.Instance.GetAllPatients())
             {
-                comboBoxPatient.Items.Add(patient);
+                comboBoxPatient.Items.Add(patient.Id + " - " + patient.FullName);
             }
 
             foreach (var treatment in Services.Instance.GetTreatments())
             {
-                comboBoxItems.Items.Add(treatment);
+                comboBoxItems.Items.Add(treatment.Name);
             }
 
             foreach (var exercise in Services.Instance.GetExercises())
             {
-                comboBoxItems.Items.Add(exercise);
+                comboBoxItems.Items.Add(exercise.Name);
             }
             
             foreach (var medicine in Services.Instance.GetMedicine())
             {
-                comboBoxItems.Items.Add(medicine);
+                comboBoxItems.Items.Add(medicine.Name);
             }
         }
 
@@ -211,6 +211,11 @@ namespace Forms
             CommandsManager.Instance.Execute(macro);
             treeViewPrescriptionItems.ExpandAll();
             
+        }
+
+        private void comboBoxPatient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
