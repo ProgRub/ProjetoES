@@ -26,6 +26,7 @@ namespace Forms
             LabelToChangeAuthor.Text = $"{_prescription.Author.Id} - {_prescription.Author.FullName}";
             LabelStartDate.Text = _prescription.StartDate.ToString("d");
             LabelEndDate.Text = _prescription.EndDate.ToString("d");
+            TextBoxDescription.Text = _prescription.Description;
             foreach (var prescriptionItem in _prescription.PrescriptionItemsRecommendedTimes.Keys)
             {
                 var parentNode = new TreeNode($"{prescriptionItem.Id} - {prescriptionItem.Name}");
