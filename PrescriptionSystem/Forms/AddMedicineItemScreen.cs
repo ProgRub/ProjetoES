@@ -26,7 +26,7 @@ namespace Forms
         private void AddMedicineItemScreen_Load(object sender, EventArgs e)
         {
             _allergies = Services.Instance.GetAllAllergies();
-            _diseases = Services.Instance.GetDiseases();
+            _diseases = Services.Instance.GetAllDiseases();
             foreach (var allergy in _allergies)
             {
                 CheckedListBoxAllergies.Items.Add($"{allergy.Id} - {allergy.Name}");

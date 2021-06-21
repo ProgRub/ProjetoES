@@ -27,7 +27,7 @@ namespace Forms
         private void SelectHealthCareProfessionalsScreen_Load(object sender, EventArgs e)
         {
 
-            _healthCareProfessionals = Services.Instance.GetHealthCareProfessionals();
+            _healthCareProfessionals = Services.Instance.GetAllHealthCareProfessionals();
             if (!_healthCareProfessionals.Any())
             {
                 LabelTitle.Text = "There are no Health Care Professionals registered...";

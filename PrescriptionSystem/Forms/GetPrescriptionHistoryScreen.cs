@@ -26,7 +26,7 @@ namespace Forms
         private void GetPrescriptionHistoryScreen_Load(object sender, EventArgs e)
         {
 
-            foreach (var prescription in Services.Instance.GetLoggedInPatientsPrescriptions())
+            foreach (var prescription in Services.Instance.GetAllLoggedInPatientsPrescriptions())
             {
                 var listViewItem = new ListViewItem(prescription.Author.FullName);
                 listViewItem.SubItems.Add(prescription.Description);

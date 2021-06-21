@@ -27,7 +27,7 @@ namespace Forms
 
         private void SelectPrescriptionsScreen_Load(object sender, EventArgs e)
         {
-            _prescriptions = Services.Instance.GetLoggedInPatientsPrescriptions();
+            _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
             if (!_prescriptions.Any())
             {
                 LabelTitle.Text = "You haven't had any prescriptions prescribed to you yet...";

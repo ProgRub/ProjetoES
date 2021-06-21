@@ -44,7 +44,6 @@ namespace ServicesLibrary.DifferentServices
         internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
             IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
         {
-            //throw new NotImplementedException();
             var therapySession = new TherapySession
             {
                 PatientId = patient.Id,
@@ -70,12 +69,6 @@ namespace ServicesLibrary.DifferentServices
         internal TherapySession GetSelectedTherapySession()
         {
             return _therapySessionRepository.GetById(SelectedTherapySessionId);
-        }
-
-        internal IEnumerable<TherapySessionHasTreatments>
-            GetTherapySessionHasTreatmentsEnumerableByTherapySessionId(int id)
-        {
-            return _therapySessionRepository.GetTherapySessionHasTreatmentsEnumerableBySessionId(id);
         }
 
         internal TherapySessionHasTreatments GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(int sessionId,
