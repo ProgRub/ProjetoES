@@ -29,8 +29,8 @@ namespace Forms
             CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
             _patients = Services.Instance.GetAllPatients();
             _treatments = Services.Instance.GetAllTreatments();
-            _medicines = Services.Instance.GetMedicine();
-            _exercises = Services.Instance.GetExercises();
+            _medicines = Services.Instance.GetAllMedicines();
+            _exercises = Services.Instance.GetAllExercises();
 
             foreach (var patient in _patients)
             {

@@ -136,12 +136,12 @@ namespace ServicesLibrary
 
         public void RegisterUser(UserDTO user, string email, string password, string userType) =>
             _userService.RegisterUser(user, email, password, userType);
-        
+
         public void CreatePrescription(PrescriptionDTO prescription) =>
             _prescriptionService.CreatePrescription(prescription);
-        
 
-               public IEnumerable<int> CheckPrescriptionCreation(PrescriptionDTO prescription)
+
+        public IEnumerable<int> CheckPrescriptionCreation(PrescriptionDTO prescription)
         {
             var errorCodes = new List<int>();
             BaseValidator validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
@@ -205,13 +205,13 @@ namespace ServicesLibrary
             return _userService.LogIn(email, password);
         }
 
-        public IEnumerable<MedicalConditionDTO> GetAllergies() => _medicalConditionService.GetAllergies()
+        public IEnumerable<MedicalConditionDTO> GetAllAllergies() => _medicalConditionService.GetAllergies()
             .Select(e => MedicalConditionDTO.ConvertMedicalConditionToDTO(e));
 
-        public IEnumerable<ExerciseDTO> GetExercises() => _prescriptionItemService.GetAllExercises()
+        public IEnumerable<ExerciseDTO> GetAllExercises() => _prescriptionItemService.GetAllExercises()
             .Select(e => ExerciseDTO.ConvertExerciseToDTO(e));
 
-        public IEnumerable<MedicineDTO> GetMedicine() => _prescriptionItemService.GetAllMedicine()
+        public IEnumerable<MedicineDTO> GetAllMedicines() => _prescriptionItemService.GetAllMedicine()
             .Select(e => MedicineDTO.ConvertMedicineToDTO(e));
 
         public IEnumerable<TreatmentDTO> GetTreatments() => _prescriptionItemService.GetAllTreatments()
@@ -291,13 +291,13 @@ namespace ServicesLibrary
             _therapySessionService.GetTherapySessionsAtDate(
                     _therapySessionService.GetAllTherapySessionsOfPatient(_userService.LoggedInUserId), date)
                 .Select(e => TherapySessionDTO.ConvertTherapySessionToDTO(e));
-        
-        
+
+
         public bool IsMedicine(int id) => _prescriptionItemService.IsMedicine(id);
 
         public bool IsExercise(int id) => _prescriptionItemService.IsExercise(id);
-        
-        
+
+
         public void SelectPrescriptions(IEnumerable<PrescriptionDTO> prescriptions)
         {
             _prescriptionService.SelectedPrescriptions = new List<Prescription>();
@@ -323,7 +323,7 @@ namespace ServicesLibrary
                 }
             }
         }
-        
+
         public TherapySessionDTO GetSelectedTherapySession() =>
             TherapySessionDTO.ConvertTherapySessionToDTO(_therapySessionService.GetSelectedTherapySession());
 

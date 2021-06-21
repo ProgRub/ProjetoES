@@ -23,7 +23,7 @@ namespace Forms
 
         private void SignUpScreen_Load(object sender, EventArgs e)
         {
-            _allergies = Services.Instance.GetAllergies();
+            _allergies = Services.Instance.GetAllAllergies();
             _diseases = Services.Instance.GetDiseases();
             DateTimePickerDOB.MaxDate = DateTime.Today;
             DateTimePickerDOB.Value = DateTime.Today;

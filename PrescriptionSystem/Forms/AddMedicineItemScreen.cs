@@ -25,7 +25,7 @@ namespace Forms
 
         private void AddMedicineItemScreen_Load(object sender, EventArgs e)
         {
-            _allergies = Services.Instance.GetAllergies();
+            _allergies = Services.Instance.GetAllAllergies();
             _diseases = Services.Instance.GetDiseases();
             foreach (var allergy in _allergies)
             {
