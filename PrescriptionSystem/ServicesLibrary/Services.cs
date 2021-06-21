@@ -37,7 +37,9 @@ namespace ServicesLibrary
             DescriptionRequired = 15,
             AgeMinimumNotValid = 16,
             AgeMaximumNotValid = 17,
-            PriceNotValid = 18;
+            PriceNotValid = 18,
+            AgesNotValid = 19,
+            DatesNotValid = 20;
 
         #endregion
 
@@ -144,8 +146,12 @@ namespace ServicesLibrary
             validator = new AgeValidator(InvalidAge, ref errorCodes);
             validator.SetNext(new AllergyValidator(IncompatibleMedicine, ref errorCodes))
                 .SetNext(new ExistingDiseaseValidator(IncompatibleDisease, ref errorCodes))
-                .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes));
+                .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes))
+                .SetNext(new StartDateIsBeforeEndDateValidator(DatesNotValid, ref errorCodes));
             validator.Validate(prescription);
+            validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
+            validator.Validate(prescription.Patient);
+
 
             return errorCodes;
         }
@@ -164,6 +170,8 @@ namespace ServicesLibrary
             validator = new StringEmptyValidator(AgeMaximumNotValid, ref errorCodes);
             validator.SetNext(new StringIsIntegerValidator(AgeMaximumNotValid, ref errorCodes));
             validator.Validate(ageMaximum);
+            validator = new MaxAgeGreaterThanMinAgeValidator(AgesNotValid, ref errorCodes);
+            validator.Validate(new Tuple<string, string>(ageMaximum, ageMinimum));
 
             return errorCodes;
         }

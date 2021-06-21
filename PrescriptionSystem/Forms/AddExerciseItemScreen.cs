@@ -71,8 +71,16 @@ namespace Forms
                     case Services.AgeMaximumNotValid:
                         ShowTextBoxErrorMessage(TextBoxMaximumAge, "Age maximum is required!");
                         break;
+                    case Services.AgesNotValid:
+                        ShowInformationMessageBox("The maximum age has to be greater than the minimum age.", "Error");
+                        break;
                 }
             }
+        }
+
+        private void TextBoxMaximumAge_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

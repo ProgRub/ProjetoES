@@ -191,9 +191,6 @@ namespace Forms
                     case Services.InvalidAge:
                         errorMessage += "A treatment or exercise is not recommended for the patient's age.";
                         break;
-                    //case Services.ExerciseInvalidAge:
-                    //    errorMessage += "An exercise is not recommended for the patient's age.";
-                    //    break;
                     case Services.IncompatibleMedicine:
                         errorMessage += "A medicine can cause an allergic reaction.";
                         break;
@@ -203,6 +200,9 @@ namespace Forms
                     case Services.MissingBodyPart:
                         errorMessage += "The patient can't do an exercise.";
                         break;
+                    case Services.DatesNotValid:
+                        errorMessage += "The end date has to be after the start date.";
+                        break;
                 }
             }
 
@@ -211,16 +211,6 @@ namespace Forms
 
         private void ComboBoxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
-
-        private void ButtonUndo_Click_1(object sender, EventArgs e)
-        {
-            CommandsManager.Instance.Undo();
-        }
-
-        private void ButtonRedo_Click_1(object sender, EventArgs e)
-        {
-            CommandsManager.Instance.Redo();
         }
 
 
@@ -254,6 +244,16 @@ namespace Forms
             macro.Add(command2);
             CommandsManager.Instance.Execute(macro);
             treeViewPrescriptionItems.ExpandAll();
+        }
+
+        private void ButtonUndo_Click(object sender, EventArgs e)
+        {
+            CommandsManager.Instance.Undo();
+        }
+
+        private void ButtonRedo_Click(object sender, EventArgs e)
+        {
+            CommandsManager.Instance.Redo();
         }
     }
 }

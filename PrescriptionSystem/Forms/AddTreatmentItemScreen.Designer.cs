@@ -62,10 +62,9 @@ namespace Forms
             this.ButtonAddTreatment.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddTreatment.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddTreatment.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddTreatment.Location = new System.Drawing.Point(268, 409);
-            this.ButtonAddTreatment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddTreatment.Location = new System.Drawing.Point(306, 545);
             this.ButtonAddTreatment.Name = "ButtonAddTreatment";
-            this.ButtonAddTreatment.Size = new System.Drawing.Size(130, 32);
+            this.ButtonAddTreatment.Size = new System.Drawing.Size(149, 43);
             this.ButtonAddTreatment.TabIndex = 6;
             this.ButtonAddTreatment.Text = "Add Treatment";
             this.ButtonAddTreatment.UseVisualStyleBackColor = false;
@@ -75,99 +74,94 @@ namespace Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(198, 24);
+            this.label1.Location = new System.Drawing.Point(226, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(267, 21);
+            this.label1.Size = new System.Drawing.Size(330, 28);
             this.label1.TabIndex = 7;
             this.label1.Text = "Create Treatment Prescription Item";
             // 
             // TextBoxTreatmentName
             // 
-            this.TextBoxTreatmentName.Location = new System.Drawing.Point(152, 64);
-            this.TextBoxTreatmentName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxTreatmentName.Location = new System.Drawing.Point(174, 85);
             this.TextBoxTreatmentName.Name = "TextBoxTreatmentName";
-            this.TextBoxTreatmentName.Size = new System.Drawing.Size(372, 23);
+            this.TextBoxTreatmentName.Size = new System.Drawing.Size(425, 27);
             this.TextBoxTreatmentName.TabIndex = 10;
             // 
             // TextBoxTreatmentDescription
             // 
             this.TextBoxTreatmentDescription.AcceptsReturn = true;
-            this.TextBoxTreatmentDescription.Location = new System.Drawing.Point(152, 109);
-            this.TextBoxTreatmentDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxTreatmentDescription.Location = new System.Drawing.Point(174, 145);
             this.TextBoxTreatmentDescription.Multiline = true;
             this.TextBoxTreatmentDescription.Name = "TextBoxTreatmentDescription";
-            this.TextBoxTreatmentDescription.Size = new System.Drawing.Size(372, 66);
+            this.TextBoxTreatmentDescription.Size = new System.Drawing.Size(425, 87);
             this.TextBoxTreatmentDescription.TabIndex = 11;
             // 
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(104, 64);
+            this.LabelName.Location = new System.Drawing.Point(119, 85);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(42, 15);
+            this.LabelName.Size = new System.Drawing.Size(52, 20);
             this.LabelName.TabIndex = 16;
             this.LabelName.Text = "Name:";
             // 
             // LabelDescription
             // 
             this.LabelDescription.AutoSize = true;
-            this.LabelDescription.Location = new System.Drawing.Point(76, 109);
+            this.LabelDescription.Location = new System.Drawing.Point(87, 145);
             this.LabelDescription.Name = "LabelDescription";
-            this.LabelDescription.Size = new System.Drawing.Size(70, 15);
+            this.LabelDescription.Size = new System.Drawing.Size(88, 20);
             this.LabelDescription.TabIndex = 17;
             this.LabelDescription.Text = "Description:";
             // 
             // LabelDuration
             // 
             this.LabelDuration.AutoSize = true;
-            this.LabelDuration.Location = new System.Drawing.Point(90, 194);
+            this.LabelDuration.Location = new System.Drawing.Point(103, 259);
             this.LabelDuration.Name = "LabelDuration";
-            this.LabelDuration.Size = new System.Drawing.Size(56, 15);
+            this.LabelDuration.Size = new System.Drawing.Size(70, 20);
             this.LabelDuration.TabIndex = 24;
             this.LabelDuration.Text = "Duration:";
             // 
             // TextBoxMinimumAge
             // 
-            this.TextBoxMinimumAge.Location = new System.Drawing.Point(284, 234);
-            this.TextBoxMinimumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMinimumAge.Location = new System.Drawing.Point(325, 312);
             this.TextBoxMinimumAge.Name = "TextBoxMinimumAge";
-            this.TextBoxMinimumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMinimumAge.Size = new System.Drawing.Size(45, 27);
             this.TextBoxMinimumAge.TabIndex = 25;
             // 
             // TextBoxMaximumAge
             // 
-            this.TextBoxMaximumAge.Location = new System.Drawing.Point(348, 234);
-            this.TextBoxMaximumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMaximumAge.Location = new System.Drawing.Point(398, 312);
             this.TextBoxMaximumAge.Name = "TextBoxMaximumAge";
-            this.TextBoxMaximumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMaximumAge.Size = new System.Drawing.Size(45, 27);
             this.TextBoxMaximumAge.TabIndex = 26;
             // 
             // LabelAge
             // 
             this.LabelAge.AutoSize = true;
-            this.LabelAge.Location = new System.Drawing.Point(247, 234);
+            this.LabelAge.Location = new System.Drawing.Point(282, 312);
             this.LabelAge.Name = "LabelAge";
-            this.LabelAge.Size = new System.Drawing.Size(31, 15);
+            this.LabelAge.Size = new System.Drawing.Size(39, 20);
             this.LabelAge.TabIndex = 27;
             this.LabelAge.Text = "Age:";
             // 
             // LabelHifenMinimumMaximumAge
             // 
             this.LabelHifenMinimumMaximumAge.AutoSize = true;
-            this.LabelHifenMinimumMaximumAge.Location = new System.Drawing.Point(330, 237);
+            this.LabelHifenMinimumMaximumAge.Location = new System.Drawing.Point(377, 316);
             this.LabelHifenMinimumMaximumAge.Name = "LabelHifenMinimumMaximumAge";
-            this.LabelHifenMinimumMaximumAge.Size = new System.Drawing.Size(12, 15);
+            this.LabelHifenMinimumMaximumAge.Size = new System.Drawing.Size(15, 20);
             this.LabelHifenMinimumMaximumAge.TabIndex = 28;
             this.LabelHifenMinimumMaximumAge.Text = "-";
             // 
             // DateTimePickerDuration
             // 
             this.DateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.DateTimePickerDuration.Location = new System.Drawing.Point(152, 194);
-            this.DateTimePickerDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerDuration.Location = new System.Drawing.Point(174, 259);
             this.DateTimePickerDuration.Name = "DateTimePickerDuration";
             this.DateTimePickerDuration.ShowUpDown = true;
-            this.DateTimePickerDuration.Size = new System.Drawing.Size(219, 23);
+            this.DateTimePickerDuration.Size = new System.Drawing.Size(250, 27);
             this.DateTimePickerDuration.TabIndex = 29;
             this.DateTimePickerDuration.Value = new System.DateTime(2021, 6, 20, 0, 0, 0, 0);
             // 
@@ -181,11 +175,9 @@ namespace Forms
             this.GroupBoxBodyPart.Controls.Add(this.RadioButtonRightArm);
             this.GroupBoxBodyPart.Controls.Add(this.RadioButtonLeftArm);
             this.GroupBoxBodyPart.Controls.Add(this.RadioButtonHead);
-            this.GroupBoxBodyPart.Location = new System.Drawing.Point(226, 272);
-            this.GroupBoxBodyPart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.GroupBoxBodyPart.Location = new System.Drawing.Point(258, 363);
             this.GroupBoxBodyPart.Name = "GroupBoxBodyPart";
-            this.GroupBoxBodyPart.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.GroupBoxBodyPart.Size = new System.Drawing.Size(204, 118);
+            this.GroupBoxBodyPart.Size = new System.Drawing.Size(233, 157);
             this.GroupBoxBodyPart.TabIndex = 31;
             this.GroupBoxBodyPart.TabStop = false;
             this.GroupBoxBodyPart.Text = "Body Part:";
@@ -193,10 +185,9 @@ namespace Forms
             // RadioButtonRightFoot
             // 
             this.RadioButtonRightFoot.AutoSize = true;
-            this.RadioButtonRightFoot.Location = new System.Drawing.Point(116, 88);
-            this.RadioButtonRightFoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightFoot.Location = new System.Drawing.Point(133, 117);
             this.RadioButtonRightFoot.Name = "RadioButtonRightFoot";
-            this.RadioButtonRightFoot.Size = new System.Drawing.Size(77, 19);
+            this.RadioButtonRightFoot.Size = new System.Drawing.Size(95, 24);
             this.RadioButtonRightFoot.TabIndex = 7;
             this.RadioButtonRightFoot.TabStop = true;
             this.RadioButtonRightFoot.Text = "RightFoot";
@@ -205,10 +196,9 @@ namespace Forms
             // RadioButtonLeftFoot
             // 
             this.RadioButtonLeftFoot.AutoSize = true;
-            this.RadioButtonLeftFoot.Location = new System.Drawing.Point(116, 65);
-            this.RadioButtonLeftFoot.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftFoot.Location = new System.Drawing.Point(133, 87);
             this.RadioButtonLeftFoot.Name = "RadioButtonLeftFoot";
-            this.RadioButtonLeftFoot.Size = new System.Drawing.Size(69, 19);
+            this.RadioButtonLeftFoot.Size = new System.Drawing.Size(85, 24);
             this.RadioButtonLeftFoot.TabIndex = 6;
             this.RadioButtonLeftFoot.TabStop = true;
             this.RadioButtonLeftFoot.Text = "LeftFoot";
@@ -217,10 +207,9 @@ namespace Forms
             // RadioButtonRightLeg
             // 
             this.RadioButtonRightLeg.AutoSize = true;
-            this.RadioButtonRightLeg.Location = new System.Drawing.Point(116, 42);
-            this.RadioButtonRightLeg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightLeg.Location = new System.Drawing.Point(133, 56);
             this.RadioButtonRightLeg.Name = "RadioButtonRightLeg";
-            this.RadioButtonRightLeg.Size = new System.Drawing.Size(72, 19);
+            this.RadioButtonRightLeg.Size = new System.Drawing.Size(89, 24);
             this.RadioButtonRightLeg.TabIndex = 5;
             this.RadioButtonRightLeg.TabStop = true;
             this.RadioButtonRightLeg.Text = "RightLeg";
@@ -229,10 +218,9 @@ namespace Forms
             // RadioButtonLeftLeg
             // 
             this.RadioButtonLeftLeg.AutoSize = true;
-            this.RadioButtonLeftLeg.Location = new System.Drawing.Point(116, 20);
-            this.RadioButtonLeftLeg.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftLeg.Location = new System.Drawing.Point(133, 27);
             this.RadioButtonLeftLeg.Name = "RadioButtonLeftLeg";
-            this.RadioButtonLeftLeg.Size = new System.Drawing.Size(64, 19);
+            this.RadioButtonLeftLeg.Size = new System.Drawing.Size(79, 24);
             this.RadioButtonLeftLeg.TabIndex = 4;
             this.RadioButtonLeftLeg.TabStop = true;
             this.RadioButtonLeftLeg.Text = "LeftLeg";
@@ -241,10 +229,9 @@ namespace Forms
             // RadioButtonTorso
             // 
             this.RadioButtonTorso.AutoSize = true;
-            this.RadioButtonTorso.Location = new System.Drawing.Point(6, 88);
-            this.RadioButtonTorso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonTorso.Location = new System.Drawing.Point(7, 117);
             this.RadioButtonTorso.Name = "RadioButtonTorso";
-            this.RadioButtonTorso.Size = new System.Drawing.Size(53, 19);
+            this.RadioButtonTorso.Size = new System.Drawing.Size(66, 24);
             this.RadioButtonTorso.TabIndex = 3;
             this.RadioButtonTorso.TabStop = true;
             this.RadioButtonTorso.Text = "Torso";
@@ -253,10 +240,9 @@ namespace Forms
             // RadioButtonRightArm
             // 
             this.RadioButtonRightArm.AutoSize = true;
-            this.RadioButtonRightArm.Location = new System.Drawing.Point(5, 64);
-            this.RadioButtonRightArm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonRightArm.Location = new System.Drawing.Point(6, 85);
             this.RadioButtonRightArm.Name = "RadioButtonRightArm";
-            this.RadioButtonRightArm.Size = new System.Drawing.Size(76, 19);
+            this.RadioButtonRightArm.Size = new System.Drawing.Size(93, 24);
             this.RadioButtonRightArm.TabIndex = 2;
             this.RadioButtonRightArm.TabStop = true;
             this.RadioButtonRightArm.Text = "RightArm";
@@ -265,10 +251,9 @@ namespace Forms
             // RadioButtonLeftArm
             // 
             this.RadioButtonLeftArm.AutoSize = true;
-            this.RadioButtonLeftArm.Location = new System.Drawing.Point(5, 42);
-            this.RadioButtonLeftArm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonLeftArm.Location = new System.Drawing.Point(6, 56);
             this.RadioButtonLeftArm.Name = "RadioButtonLeftArm";
-            this.RadioButtonLeftArm.Size = new System.Drawing.Size(68, 19);
+            this.RadioButtonLeftArm.Size = new System.Drawing.Size(83, 24);
             this.RadioButtonLeftArm.TabIndex = 1;
             this.RadioButtonLeftArm.TabStop = true;
             this.RadioButtonLeftArm.Text = "LeftArm";
@@ -277,10 +262,9 @@ namespace Forms
             // RadioButtonHead
             // 
             this.RadioButtonHead.AutoSize = true;
-            this.RadioButtonHead.Location = new System.Drawing.Point(5, 20);
-            this.RadioButtonHead.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.RadioButtonHead.Location = new System.Drawing.Point(6, 27);
             this.RadioButtonHead.Name = "RadioButtonHead";
-            this.RadioButtonHead.Size = new System.Drawing.Size(53, 19);
+            this.RadioButtonHead.Size = new System.Drawing.Size(66, 24);
             this.RadioButtonHead.TabIndex = 0;
             this.RadioButtonHead.TabStop = true;
             this.RadioButtonHead.Text = "Head";
@@ -288,7 +272,7 @@ namespace Forms
             // 
             // AddTreatmentItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.GroupBoxBodyPart);
@@ -304,9 +288,10 @@ namespace Forms
             this.Controls.Add(this.TextBoxTreatmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ButtonAddTreatment);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddTreatmentItemScreen";
-            this.Size = new System.Drawing.Size(667, 459);
+            this.Size = new System.Drawing.Size(762, 612);
+            this.Load += new System.EventHandler(this.AddTreatmentItemScreen_Load);
             this.Controls.SetChildIndex(this.ButtonAddTreatment, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.TextBoxTreatmentName, 0);

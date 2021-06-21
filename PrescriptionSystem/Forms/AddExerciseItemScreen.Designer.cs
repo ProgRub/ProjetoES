@@ -52,57 +52,55 @@ namespace Forms
             // LabelBodyPart
             // 
             this.LabelBodyPart.AutoSize = true;
-            this.LabelBodyPart.Location = new System.Drawing.Point(111, 246);
+            this.LabelBodyPart.Location = new System.Drawing.Point(127, 328);
             this.LabelBodyPart.Name = "LabelBodyPart";
-            this.LabelBodyPart.Size = new System.Drawing.Size(61, 15);
+            this.LabelBodyPart.Size = new System.Drawing.Size(75, 20);
             this.LabelBodyPart.TabIndex = 35;
             this.LabelBodyPart.Text = "Body Part:";
             // 
             // LabelDescription
             // 
             this.LabelDescription.AutoSize = true;
-            this.LabelDescription.Location = new System.Drawing.Point(102, 106);
+            this.LabelDescription.Location = new System.Drawing.Point(117, 141);
             this.LabelDescription.Name = "LabelDescription";
-            this.LabelDescription.Size = new System.Drawing.Size(70, 15);
+            this.LabelDescription.Size = new System.Drawing.Size(88, 20);
             this.LabelDescription.TabIndex = 34;
             this.LabelDescription.Text = "Description:";
             // 
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(130, 65);
+            this.LabelName.Location = new System.Drawing.Point(149, 87);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(42, 15);
+            this.LabelName.Size = new System.Drawing.Size(52, 20);
             this.LabelName.TabIndex = 33;
             this.LabelName.Text = "Name:";
             // 
             // TextBoxDescription
             // 
             this.TextBoxDescription.AcceptsReturn = true;
-            this.TextBoxDescription.Location = new System.Drawing.Point(178, 106);
-            this.TextBoxDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxDescription.Location = new System.Drawing.Point(203, 141);
             this.TextBoxDescription.Multiline = true;
             this.TextBoxDescription.Name = "TextBoxDescription";
-            this.TextBoxDescription.Size = new System.Drawing.Size(364, 75);
+            this.TextBoxDescription.Size = new System.Drawing.Size(415, 99);
             this.TextBoxDescription.TabIndex = 31;
             // 
             // TextBoxName
             // 
             this.TextBoxName.BackColor = System.Drawing.Color.White;
             this.TextBoxName.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.TextBoxName.Location = new System.Drawing.Point(178, 62);
-            this.TextBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxName.Location = new System.Drawing.Point(203, 83);
             this.TextBoxName.Name = "TextBoxName";
-            this.TextBoxName.Size = new System.Drawing.Size(364, 23);
+            this.TextBoxName.Size = new System.Drawing.Size(415, 27);
             this.TextBoxName.TabIndex = 30;
             // 
             // LabelTitle
             // 
             this.LabelTitle.AutoSize = true;
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(231, 24);
+            this.LabelTitle.Location = new System.Drawing.Point(264, 32);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(251, 21);
+            this.LabelTitle.Size = new System.Drawing.Size(310, 28);
             this.LabelTitle.TabIndex = 29;
             this.LabelTitle.Text = "Create Exercise Prescription Item";
             // 
@@ -111,10 +109,9 @@ namespace Forms
             this.ButtonAddExercise.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddExercise.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddExercise.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddExercise.Location = new System.Drawing.Point(302, 402);
-            this.ButtonAddExercise.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddExercise.Location = new System.Drawing.Point(345, 536);
             this.ButtonAddExercise.Name = "ButtonAddExercise";
-            this.ButtonAddExercise.Size = new System.Drawing.Size(130, 31);
+            this.ButtonAddExercise.Size = new System.Drawing.Size(149, 41);
             this.ButtonAddExercise.TabIndex = 28;
             this.ButtonAddExercise.Text = "Add Exercise";
             this.ButtonAddExercise.UseVisualStyleBackColor = false;
@@ -123,20 +120,19 @@ namespace Forms
             // LabelDuration
             // 
             this.LabelDuration.AutoSize = true;
-            this.LabelDuration.Location = new System.Drawing.Point(116, 201);
+            this.LabelDuration.Location = new System.Drawing.Point(133, 268);
             this.LabelDuration.Name = "LabelDuration";
-            this.LabelDuration.Size = new System.Drawing.Size(56, 15);
+            this.LabelDuration.Size = new System.Drawing.Size(70, 20);
             this.LabelDuration.TabIndex = 41;
             this.LabelDuration.Text = "Duration:";
             // 
             // DateTimePickerDuration
             // 
             this.DateTimePickerDuration.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.DateTimePickerDuration.Location = new System.Drawing.Point(178, 201);
-            this.DateTimePickerDuration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerDuration.Location = new System.Drawing.Point(203, 268);
             this.DateTimePickerDuration.Name = "DateTimePickerDuration";
             this.DateTimePickerDuration.ShowUpDown = true;
-            this.DateTimePickerDuration.Size = new System.Drawing.Size(364, 23);
+            this.DateTimePickerDuration.Size = new System.Drawing.Size(415, 27);
             this.DateTimePickerDuration.TabIndex = 42;
             this.DateTimePickerDuration.Value = new System.DateTime(2021, 6, 20, 0, 0, 0, 0);
             // 
@@ -153,52 +149,50 @@ namespace Forms
             "RightFoot",
             "RightLeg",
             "Torso"});
-            this.CheckedListBoxBodyPart.Location = new System.Drawing.Point(178, 246);
-            this.CheckedListBoxBodyPart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CheckedListBoxBodyPart.Location = new System.Drawing.Point(203, 328);
             this.CheckedListBoxBodyPart.MultiColumn = true;
             this.CheckedListBoxBodyPart.Name = "CheckedListBoxBodyPart";
-            this.CheckedListBoxBodyPart.Size = new System.Drawing.Size(364, 76);
+            this.CheckedListBoxBodyPart.Size = new System.Drawing.Size(415, 92);
             this.CheckedListBoxBodyPart.TabIndex = 43;
             // 
             // LabelHifenMinimumMaximumAge
             // 
             this.LabelHifenMinimumMaximumAge.AutoSize = true;
-            this.LabelHifenMinimumMaximumAge.Location = new System.Drawing.Point(359, 351);
+            this.LabelHifenMinimumMaximumAge.Location = new System.Drawing.Point(410, 468);
             this.LabelHifenMinimumMaximumAge.Name = "LabelHifenMinimumMaximumAge";
-            this.LabelHifenMinimumMaximumAge.Size = new System.Drawing.Size(12, 15);
+            this.LabelHifenMinimumMaximumAge.Size = new System.Drawing.Size(15, 20);
             this.LabelHifenMinimumMaximumAge.TabIndex = 49;
             this.LabelHifenMinimumMaximumAge.Text = "-";
             // 
             // LabelAge
             // 
             this.LabelAge.AutoSize = true;
-            this.LabelAge.Location = new System.Drawing.Point(275, 348);
+            this.LabelAge.Location = new System.Drawing.Point(314, 464);
             this.LabelAge.Name = "LabelAge";
-            this.LabelAge.Size = new System.Drawing.Size(31, 15);
+            this.LabelAge.Size = new System.Drawing.Size(39, 20);
             this.LabelAge.TabIndex = 48;
             this.LabelAge.Text = "Age:";
             // 
             // TextBoxMaximumAge
             // 
-            this.TextBoxMaximumAge.Location = new System.Drawing.Point(378, 348);
-            this.TextBoxMaximumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMaximumAge.Location = new System.Drawing.Point(432, 464);
             this.TextBoxMaximumAge.MaxLength = 3;
             this.TextBoxMaximumAge.Name = "TextBoxMaximumAge";
-            this.TextBoxMaximumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMaximumAge.Size = new System.Drawing.Size(45, 27);
             this.TextBoxMaximumAge.TabIndex = 47;
+            this.TextBoxMaximumAge.TextChanged += new System.EventHandler(this.TextBoxMaximumAge_TextChanged);
             // 
             // TextBoxMinimumAge
             // 
-            this.TextBoxMinimumAge.Location = new System.Drawing.Point(312, 348);
-            this.TextBoxMinimumAge.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMinimumAge.Location = new System.Drawing.Point(357, 464);
             this.TextBoxMinimumAge.MaxLength = 3;
             this.TextBoxMinimumAge.Name = "TextBoxMinimumAge";
-            this.TextBoxMinimumAge.Size = new System.Drawing.Size(40, 23);
+            this.TextBoxMinimumAge.Size = new System.Drawing.Size(45, 27);
             this.TextBoxMinimumAge.TabIndex = 46;
             // 
             // AddExerciseItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.LabelHifenMinimumMaximumAge);
@@ -215,9 +209,9 @@ namespace Forms
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonAddExercise);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddExerciseItemScreen";
-            this.Size = new System.Drawing.Size(680, 463);
+            this.Size = new System.Drawing.Size(777, 617);
             this.Load += new System.EventHandler(this.AddExerciseItemScreen_Load);
             this.Controls.SetChildIndex(this.ButtonAddExercise, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);
