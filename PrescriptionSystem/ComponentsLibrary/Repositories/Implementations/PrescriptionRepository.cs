@@ -26,7 +26,7 @@ namespace ComponentsLibrary.Repositories.Implementations
             _prescriptionHasItemsRepository.SaveChanges();
         }
 
-        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTime)
+        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTimes)
         {
             if (prescription.PrescriptionHasPrescriptionItemsCollection == null)
             {
@@ -36,7 +36,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                     {
                         Prescription = prescription,
                         PrescriptionItem = item,
-                        RecommendedTimes = recommendedTime
+                        RecommendedTimes = recommendedTimes.Any()?recommendedTimes:null
                     }
                 };
             }
@@ -46,7 +46,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                 {
                     Prescription = prescription,
                     PrescriptionItem = item,
-                    RecommendedTimes = recommendedTime
+                    RecommendedTimes = recommendedTimes.Any() ? recommendedTimes : null
                 });
             }
         }
@@ -81,7 +81,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                 e.HealthCareProfessionalId == healthCareProfessional.Id && e.PrescriptionId == prescription.Id).Any();
         }
 
-        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerable(
+        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
             int prescriptionId)
         {
             return _prescriptionHasItemsRepository.Find(e => e.PrescriptionId == prescriptionId);

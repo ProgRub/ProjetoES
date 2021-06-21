@@ -76,16 +76,10 @@ namespace ServicesLibrary.DifferentServices
                 healthCareProfessional);
         }
 
-        internal IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasItemsEnumerableByPrescriptionId(
-            int prescriptionId)
-        {
-            return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionId);
-        }
-
         internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
         {
             var prescriptionItems = new List<PrescriptionItem>();
-            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(
+            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
                 prescriptionId))
             {
                 if (PrescriptionItemService.Instance.IsExercise(prescriptionHasItems.PrescriptionItemId))
@@ -121,7 +115,7 @@ namespace ServicesLibrary.DifferentServices
         public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(int prescriptionID,
             int prescriptionItemId)
         {
-            return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerable(prescriptionID)
+            return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(prescriptionID)
                 .First(e => e.PrescriptionItemId == prescriptionItemId).RecommendedTimes;
         }
     }

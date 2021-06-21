@@ -15,14 +15,12 @@ namespace ServicesLibrary.DifferentServices
         private readonly IMedicineRepository _medicineRepository;
         private readonly IExerciseRepository _exerciseRepository;
         private readonly ITreatmentRepository _treatmentRepository;
-        //private readonly PrescriptionHasItemsRepository _prescriptionRepository;
 
         private PrescriptionItemService()
         {
             _medicineRepository = new MedicineRepository(Database.GetContext());
             _exerciseRepository = new ExerciseRepository(Database.GetContext());
             _treatmentRepository = new TreatmentRepository(Database.GetContext());
-            //_prescriptionRepository = new PrescriptionHasItemsRepository(Database.GetContext());
         }
 
         internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
@@ -103,21 +101,6 @@ namespace ServicesLibrary.DifferentServices
             return _exerciseRepository.GetAll();
         }
 
-        internal Treatment GetTreatmentByName(string name)
-        {
-            return _treatmentRepository.Find(e => e.Name == name).First();
-        }
-
-        internal Medicine GetMedicineByName(string name)
-        {
-            return _medicineRepository.Find(e => e.Name == name).First();
-        }
-
-        internal Exercise GetExerciseByName(string name)
-        {
-            return _exerciseRepository.Find(e => e.Name == name).First();
-        }
-
         internal Treatment GetTreatmentById(int id)
         {
             return _treatmentRepository.GetById(id);
@@ -128,11 +111,6 @@ namespace ServicesLibrary.DifferentServices
         {
             return _medicineRepository.GetIncompatibleMedicalConditionsOfMedicineByMedicineId(id);
         }
-
-        //internal IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
-        //{
-        //    return _medicineRepository.GetMedicineIncompatibleMedicalConditionsIds(medicineIncompatibleMedicalConditions);
-        //}
 
         internal Medicine GetMedicineById(int item_id)
         {
@@ -152,21 +130,6 @@ namespace ServicesLibrary.DifferentServices
         internal bool IsExercise(int item_id)
         {
             return _exerciseRepository.Find(e => e.Id == item_id).Any();
-        }
-
-        internal bool IsMedicineByName(string name)
-        {
-            return _medicineRepository.Find(e => e.Name == name).Any();
-        }
-
-        internal bool IsExerciseByName(string name)
-        {
-            return _exerciseRepository.Find(e => e.Name == name).Any();
-        }
-
-        internal bool IsTreatmentByName(string name)
-        {
-            return _treatmentRepository.Find(e => e.Name == name).Any();
         }
 
         public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
