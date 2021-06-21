@@ -515,6 +515,7 @@ namespace ComponentsLibrary.Migrations
                             Email = "luisbrito@gmail.com",
                             FullName = "Luís Brito",
                             HealthUserNumber = 243719236,
+                            MissingBodyParts = "3",
                             Password = "luis123",
                             PhoneNumber = 924837193
                         },
@@ -526,6 +527,7 @@ namespace ComponentsLibrary.Migrations
                             Email = "marybreu@hotmail.com",
                             FullName = "Mariana Abreu",
                             HealthUserNumber = 295831023,
+                            MissingBodyParts = "4",
                             Password = "M_A_R_Y",
                             PhoneNumber = 968391023
                         });

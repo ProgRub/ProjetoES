@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComponentsLibrary.Migrations
 {
     [DbContext(typeof(PrescriptionSystemDbContext))]
-    [Migration("20210621015920_z")]
-    partial class z
+    [Migration("20210621162733_SeededUsersHaveMissingBodyParts")]
+    partial class SeededUsersHaveMissingBodyParts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -261,86 +261,6 @@ namespace ComponentsLibrary.Migrations
                     b.ToTable("Prescription");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.ExerciseHasBodyParts", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int>("BodyPart")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("ExerciseId");
-
-                    b.ToTable("ExerciseHasBodyParts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 100,
-                            Zombie = false,
-                            BodyPart = 3,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 101,
-                            Zombie = false,
-                            BodyPart = 2,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 102,
-                            Zombie = false,
-                            BodyPart = 4,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 103,
-                            Zombie = false,
-                            BodyPart = 5,
-                            ExerciseId = 8
-                        },
-                        new
-                        {
-                            Id = 104,
-                            Zombie = false,
-                            BodyPart = 3,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 105,
-                            Zombie = false,
-                            BodyPart = 2,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 106,
-                            Zombie = false,
-                            BodyPart = 1,
-                            ExerciseId = 9
-                        },
-                        new
-                        {
-                            Id = 107,
-                            Zombie = false,
-                            BodyPart = 4,
-                            ExerciseId = 10
-                        },
-                        new
-                        {
-                            Id = 108,
-                            Zombie = false,
-                            BodyPart = 5,
-                            ExerciseId = 10
-                        });
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
                 {
                     b.HasBaseType("ComponentsLibrary.Entities.Item");
@@ -399,6 +319,9 @@ namespace ComponentsLibrary.Migrations
                     b.Property<int>("HealthUserNumber")
                         .HasColumnType("int");
 
+                    b.Property<string>("MissingBodyParts")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -407,21 +330,6 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
-                {
-                    b.HasBaseType("ComponentsLibrary.Entities.Item");
-
-                    b.Property<int>("BodyPart")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserHasMissingBodyPart");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>
@@ -438,6 +346,9 @@ namespace ComponentsLibrary.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<string>("BodyParts")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
@@ -452,6 +363,7 @@ namespace ComponentsLibrary.Migrations
                             Name = "Burpees",
                             AgeMaximum = 50,
                             AgeMinimum = 15,
+                            BodyParts = "3,2,4,5",
                             Duration = new TimeSpan(0, 0, 10, 0, 0)
                         },
                         new
@@ -462,6 +374,7 @@ namespace ComponentsLibrary.Migrations
                             Name = "Pushups",
                             AgeMaximum = 78,
                             AgeMinimum = 8,
+                            BodyParts = "3,2,1",
                             Duration = new TimeSpan(0, 0, 20, 0, 0)
                         },
                         new
@@ -472,6 +385,7 @@ namespace ComponentsLibrary.Migrations
                             Name = "Squats",
                             AgeMaximum = 0,
                             AgeMinimum = 5,
+                            BodyParts = "5,4",
                             Duration = new TimeSpan(0, 0, 15, 0, 0)
                         });
                 });
@@ -603,6 +517,7 @@ namespace ComponentsLibrary.Migrations
                             Email = "luisbrito@gmail.com",
                             FullName = "Luís Brito",
                             HealthUserNumber = 243719236,
+                            MissingBodyParts = "3",
                             Password = "luis123",
                             PhoneNumber = 924837193
                         },
@@ -614,6 +529,7 @@ namespace ComponentsLibrary.Migrations
                             Email = "marybreu@hotmail.com",
                             FullName = "Mariana Abreu",
                             HealthUserNumber = 295831023,
+                            MissingBodyParts = "4",
                             Password = "M_A_R_Y",
                             PhoneNumber = 968391023
                         });
@@ -779,23 +695,6 @@ namespace ComponentsLibrary.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.ExerciseHasBodyParts", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.PrescriptionItems.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.PrescriptionItems.ExerciseHasBodyParts", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.Navigation("Exercise");
-                });
-
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.PrescriptionItem", b =>
                 {
                     b.HasOne("ComponentsLibrary.Entities.Item", null)
@@ -837,21 +736,6 @@ namespace ComponentsLibrary.Migrations
                         .HasForeignKey("ComponentsLibrary.Entities.User", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ComponentsLibrary.Entities.UserHasMissingBodyPart", b =>
-                {
-                    b.HasOne("ComponentsLibrary.Entities.Item", null)
-                        .WithOne()
-                        .HasForeignKey("ComponentsLibrary.Entities.UserHasMissingBodyPart", "Id")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.HasOne("ComponentsLibrary.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ComponentsLibrary.Entities.PrescriptionItems.Exercise", b =>

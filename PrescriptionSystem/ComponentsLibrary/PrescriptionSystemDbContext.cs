@@ -235,7 +235,8 @@ namespace ComponentsLibrary
                 PhoneNumber = 924837193,
                 HealthUserNumber = 243719236,
                 Email = "luisbrito@gmail.com",
-                Password = "luis123"
+                Password = "luis123",
+                MissingBodyParts = new List<BodyPart> {BodyPart.RightArm}
             }, new Patient
             {
                 Id = id++,
@@ -245,7 +246,8 @@ namespace ComponentsLibrary
                 PhoneNumber = 968391023,
                 HealthUserNumber = 295831023,
                 Email = "marybreu@hotmail.com",
-                Password = "M_A_R_Y"
+                Password = "M_A_R_Y",
+                MissingBodyParts = new List<BodyPart> { BodyPart.LeftLeg }
             });
 
             modelBuilder.Entity<Therapist>().HasData(new Therapist
