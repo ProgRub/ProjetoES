@@ -39,9 +39,9 @@ namespace Forms
             this.loginScreen1.BackColor = System.Drawing.Color.Transparent;
             this.loginScreen1.Location = new System.Drawing.Point(1, -4);
             this.loginScreen1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.loginScreen1.MinimumSize = new System.Drawing.Size(650, 254);
+            this.loginScreen1.MinimumSize = new System.Drawing.Size(590, 194);
             this.loginScreen1.Name = "loginScreen1";
-            this.loginScreen1.Size = new System.Drawing.Size(650, 254);
+            this.loginScreen1.Size = new System.Drawing.Size(590, 194);
             this.loginScreen1.TabIndex = 0;
             // 
             // Window

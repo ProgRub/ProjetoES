@@ -142,8 +142,8 @@ namespace Forms
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var recommendedTimes = GetRecommendedTimesDictionary(treeViewPrescriptionItems);
-            var selectedItems = GetParentNodes(treeViewPrescriptionItems);
+            var recommendedTimes = GetRecommendedTimesDictionary(TreeViewPrescriptionItems);
+            var selectedItems = GetParentNodes(TreeViewPrescriptionItems);
             var prescription = new PrescriptionDTO
             {
                 Author = Services.Instance.GetLoggedInHealthCareProfessional(),
@@ -211,25 +211,24 @@ namespace Forms
 
         private void ComboBoxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-        }
 
 
         private void ButtonAddTime_Click(object sender, EventArgs e)
         {
-            if (treeViewPrescriptionItems.SelectedNode == null) return;
+            if (TreeViewPrescriptionItems.SelectedNode == null) return;
             
-            var collection = treeViewPrescriptionItems.SelectedNode.Nodes;
-            if (treeViewPrescriptionItems.SelectedNode.Parent != null) return;
+            var collection = TreeViewPrescriptionItems.SelectedNode.Nodes;
+            if (TreeViewPrescriptionItems.SelectedNode.Parent != null) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreateRecommendedTime(DateTimePickerRecommendedTime.Value.TimeOfDay);
             //command1.Execute();
             macro.Add(command1);
 
-            var command2 = new CommandCreateNode(collection, 1, command1.RecommendedTime.ToString());
+            var command2 = new CommandCreateNode(collection, 1, command1.RecommendedTime.Value.ToString(@"hh\:mm"));
             macro.Add(command2);
 
             CommandsManager.Instance.Execute(macro);
-            treeViewPrescriptionItems.ExpandAll();
+            TreeViewPrescriptionItems.ExpandAll();
         }
 
         private void ButtonAddPrescriptionItem_Click(object sender, EventArgs e)
@@ -240,10 +239,19 @@ namespace Forms
             //command1.Execute();
             macro.Add(command1);
 
-            var command2 = new CommandCreateNode(treeViewPrescriptionItems.Nodes, 2, command1.Name);
+            var command2 = new CommandCreateNode(TreeViewPrescriptionItems.Nodes, 2, command1.Name);
             macro.Add(command2);
             CommandsManager.Instance.Execute(macro);
-            treeViewPrescriptionItems.ExpandAll();
+            TreeViewPrescriptionItems.ExpandAll();
+        }
+
+        private void TreeViewPrescriptionItems_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && TreeViewPrescriptionItems.SelectedNode != null)
+            {
+                CommandsManager.Instance.Execute(new CommandDeleteNode(TreeViewPrescriptionItems.Nodes,TreeViewPrescriptionItems.SelectedNode));
+
+            }
         }
 
         private void ButtonUndo_Click(object sender, EventArgs e)

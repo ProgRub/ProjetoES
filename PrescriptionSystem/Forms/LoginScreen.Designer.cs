@@ -130,7 +130,7 @@ namespace Forms
             this.Controls.Add(this.LabelPassword);
             this.Controls.Add(this.LabelEmail);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(569, 190);
+            this.MinimumSize = new System.Drawing.Size(300, 190);
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(590, 194);
             this.Load += new System.EventHandler(this.LoginScreen_Load);
