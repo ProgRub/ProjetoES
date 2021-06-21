@@ -307,21 +307,7 @@ namespace ServicesLibrary
         public bool IsMedicine(int id) => _prescriptionItemService.IsMedicine(id);
 
         public bool IsExercise(int id) => _prescriptionItemService.IsExercise(id);
-
-        public bool IsMedicineByName(string name)
-        {
-            return _prescriptionItemService.IsMedicineByName(name);
-        }
-
-        public bool IsExerciseByName(string name)
-        {
-            return _prescriptionItemService.IsExerciseByName(name);
-        }
-
-        public bool IsTreatmentByName(string name)
-        {
-            return _prescriptionItemService.IsTreatmentByName(name);
-        }
+        
 
         public IEnumerable<string> GetPatientPrescriptions()
         {
