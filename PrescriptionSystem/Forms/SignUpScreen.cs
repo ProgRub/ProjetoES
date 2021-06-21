@@ -15,7 +15,6 @@ namespace Forms
     {
         private IEnumerable<MedicalConditionDTO> _allergies;
         private IEnumerable<MedicalConditionDTO> _diseases;
-
         public SignUpScreen()
         {
             InitializeComponent();
@@ -41,11 +40,6 @@ namespace Forms
             SetCheckedListBoxColumnWidth(CheckedListBoxAllergies);
             SetCheckedListBoxColumnWidth(CheckedListBoxMissingBodyParts);
             SetFormAcceptButton(ButtonSignUp);
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new LoginScreen());
         }
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
@@ -94,7 +88,7 @@ namespace Forms
                 PhoneNumber = int.Parse(TextBoxPhoneNumber.Text)
             }, TextBoxEmail.Text, TextBoxPassword.Text, userType);
             ShowInformationMessageBox("User registered successively.", "Success");
-            MoveToScreen(new LoginScreen());
+            MoveToScreen(new LoginScreen(), this);
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
@@ -167,7 +161,7 @@ namespace Forms
                         break;
                     case Services.MiscError:
                         ShowInformationMessageBox("Something went wrong...", "Error Detected");
-                        MoveToScreen(new LoginScreen());
+                        MoveToScreen(new LoginScreen(), this);
                         break;
                 }
             }

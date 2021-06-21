@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ComponentsLibrary.Entities;
 using ServicesLibrary.DifferentServices;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.TherapySessionValidators
 {
@@ -12,10 +13,10 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
         }
         public override bool RequestIsValid(object request)
         {
-            if (request is TherapySession therapySession)
+            if (request is TherapySessionDTO therapySession)
             {
                 var patientTherapySessions =
-                    TherapySessionService.Instance.GetAllTherapySessionsOfPatient(therapySession.Patient);
+                    TherapySessionService.Instance.GetAllTherapySessionsOfPatient(therapySession.Patient.Id);
                 foreach (var therapySessionInDatabase in patientTherapySessions)
                 {
                     if (therapySession.DateTime.Date == therapySessionInDatabase.DateTime.Date)

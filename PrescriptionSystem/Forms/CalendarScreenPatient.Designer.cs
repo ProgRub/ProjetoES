@@ -85,6 +85,7 @@ namespace Forms
             this.MonthCalendarPatient.BackColor = System.Drawing.SystemColors.Window;
             this.MonthCalendarPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MonthCalendarPatient.Location = new System.Drawing.Point(0, 41);
+            this.MonthCalendarPatient.MaxSelectionCount = 1;
             this.MonthCalendarPatient.Name = "MonthCalendarPatient";
             this.MonthCalendarPatient.TabIndex = 28;
             this.MonthCalendarPatient.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendarPatient_DateChanged);

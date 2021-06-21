@@ -18,28 +18,8 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal new static PatientService Instance { get; } = new PatientService();
-
-        //internal void RegisterPatient(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
-        //    string email,
-        //    string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
-        //    IEnumerable<string> missingBodyParts)
-        //{
-        //    var patient = new Patient
-        //    {
-        //        FullName = name,
-        //        DateOfBirth = dateOfBirth,
-        //        Email = email,
-        //        HealthUserNumber = healthUserNumber,
-        //        Password = password,
-        //        PhoneNumber = phoneNumber
-        //    };
-        //    _patientRepository.Add(patient);
-        //    AddMedicalConditionsToUser(patient, allergies, diseases);
-        //    AddMissingBodyPartsToUser(patient, missingBodyParts);
-        //    _patientRepository.SaveChanges();
-        //    UserService.Instance.SaveChanges();
-        //}
-
+        internal int SelectedPatientId { get; set; }
+        
         public Patient GetById(int id)
         {
             return _patientRepository.GetById(id);

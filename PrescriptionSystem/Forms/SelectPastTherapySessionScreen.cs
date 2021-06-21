@@ -15,12 +15,10 @@ namespace Forms
     public partial class SelectPastTherapySessionScreen : BaseControl
     {
         private IEnumerable<TherapySessionDTO> _therapySessions;
-
         public SelectPastTherapySessionScreen()
         {
             InitializeComponent();
         }
-
         private void SelectPastTherapySessionScreen_Load(object sender, EventArgs e)
         {
             _therapySessions = Services.Instance.GetPastTherapySessionsOfLoggedInTherapist();
@@ -37,6 +35,7 @@ namespace Forms
                     AutoSize = false,
                     Font = ButtonExampleTherapySession.Font,
                     ForeColor = ButtonExampleTherapySession.ForeColor,
+                    BackColor = ButtonExampleTherapySession.BackColor,
                     Text =
                         $"{_therapySessions.ElementAt(index).Id} | {_therapySessions.ElementAt(index).Patient.FullName}{Environment.NewLine}{_therapySessions.ElementAt(index).DateTime:dddd dd/MM/yyyy HH:mm}",
                     Size = ButtonExampleTherapySession.Size,
@@ -54,19 +53,13 @@ namespace Forms
         private void ButtonClicked(object sender, EventArgs e)
         {
             Services.Instance.SelectTherapySession(GetSessionFromString(((Button) sender).Text));
-            MoveToScreen(new TherapySessionCompletedScreen());
+            MoveToScreen(new TherapySessionCompletedScreen(), this);
         }
 
         private TherapySessionDTO GetSessionFromString(string therapySessionString)
         {
-            var therapySessionSplit = therapySessionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries);
             return _therapySessions.FirstOrDefault(treatment =>
-                treatment.Id.ToString() == therapySessionSplit[0]);
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
+                treatment.Id.ToString() == therapySessionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
     }
 }

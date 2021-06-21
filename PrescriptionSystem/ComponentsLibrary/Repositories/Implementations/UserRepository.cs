@@ -15,6 +15,13 @@ namespace ComponentsLibrary.Repositories.Implementations
             _userHasMedicalConditionRepository = new UserHasMedicalConditionRepository(context);
         }
 
+
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
+            _userHasMedicalConditionRepository.SaveChanges();
+        }
+
         public void AddMedicalConditionToUser(User user, MedicalCondition medicalCondition)
         {
             if (user.UserHasMedicalConditions == null)

@@ -16,12 +16,11 @@ namespace Forms
         private IEnumerable<ExerciseDTO> _exercises;
         private IEnumerable<PatientDTO> _patients;
         private IEnumerable<MedicineDTO> _medicines;
-
+        
         public CreatePrescription()
         {
             InitializeComponent();
         }
-
         private void CreatePrescription_Load(object sender, EventArgs e)
         {
             CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
@@ -53,11 +52,6 @@ namespace Forms
                 comboBoxItems.Items.Add(
                     $"(Exercise) {exercise.Id} | {exercise.Name} | Age range: {exercise.AgeMinimum}-{exercise.AgeMaximum}");
             }
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
         }
 
         private IEnumerable<PrescriptionItemDTO> GetParentNodes(TreeView treeView)
@@ -171,7 +165,7 @@ namespace Forms
             }
             Services.Instance.CreatePrescription(prescription);
             ShowInformationMessageBox("Prescription successfully created.", "Success");
-            MoveToScreen(new CalendarScreenTherapist());
+            MoveToScreen(new CalendarScreenTherapist(), new LoginScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)

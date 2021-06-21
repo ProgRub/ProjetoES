@@ -38,6 +38,11 @@ namespace Forms
             this.LabelNoAccount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
+            // ButtonBack
+            // 
+            this.ButtonBack.Enabled = false;
+            this.ButtonBack.Visible = false;
+            // 
             // LabelEmail
             // 
             this.LabelEmail.AutoSize = true;

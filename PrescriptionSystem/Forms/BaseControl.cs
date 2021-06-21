@@ -11,24 +11,20 @@ namespace Forms
 {
     public partial class BaseControl : UserControl
     {
+        public BaseControl PreviousScreen { private get; set; }
         public BaseControl()
         {
             InitializeComponent();
             AutoSize = true;
         }
 
-        protected void MoveToScreen(BaseControl newControl)
+        protected void MoveToScreen(BaseControl newControl, BaseControl previousControl)
         {
-            var window = (Window)Parent;
+            newControl.PreviousScreen = previousControl;
+            var window = (Window)Parent ?? (Window) newControl.Parent;
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);
-        }
-
-        protected void DisableBackButton()
-        {
-            ButtonBack.Enabled = false;
-            ButtonBack.Visible = false;
         }
         protected void ClearTextBox(TextBox textBox) => textBox.Text = "";
 
@@ -75,6 +71,11 @@ namespace Forms
             {
                 textBox.PlaceholderText = "";
             }
+        }
+
+        protected void ButtonBack_Click(object sender, EventArgs e)
+        {
+            MoveToScreen(PreviousScreen, PreviousScreen.PreviousScreen??this);
         }
     }
 }

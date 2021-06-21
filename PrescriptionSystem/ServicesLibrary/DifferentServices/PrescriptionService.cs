@@ -110,7 +110,7 @@ namespace ServicesLibrary.DifferentServices
 
         public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
         {
-            return _prescriptionRepository.GetPrescriptionViewersByPrescriptionId(id);
+            return _prescriptionRepository.GetPrescriptionViewersIdsByPrescriptionId(id).Select(e=>HealthCareProfessionalService.Instance.GetById(e));
         }
 
         public Prescription GetPrescriptionById(int prescriptionId)

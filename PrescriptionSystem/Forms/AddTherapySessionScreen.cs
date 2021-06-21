@@ -16,7 +16,6 @@ namespace Forms
     {
         private IEnumerable<TreatmentDTO> _treatments;
         private IEnumerable<PatientDTO> _patients;
-
         public AddTherapySessionScreen()
         {
             InitializeComponent();
@@ -41,12 +40,6 @@ namespace Forms
             SetCheckedListBoxColumnWidth(CheckedListBoxTreatments);
         }
 
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
-        }
-
         private void ButtonAddTherapySession_Click(object sender, EventArgs e)
         {
             var treatments = new List<TreatmentDTO>();
@@ -55,21 +48,23 @@ namespace Forms
                 treatments.Add(GetTreatmentFromString(checkedItem.ToString()));
             }
 
-            var estimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text);
-
-            var errorCodes = Services.Instance.CheckTherapySessionCreation(GetSelectedPatientInComboBox(),
-                DateTimePickerDate.Value,
-                DateTimePickerSessionHour.Value, treatments, estimatedDuration);
+            var therapySession = new TherapySessionDTO
+            {
+                Patient = GetSelectedPatientInComboBox(), Therapist = Services.Instance.GetLoggedInTherapist(),
+                DateTime = DateTimePickerDate.Value.Date.Add(DateTimePickerSessionHour.Value.TimeOfDay),
+                EstimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text), Treatments = treatments
+            };
+            
+            var errorCodes = Services.Instance.CheckTherapySessionCreation(therapySession);
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
                 return;
             }
 
-            Services.Instance.CreateTherapySession(GetSelectedPatientInComboBox(), DateTimePickerDate.Value,
-                DateTimePickerSessionHour.Value, treatments, estimatedDuration);
+            Services.Instance.CreateTherapySession(therapySession);
             ShowInformationMessageBox("Therapy Session successfully scheduled.", "Success");
-            MoveToScreen(new CalendarScreenTherapist());
+            MoveToScreen(new CalendarScreenTherapist(), new LoginScreen());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
@@ -100,6 +95,12 @@ namespace Forms
                         break;
                     case Services.AtLeastOneTreatment:
                         errorMessage += "You have to select at least one treatment.";
+                        break;
+                    case Services.InvalidAge:
+                        errorMessage += "The patient is out of the age range of, at least, one of the selected treatments.";
+                        break;
+                    case Services.MissingBodyPart:
+                        errorMessage += "The patient is missing the body part one of the treatments targets.";
                         break;
                 }
             }

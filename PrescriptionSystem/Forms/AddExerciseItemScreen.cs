@@ -24,11 +24,6 @@ namespace Forms
             SetCheckedListBoxColumnWidth(CheckedListBoxBodyPart);
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new AddPrescriptionItemScreen());
-        }
-
         private void ButtonAddExercise_Click(object sender, EventArgs e)
         {
             var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxName.Text,
@@ -54,7 +49,7 @@ namespace Forms
                 BodyParts = bodyParts.Select(e => Services.Instance.ConvertStringToBodyPart(e))
             });
             ShowInformationMessageBox("Exercise successfully added.", "Success");
-            MoveToScreen(new AddPrescriptionItemScreen());
+            MoveToScreen(new AddPrescriptionItemScreen(), new CalendarScreenTherapist());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)

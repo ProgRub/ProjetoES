@@ -17,7 +17,6 @@ namespace Forms
     public partial class TherapySessionCompletedScreen : BaseControl
     {
         private TherapySessionDTO _therapySession;
-
         public TherapySessionCompletedScreen()
         {
             InitializeComponent();
@@ -40,11 +39,6 @@ namespace Forms
             }
 
             TextBoxTherapySessionNote.Text = _therapySession.Note;
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new SelectPastTherapySessionScreen());
         }
 
         private void ButtonRedo_Click(object sender, EventArgs e)

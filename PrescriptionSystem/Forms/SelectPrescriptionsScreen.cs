@@ -14,17 +14,10 @@ namespace Forms
     public partial class SelectPrescriptionsScreen : BaseControl
     {
         private IEnumerable<PrescriptionDTO> _prescriptions;
-
         public SelectPrescriptionsScreen()
         {
             InitializeComponent();
         }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenPatient());
-        }
-
         private void SelectPrescriptionsScreen_Load(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
@@ -87,7 +80,7 @@ namespace Forms
                 }
 
                 Services.Instance.SelectPrescriptions(checkedPrescriptions);
-                MoveToScreen(new SelectHealthCareProfessionalsScreen());
+                MoveToScreen(new SelectHealthCareProfessionalsScreen(), this);
             }
             else
             {

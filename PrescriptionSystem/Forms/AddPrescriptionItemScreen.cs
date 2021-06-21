@@ -17,22 +17,17 @@ namespace Forms
 
         private void ButtonMedicine_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddMedicineItemScreen());
+            MoveToScreen(new AddMedicineItemScreen(), this);
         }
 
         private void ButtonTreatment_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddTreatmentItemScreen());
+            MoveToScreen(new AddTreatmentItemScreen(), this);
         }
 
         private void ButtonExercise_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddExerciseItemScreen());
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new CalendarScreenTherapist());
+            MoveToScreen(new AddExerciseItemScreen(),this);
         }
     }
 }

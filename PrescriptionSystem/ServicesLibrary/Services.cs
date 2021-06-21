@@ -55,7 +55,7 @@ namespace ServicesLibrary
 
         #region PrescriptionCreation
 
-        public const int InvalidAge = 1, IncompatibleMedicine = 2, IncompatibleDisease = 5, MissingBodyPart = 6;
+        public const int InvalidAge = 15, IncompatibleMedicine = 16, IncompatibleDisease = 17, MissingBodyPart = 18;
 
         #endregion
 
@@ -182,26 +182,23 @@ namespace ServicesLibrary
             return errorCodes;
         }
 
-        public IEnumerable<int> CheckTherapySessionCreation(PatientDTO patient, DateTime sessionDate,
-            DateTime sessionTime,
-            IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration)
+
+        public IEnumerable<int> CheckTherapySessionCreation(TherapySessionDTO session)
         {
             var errorCodes = new List<int>();
 
             BaseValidator validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
-            validator.Validate(patient);
+            validator.Validate(session.Patient);
             if (errorCodes.Any()) return errorCodes;
-            validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
-            validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes));
-            validator.Validate(new TherapySession()
-            {
-                Patient = _patientService.GetById(patient.Id),
-                Therapist = (Therapist) UserService.Instance.GetUserById(UserService.Instance.LoggedInUserId),
-                DateTime = sessionDate.Date.Add(sessionTime.TimeOfDay),
-                EstimatedDuration = estimatedDuration
-            });
             validator = new EnumerableEmptyValidator(AtLeastOneTreatment, ref errorCodes);
-            validator.Validate(treatments);
+            validator.Validate(session.Treatments);
+            if (errorCodes.Any()) return errorCodes;
+
+            validator = new PatientAvailabilityValidator(PatientUnavailable, ref errorCodes);
+            validator.SetNext(new TherapistAvailabilityValidator(TherapistUnavailable, ref errorCodes))
+                .SetNext(new AgeValidator(InvalidAge, ref errorCodes))
+                .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes));
+            validator.Validate(session);
 
             return errorCodes;
         }
@@ -225,11 +222,14 @@ namespace ServicesLibrary
         public void CreateTreatmentPrescriptionItem(TreatmentDTO treatment) =>
             _prescriptionItemService.CreateTreatmentPrescriptionItem(treatment);
 
-        public void CreateTherapySession(PatientDTO patient, DateTime sessionDate, DateTime sessionTime,
-            IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration) =>
-            TherapySessionService.Instance.AddTherapySession(_patientService.GetById(patient.Id),
-                sessionDate.Date.Add(sessionTime.TimeOfDay),
-                treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id)), estimatedDuration);
+        //public void CreateTherapySession(PatientDTO patient, DateTime sessionDate, DateTime sessionTime,
+        //    IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration) =>
+        //    TherapySessionService.Instance.AddTherapySession(_patientService.GetById(patient.Id),
+        //        sessionDate.Date.Add(sessionTime.TimeOfDay),
+        //        treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id)), estimatedDuration);
+
+        public void CreateTherapySession(TherapySessionDTO therapySession) =>
+            _therapySessionService.AddTherapySession(therapySession);
 
         public void AddPermissionToHealthCareProfessionals(IEnumerable<HealthCareProfessionalDTO> professionals)
         {
@@ -308,8 +308,41 @@ namespace ServicesLibrary
             HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
                 (HealthCareProfessional) _userService.GetUserById(_userService.LoggedInUserId));
 
+        public TherapistDTO GetLoggedInTherapist() =>
+            TherapistDTO.ConvertTherapistToDTO((Therapist) _userService.GetUserById(_userService.LoggedInUserId));
+
+        public PrescriptionDTO GetSelectedPrescription() =>
+            PrescriptionDTO.ConvertPrescriptionToDTO(_prescriptionService.SelectedPrescriptions[0]);
+
+        public PatientDTO GetSelectedPatient() =>
+            PatientDTO.ConvertPatientToDTO(_patientService.GetById(_patientService.SelectedPatientId));
+
+        public IEnumerable<PrescriptionDTO> GetPatientsPrescriptionsByPatientId(int id) => _prescriptionService
+            .GetPrescriptionsOfPatientById(id).Select(e => PrescriptionDTO.ConvertPrescriptionToDTO(e));
+
         #endregion
-        
+
+        #region Selectors
+
+        public void SelectTherapySession(TherapySessionDTO session) =>
+            _therapySessionService.SelectedTherapySessionId = session.Id;
+
+        public void SelectPrescriptions(IEnumerable<PrescriptionDTO> prescriptions)
+        {
+            _prescriptionService.SelectedPrescriptions = new List<Prescription>();
+            foreach (var prescription in prescriptions)
+            {
+                _prescriptionService.AddSelectedPrescriptionById(prescription.Id);
+            }
+        }
+
+        public void SelectPatient(PatientDTO patient)
+        {
+            _patientService.SelectedPatientId = patient.Id;
+        }
+
+        #endregion
+
         #region Others
 
         public int Login(string email, string password)
@@ -321,20 +354,15 @@ namespace ServicesLibrary
 
         public void LoadDatabase() => _userService.LoadDBHelpFunction();
 
-        public void SelectTherapySession(TherapySessionDTO session) =>
-            _therapySessionService.SelectedTherapySessionId = session.Id;
-
         public bool IsMedicine(int id) => _prescriptionItemService.IsMedicine(id);
         public bool IsExercise(int id) => _prescriptionItemService.IsExercise(id);
 
-        public void SelectPrescriptions(IEnumerable<PrescriptionDTO> prescriptions)
-        {
-            _prescriptionService.SelectedPrescriptions = new List<Prescription>();
-            foreach (var prescription in prescriptions)
-            {
-                _prescriptionService.AddSelectedPrescriptionById(prescription.Id);
-            }
-        }
+        public bool CanHealthCareProfessionalViewPrescription(PrescriptionDTO prescription,
+            HealthCareProfessionalDTO healthCareProfessional) =>
+            prescription.Author.Id == healthCareProfessional.Id ||
+            _prescriptionService.CanHealthCareProfessionalViewPrescription(
+                _prescriptionService.GetPrescriptionById(prescription.Id),
+                _healthCareProfessionalService.GetById(healthCareProfessional.Id));
 
         public BodyPart ConvertStringToBodyPart(string bodyPart) => (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
 

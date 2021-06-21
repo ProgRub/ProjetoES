@@ -14,7 +14,6 @@ namespace Forms
         public LoginScreen()
         {
             InitializeComponent();
-            DisableBackButton();
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
@@ -31,17 +30,17 @@ namespace Forms
                     ShowTextBoxErrorMessage(TextBoxPassword,"Incorrect Password");
                     return;
                 case Services.Patient:
-                    MoveToScreen(new CalendarScreenPatient());
+                    MoveToScreen(new CalendarScreenPatient(), this);
                     return;
                 case Services.Therapist:
-                    MoveToScreen(new CalendarScreenTherapist());
+                    MoveToScreen(new CalendarScreenTherapist(), this);
                     return;
             }
         }
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new SignUpScreen());
+            MoveToScreen(new SignUpScreen(), this);
         }
 
         private void LoginScreen_Load(object sender, EventArgs e)

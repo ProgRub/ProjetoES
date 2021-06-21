@@ -7,7 +7,9 @@ namespace ComponentsLibrary.Repositories.Interfaces
 {
     public interface IPrescriptionRepository : IGenericRepository<Prescription>
     {
-        void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTime);
+        void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item,
+            List<TimeSpan> recommendedTime);
+
         void AddViewerToPrescription(Prescription prescription, HealthCareProfessional healthCareProfessional);
 
         bool IsHealthCareProfessionalPrescriptionViewer(Prescription prescription,
@@ -16,6 +18,6 @@ namespace ComponentsLibrary.Repositories.Interfaces
         IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerable(
             int prescriptionId);
 
-        IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id);
+        IEnumerable<int> GetPrescriptionViewersIdsByPrescriptionId(int id);
     }
 }

@@ -83,7 +83,7 @@ namespace Forms
                 IncompatibleAllergies = allergies,IncompatibleDiseases = diseases
             });
             ShowInformationMessageBox("Medicine successfully added.", "Success");
-            MoveToScreen(new AddPrescriptionItemScreen());
+            MoveToScreen(new AddPrescriptionItemScreen(), new CalendarScreenTherapist());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
@@ -104,11 +104,6 @@ namespace Forms
                         break;
                 }
             }
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new AddPrescriptionItemScreen());
         }
     }
 }

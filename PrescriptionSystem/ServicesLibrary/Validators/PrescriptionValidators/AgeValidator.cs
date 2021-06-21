@@ -33,8 +33,20 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
                 return true;
             }
+            if (request is TherapySessionDTO therapySession)
+            {
+                var today = DateTime.Today;
+                var patientsAge = today.Year - therapySession.Patient.DateOfBirth.Year;
+                if (therapySession.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
+                foreach (var treatment in therapySession.Treatments)
+                {
+                    if (patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) return false;
+                }
 
-            throw new NotSupportedException($"Invalid type {request.GetType()}!");
+                return true;
+            }
+
+                throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
     }
 }

@@ -15,6 +15,12 @@ namespace ComponentsLibrary.Repositories.Implementations
             _therapySessionHasTreatmentsRepository = new TherapySessionHasTreatmentsRepository(context);
         }
 
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
+            _therapySessionHasTreatmentsRepository.SaveChanges();
+        }
+
         public void AddTreatmentToTherapySession(TherapySession therapySession, Treatment treatment)
         {
             if (therapySession.TherapySessionHasTreatmentsCollection == null)

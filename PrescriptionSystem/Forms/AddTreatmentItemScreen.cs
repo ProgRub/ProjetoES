@@ -18,7 +18,6 @@ namespace Forms
         {
             InitializeComponent();
         }
-
         private void ButtonAddTreatment_Click(object sender, EventArgs e)
         {
             var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text,
@@ -47,7 +46,7 @@ namespace Forms
                 BodyPart = Services.Instance.ConvertStringToBodyPart(bodyPart)
             });
             ShowInformationMessageBox("Treatment successfully added.", "Success");
-            MoveToScreen(new AddPrescriptionItemScreen());
+            MoveToScreen(new AddPrescriptionItemScreen(), new CalendarScreenTherapist());
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
@@ -71,11 +70,6 @@ namespace Forms
                         break;
                 }
             }
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new AddPrescriptionItemScreen());
         }
     }
 }

@@ -20,12 +20,18 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                     {
                         if (missingBodyPart == treatment.BodyPart) return false;
                     }
-                        //foreach (var missingBodyPart in UserService.Instance.GetUserMissingBodyPartsByUserId(TODO))
-                        //{
-                        //    if (missingBodyPart.User == prescription.Patient &&
-                        //        missingBodyPart.BodyPart == treatment.BodyPart)
-                        //        return false;
-                        //}
+                }
+
+                return true;
+            }
+            if (request is TherapySessionDTO therapySession)
+            {
+                foreach (var treatment in therapySession.Treatments)
+                {
+                    foreach (var missingBodyPart in therapySession.Patient.MissingBodyParts)
+                    {
+                        if (missingBodyPart == treatment.BodyPart) return false;
+                    }
                 }
 
                 return true;

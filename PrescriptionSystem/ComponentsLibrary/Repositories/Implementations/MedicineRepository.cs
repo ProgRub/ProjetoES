@@ -13,6 +13,13 @@ namespace ComponentsLibrary.Repositories.Implementations
             _medicineHasIncompatibilityRepository = new MedicineHasIncompatibilityRepository(context);
         }
 
+
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
+            _medicineHasIncompatibilityRepository.SaveChanges();
+        }
+
         public void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition)
         {
             if(medicine.MedicineHasIncompatibleMedicalConditionsList == null)

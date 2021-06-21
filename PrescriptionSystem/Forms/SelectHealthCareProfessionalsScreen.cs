@@ -18,12 +18,6 @@ namespace Forms
         {
             InitializeComponent();
         }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new SelectPrescriptionsScreen());
-        }
-
         private void SelectHealthCareProfessionalsScreen_Load(object sender, EventArgs e)
         {
 
@@ -93,7 +87,7 @@ namespace Forms
                 }
                 Services.Instance.AddPermissionToHealthCareProfessionals(checkedProfessionals);
                 ShowInformationMessageBox("The selected Health Care Professionals now have access to your prescription details.", "Success");
-                MoveToScreen(new SelectPrescriptionsScreen());
+                MoveToScreen(new SelectPrescriptionsScreen(), new CalendarScreenPatient());
             }
             else
             {

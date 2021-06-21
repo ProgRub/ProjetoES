@@ -6,6 +6,7 @@ using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -21,19 +22,10 @@ namespace ServicesLibrary.DifferentServices
 
         internal static TherapySessionService Instance { get; } = new TherapySessionService();
 
-        internal IEnumerable<TherapySession> GetAllTherapySessionsOfPatient(Patient patient)
-        {
-            return _therapySessionRepository.Find(e => e.Patient == patient);
-        }
 
         internal IEnumerable<TherapySession> GetAllTherapySessionsOfPatient(int patientId)
         {
             return _therapySessionRepository.Find(e => e.PatientId == patientId);
-        }
-
-        internal IEnumerable<TherapySession> GetAllTherapySessionsOfTherapist(Therapist therapist)
-        {
-            return _therapySessionRepository.Find(e => e.Therapist == therapist);
         }
 
         internal IEnumerable<TherapySession> GetAllTherapySessionsOfTherapist(int therapistId)
@@ -41,22 +33,40 @@ namespace ServicesLibrary.DifferentServices
             return _therapySessionRepository.Find(e => e.TherapistId == therapistId);
         }
 
-        internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
-            IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
+        //internal void AddTherapySession(Patient patient, DateTime sessionDateTime,
+        //    IEnumerable<Treatment> treatments, TimeSpan estimatedDuration)
+        //{
+        //    var therapySession = new TherapySession
+        //    {
+        //        PatientId = patient.Id,
+        //        TherapistId = UserService.Instance.LoggedInUserId,
+        //        DateTime = sessionDateTime,
+        //        EstimatedDuration = estimatedDuration
+        //    };
+        //    _therapySessionRepository.Add(therapySession);
+        //    foreach (var treatment in treatments)
+        //    {
+        //        _therapySessionRepository.AddTreatmentToTherapySession(therapySession, treatment);
+        //    }
+
+        //    _therapySessionRepository.SaveChanges();
+        //}
+
+        public void AddTherapySession(TherapySessionDTO therapySessionDTO)
         {
             var therapySession = new TherapySession
             {
-                PatientId = patient.Id,
+                PatientId = therapySessionDTO.Patient.Id,
                 TherapistId = UserService.Instance.LoggedInUserId,
-                DateTime = sessionDateTime,
-                EstimatedDuration = estimatedDuration
+                DateTime = therapySessionDTO.DateTime,
+                EstimatedDuration = therapySessionDTO.EstimatedDuration
             };
             _therapySessionRepository.Add(therapySession);
-            foreach (var treatment in treatments)
+            foreach (var treatment in therapySessionDTO.Treatments)
             {
-                _therapySessionRepository.AddTreatmentToTherapySession(therapySession, treatment);
+                _therapySessionRepository.AddTreatmentToTherapySession(therapySession,
+                    PrescriptionItemService.Instance.GetTreatmentById(treatment.Id));
             }
-
             _therapySessionRepository.SaveChanges();
         }
 

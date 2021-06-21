@@ -17,22 +17,15 @@ namespace Forms
         public CalendarScreenPatient()
         {
             InitializeComponent();
-            CommandsManager.Instance.ResetCommandsList();
         }
-
         private void ButtonGetPrescriptionHistory_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new GetPrescriptionHistoryScreen());
-        }
-
-        private void ButtonBack_Click(object sender, EventArgs e)
-        {
-            MoveToScreen(new LoginScreen());
+            MoveToScreen(new GetPrescriptionHistoryScreen(), this);
         }
 
         private void ButtonAddPermission_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new SelectPrescriptionsScreen());
+            MoveToScreen(new SelectPrescriptionsScreen(), this);
         }
 
         private void MonthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)

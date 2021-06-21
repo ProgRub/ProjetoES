@@ -28,12 +28,6 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTime)
         {
-            //Debug.WriteLine(item.Name + " : ");
-            //foreach (var t in recommendedTime)
-            //{
-            //    Debug.WriteLine(" - " + t.ToString());
-            //}
-
             if (prescription.PrescriptionHasPrescriptionItemsCollection == null)
             {
                 prescription.PrescriptionHasPrescriptionItemsCollection = new List<PrescriptionHasPrescriptionItems>
@@ -93,10 +87,10 @@ namespace ComponentsLibrary.Repositories.Implementations
             return _prescriptionHasItemsRepository.Find(e => e.PrescriptionId == prescriptionId);
         }
 
-        public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
+        public IEnumerable<int> GetPrescriptionViewersIdsByPrescriptionId(int id)
         {
             return _prescriptionHasViewersRepository.Find(e => e.PrescriptionId == id)
-                .Select(e => e.HealthCareProfessional);
+                .Select(e => e.HealthCareProfessionalId);
         }
     }
 }
