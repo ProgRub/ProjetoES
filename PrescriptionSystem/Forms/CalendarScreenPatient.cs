@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
-using ServicesLibrary.Commands;
-using ServicesLibrary.DTOs;
 
 namespace Forms
 {
@@ -44,19 +38,25 @@ namespace Forms
                 {
                     if (Services.Instance.IsMedicine(item.Id))
                     {
-                        foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                        if (prescription.PrescriptionItemsRecommendedTimes != null)
                         {
-                            var data_string = "Take " + item.Name + " medicine.";
-                            data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), data_string));
+                            foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                            {
+                                var dataString = "Take " + item.Name + " medicine.";
+                                data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
+                            }
                         }
                     }
 
                     if (Services.Instance.IsExercise(item.Id))
                     {
-                        foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                        if (prescription.PrescriptionItemsRecommendedTimes != null)
                         {
-                            var data_string = "Do " + item.Name + " exercise.";
-                            data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), data_string));
+                            foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
+                            {
+                                var dataString = "Do " + item.Name + " exercise.";
+                                data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
+                            }
                         }
                     }
                 }
@@ -65,8 +65,8 @@ namespace Forms
             foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(MonthCalendarPatient
                 .SelectionRange.Start))
             {
-                var data_string = "Therapy session with therapist " + session.Therapist.FullName + ".";
-                data.Add(new KeyValuePair<string, string>(session.DateTime.TimeOfDay.ToString(), data_string));
+                var dataString = "Therapy session with therapist " + session.Therapist.FullName + ".";
+                data.Add(new KeyValuePair<string, string>(session.DateTime.TimeOfDay.ToString(), dataString));
             }
 
             data.Sort((b, a) => (b.Value.CompareTo(a.Value)));

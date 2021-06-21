@@ -30,20 +30,6 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                             if (allergy.Id == allergenic.Id) return false;
                         }
                     }
-                        //var medicineIncompatibleMedicalConditionsIds =
-                        //    PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditionsIds(
-                        //        PrescriptionItemService.Instance.GetMedicineIncompatibleMedicalConditions(medicine.Id));
-                        //var userMedicalConditions = UserService.Instance.GetUsersMedicalConditionsByUserId(prescription.PatientId);
-
-                        //foreach (var incompatibleMedicalConditionId in medicineIncompatibleMedicalConditionsIds)
-                        //{
-                        //    foreach (var patientMedicalCondition in userMedicalConditions)
-                        //    {
-                        //        if (patientMedicalCondition.Id== incompatibleMedicalConditionId &&
-                        //            MedicalConditionIsAllergy(patientMedicalCondition.Id))
-                        //            return false;
-                        //    }
-                        //}
                 }
 
                 return true;
