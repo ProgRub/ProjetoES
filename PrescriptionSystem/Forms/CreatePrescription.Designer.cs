@@ -147,7 +147,6 @@
             this.comboBoxPatient.Name = "comboBoxPatient";
             this.comboBoxPatient.Size = new System.Drawing.Size(250, 28);
             this.comboBoxPatient.TabIndex = 15;
-            this.comboBoxPatient.SelectedIndexChanged += new System.EventHandler(this.comboBoxPatient_SelectedIndexChanged);
             // 
             // treeViewPrescriptionItems
             // 
@@ -247,7 +246,6 @@
             this.DateTimePickerRecommendedTime.ShowUpDown = true;
             this.DateTimePickerRecommendedTime.Size = new System.Drawing.Size(222, 27);
             this.DateTimePickerRecommendedTime.TabIndex = 25;
-            this.DateTimePickerRecommendedTime.ValueChanged += new System.EventHandler(this.DateTimePickerRecommendedTime_ValueChanged);
             // 
             // CreatePrescription
             // 

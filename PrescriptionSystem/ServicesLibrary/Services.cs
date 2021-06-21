@@ -136,66 +136,22 @@ namespace ServicesLibrary
 
         public void RegisterUser(UserDTO user, string email, string password, string userType) =>
             _userService.RegisterUser(user, email, password, userType);
+        
+        public void CreatePrescription(PrescriptionDTO prescription) =>
+            _prescriptionService.CreatePrescription(prescription);
+        
 
-        public void CreatePrescription(string patient, string description, DateTime startDate, DateTime endDate,
-            ICollection<string> treatments, ICollection<string> medicines, ICollection<string> exercises, List<KeyValuePair<string, string>> recommendedTimes)
-        {
-            var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
-
-            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-
-            _prescriptionService.CreatePrescription((Patient) UserService.Instance.GetUserById(patientId), description,
-                startDate, endDate, prescriptionItems, recommendedTimes);
-        }
-
-        public ICollection<PrescriptionItem> GetPrescriptionItemsFromStrings(ICollection<string> treatments,
-            ICollection<string> medicines, ICollection<string> exercises)
-        {
-            var prescriptionItems = new List<PrescriptionItem>();
-
-            foreach (var exerciseString in exercises)
-            {
-                prescriptionItems.Add(PrescriptionItemService.Instance.GetExerciseByName(exerciseString));
-            }
-
-            foreach (var treatmentString in treatments)
-            {
-                prescriptionItems.Add(PrescriptionItemService.Instance.GetTreatmentByName(treatmentString));
-            }
-
-            foreach (var medicineString in medicines)
-            {
-                prescriptionItems.Add(PrescriptionItemService.Instance.GetMedicineByName(medicineString));
-            }
-
-            return prescriptionItems;
-        }
-
-        public IEnumerable<int> CheckPrescriptionCreation(string patient, string description, DateTime startDate,
-            DateTime endDate, ICollection<string> treatments, ICollection<string> medicines,
-            ICollection<string> exercises)
+               public IEnumerable<int> CheckPrescriptionCreation(PrescriptionDTO prescription)
         {
             var errorCodes = new List<int>();
-            BaseValidator validator = new StringEmptyValidator(PatientRequired, ref errorCodes);
-            validator.Validate(patient);
+            BaseValidator validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
+            validator.Validate(prescription.Patient);
             if (errorCodes.Any()) return errorCodes;
-            var patientId = int.Parse(patient.Split(" - ", StringSplitOptions.RemoveEmptyEntries).First());
-            var prescriptionItems = GetPrescriptionItemsFromStrings(treatments, medicines, exercises);
-            var prescriptionDTO = new PrescriptionDTO
-            {
-                Patient = PatientDTO.ConvertPatientToDTO((Patient) UserService.Instance.GetUserById(patientId)),
-                Author = HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
-                    (HealthCareProfessional) UserService.Instance.GetUserById(UserService.Instance
-                        .LoggedInUserId)),
-                StartDate = startDate,
-                EndDate = endDate,
-            };
-            PrescriptionDTO.AddPrescriptionItemsToDTO(prescriptionDTO, prescriptionItems);
             validator = new AgeValidator(InvalidAge, ref errorCodes);
             validator.SetNext(new AllergyValidator(IncompatibleMedicine, ref errorCodes))
                 .SetNext(new ExistingDiseaseValidator(IncompatibleDisease, ref errorCodes))
                 .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes));
-            validator.Validate(prescriptionDTO);
+            validator.Validate(prescription);
 
             return errorCodes;
         }
@@ -414,18 +370,11 @@ namespace ServicesLibrary
         public TherapySessionDTO GetSelectedTherapySession() =>
             TherapySessionDTO.ConvertTherapySessionToDTO(_therapySessionService.GetSelectedTherapySession());
 
-        public BodyPart ConvertStringToBodyPart(string bodyPart)
-        {
-            return (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
-        }
 
-        public string RemoveSecondsInTimeSpan(TimeSpan ts)
-        {
-            string tsString = ts.ToString();
-            string tsWithoutSeconds = tsString.Substring(0, 5);
-            return tsWithoutSeconds;
-        }
-        
         public BodyPart ConvertStringToBodyPart(string bodyPart) => (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
+
+        public HealthCareProfessionalDTO GetLoggedInHealthCareProfessional() =>
+            HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
+                (HealthCareProfessional) _userService.GetUserById(_userService.LoggedInUserId));
     }
 }

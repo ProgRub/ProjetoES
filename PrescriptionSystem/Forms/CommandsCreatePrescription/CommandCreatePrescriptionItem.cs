@@ -1,12 +1,13 @@
 ﻿using ServicesLibrary.Commands;
+using ServicesLibrary.DTOs;
 
 namespace Forms.CommandsCreatePrescription
 {
     public class CommandCreatePrescriptionItem : ICommand
     {
-        public CommandCreatePrescriptionItem(string name)
+        public CommandCreatePrescriptionItem(PrescriptionItemDTO prescriptionItem)
         {
-            Name = name;
+            Name = $"{prescriptionItem.Id} - {prescriptionItem.Name}";
         }
 
         public string Name { get; set; }

@@ -48,14 +48,13 @@ namespace Forms
         private void MonthCalendarTherapist_DateChanged(object sender, DateRangeEventArgs e)
         {
             var sessions = "";
-            var newLine = Environment.NewLine;
 
             foreach (var session in Services.Instance.GetLoggedInTherapistsTherapySessionsAtDate(MonthCalendarTherapist.SelectionRange.Start))
             {
                 var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
-                string endSessionCorrectFormat = Services.Instance.RemoveSecondsInTimeSpan(endSession);      
-                sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSessionCorrectFormat + newLine 
-                    + "Therapy session with patient " + session.Patient.FullName + newLine + newLine;
+                var endSessionCorrectFormat = endSession.ToString(@"hh\:mm");      
+                sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSessionCorrectFormat + Environment.NewLine
+                    + "Therapy session with patient " + session.Patient.FullName + Environment.NewLine + Environment.NewLine;
             }
 
             if (sessions == "")
@@ -63,11 +62,6 @@ namespace Forms
                 sessions = "There are no therapy sessions scheduled for today!";
             }
             TextBoxDayEvents.Text = sessions;
-        }
-
-        private void CalendarScreenTherapist_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

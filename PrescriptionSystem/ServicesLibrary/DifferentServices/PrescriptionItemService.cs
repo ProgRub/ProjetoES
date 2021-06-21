@@ -173,5 +173,12 @@ namespace ServicesLibrary.DifferentServices
         {
             return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
         }
+
+        public PrescriptionItem GetPrescriptionItemById(int prescriptionItemId)
+        {
+            if (IsExercise(prescriptionItemId)) return GetExerciseById(prescriptionItemId);
+            if (IsMedicine(prescriptionItemId)) return GetMedicineById(prescriptionItemId);
+            return GetTreatmentById(prescriptionItemId);
+        }
     }
 }

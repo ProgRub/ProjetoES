@@ -17,7 +17,8 @@ namespace ComponentsLibrary
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDb;MultipleActiveResultSets=True");
+            optionsBuilder.UseSqlServer(
+                @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PrescriptionSystemDb;MultipleActiveResultSets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,9 +26,9 @@ namespace ComponentsLibrary
             TablesConfiguration(modelBuilder);
 
             PropertiesConfiguration(modelBuilder);
-            
+
             ManyToManyTablesConfiguration(modelBuilder);
-            
+
             SeedData(modelBuilder);
 
             ConvertersConfiguration(modelBuilder);
@@ -119,7 +120,7 @@ namespace ComponentsLibrary
 
         private void SeedData(ModelBuilder modelBuilder)
         {
-            int id = 1;
+            var id = 1;
             modelBuilder.Entity<Medicine>().HasData(
                 new Medicine {Id = id++, Zombie = false, Name = "Penicillin", Description = "", Price = 2.32},
                 new Medicine {Id = id++, Zombie = false, Name = "Streptomycin", Description = "", Price = 4.57},
@@ -168,7 +169,8 @@ namespace ComponentsLibrary
                 Description =
                     "From standing up, drop into a high plank and then jump your feet to your hands, stand up and jump with your arms up. Repeat.",
                 Duration = new TimeSpan(0, 10, 0),
-                BodyParts = new List<BodyPart> { BodyPart.RightArm, BodyPart.LeftArm, BodyPart.LeftLeg, BodyPart.RightLeg }
+                BodyParts = new List<BodyPart>
+                    {BodyPart.RightArm, BodyPart.LeftArm, BodyPart.LeftLeg, BodyPart.RightLeg}
             }, new Exercise
             {
                 Id = id++,
@@ -178,7 +180,7 @@ namespace ComponentsLibrary
                 AgeMaximum = 78,
                 Description = "",
                 Duration = new TimeSpan(0, 20, 0),
-                BodyParts = new List<BodyPart> { BodyPart.RightArm, BodyPart.LeftArm, BodyPart.Torso }
+                BodyParts = new List<BodyPart> {BodyPart.RightArm, BodyPart.LeftArm, BodyPart.Torso}
             }, new Exercise
             {
                 Id = id++,
@@ -187,7 +189,7 @@ namespace ComponentsLibrary
                 AgeMinimum = 5,
                 Description = "Make sure your knees don't go in front of your feet",
                 Duration = new TimeSpan(0, 15, 0),
-                BodyParts = new List<BodyPart> { BodyPart.RightLeg, BodyPart.LeftLeg }
+                BodyParts = new List<BodyPart> {BodyPart.RightLeg, BodyPart.LeftLeg}
             });
             modelBuilder.Entity<MedicalCondition>().HasData(new MedicalCondition
             {
@@ -271,19 +273,20 @@ namespace ComponentsLibrary
 
         private void ConvertersConfiguration(ModelBuilder modelBuilder)
         {
-            var timeSpanValueConverter = new TimeSpanListToStringValueConverter();
-
             modelBuilder
                 .Entity<PrescriptionHasPrescriptionItems>()
-                .Property(e => e.RecommendedTimes) 
-                .HasConversion(timeSpanValueConverter);
+                .Property(e => e.RecommendedTimes)
+                .HasConversion(v => string.Join(',', v.Select(e => e.ToString(@"hh\:mm")).ToArray()),
+                    v => v.Split(new[] {','})
+                        .Select(e => TimeSpan.Parse(e))
+                        .ToList());
 
             modelBuilder
                 .Entity<User>()
-                .Property(e => e.MissingBodyParts) 
+                .Property(e => e.MissingBodyParts)
                 .HasConversion(
-                    v => string.Join(',',v.Select(e => e.ToString("D")).ToArray()),
-                    v => v.Split(new[] { ',' })
+                    v => string.Join(',', v.Select(e => e.ToString("D")).ToArray()),
+                    v => v.Split(new[] {','})
                         .Select(e => Enum.Parse(typeof(BodyPart), e))
                         .Cast<BodyPart>()
                         .ToList()
@@ -294,7 +297,7 @@ namespace ComponentsLibrary
                 .Property(e => e.BodyParts)
                 .HasConversion(
                     v => string.Join(',', v.Select(e => e.ToString("D")).ToArray()),
-                    v => v.Split(new[] { ',' })
+                    v => v.Split(new[] {','})
                         .Select(e => Enum.Parse(typeof(BodyPart), e))
                         .Cast<BodyPart>()
                         .ToList()

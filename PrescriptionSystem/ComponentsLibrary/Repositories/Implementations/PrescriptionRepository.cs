@@ -19,6 +19,13 @@ namespace ComponentsLibrary.Repositories.Implementations
             _prescriptionHasViewersRepository = new PrescriptionHasViewersRepository(context);
         }
 
+        public new void SaveChanges()
+        {
+            base.SaveChanges();
+            _prescriptionHasViewersRepository.SaveChanges();
+            _prescriptionHasItemsRepository.SaveChanges();
+        }
+
         public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTime)
         {
             //Debug.WriteLine(item.Name + " : ");

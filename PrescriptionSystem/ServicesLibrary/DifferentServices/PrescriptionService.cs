@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Entities.PrescriptionItems;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
+using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
@@ -22,51 +24,25 @@ namespace ServicesLibrary.DifferentServices
 
         internal List<Prescription> SelectedPrescriptions { get; set; }
 
-        internal void CreatePrescription(Patient patient, string description, DateTime startDate, DateTime endDate,
-            ICollection<PrescriptionItem> prescriptionItems, List<KeyValuePair<string, string>> recommendedTimes)
+
+
+        public void CreatePrescription(PrescriptionDTO prescriptionDTO)
         {
             var prescription = new Prescription
             {
-                AuthorId = UserService.Instance.LoggedInUserId,
-                PatientId = patient.Id,
-                Description = description,
-                StartDate = startDate,
-                EndDate = endDate
+                AuthorId = prescriptionDTO.Author.Id, PatientId = prescriptionDTO.Patient.Id,
+                Description = prescriptionDTO.Description, StartDate = prescriptionDTO.StartDate.Date,
+                EndDate = prescriptionDTO.EndDate.Date
             };
-
             _prescriptionRepository.Add(prescription);
-            
-            foreach (var item in prescriptionItems)
+            foreach (var prescriptionItem in prescriptionDTO.PrescriptionItemsRecommendedTimes.Keys)
             {
-                _prescriptionRepository.AddPrescriptionItemToPrescription(prescription, item, RecommendedTimesOfPrescriptionItem(item, recommendedTimes));
+                _prescriptionRepository.AddPrescriptionItemToPrescription(prescription,
+                    PrescriptionItemService.Instance.GetPrescriptionItemById(prescriptionItem.Id),
+                    prescriptionDTO.PrescriptionItemsRecommendedTimes[prescriptionItem].ToList());
             }
 
             _prescriptionRepository.SaveChanges();
-        }
-
-
-        internal List<TimeSpan> RecommendedTimesOfPrescriptionItem(PrescriptionItem prescriptionItem,
-            List<KeyValuePair<string, string>> recommendedTimes)
-        {
-            var recommendedTimesList = new List<TimeSpan>();
-            foreach (var recommendedTime in recommendedTimes)
-            {
-                if(recommendedTime.Key == prescriptionItem.Name) recommendedTimesList.Add(TimeSpan.Parse(recommendedTime.Value));
-            }
-
-            return recommendedTimesList;
-        }
-
-        internal IEnumerable<Prescription> GetPrescriptionByPatientId()
-        {
-            return _prescriptionRepository.Find(e => e.PatientId == UserService.Instance.LoggedInUserId)
-                .OrderBy(e => e.StartDate);
-        }
-
-        internal IEnumerable<Prescription> GetPrescriptionByDate(DateTime date)
-        {
-            return _prescriptionRepository.Find(e =>
-                e.PatientId == UserService.Instance.LoggedInUserId && e.StartDate <= date && e.EndDate >= date);
         }
 
         public IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)
@@ -77,7 +53,7 @@ namespace ServicesLibrary.DifferentServices
         public IEnumerable<Prescription> GetPrescriptionsStartedBeforeDate(IEnumerable<Prescription> prescriptions,
             DateTime date)
         {
-            return prescriptions.Where(e => e.StartDate < date);
+            return prescriptions.Where(e => e.StartDate <= date&& e.EndDate>=date);
         }
 
         public void AddSelectedPrescriptionById(int id)

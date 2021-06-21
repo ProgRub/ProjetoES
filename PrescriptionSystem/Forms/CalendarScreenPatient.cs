@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
@@ -36,59 +37,54 @@ namespace Forms
 
         private void MonthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)
         {
-            string sessions = "";
-            string newLine = Environment.NewLine;
 
             var data = new List<KeyValuePair<string, string>>();
 
-            var prescriptions = new List<PrescriptionDTO>();
+            var prescriptions =
+                Services.Instance.GetLoggedInPatientsPrescriptionsStartedBeforeDate(MonthCalendarPatient.SelectionRange
+                    .Start);
 
-            foreach (var prescription in Services.Instance.GetLoggedInPatientsPrescriptionsStartedBeforeDate(MonthCalendarPatient.SelectionRange.Start))
+
+            foreach (var prescription in prescriptions)
             {
-                prescriptions.Add(prescription);
-            }
-
-
-            foreach (var presc in prescriptions)
-            {
-                foreach (var item in Services.Instance.GetPrescriptionHasItemsEnumerableByPrescriptionId(presc.Id))
+                foreach (var item in prescription.PrescriptionItemsRecommendedTimes.Keys)
                 {
-                    if (Services.Instance.IsMedicine(item.PrescriptionItemId))
+                    if (Services.Instance.IsMedicine(item.Id))
                     {
-                        foreach (TimeSpan ts in item.RecommendedTimes)
+                        foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
                         {
-                            string data_string = "Take " + Services.Instance.GetMedicineById(item.PrescriptionItemId).Name + " medicine.";
-                            data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(ts), data_string));
+                            var data_string = "Take " + item.Name + " medicine.";
+                            data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), data_string));
                         }
                     }
-                    if (Services.Instance.IsExercise(item.PrescriptionItemId))
-                    {                     
-                        foreach (TimeSpan ts in item.RecommendedTimes)
+
+                    if (Services.Instance.IsExercise(item.Id))
+                    {
+                        foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
                         {
-                            string data_string = "Do " + Services.Instance.GetExerciseById(item.PrescriptionItemId).Name + " exercise.";
-                            data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(ts), data_string));
+                            var data_string = "Do " + item.Name + " exercise.";
+                            data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), data_string));
                         }
                     }
                 }
             }
 
-            foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(MonthCalendarPatient.SelectionRange.Start))
+            foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(MonthCalendarPatient
+                .SelectionRange.Start))
             {
-                string data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.Therapist.Id).FullName + ".";
+                var data_string = "Therapy session with therapist " + session.Therapist.FullName + ".";
                 data.Add(new KeyValuePair<string, string>(session.DateTime.TimeOfDay.ToString(), data_string));
             }
 
             data.Sort((b, a) => (b.Value.CompareTo(a.Value)));
 
-            foreach (var pair in data)
-            {
-                sessions = sessions + pair + newLine;
-            }
+            var sessions = data.Aggregate("", (current, pair) => current + pair + Environment.NewLine);
 
             if (sessions == "")
             {
                 sessions = "Nothing for today";
             }
+
             TextBoxDayEvents.Text = sessions;
         }
     }

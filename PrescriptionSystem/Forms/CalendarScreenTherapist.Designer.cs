@@ -131,7 +131,6 @@ namespace Forms
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CalendarScreenTherapist";
             this.Size = new System.Drawing.Size(446, 390);
-            this.Load += new System.EventHandler(this.CalendarScreenTherapist_Load);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.MonthCalendarTherapist, 0);
             this.Controls.SetChildIndex(this.ButtonCreatePrescriptionItem, 0);

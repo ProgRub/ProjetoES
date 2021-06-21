@@ -25,7 +25,7 @@ namespace ServicesLibrary.DTOs
             var prescriptionDTO = new PrescriptionDTO
             {
                 Id = prescription.Id,
-                Patient = PatientDTO.ConvertPatientToDTO((Patient) UserService.Instance.GetUserById(prescription.Id)),
+                Patient = PatientDTO.ConvertPatientToDTO((Patient) UserService.Instance.GetUserById(prescription.PatientId)),
                 Author = HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
                     (HealthCareProfessional) UserService.Instance.GetUserById(prescription.AuthorId)),
                 Description = prescription.Description,
