@@ -14,6 +14,7 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
         {
             if (request is PrescriptionDTO prescription)
             {
+                if (prescription.Patient.MissingBodyParts == null) return true;
                 foreach (var treatment in prescription.Treatments)
                 {
                     foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
@@ -26,6 +27,7 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             }
             if (request is TherapySessionDTO therapySession)
             {
+                if (therapySession.Patient.MissingBodyParts == null) return true;
                 foreach (var treatment in therapySession.Treatments)
                 {
                     foreach (var missingBodyPart in therapySession.Patient.MissingBodyParts)
