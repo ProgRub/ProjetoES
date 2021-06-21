@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using ServicesLibrary;
 using ServicesLibrary.Commands;
+using ServicesLibrary.DTOs;
 
 namespace Forms
 {
@@ -35,46 +36,60 @@ namespace Forms
 
         private void MonthCalendarPatient_DateChanged(object sender, DateRangeEventArgs e)
         {
-        //    string sessions = "";
-        //    string newLine = Environment.NewLine;
+            string sessions = "";
+            string newLine = Environment.NewLine;
 
-        //    var data = new List<KeyValuePair<TimeSpan, string>>();
+            var data = new List<KeyValuePair<string, string>>();
 
-        //    foreach (var prescription in Services.Instance.GetPatientsPrescriptionByDate(monthCalendarPatient.SelectionRange.Start))
-        //    {
-        //        foreach (var item in Services.Instance.GetPrescriptionItems(prescription.Id))
-        //        {
-        //            if(Services.Instance.IsMedicine(item.Id))
-        //            {
-        //                string data_string = "Take " + Services.Instance.GetMedicineById(item.Id).Name + " medicine.";
-        //                data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
-        //            }
-        //            if (Services.Instance.IsExercise(item.Id))
-        //            {
-        //                string data_string = "Do " + Services.Instance.GetExerciseById(item.Id).Name + " exercise.";
-        //                data.Add(new KeyValuePair<TimeSpan, string>(item.RecommendedTime, data_string));
-        //            }
-        //        }
-        //    }
+            var prescriptions = new List<PrescriptionDTO>();
 
-        //    foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(monthCalendarPatient.SelectionRange.Start))
-        //    {
-        //        string data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.TherapistId).FullName + ".";
-        //        data.Add(new KeyValuePair<TimeSpan, string>(session.DateTime.TimeOfDay, data_string));
-        //    }
+            foreach (var prescription in Services.Instance.GetLoggedInPatientsPrescriptionsStartedBeforeDate(MonthCalendarPatient.SelectionRange.Start))
+            {
+                prescriptions.Add(prescription);
+            }
 
-        //    data.Sort((b, a) => (b.Value.CompareTo(a.Value)));
 
-        //    foreach (var pair in data)
-        //    {
-        //        sessions = sessions + pair + newLine;
-        //    }
+            foreach (var presc in prescriptions)
+            {
+                foreach (var item in Services.Instance.GetPrescriptionHasItemsEnumerableByPrescriptionId(presc.Id))
+                {
+                    if (Services.Instance.IsMedicine(item.PrescriptionItemId))
+                    {
+                        foreach (TimeSpan ts in item.RecommendedTimes)
+                        {
+                            string data_string = "Take " + Services.Instance.GetMedicineById(item.PrescriptionItemId).Name + " medicine.";
+                            data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(ts), data_string));
+                        }
+                    }
+                    if (Services.Instance.IsExercise(item.PrescriptionItemId))
+                    {                     
+                        foreach (TimeSpan ts in item.RecommendedTimes)
+                        {
+                            string data_string = "Do " + Services.Instance.GetExerciseById(item.PrescriptionItemId).Name + " exercise.";
+                            data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(ts), data_string));
+                        }
+                    }
+                }
+            }
 
-        //    if (sessions == "")
-        //    {
-        //        sessions = "Nothing for today.";
-        //    }
-        //    textBox1.Text = sessions;
+            foreach (var session in Services.Instance.GetLoggedInPatientsTherapySessionsAtDate(MonthCalendarPatient.SelectionRange.Start))
+            {
+                string data_string = "Therapy session with therapist " + Services.Instance.GetUserById(session.Therapist.Id).FullName + ".";
+                data.Add(new KeyValuePair<string, string>(session.DateTime.TimeOfDay.ToString(), data_string));
+            }
+
+            data.Sort((b, a) => (b.Value.CompareTo(a.Value)));
+
+            foreach (var pair in data)
+            {
+                sessions = sessions + pair + newLine;
+            }
+
+            if (sessions == "")
+            {
+                sessions = "Nothing for today";
+            }
+            TextBoxDayEvents.Text = sessions;
         }
     }
 }

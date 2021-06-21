@@ -53,7 +53,8 @@ namespace Forms
             foreach (var session in Services.Instance.GetLoggedInTherapistsTherapySessionsAtDate(MonthCalendarTherapist.SelectionRange.Start))
             {
                 var endSession = session.DateTime.TimeOfDay + session.EstimatedDuration;
-                sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSession + newLine 
+                string endSessionCorrectFormat = Services.Instance.RemoveSecondsInTimeSpan(endSession);      
+                sessions = sessions + session.DateTime.ToString("hh:mm") + " - " + endSessionCorrectFormat + newLine 
                     + "Therapy session with patient " + session.Patient.FullName + newLine + newLine;
             }
 

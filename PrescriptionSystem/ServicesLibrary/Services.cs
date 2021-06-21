@@ -498,5 +498,13 @@ namespace ServicesLibrary
         {
             return (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
         }
+
+        public string RemoveSecondsInTimeSpan(TimeSpan ts)
+        {
+            string tsString = ts.ToString();
+            string tsWithoutSeconds = tsString.Substring(0, 5);
+            return tsWithoutSeconds;
+        }
+        
     }
 }

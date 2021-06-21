@@ -216,7 +216,7 @@
             this.ButtonRedo.Enabled = false;
             this.ButtonRedo.FlatAppearance.BorderSize = 0;
             this.ButtonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRedo.Image")));
+            //this.ButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRedo.Image")));
             this.ButtonRedo.Location = new System.Drawing.Point(579, 437);
             this.ButtonRedo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonRedo.Name = "ButtonRedo";
@@ -231,7 +231,7 @@
             this.ButtonUndo.Enabled = false;
             this.ButtonUndo.FlatAppearance.BorderSize = 0;
             this.ButtonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonUndo.Image")));
+            //this.ButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("ButtonUndo.Image")));
             this.ButtonUndo.Location = new System.Drawing.Point(532, 437);
             this.ButtonUndo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonUndo.Name = "ButtonUndo";
