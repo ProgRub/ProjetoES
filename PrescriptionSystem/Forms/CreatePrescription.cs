@@ -217,7 +217,6 @@ namespace Forms
             if (TreeViewPrescriptionItems.SelectedNode.Parent != null) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreateRecommendedTime(DateTimePickerRecommendedTime.Value.TimeOfDay);
-            //command1.Execute();
             macro.Add(command1);
 
             var command2 = new CommandCreateNode(collection, 1, command1.RecommendedTime.Value.ToString(@"hh\:mm"));
