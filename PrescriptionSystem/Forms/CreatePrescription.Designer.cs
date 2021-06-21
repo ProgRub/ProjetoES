@@ -38,7 +38,7 @@
             this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBoxPatient = new System.Windows.Forms.ComboBox();
-            this.treeViewPrescriptionItems = new System.Windows.Forms.TreeView();
+            this.TreeViewPrescriptionItems = new System.Windows.Forms.TreeView();
             this.buttonAddPrescriptionItem = new System.Windows.Forms.Button();
             this.comboBoxItems = new System.Windows.Forms.ComboBox();
             this.buttonAddTime = new System.Windows.Forms.Button();
@@ -153,13 +153,14 @@
             this.comboBoxPatient.Size = new System.Drawing.Size(428, 23);
             this.comboBoxPatient.TabIndex = 15;
             // 
-            // treeViewPrescriptionItems
+            // TreeViewPrescriptionItems
             // 
-            this.treeViewPrescriptionItems.Location = new System.Drawing.Point(570, 129);
-            this.treeViewPrescriptionItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.treeViewPrescriptionItems.Name = "treeViewPrescriptionItems";
-            this.treeViewPrescriptionItems.Size = new System.Drawing.Size(413, 195);
-            this.treeViewPrescriptionItems.TabIndex = 16;
+            this.TreeViewPrescriptionItems.Location = new System.Drawing.Point(570, 129);
+            this.TreeViewPrescriptionItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TreeViewPrescriptionItems.Name = "TreeViewPrescriptionItems";
+            this.TreeViewPrescriptionItems.Size = new System.Drawing.Size(413, 195);
+            this.TreeViewPrescriptionItems.TabIndex = 16;
+            this.TreeViewPrescriptionItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TreeViewPrescriptionItems_KeyDown);
             // 
             // buttonAddPrescriptionItem
             // 
@@ -183,7 +184,6 @@
             this.comboBoxItems.Name = "comboBoxItems";
             this.comboBoxItems.Size = new System.Drawing.Size(413, 23);
             this.comboBoxItems.TabIndex = 18;
-            this.comboBoxItems.SelectedIndexChanged += new System.EventHandler(this.ComboBoxItems_SelectedIndexChanged);
             // 
             // buttonAddTime
             // 
@@ -229,7 +229,7 @@
             this.ButtonRedo.Size = new System.Drawing.Size(36, 23);
             this.ButtonRedo.TabIndex = 24;
             this.ButtonRedo.UseVisualStyleBackColor = true;
-            this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click_1);
+            this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click);
             // 
             // ButtonUndo
             // 
@@ -242,7 +242,7 @@
             this.ButtonUndo.Size = new System.Drawing.Size(36, 23);
             this.ButtonUndo.TabIndex = 23;
             this.ButtonUndo.UseVisualStyleBackColor = true;
-            this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click_1);
+            this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click);
             // 
             // DateTimePickerRecommendedTime
             // 
@@ -267,7 +267,7 @@
             this.Controls.Add(this.buttonAddTime);
             this.Controls.Add(this.comboBoxItems);
             this.Controls.Add(this.buttonAddPrescriptionItem);
-            this.Controls.Add(this.treeViewPrescriptionItems);
+            this.Controls.Add(this.TreeViewPrescriptionItems);
             this.Controls.Add(this.comboBoxPatient);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePickerEndDate);
@@ -293,7 +293,7 @@
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.comboBoxPatient, 0);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.treeViewPrescriptionItems, 0);
+            this.Controls.SetChildIndex(this.TreeViewPrescriptionItems, 0);
             this.Controls.SetChildIndex(this.buttonAddPrescriptionItem, 0);
             this.Controls.SetChildIndex(this.comboBoxItems, 0);
             this.Controls.SetChildIndex(this.buttonAddTime, 0);
@@ -319,7 +319,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBoxPatient;
-        private System.Windows.Forms.TreeView treeViewPrescriptionItems;
+        private System.Windows.Forms.TreeView TreeViewPrescriptionItems;
         private System.Windows.Forms.Button buttonAddPrescriptionItem;
         private System.Windows.Forms.ComboBox comboBoxItems;
         private System.Windows.Forms.Button buttonAddTime;
