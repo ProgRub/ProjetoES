@@ -208,11 +208,7 @@ namespace Forms
 
             ShowInformationMessageBox(errorMessage, "Error");
         }
-
-        private void ComboBoxItems_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
+        
         private void ButtonAddTime_Click(object sender, EventArgs e)
         {
             if (TreeViewPrescriptionItems.SelectedNode == null) return;
