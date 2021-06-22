@@ -9,8 +9,8 @@ namespace ComponentsLibrary.Repositories.Implementations
 {
     public class BaseRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly PrescriptionSystemDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly PrescriptionSystemDbContext _context;
+        protected readonly DbSet<T> _dbSet;
         public BaseRepository(PrescriptionSystemDbContext context)
         {
             _context = context;

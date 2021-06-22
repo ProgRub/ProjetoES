@@ -33,7 +33,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                     new PrescriptionHasPrescriptionItems
                     {
                         Prescription = prescription,
-                        PrescriptionItem = item,
+                        PrescriptionItem = _context.PrescriptionItems.First(e=>e.Id==item.Id),
                         RecommendedTimes = recommendedTimes.Any()?recommendedTimes:null
                     }
                 };
@@ -43,7 +43,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                 prescription.PrescriptionHasPrescriptionItemsCollection.Add(new PrescriptionHasPrescriptionItems
                 {
                     Prescription = prescription,
-                    PrescriptionItem = item,
+                    PrescriptionItem = _context.PrescriptionItems.First(e => e.Id == item.Id),
                     RecommendedTimes = recommendedTimes.Any() ? recommendedTimes : null
                 });
             }
