@@ -154,8 +154,6 @@ namespace ServicesLibrary
                 .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes))
                 .SetNext(new StartDateIsBeforeEndDateValidator(DatesNotValid, ref errorCodes));
             validator.Validate(prescription);
-            validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
-            validator.Validate(prescription.Patient);
 
 
             return errorCodes;
