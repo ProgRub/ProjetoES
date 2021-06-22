@@ -25,9 +25,9 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void CreatePrescription_Load(object sender, EventArgs e)
         {
-            CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
+            CommandsManager.Instance.Notify += (sender, args) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
 
-            CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
+            CommandsManager.Instance.Notify += (sender, args) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
             _patients = Services.Instance.GetAllPatients();
             _treatments = Services.Instance.GetAllTreatments();
             _medicines = Services.Instance.GetAllMedicines();
