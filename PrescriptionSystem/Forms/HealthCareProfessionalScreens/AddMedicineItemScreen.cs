@@ -67,9 +67,7 @@ namespace Forms.HealthCareProfessionalScreens
             {
                 diseases.Add(GetDiseaseFromString(checkedItem.ToString()));
             }
-
-            //Services.Instance.CreateMedicinePrescriptionItem(TextBoxMedicineName.Text, TextBoxMedicineDescription.Text,
-            //    double.Parse(TextBoxMedicinePrice.Text), allergies, diseases);
+            
             Services.Instance.CreateMedicinePrescriptionItem(new MedicineDTO
             {
                 Name = TextBoxMedicineName.Text,Description = TextBoxMedicineDescription.Text,Price = double.Parse(TextBoxMedicinePrice.Text),
@@ -93,7 +91,7 @@ namespace Forms.HealthCareProfessionalScreens
                         ShowTextBoxErrorMessage(TextBoxMedicineDescription, "Description is required!");
                         break;
                     case Services.PriceNotValid:
-                        ShowTextBoxErrorMessage(TextBoxMedicinePrice, "Price is required!");
+                        ShowTextBoxErrorMessage(TextBoxMedicinePrice, "Price is required and needs to be bigger than 0!");
                         break;
                     case Services.ItemAlreadyExists:
                         ShowInformationMessageBox("That medicine already exists in the database.","Error");

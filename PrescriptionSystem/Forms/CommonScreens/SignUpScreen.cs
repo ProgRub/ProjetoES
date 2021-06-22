@@ -71,11 +71,6 @@ namespace Forms.CommonScreens
                 ShowErrorMessages(errorCodes);
                 return;
             }
-
-            //Services.Instance.RegisterUser(TextBoxName.Text, DateTimePickerDOB.Value,
-            //    int.Parse(TextBoxPhoneNumber.Text), int.Parse(TextBoxHealthUserNumber.Text), TextBoxEmail.Text,
-            //    TextBoxPassword.Text,
-            //    allergies, diseases, missingBodyParts, userType);
             Services.Instance.RegisterUser(new UserDTO
             {
                 Allergies = allergies, DateOfBirth = DateTimePickerDOB.Value, Diseases = diseases,
@@ -123,7 +118,7 @@ namespace Forms.CommonScreens
 
                         break;
                     case Services.PhoneNumberNotANumber:
-                        ShowTextBoxErrorMessage(TextBoxPhoneNumber, "Phone Number needs to be a number!");
+                        ShowTextBoxErrorMessage(TextBoxPhoneNumber, "Phone Number needs to be a number bigger than 0!");
                         break;
                     case Services.HealthUserNumberWrongLength:
                         ClearTextBox(TextBoxHealthUserNumber);
@@ -140,7 +135,7 @@ namespace Forms.CommonScreens
 
                         break;
                     case Services.HealthUserNumberNotANumber:
-                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number needs to be a number!");
+                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number needs to be a number bigger than 0!");
                         break;
                     case Services.HealthUserNumberAlreadyExists:
                         ShowTextBoxErrorMessage(TextBoxHealthUserNumber,

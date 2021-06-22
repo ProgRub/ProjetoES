@@ -14,7 +14,7 @@ namespace ServicesLibrary.Validators.FormValidators
 
             if (request is string requestString)
             {
-                return double.TryParse(requestString,out _);
+                return double.TryParse(requestString,out var number) && number > 0; ;
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

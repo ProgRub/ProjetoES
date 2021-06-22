@@ -19,8 +19,8 @@ namespace Forms.TherapistScreens
         private void TherapySessionCompletedScreen_Load(object sender, EventArgs e)
         {
             _therapySession = Services.Instance.GetSelectedTherapySession();
-            //CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
-            //CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
+            CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
+            CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
             LabelSessionInfo.Text =
                 $"{_therapySession.Id} | {_therapySession.Patient.FullName} | {_therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
             foreach (var treatment in _therapySession.Treatments)
@@ -84,11 +84,6 @@ namespace Forms.TherapistScreens
         private void ButtonAddSessionNote_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Execute(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text));
-        }
-
-        private void TextBoxTherapySessionNote_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
