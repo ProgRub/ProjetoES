@@ -4,13 +4,13 @@ using ServicesLibrary.Commands;
 
 namespace Forms.CommandsVisualCompletedSession
 {
-    public class CommandListViewRowSetColor : ICommand
+    public class CommandListViewRowSetBackColor : ICommand
     {
         private ListViewItem ListViewItem { get; set; }
         private Color _newColor;
         private Color _oldColor;
 
-        public CommandListViewRowSetColor(ListViewItem listViewItem, Color newColor)
+        public CommandListViewRowSetBackColor(ListViewItem listViewItem, Color newColor)
         {
             _oldColor = listViewItem.BackColor;
             _newColor = newColor;

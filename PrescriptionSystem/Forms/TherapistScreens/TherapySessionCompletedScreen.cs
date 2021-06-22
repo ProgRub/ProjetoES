@@ -42,13 +42,11 @@ namespace Forms.TherapistScreens
         private void ButtonRedo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Redo();
-            _therapySession.Note = TextBoxTherapySessionNote.Text;
         }
 
         private void ButtonUndo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Undo();
-            _therapySession.Note = TextBoxTherapySessionNote.Text;
         }
 
         private void ListViewTreatments_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,7 +81,9 @@ namespace Forms.TherapistScreens
             macrocommand.Add(new CommandAddTreatmentNoteSetCompleted(TextBoxTreatmentNote.Text,
                 CheckBoxCompletedTreatment.Checked, _therapySession.Id,
                 _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id));
-            macrocommand.Add(new CommandListViewRowSetColor(ListViewTreatments.SelectedItems[0], Color.GreenYellow));
+            macrocommand.Add(CheckBoxCompletedTreatment.Checked
+                ? new CommandListViewRowSetBackColor(ListViewTreatments.SelectedItems[0], Color.GreenYellow)
+                : new CommandListViewRowSetBackColor(ListViewTreatments.SelectedItems[0], Color.White));
             CommandsManager.Instance.Execute(macrocommand);
 
             TextBoxTreatmentNote.Text = "";
@@ -95,8 +95,7 @@ namespace Forms.TherapistScreens
         {
             var macrocommand = new MacroCommand();
             macrocommand.Add(new CommandSetTextboxText(TextBoxTherapySessionNote, _therapySession.Note));
-            macrocommand.Add(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text));
-            _therapySession.Note = TextBoxTherapySessionNote.Text;
+            macrocommand.Add(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text,_therapySession));
             CommandsManager.Instance.Execute(macrocommand);
         }
     }

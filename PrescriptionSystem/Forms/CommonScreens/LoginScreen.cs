@@ -42,7 +42,8 @@ namespace Forms.CommonScreens
 
         private void LoginScreen_Enter(object sender, EventArgs e)
         {
-            Debug.WriteLine("HERE");
+            TextBoxPassword.Text = "";
+            TextBoxEmail.Text = "";
             SetFormAcceptButton(ButtonLogin);
         }
         
