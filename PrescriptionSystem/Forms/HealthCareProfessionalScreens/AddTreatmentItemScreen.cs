@@ -101,6 +101,10 @@ namespace Forms.HealthCareProfessionalScreens
                         errorMessage += "The treatment must target a body part.";
                         first = false;
                         break;
+                    case Services.DurationNotValid:
+                        errorMessage += "The treatment must have a duration.";
+                        first = false;
+                        break;
                 }
             }
 

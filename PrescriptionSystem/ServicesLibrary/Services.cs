@@ -47,7 +47,8 @@ namespace ServicesLibrary
             ItemAlreadyExists = 21,
             AgeMinimumRequired = 22,
             AgeMaximumRequired = 23,
-            AtLeastOneBodyPart = 24;
+            AtLeastOneBodyPart = 24,
+            DurationNotValid = 25;
 
         #endregion
 
@@ -179,6 +180,8 @@ namespace ServicesLibrary
             validator.Validate(new Tuple<int, int>(int.Parse(ageMaximum), int.Parse(ageMinimum)));
             validator = new EnumerableNotEmptyValidator(AtLeastOneBodyPart, ref errorCodes);
             validator.Validate(bodyParts);
+            validator = new DurationGreaterThanZeroValidator(DurationNotValid, ref errorCodes);
+            validator.Validate(duration);
 
             if (errorCodes.Any()) return errorCodes;
             validator = new PrescriptionItemUniqueValidator(ItemAlreadyExists, ref errorCodes);

@@ -95,6 +95,10 @@ namespace Forms.HealthCareProfessionalScreens
                         errorMessage += "The exercise must target, at least, one body part.";
                         first = false;
                         break;
+                    case Services.DurationNotValid:
+                        errorMessage += "The exercise must have a duration.";
+                        first = false;
+                        break;
                 }
             }
 
