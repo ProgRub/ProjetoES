@@ -34,7 +34,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                     {
                         Prescription = prescription,
                         PrescriptionItem = item,
-                        RecommendedTimes = recommendedTimes.Any()?recommendedTimes:null
+                        RecommendedTimes = recommendedTimes.Any()? recommendedTimes : null
                     }
                 };
             }
