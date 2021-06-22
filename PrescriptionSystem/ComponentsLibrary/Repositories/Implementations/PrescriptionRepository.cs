@@ -34,7 +34,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                     {
                         Prescription = prescription,
                         PrescriptionItem = _context.PrescriptionItems.First(e=>e.Id==item.Id),
-                        RecommendedTimes = recommendedTimes.Any()?recommendedTimes:null
+                        RecommendedTimes = recommendedTimes.Any()? recommendedTimes : null
                     }
                 };
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
@@ -63,7 +64,7 @@ namespace ServicesLibrary.DifferentServices
         public void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
-            if (prescription.AuthorId == healthCareProfessional.Id) return;
+            if (CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional)) return;
             _prescriptionRepository.AddViewerToPrescription(prescription, healthCareProfessional);
             _prescriptionRepository.SaveChanges();
         }
@@ -71,12 +72,13 @@ namespace ServicesLibrary.DifferentServices
         public bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
-            return _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
+            return prescription.AuthorId == healthCareProfessional.Id  || _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
                 healthCareProfessional);
         }
 
         internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
         {
+            Debug.WriteLine(prescriptionId);
             var prescriptionItems = new List<PrescriptionItem>();
             foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
                 prescriptionId))

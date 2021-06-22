@@ -261,12 +261,6 @@ namespace ServicesLibrary
         public void CreateTreatmentPrescriptionItem(TreatmentDTO treatment) =>
             _prescriptionItemService.CreateTreatmentPrescriptionItem(treatment);
 
-        //public void CreateTherapySession(PatientDTO patient, DateTime sessionDate, DateTime sessionTime,
-        //    IEnumerable<TreatmentDTO> treatments, TimeSpan estimatedDuration) =>
-        //    TherapySessionService.Instance.AddTherapySession(_patientService.GetById(patient.Id),
-        //        sessionDate.Date.Add(sessionTime.TimeOfDay),
-        //        treatments.Select(e => PrescriptionItemService.Instance.GetTreatmentById(e.Id)), estimatedDuration);
-
         public void CreateTherapySession(TherapySessionDTO therapySession) =>
             _therapySessionService.AddTherapySession(therapySession);
 
@@ -398,7 +392,6 @@ namespace ServicesLibrary
 
         public bool CanHealthCareProfessionalViewPrescription(PrescriptionDTO prescription,
             HealthCareProfessionalDTO healthCareProfessional) =>
-            prescription.Author.Id == healthCareProfessional.Id ||
             _prescriptionService.CanHealthCareProfessionalViewPrescription(
                 _prescriptionService.GetPrescriptionById(prescription.Id),
                 _healthCareProfessionalService.GetById(healthCareProfessional.Id));

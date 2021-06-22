@@ -25,9 +25,9 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void CreatePrescription_Load(object sender, EventArgs e)
         {
-            CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
+            CommandsManager.Instance.Notify += (sender, args) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
 
-            CommandsManager.Instance.Notify += (_, _) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
+            CommandsManager.Instance.Notify += (sender, args) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
             _patients = Services.Instance.GetAllPatients();
             _treatments = Services.Instance.GetAllTreatments();
             _medicines = Services.Instance.GetAllMedicines();
@@ -58,14 +58,7 @@ namespace Forms.HealthCareProfessionalScreens
 
         private IEnumerable<PrescriptionItemDTO> GetParentNodes(TreeView treeView)
         {
-            var results = new List<PrescriptionItemDTO>();
-
-            foreach (TreeNode node in treeView.Nodes)
-            {
-                results.Add(GetPrescriptionItemFromString(node.Text));
-            }
-
-            return results;
+            return (from TreeNode node in treeView.Nodes select GetPrescriptionItemFromString(node.Text)).ToList();
         }
 
         private IDictionary<PrescriptionItemDTO, IEnumerable<TimeSpan>> GetRecommendedTimesDictionary(TreeView treeView)
@@ -74,11 +67,7 @@ namespace Forms.HealthCareProfessionalScreens
 
             foreach (TreeNode parent in treeView.Nodes)
             {
-                var timeSpans = new List<TimeSpan>();
-                foreach (TreeNode child in parent.Nodes)
-                {
-                    timeSpans.Add(TimeSpan.Parse(child.Text));
-                }
+                var timeSpans = (from TreeNode child in parent.Nodes select TimeSpan.Parse(child.Text)).ToList();
 
                 results.Add(GetPrescriptionItemFromString(parent.Text), timeSpans);
             }
@@ -232,7 +221,6 @@ namespace Forms.HealthCareProfessionalScreens
             if (GetPrescriptionItemInComboBox() == null ||GetPrescriptionItemsInPrescription().Any(e=>e.Id== GetPrescriptionItemInComboBox().Id)) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreatePrescriptionItem(GetPrescriptionItemInComboBox());
-            //command1.Execute();
             macro.Add(command1);
 
             var command2 = new CommandCreateNode(TreeViewPrescriptionItems.Nodes, 2, command1.Name);
