@@ -80,9 +80,9 @@ namespace Forms.PatientScreens
                 data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(session.DateTime.TimeOfDay), dataString));
             }
 
-            data.Sort((b, a) => (b.Value.CompareTo(a.Value)));
+            var orderByKey = data.OrderBy(kvp => kvp.Key);
 
-            foreach (var pair in data)
+            foreach (var pair in orderByKey)
             {
                 if (pair.Key == "")
                 {
