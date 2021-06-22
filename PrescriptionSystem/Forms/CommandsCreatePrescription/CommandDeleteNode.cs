@@ -20,10 +20,6 @@ namespace Forms.CommandsCreatePrescription
         public void Execute()
         {
             Nodes.Remove(Node);
-            //if (Node.Parent == null)
-            //{
-
-            //}
         }
 
         public void Undo()

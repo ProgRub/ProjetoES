@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using ServicesLibrary;
@@ -16,11 +15,12 @@ namespace Forms
         private IEnumerable<ExerciseDTO> _exercises;
         private IEnumerable<PatientDTO> _patients;
         private IEnumerable<MedicineDTO> _medicines;
-        
+
         public CreatePrescription()
         {
             InitializeComponent();
         }
+
         private void CreatePrescription_Load(object sender, EventArgs e)
         {
             CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
@@ -102,10 +102,8 @@ namespace Forms
         {
             if (comboBoxItems.SelectedItem != null)
             {
-                Debug.WriteLine(comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf('(') + 1,
-                    comboBoxItems.Text.IndexOf(')')-1));
                 switch (comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf('(') + 1,
-                    comboBoxItems.Text.IndexOf(')')-1))
+                    comboBoxItems.Text.IndexOf(')') - 1))
                 {
                     case "Exercise":
                         return _exercises.First(e =>
@@ -156,13 +154,14 @@ namespace Forms
                 Medicines = selectedItems.OfType<MedicineDTO>(),
                 Treatments = selectedItems.OfType<TreatmentDTO>()
             };
-            var errorCodes=Services.Instance.CheckPrescriptionCreation(prescription);
+            var errorCodes = Services.Instance.CheckPrescriptionCreation(prescription);
 
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
                 return;
             }
+
             Services.Instance.CreatePrescription(prescription);
             ShowInformationMessageBox("Prescription successfully created.", "Success");
             MoveToScreen(new CalendarScreenTherapist(), new LoginScreen());
@@ -208,11 +207,11 @@ namespace Forms
 
             ShowInformationMessageBox(errorMessage, "Error");
         }
-        
+
         private void ButtonAddTime_Click(object sender, EventArgs e)
         {
             if (TreeViewPrescriptionItems.SelectedNode == null) return;
-            
+
             var collection = TreeViewPrescriptionItems.SelectedNode.Nodes;
             if (TreeViewPrescriptionItems.SelectedNode.Parent != null) return;
             var macro = new MacroCommand();
@@ -228,7 +227,7 @@ namespace Forms
 
         private void ButtonAddPrescriptionItem_Click(object sender, EventArgs e)
         {
-            if(GetPrescriptionItemInComboBox()==null)return;
+            if (GetPrescriptionItemInComboBox() == null ||GetPrescriptionItemsInPrescription().Any(e=>e.Id== GetPrescriptionItemInComboBox().Id)) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreatePrescriptionItem(GetPrescriptionItemInComboBox());
             //command1.Execute();
@@ -244,8 +243,8 @@ namespace Forms
         {
             if (e.KeyCode == Keys.Delete && TreeViewPrescriptionItems.SelectedNode != null)
             {
-                CommandsManager.Instance.Execute(new CommandDeleteNode(TreeViewPrescriptionItems.Nodes,TreeViewPrescriptionItems.SelectedNode));
-
+                CommandsManager.Instance.Execute(new CommandDeleteNode(TreeViewPrescriptionItems.Nodes,
+                    TreeViewPrescriptionItems.SelectedNode));
             }
         }
 
@@ -257,6 +256,21 @@ namespace Forms
         private void ButtonRedo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Redo();
+        }
+
+        private IEnumerable<PrescriptionItemDTO> GetPrescriptionItemsInPrescription()
+        {
+            var itemNodes = TreeViewPrescriptionItems.Nodes;
+            for (var index = 0; index < itemNodes.Count; index++)
+            {
+                if (itemNodes[index].Parent != null)
+                {
+                    itemNodes.RemoveAt(index);
+                    index--;
+                }
+            }
+
+            return (from TreeNode itemNode in itemNodes select GetPrescriptionItemFromString(itemNode.Text)).ToList();
         }
     }
 }

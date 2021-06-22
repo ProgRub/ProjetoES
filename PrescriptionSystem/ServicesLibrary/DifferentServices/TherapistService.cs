@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ComponentsLibrary;
+﻿using ComponentsLibrary;
 using ComponentsLibrary.Entities;
 using ComponentsLibrary.Repositories.Implementations;
 using ComponentsLibrary.Repositories.Interfaces;
