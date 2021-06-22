@@ -19,7 +19,7 @@ namespace Forms.PatientScreens
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
             ListViewPrescriptionHistory.Items.Clear();
-            foreach (var prescription in _prescriptions)
+            foreach (var prescription in _prescriptions.OrderBy(e => e.StartDate))
             {
                 var listViewItem = new ListViewItem(prescription.Id.ToString());
                 listViewItem.SubItems.Add(prescription.Author.FullName);

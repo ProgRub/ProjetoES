@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Forms.PatientScreens;
 using Forms.TherapistScreens;
 using ServicesLibrary;

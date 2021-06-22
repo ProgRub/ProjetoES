@@ -51,10 +51,9 @@ namespace Forms.TherapistScreens
             // 
             this.CheckedListBoxTreatments.CheckOnClick = true;
             this.CheckedListBoxTreatments.FormattingEnabled = true;
-            this.CheckedListBoxTreatments.Location = new System.Drawing.Point(119, 151);
-            this.CheckedListBoxTreatments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CheckedListBoxTreatments.Location = new System.Drawing.Point(136, 201);
             this.CheckedListBoxTreatments.Name = "CheckedListBoxTreatments";
-            this.CheckedListBoxTreatments.Size = new System.Drawing.Size(635, 130);
+            this.CheckedListBoxTreatments.Size = new System.Drawing.Size(725, 224);
             this.CheckedListBoxTreatments.TabIndex = 24;
             this.CheckedListBoxTreatments.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBoxTreatments_ItemCheck);
             // 
@@ -63,10 +62,9 @@ namespace Forms.TherapistScreens
             this.ButtonAddTherapySession.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddTherapySession.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddTherapySession.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddTherapySession.Location = new System.Drawing.Point(342, 316);
-            this.ButtonAddTherapySession.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddTherapySession.Location = new System.Drawing.Point(402, 455);
             this.ButtonAddTherapySession.Name = "ButtonAddTherapySession";
-            this.ButtonAddTherapySession.Size = new System.Drawing.Size(193, 33);
+            this.ButtonAddTherapySession.Size = new System.Drawing.Size(221, 44);
             this.ButtonAddTherapySession.TabIndex = 23;
             this.ButtonAddTherapySession.Text = "Add Therapy Session";
             this.ButtonAddTherapySession.UseVisualStyleBackColor = false;
@@ -76,9 +74,9 @@ namespace Forms.TherapistScreens
             // 
             this.LabelTreatments.AutoSize = true;
             this.LabelTreatments.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelTreatments.Location = new System.Drawing.Point(44, 151);
+            this.LabelTreatments.Location = new System.Drawing.Point(42, 201);
             this.LabelTreatments.Name = "LabelTreatments";
-            this.LabelTreatments.Size = new System.Drawing.Size(69, 15);
+            this.LabelTreatments.Size = new System.Drawing.Size(88, 20);
             this.LabelTreatments.TabIndex = 22;
             this.LabelTreatments.Text = "Treatments:";
             // 
@@ -86,39 +84,37 @@ namespace Forms.TherapistScreens
             // 
             this.DateTimePickerSessionHour.CustomFormat = "HH:mm";
             this.DateTimePickerSessionHour.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DateTimePickerSessionHour.Location = new System.Drawing.Point(119, 116);
-            this.DateTimePickerSessionHour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerSessionHour.Location = new System.Drawing.Point(136, 155);
             this.DateTimePickerSessionHour.Name = "DateTimePickerSessionHour";
             this.DateTimePickerSessionHour.ShowUpDown = true;
-            this.DateTimePickerSessionHour.Size = new System.Drawing.Size(195, 23);
+            this.DateTimePickerSessionHour.Size = new System.Drawing.Size(222, 27);
             this.DateTimePickerSessionHour.TabIndex = 19;
             // 
             // LabelHour
             // 
             this.LabelHour.AutoSize = true;
             this.LabelHour.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelHour.Location = new System.Drawing.Point(76, 122);
+            this.LabelHour.Location = new System.Drawing.Point(81, 155);
             this.LabelHour.Name = "LabelHour";
-            this.LabelHour.Size = new System.Drawing.Size(37, 15);
+            this.LabelHour.Size = new System.Drawing.Size(49, 20);
             this.LabelHour.TabIndex = 18;
             this.LabelHour.Text = "Hour:";
             // 
             // DateTimePickerDate
             // 
             this.DateTimePickerDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateTimePickerDate.Location = new System.Drawing.Point(119, 81);
-            this.DateTimePickerDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerDate.Location = new System.Drawing.Point(136, 108);
             this.DateTimePickerDate.Name = "DateTimePickerDate";
-            this.DateTimePickerDate.Size = new System.Drawing.Size(195, 23);
+            this.DateTimePickerDate.Size = new System.Drawing.Size(222, 27);
             this.DateTimePickerDate.TabIndex = 17;
             // 
             // LabelDate
             // 
             this.LabelDate.AutoSize = true;
             this.LabelDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelDate.Location = new System.Drawing.Point(78, 87);
+            this.LabelDate.Location = new System.Drawing.Point(85, 108);
             this.LabelDate.Name = "LabelDate";
-            this.LabelDate.Size = new System.Drawing.Size(35, 15);
+            this.LabelDate.Size = new System.Drawing.Size(45, 20);
             this.LabelDate.TabIndex = 16;
             this.LabelDate.Text = "Date:";
             // 
@@ -126,10 +122,9 @@ namespace Forms.TherapistScreens
             // 
             this.ComboBoxPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxPatient.FormattingEnabled = true;
-            this.ComboBoxPatient.Location = new System.Drawing.Point(119, 44);
-            this.ComboBoxPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ComboBoxPatient.Location = new System.Drawing.Point(136, 59);
             this.ComboBoxPatient.Name = "ComboBoxPatient";
-            this.ComboBoxPatient.Size = new System.Drawing.Size(635, 23);
+            this.ComboBoxPatient.Size = new System.Drawing.Size(725, 28);
             this.ComboBoxPatient.Sorted = true;
             this.ComboBoxPatient.TabIndex = 15;
             // 
@@ -137,9 +132,9 @@ namespace Forms.TherapistScreens
             // 
             this.LabelPatient.AutoSize = true;
             this.LabelPatient.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelPatient.Location = new System.Drawing.Point(66, 47);
+            this.LabelPatient.Location = new System.Drawing.Point(69, 59);
             this.LabelPatient.Name = "LabelPatient";
-            this.LabelPatient.Size = new System.Drawing.Size(47, 15);
+            this.LabelPatient.Size = new System.Drawing.Size(61, 20);
             this.LabelPatient.TabIndex = 14;
             this.LabelPatient.Text = "Patient:";
             // 
@@ -147,9 +142,9 @@ namespace Forms.TherapistScreens
             // 
             this.LabelTitle.AutoSize = true;
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(342, 9);
+            this.LabelTitle.Location = new System.Drawing.Point(391, 12);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(189, 25);
+            this.LabelTitle.Size = new System.Drawing.Size(232, 31);
             this.LabelTitle.TabIndex = 13;
             this.LabelTitle.Text = "Add Therapy Session";
             // 
@@ -157,9 +152,9 @@ namespace Forms.TherapistScreens
             // 
             this.LabelEstimatedDuration.AutoSize = true;
             this.LabelEstimatedDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelEstimatedDuration.Location = new System.Drawing.Point(760, 151);
+            this.LabelEstimatedDuration.Location = new System.Drawing.Point(883, 277);
             this.LabelEstimatedDuration.Name = "LabelEstimatedDuration";
-            this.LabelEstimatedDuration.Size = new System.Drawing.Size(112, 15);
+            this.LabelEstimatedDuration.Size = new System.Drawing.Size(144, 20);
             this.LabelEstimatedDuration.TabIndex = 25;
             this.LabelEstimatedDuration.Text = "Estimated Duration:";
             // 
@@ -167,15 +162,15 @@ namespace Forms.TherapistScreens
             // 
             this.LabelSessionDuration.AutoSize = true;
             this.LabelSessionDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelSessionDuration.Location = new System.Drawing.Point(786, 176);
+            this.LabelSessionDuration.Location = new System.Drawing.Point(922, 311);
             this.LabelSessionDuration.Name = "LabelSessionDuration";
-            this.LabelSessionDuration.Size = new System.Drawing.Size(55, 15);
+            this.LabelSessionDuration.Size = new System.Drawing.Size(65, 20);
             this.LabelSessionDuration.TabIndex = 26;
             this.LabelSessionDuration.Text = "00:00:00";
             // 
             // AddTherapySessionScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.LabelSessionDuration);
@@ -190,9 +185,9 @@ namespace Forms.TherapistScreens
             this.Controls.Add(this.ComboBoxPatient);
             this.Controls.Add(this.LabelPatient);
             this.Controls.Add(this.LabelTitle);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "AddTherapySessionScreen";
-            this.Size = new System.Drawing.Size(941, 506);
+            this.Size = new System.Drawing.Size(1075, 675);
             this.Enter += new System.EventHandler(this.AddTherapySessionScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

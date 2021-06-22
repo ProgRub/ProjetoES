@@ -52,10 +52,9 @@ namespace Forms.HealthCareProfessionalScreens
             this.ButtonAddMedicine.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddMedicine.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddMedicine.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddMedicine.Location = new System.Drawing.Point(271, 465);
-            this.ButtonAddMedicine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddMedicine.Location = new System.Drawing.Point(308, 698);
             this.ButtonAddMedicine.Name = "ButtonAddMedicine";
-            this.ButtonAddMedicine.Size = new System.Drawing.Size(130, 34);
+            this.ButtonAddMedicine.Size = new System.Drawing.Size(149, 45);
             this.ButtonAddMedicine.TabIndex = 6;
             this.ButtonAddMedicine.Text = "Add Medicine";
             this.ButtonAddMedicine.UseVisualStyleBackColor = false;
@@ -65,80 +64,77 @@ namespace Forms.HealthCareProfessionalScreens
             // 
             this.LabelTitle.AutoSize = true;
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(201, 24);
+            this.LabelTitle.Location = new System.Drawing.Point(230, 32);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(260, 21);
+            this.LabelTitle.Size = new System.Drawing.Size(321, 28);
             this.LabelTitle.TabIndex = 7;
             this.LabelTitle.Text = "Create Medicine Prescription Item";
             // 
             // TextBoxMedicineName
             // 
-            this.TextBoxMedicineName.Location = new System.Drawing.Point(152, 64);
-            this.TextBoxMedicineName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicineName.Location = new System.Drawing.Point(174, 85);
             this.TextBoxMedicineName.Name = "TextBoxMedicineName";
-            this.TextBoxMedicineName.Size = new System.Drawing.Size(382, 23);
+            this.TextBoxMedicineName.Size = new System.Drawing.Size(436, 27);
             this.TextBoxMedicineName.TabIndex = 10;
             // 
             // TextBoxMedicineDescription
             // 
             this.TextBoxMedicineDescription.AcceptsReturn = true;
-            this.TextBoxMedicineDescription.Location = new System.Drawing.Point(152, 104);
-            this.TextBoxMedicineDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicineDescription.Location = new System.Drawing.Point(174, 139);
             this.TextBoxMedicineDescription.Multiline = true;
             this.TextBoxMedicineDescription.Name = "TextBoxMedicineDescription";
-            this.TextBoxMedicineDescription.Size = new System.Drawing.Size(382, 71);
+            this.TextBoxMedicineDescription.Size = new System.Drawing.Size(436, 93);
             this.TextBoxMedicineDescription.TabIndex = 11;
             // 
             // TextBoxMedicinePrice
             // 
-            this.TextBoxMedicinePrice.Location = new System.Drawing.Point(152, 190);
-            this.TextBoxMedicinePrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TextBoxMedicinePrice.Location = new System.Drawing.Point(174, 253);
             this.TextBoxMedicinePrice.Name = "TextBoxMedicinePrice";
-            this.TextBoxMedicinePrice.Size = new System.Drawing.Size(382, 23);
+            this.TextBoxMedicinePrice.Size = new System.Drawing.Size(436, 27);
             this.TextBoxMedicinePrice.TabIndex = 12;
             // 
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(104, 67);
+            this.LabelName.Location = new System.Drawing.Point(116, 85);
             this.LabelName.Name = "LabelName";
-            this.LabelName.Size = new System.Drawing.Size(42, 15);
+            this.LabelName.Size = new System.Drawing.Size(52, 20);
             this.LabelName.TabIndex = 16;
             this.LabelName.Text = "Name:";
             // 
             // LabelDescription
             // 
             this.LabelDescription.AutoSize = true;
-            this.LabelDescription.Location = new System.Drawing.Point(76, 107);
+            this.LabelDescription.Location = new System.Drawing.Point(80, 139);
             this.LabelDescription.Name = "LabelDescription";
-            this.LabelDescription.Size = new System.Drawing.Size(70, 15);
+            this.LabelDescription.Size = new System.Drawing.Size(88, 20);
             this.LabelDescription.TabIndex = 17;
             this.LabelDescription.Text = "Description:";
             // 
             // LabelPrice
             // 
             this.LabelPrice.AutoSize = true;
-            this.LabelPrice.Location = new System.Drawing.Point(110, 193);
+            this.LabelPrice.Location = new System.Drawing.Point(124, 253);
             this.LabelPrice.Name = "LabelPrice";
-            this.LabelPrice.Size = new System.Drawing.Size(36, 15);
+            this.LabelPrice.Size = new System.Drawing.Size(44, 20);
             this.LabelPrice.TabIndex = 20;
             this.LabelPrice.Text = "Price:";
             // 
             // LabelAllergenics
             // 
             this.LabelAllergenics.AutoSize = true;
-            this.LabelAllergenics.Location = new System.Drawing.Point(78, 226);
+            this.LabelAllergenics.Location = new System.Drawing.Point(83, 301);
             this.LabelAllergenics.Name = "LabelAllergenics";
-            this.LabelAllergenics.Size = new System.Drawing.Size(68, 15);
+            this.LabelAllergenics.Size = new System.Drawing.Size(85, 20);
             this.LabelAllergenics.TabIndex = 23;
             this.LabelAllergenics.Text = "Allergenics:";
             // 
             // LabelIncompatibleDiseases
             // 
             this.LabelIncompatibleDiseases.AutoSize = true;
-            this.LabelIncompatibleDiseases.Location = new System.Drawing.Point(19, 353);
+            this.LabelIncompatibleDiseases.Location = new System.Drawing.Point(7, 494);
             this.LabelIncompatibleDiseases.Name = "LabelIncompatibleDiseases";
-            this.LabelIncompatibleDiseases.Size = new System.Drawing.Size(127, 15);
+            this.LabelIncompatibleDiseases.Size = new System.Drawing.Size(161, 20);
             this.LabelIncompatibleDiseases.TabIndex = 24;
             this.LabelIncompatibleDiseases.Text = "Incompatible Diseases:";
             // 
@@ -146,25 +142,27 @@ namespace Forms.HealthCareProfessionalScreens
             // 
             this.CheckedListBoxDiseases.CheckOnClick = true;
             this.CheckedListBoxDiseases.FormattingEnabled = true;
-            this.CheckedListBoxDiseases.Location = new System.Drawing.Point(152, 353);
+            this.CheckedListBoxDiseases.Location = new System.Drawing.Point(174, 494);
+            this.CheckedListBoxDiseases.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CheckedListBoxDiseases.MultiColumn = true;
             this.CheckedListBoxDiseases.Name = "CheckedListBoxDiseases";
-            this.CheckedListBoxDiseases.Size = new System.Drawing.Size(382, 94);
+            this.CheckedListBoxDiseases.Size = new System.Drawing.Size(436, 180);
             this.CheckedListBoxDiseases.TabIndex = 31;
             // 
             // CheckedListBoxAllergies
             // 
             this.CheckedListBoxAllergies.CheckOnClick = true;
             this.CheckedListBoxAllergies.FormattingEnabled = true;
-            this.CheckedListBoxAllergies.Location = new System.Drawing.Point(152, 226);
+            this.CheckedListBoxAllergies.Location = new System.Drawing.Point(174, 301);
+            this.CheckedListBoxAllergies.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CheckedListBoxAllergies.MultiColumn = true;
             this.CheckedListBoxAllergies.Name = "CheckedListBoxAllergies";
-            this.CheckedListBoxAllergies.Size = new System.Drawing.Size(382, 94);
+            this.CheckedListBoxAllergies.Size = new System.Drawing.Size(436, 180);
             this.CheckedListBoxAllergies.TabIndex = 28;
             // 
             // AddMedicineItemScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.CheckedListBoxDiseases);
@@ -179,9 +177,9 @@ namespace Forms.HealthCareProfessionalScreens
             this.Controls.Add(this.TextBoxMedicineName);
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonAddMedicine);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddMedicineItemScreen";
-            this.Size = new System.Drawing.Size(693, 530);
+            this.Size = new System.Drawing.Size(764, 777);
             this.Enter += new System.EventHandler(this.AddMedicineItemScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonAddMedicine, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

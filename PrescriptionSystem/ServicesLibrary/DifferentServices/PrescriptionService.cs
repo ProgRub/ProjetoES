@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using ComponentsLibrary;
 using ComponentsLibrary.Entities;
@@ -78,7 +77,6 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
         {
-            Debug.WriteLine(prescriptionId);
             var prescriptionItems = new List<PrescriptionItem>();
             foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
                 prescriptionId))

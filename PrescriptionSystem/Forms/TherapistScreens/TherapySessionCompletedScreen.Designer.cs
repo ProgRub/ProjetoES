@@ -63,11 +63,11 @@ namespace Forms.TherapistScreens
             this.ListViewTreatments.GridLines = true;
             this.ListViewTreatments.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewTreatments.HideSelection = false;
-            this.ListViewTreatments.Location = new System.Drawing.Point(51, 89);
+            this.ListViewTreatments.Location = new System.Drawing.Point(218, 91);
             this.ListViewTreatments.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListViewTreatments.MultiSelect = false;
             this.ListViewTreatments.Name = "ListViewTreatments";
-            this.ListViewTreatments.Size = new System.Drawing.Size(1033, 337);
+            this.ListViewTreatments.Size = new System.Drawing.Size(904, 337);
             this.ListViewTreatments.TabIndex = 6;
             this.ListViewTreatments.UseCompatibleStateImageBehavior = false;
             this.ListViewTreatments.View = System.Windows.Forms.View.Details;
@@ -100,7 +100,7 @@ namespace Forms.TherapistScreens
             // 
             this.LabelTreatments.AutoSize = true;
             this.LabelTreatments.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTreatments.Location = new System.Drawing.Point(505, 57);
+            this.LabelTreatments.Location = new System.Drawing.Point(630, 49);
             this.LabelTreatments.Name = "LabelTreatments";
             this.LabelTreatments.Size = new System.Drawing.Size(107, 28);
             this.LabelTreatments.TabIndex = 7;
@@ -113,7 +113,7 @@ namespace Forms.TherapistScreens
             this.ButtonUndo.FlatAppearance.BorderSize = 0;
             this.ButtonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonUndo.Image = global::Forms.Properties.Resources.Undo;
-            this.ButtonUndo.Location = new System.Drawing.Point(494, 436);
+            this.ButtonUndo.Location = new System.Drawing.Point(611, 436);
             this.ButtonUndo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonUndo.Name = "ButtonUndo";
             this.ButtonUndo.Size = new System.Drawing.Size(41, 31);
@@ -128,7 +128,7 @@ namespace Forms.TherapistScreens
             this.ButtonRedo.FlatAppearance.BorderSize = 0;
             this.ButtonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonRedo.Image = global::Forms.Properties.Resources.Redo;
-            this.ButtonRedo.Location = new System.Drawing.Point(579, 436);
+            this.ButtonRedo.Location = new System.Drawing.Point(696, 436);
             this.ButtonRedo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonRedo.Name = "ButtonRedo";
             this.ButtonRedo.Size = new System.Drawing.Size(41, 31);
@@ -144,7 +144,7 @@ namespace Forms.TherapistScreens
             this.TextBoxTreatmentNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxTreatmentNote.Multiline = true;
             this.TextBoxTreatmentNote.Name = "TextBoxTreatmentNote";
-            this.TextBoxTreatmentNote.Size = new System.Drawing.Size(847, 177);
+            this.TextBoxTreatmentNote.Size = new System.Drawing.Size(904, 177);
             this.TextBoxTreatmentNote.TabIndex = 10;
             // 
             // LabelTreatmentNote
@@ -162,7 +162,7 @@ namespace Forms.TherapistScreens
             this.CheckBoxCompletedTreatment.AutoSize = true;
             this.CheckBoxCompletedTreatment.Enabled = false;
             this.CheckBoxCompletedTreatment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CheckBoxCompletedTreatment.Location = new System.Drawing.Point(551, 855);
+            this.CheckBoxCompletedTreatment.Location = new System.Drawing.Point(564, 853);
             this.CheckBoxCompletedTreatment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CheckBoxCompletedTreatment.Name = "CheckBoxCompletedTreatment";
             this.CheckBoxCompletedTreatment.Size = new System.Drawing.Size(232, 32);
@@ -174,7 +174,7 @@ namespace Forms.TherapistScreens
             // 
             this.LabelSessionInfo.AutoSize = true;
             this.LabelSessionInfo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelSessionInfo.Location = new System.Drawing.Point(431, 5);
+            this.LabelSessionInfo.Location = new System.Drawing.Point(551, 0);
             this.LabelSessionInfo.Name = "LabelSessionInfo";
             this.LabelSessionInfo.Size = new System.Drawing.Size(264, 28);
             this.LabelSessionInfo.TabIndex = 13;
@@ -197,7 +197,7 @@ namespace Forms.TherapistScreens
             this.TextBoxTherapySessionNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxTherapySessionNote.Multiline = true;
             this.TextBoxTherapySessionNote.Name = "TextBoxTherapySessionNote";
-            this.TextBoxTherapySessionNote.Size = new System.Drawing.Size(847, 177);
+            this.TextBoxTherapySessionNote.Size = new System.Drawing.Size(904, 177);
             this.TextBoxTherapySessionNote.TabIndex = 14;
             // 
             // ButtonAddSessionNote
@@ -205,7 +205,7 @@ namespace Forms.TherapistScreens
             this.ButtonAddSessionNote.BackColor = System.Drawing.Color.LimeGreen;
             this.ButtonAddSessionNote.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddSessionNote.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddSessionNote.Location = new System.Drawing.Point(1091, 540);
+            this.ButtonAddSessionNote.Location = new System.Drawing.Point(1152, 542);
             this.ButtonAddSessionNote.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonAddSessionNote.Name = "ButtonAddSessionNote";
             this.ButtonAddSessionNote.Size = new System.Drawing.Size(160, 72);
@@ -220,7 +220,7 @@ namespace Forms.TherapistScreens
             this.ButtonAddTreatmentNoteSetCompletedState.Enabled = false;
             this.ButtonAddTreatmentNoteSetCompletedState.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddTreatmentNoteSetCompletedState.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddTreatmentNoteSetCompletedState.Location = new System.Drawing.Point(1091, 684);
+            this.ButtonAddTreatmentNoteSetCompletedState.Location = new System.Drawing.Point(1152, 685);
             this.ButtonAddTreatmentNoteSetCompletedState.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonAddTreatmentNoteSetCompletedState.Name = "ButtonAddTreatmentNoteSetCompletedState";
             this.ButtonAddTreatmentNoteSetCompletedState.Size = new System.Drawing.Size(213, 131);
@@ -247,7 +247,7 @@ namespace Forms.TherapistScreens
             this.Controls.Add(this.ListViewTreatments);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "TherapySessionCompletedScreen";
-            this.Size = new System.Drawing.Size(1307, 893);
+            this.Size = new System.Drawing.Size(1368, 893);
             this.Enter += new System.EventHandler(this.TherapySessionCompletedScreen_Enter);
             this.Controls.SetChildIndex(this.ListViewTreatments, 0);
             this.Controls.SetChildIndex(this.LabelTreatments, 0);

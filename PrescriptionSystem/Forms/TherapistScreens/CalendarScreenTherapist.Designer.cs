@@ -40,17 +40,19 @@ namespace Forms.TherapistScreens
             // 
             // ButtonBack
             // 
-            this.ButtonBack.BackColor = System.Drawing.Color.Teal;
+            this.ButtonBack.BackColor = System.Drawing.Color.Firebrick;
             this.ButtonBack.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ButtonBack.Size = new System.Drawing.Size(81, 29);
+            this.ButtonBack.Location = new System.Drawing.Point(0, 19);
+            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.ButtonBack.Size = new System.Drawing.Size(93, 39);
             this.ButtonBack.Text = "Logout";
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // MonthCalendarTherapist
             // 
             this.MonthCalendarTherapist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonthCalendarTherapist.Location = new System.Drawing.Point(0, 41);
+            this.MonthCalendarTherapist.Location = new System.Drawing.Point(0, 64);
+            this.MonthCalendarTherapist.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
             this.MonthCalendarTherapist.MaxSelectionCount = 1;
             this.MonthCalendarTherapist.Name = "MonthCalendarTherapist";
             this.MonthCalendarTherapist.TabIndex = 6;
@@ -61,9 +63,10 @@ namespace Forms.TherapistScreens
             this.ButtonCreatePrescriptionItem.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonCreatePrescriptionItem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonCreatePrescriptionItem.ForeColor = System.Drawing.Color.White;
-            this.ButtonCreatePrescriptionItem.Location = new System.Drawing.Point(254, 53);
+            this.ButtonCreatePrescriptionItem.Location = new System.Drawing.Point(290, 71);
+            this.ButtonCreatePrescriptionItem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonCreatePrescriptionItem.Name = "ButtonCreatePrescriptionItem";
-            this.ButtonCreatePrescriptionItem.Size = new System.Drawing.Size(213, 33);
+            this.ButtonCreatePrescriptionItem.Size = new System.Drawing.Size(250, 44);
             this.ButtonCreatePrescriptionItem.TabIndex = 23;
             this.ButtonCreatePrescriptionItem.Text = "Create Prescription Item";
             this.ButtonCreatePrescriptionItem.UseVisualStyleBackColor = false;
@@ -74,9 +77,10 @@ namespace Forms.TherapistScreens
             this.ButtonCreateTherapySession.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonCreateTherapySession.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonCreateTherapySession.ForeColor = System.Drawing.Color.White;
-            this.ButtonCreateTherapySession.Location = new System.Drawing.Point(254, 92);
+            this.ButtonCreateTherapySession.Location = new System.Drawing.Point(290, 123);
+            this.ButtonCreateTherapySession.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonCreateTherapySession.Name = "ButtonCreateTherapySession";
-            this.ButtonCreateTherapySession.Size = new System.Drawing.Size(213, 33);
+            this.ButtonCreateTherapySession.Size = new System.Drawing.Size(250, 44);
             this.ButtonCreateTherapySession.TabIndex = 24;
             this.ButtonCreateTherapySession.Text = "Create Therapy Session";
             this.ButtonCreateTherapySession.UseVisualStyleBackColor = false;
@@ -87,9 +91,10 @@ namespace Forms.TherapistScreens
             this.ButtonTherapySessionHistory.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonTherapySessionHistory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonTherapySessionHistory.ForeColor = System.Drawing.Color.White;
-            this.ButtonTherapySessionHistory.Location = new System.Drawing.Point(254, 131);
+            this.ButtonTherapySessionHistory.Location = new System.Drawing.Point(290, 175);
+            this.ButtonTherapySessionHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonTherapySessionHistory.Name = "ButtonTherapySessionHistory";
-            this.ButtonTherapySessionHistory.Size = new System.Drawing.Size(213, 33);
+            this.ButtonTherapySessionHistory.Size = new System.Drawing.Size(250, 44);
             this.ButtonTherapySessionHistory.TabIndex = 25;
             this.ButtonTherapySessionHistory.Text = "Therapy Session History";
             this.ButtonTherapySessionHistory.UseVisualStyleBackColor = false;
@@ -99,20 +104,22 @@ namespace Forms.TherapistScreens
             // 
             this.TextBoxDayEvents.BackColor = System.Drawing.Color.White;
             this.TextBoxDayEvents.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxDayEvents.Location = new System.Drawing.Point(0, 215);
+            this.TextBoxDayEvents.Location = new System.Drawing.Point(0, 287);
+            this.TextBoxDayEvents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxDayEvents.Multiline = true;
             this.TextBoxDayEvents.Name = "TextBoxDayEvents";
-            this.TextBoxDayEvents.Size = new System.Drawing.Size(467, 172);
+            this.TextBoxDayEvents.Size = new System.Drawing.Size(540, 302);
             this.TextBoxDayEvents.TabIndex = 27;
             // 
             // ButtonCreatePrescription
             // 
             this.ButtonCreatePrescription.BackColor = System.Drawing.Color.Turquoise;
-            this.ButtonCreatePrescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonCreatePrescription.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonCreatePrescription.ForeColor = System.Drawing.Color.White;
-            this.ButtonCreatePrescription.Location = new System.Drawing.Point(254, 14);
+            this.ButtonCreatePrescription.Location = new System.Drawing.Point(290, 19);
+            this.ButtonCreatePrescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonCreatePrescription.Name = "ButtonCreatePrescription";
-            this.ButtonCreatePrescription.Size = new System.Drawing.Size(213, 33);
+            this.ButtonCreatePrescription.Size = new System.Drawing.Size(250, 44);
             this.ButtonCreatePrescription.TabIndex = 28;
             this.ButtonCreatePrescription.Text = "Create Prescription";
             this.ButtonCreatePrescription.UseVisualStyleBackColor = false;
@@ -123,9 +130,10 @@ namespace Forms.TherapistScreens
             this.ButtonCheckPatientsPrescriptions.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonCheckPatientsPrescriptions.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonCheckPatientsPrescriptions.ForeColor = System.Drawing.Color.White;
-            this.ButtonCheckPatientsPrescriptions.Location = new System.Drawing.Point(254, 170);
+            this.ButtonCheckPatientsPrescriptions.Location = new System.Drawing.Point(290, 227);
+            this.ButtonCheckPatientsPrescriptions.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonCheckPatientsPrescriptions.Name = "ButtonCheckPatientsPrescriptions";
-            this.ButtonCheckPatientsPrescriptions.Size = new System.Drawing.Size(213, 33);
+            this.ButtonCheckPatientsPrescriptions.Size = new System.Drawing.Size(250, 44);
             this.ButtonCheckPatientsPrescriptions.TabIndex = 29;
             this.ButtonCheckPatientsPrescriptions.Text = "Check Patient\'s Prescriptions";
             this.ButtonCheckPatientsPrescriptions.UseVisualStyleBackColor = false;
@@ -133,7 +141,7 @@ namespace Forms.TherapistScreens
             // 
             // CalendarScreenTherapist
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Transparent;
@@ -144,9 +152,10 @@ namespace Forms.TherapistScreens
             this.Controls.Add(this.ButtonCreateTherapySession);
             this.Controls.Add(this.ButtonCreatePrescriptionItem);
             this.Controls.Add(this.MonthCalendarTherapist);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "CalendarScreenTherapist";
-            this.Size = new System.Drawing.Size(470, 390);
+            this.Size = new System.Drawing.Size(543, 593);
+            this.Enter += new System.EventHandler(this.CalendarScreenTherapist_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.MonthCalendarTherapist, 0);
             this.Controls.SetChildIndex(this.ButtonCreatePrescriptionItem, 0);

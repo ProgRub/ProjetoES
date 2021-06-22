@@ -23,7 +23,7 @@ namespace Forms.TherapistScreens
                 LabelTitle.Text = "You haven't completed any therapy sessions yet...";
                 return;
             }
-
+            flowLayoutPanel1.Controls.Clear();
             for (var index = 0; index < _therapySessions.Count(); index++)
             {
                 var button = new Button
@@ -42,7 +42,8 @@ namespace Forms.TherapistScreens
                         (index % 8) * (ButtonExampleTherapySession.Size.Height + 25))
                 };
                 button.MouseClick += ButtonClicked;
-                Controls.Add(button);
+
+                flowLayoutPanel1.Controls.Add(button);
             }
         }
 
@@ -57,5 +58,6 @@ namespace Forms.TherapistScreens
             return _therapySessions.FirstOrDefault(treatment =>
                 treatment.Id.ToString() == therapySessionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
+        
     }
 }

@@ -26,7 +26,7 @@ namespace Forms.HealthCareProfessionalScreens
                 LabelTitle.Text = "The selected patient doesn't have any prescriptions yet...";
                 return;
             }
-
+            flowLayoutPanel1.Controls.Clear();
             for (var index = 0; index < _prescriptions.Count(); index++)
             {
                 var button = new Button
@@ -58,7 +58,7 @@ namespace Forms.HealthCareProfessionalScreens
 
                 ;
                 button.MouseClick += ButtonClicked;
-                Controls.Add(button);
+                flowLayoutPanel1.Controls.Add(button);
             }
         }
 

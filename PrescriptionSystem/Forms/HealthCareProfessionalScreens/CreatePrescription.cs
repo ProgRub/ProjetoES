@@ -93,29 +93,25 @@ namespace Forms.HealthCareProfessionalScreens
 
         private PrescriptionItemDTO GetPrescriptionItemInComboBox()
         {
-            if (comboBoxItems.SelectedItem != null)
+            if (comboBoxItems.SelectedItem == null) return null;
+            switch (comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf('(') + 1,
+                comboBoxItems.Text.IndexOf(')') - 1))
             {
-                switch (comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf('(') + 1,
-                    comboBoxItems.Text.IndexOf(')') - 1))
-                {
-                    case "Exercise":
-                        return _exercises.First(e =>
-                            e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
-                                .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
-                    case "Treatment":
-                        return _treatments.First(e =>
-                            e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
-                                .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
-                    case "Medicine":
-                        return _medicines.First(e =>
-                            e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
-                                .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
-                    default:
-                        throw new NotImplementedException();
-                }
+                case "Exercise":
+                    return _exercises.First(e =>
+                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                            .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
+                case "Treatment":
+                    return _treatments.First(e =>
+                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                            .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
+                case "Medicine":
+                    return _medicines.First(e =>
+                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                            .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
+                default:
+                    throw new NotImplementedException();
             }
-
-            return null;
         }
 
 
@@ -206,6 +202,12 @@ namespace Forms.HealthCareProfessionalScreens
             if (TreeViewPrescriptionItems.SelectedNode == null) return;
 
             var collection = TreeViewPrescriptionItems.SelectedNode.Nodes;
+
+            foreach (TreeNode node in collection)
+            {
+                if (node.Text == DateTimePickerRecommendedTime.Value.TimeOfDay.ToString(@"hh\:mm")) return;
+            }
+
             if (TreeViewPrescriptionItems.SelectedNode.Parent != null) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreateRecommendedTime(DateTimePickerRecommendedTime.Value.TimeOfDay);

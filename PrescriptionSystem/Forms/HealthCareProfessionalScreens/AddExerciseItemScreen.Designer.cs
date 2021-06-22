@@ -52,7 +52,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelBodyPart
             // 
             this.LabelBodyPart.AutoSize = true;
-            this.LabelBodyPart.Location = new System.Drawing.Point(127, 328);
+            this.LabelBodyPart.Location = new System.Drawing.Point(122, 328);
             this.LabelBodyPart.Name = "LabelBodyPart";
             this.LabelBodyPart.Size = new System.Drawing.Size(75, 20);
             this.LabelBodyPart.TabIndex = 35;
@@ -61,7 +61,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelDescription
             // 
             this.LabelDescription.AutoSize = true;
-            this.LabelDescription.Location = new System.Drawing.Point(117, 141);
+            this.LabelDescription.Location = new System.Drawing.Point(109, 141);
             this.LabelDescription.Name = "LabelDescription";
             this.LabelDescription.Size = new System.Drawing.Size(88, 20);
             this.LabelDescription.TabIndex = 34;
@@ -70,7 +70,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(149, 87);
+            this.LabelName.Location = new System.Drawing.Point(145, 83);
             this.LabelName.Name = "LabelName";
             this.LabelName.Size = new System.Drawing.Size(52, 20);
             this.LabelName.TabIndex = 33;
@@ -120,7 +120,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelDuration
             // 
             this.LabelDuration.AutoSize = true;
-            this.LabelDuration.Location = new System.Drawing.Point(133, 268);
+            this.LabelDuration.Location = new System.Drawing.Point(127, 268);
             this.LabelDuration.Name = "LabelDuration";
             this.LabelDuration.Size = new System.Drawing.Size(70, 20);
             this.LabelDuration.TabIndex = 41;
@@ -167,7 +167,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelAge
             // 
             this.LabelAge.AutoSize = true;
-            this.LabelAge.Location = new System.Drawing.Point(314, 464);
+            this.LabelAge.Location = new System.Drawing.Point(312, 464);
             this.LabelAge.Name = "LabelAge";
             this.LabelAge.Size = new System.Drawing.Size(39, 20);
             this.LabelAge.TabIndex = 48;
@@ -208,7 +208,7 @@ namespace Forms.HealthCareProfessionalScreens
             this.Controls.Add(this.TextBoxName);
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonAddExercise);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "AddExerciseItemScreen";
             this.Size = new System.Drawing.Size(777, 617);
             this.Enter += new System.EventHandler(this.AddExerciseItemScreen_Enter);

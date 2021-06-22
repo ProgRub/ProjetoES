@@ -7,10 +7,10 @@ namespace Forms.CommandsCreatePrescription
     {
         public CommandDeleteNode(TreeNodeCollection nodes, TreeNode node)
         {
-            Nodes = nodes;
-
+            if (node.Parent != null) Nodes = node.Parent.Nodes;
+            else Nodes = nodes;
             Node = node;
-
+            
         }
 
         public TreeNodeCollection Nodes { get; }

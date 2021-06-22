@@ -37,10 +37,10 @@ namespace Forms.PatientScreens
             // 
             // ButtonBack
             // 
-            this.ButtonBack.BackColor = System.Drawing.Color.Teal;
+            this.ButtonBack.BackColor = System.Drawing.Color.Firebrick;
             this.ButtonBack.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ButtonBack.Size = new System.Drawing.Size(82, 30);
+            this.ButtonBack.Margin = new System.Windows.Forms.Padding(3);
+            this.ButtonBack.Size = new System.Drawing.Size(94, 40);
             this.ButtonBack.Text = "Logout";
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
@@ -48,10 +48,11 @@ namespace Forms.PatientScreens
             // 
             this.TextBoxDayEvents.BackColor = System.Drawing.Color.White;
             this.TextBoxDayEvents.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TextBoxDayEvents.Location = new System.Drawing.Point(0, 215);
+            this.TextBoxDayEvents.Location = new System.Drawing.Point(0, 287);
+            this.TextBoxDayEvents.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextBoxDayEvents.Multiline = true;
             this.TextBoxDayEvents.Name = "TextBoxDayEvents";
-            this.TextBoxDayEvents.Size = new System.Drawing.Size(443, 172);
+            this.TextBoxDayEvents.Size = new System.Drawing.Size(506, 331);
             this.TextBoxDayEvents.TabIndex = 33;
             // 
             // ButtonGetPrescriptionHistory
@@ -59,9 +60,10 @@ namespace Forms.PatientScreens
             this.ButtonGetPrescriptionHistory.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonGetPrescriptionHistory.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonGetPrescriptionHistory.ForeColor = System.Drawing.Color.White;
-            this.ButtonGetPrescriptionHistory.Location = new System.Drawing.Point(249, 80);
+            this.ButtonGetPrescriptionHistory.Location = new System.Drawing.Point(282, 116);
+            this.ButtonGetPrescriptionHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonGetPrescriptionHistory.Name = "ButtonGetPrescriptionHistory";
-            this.ButtonGetPrescriptionHistory.Size = new System.Drawing.Size(194, 33);
+            this.ButtonGetPrescriptionHistory.Size = new System.Drawing.Size(222, 44);
             this.ButtonGetPrescriptionHistory.TabIndex = 30;
             this.ButtonGetPrescriptionHistory.Text = "Get Prescription History";
             this.ButtonGetPrescriptionHistory.UseVisualStyleBackColor = false;
@@ -72,9 +74,10 @@ namespace Forms.PatientScreens
             this.ButtonAddPermission.BackColor = System.Drawing.Color.Turquoise;
             this.ButtonAddPermission.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonAddPermission.ForeColor = System.Drawing.Color.White;
-            this.ButtonAddPermission.Location = new System.Drawing.Point(249, 41);
+            this.ButtonAddPermission.Location = new System.Drawing.Point(282, 64);
+            this.ButtonAddPermission.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ButtonAddPermission.Name = "ButtonAddPermission";
-            this.ButtonAddPermission.Size = new System.Drawing.Size(194, 33);
+            this.ButtonAddPermission.Size = new System.Drawing.Size(222, 44);
             this.ButtonAddPermission.TabIndex = 29;
             this.ButtonAddPermission.Text = "Add Permission";
             this.ButtonAddPermission.UseVisualStyleBackColor = false;
@@ -84,7 +87,8 @@ namespace Forms.PatientScreens
             // 
             this.MonthCalendarPatient.BackColor = System.Drawing.SystemColors.Window;
             this.MonthCalendarPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MonthCalendarPatient.Location = new System.Drawing.Point(0, 41);
+            this.MonthCalendarPatient.Location = new System.Drawing.Point(0, 64);
+            this.MonthCalendarPatient.Margin = new System.Windows.Forms.Padding(10, 12, 10, 12);
             this.MonthCalendarPatient.MaxSelectionCount = 1;
             this.MonthCalendarPatient.Name = "MonthCalendarPatient";
             this.MonthCalendarPatient.TabIndex = 28;
@@ -92,16 +96,17 @@ namespace Forms.PatientScreens
             // 
             // CalendarScreenPatient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.TextBoxDayEvents);
             this.Controls.Add(this.ButtonGetPrescriptionHistory);
             this.Controls.Add(this.ButtonAddPermission);
             this.Controls.Add(this.MonthCalendarPatient);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "CalendarScreenPatient";
-            this.Size = new System.Drawing.Size(447, 395);
+            this.Size = new System.Drawing.Size(511, 627);
+            this.Enter += new System.EventHandler(this.CalendarScreenPatient_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.MonthCalendarPatient, 0);
             this.Controls.SetChildIndex(this.ButtonAddPermission, 0);

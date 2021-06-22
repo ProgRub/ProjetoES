@@ -99,7 +99,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(119, 85);
+            this.LabelName.Location = new System.Drawing.Point(116, 85);
             this.LabelName.Name = "LabelName";
             this.LabelName.Size = new System.Drawing.Size(52, 20);
             this.LabelName.TabIndex = 16;
@@ -108,7 +108,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelDescription
             // 
             this.LabelDescription.AutoSize = true;
-            this.LabelDescription.Location = new System.Drawing.Point(87, 145);
+            this.LabelDescription.Location = new System.Drawing.Point(80, 145);
             this.LabelDescription.Name = "LabelDescription";
             this.LabelDescription.Size = new System.Drawing.Size(88, 20);
             this.LabelDescription.TabIndex = 17;
@@ -117,7 +117,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelDuration
             // 
             this.LabelDuration.AutoSize = true;
-            this.LabelDuration.Location = new System.Drawing.Point(103, 259);
+            this.LabelDuration.Location = new System.Drawing.Point(98, 259);
             this.LabelDuration.Name = "LabelDuration";
             this.LabelDuration.Size = new System.Drawing.Size(70, 20);
             this.LabelDuration.TabIndex = 24;
@@ -140,7 +140,7 @@ namespace Forms.HealthCareProfessionalScreens
             // LabelAge
             // 
             this.LabelAge.AutoSize = true;
-            this.LabelAge.Location = new System.Drawing.Point(282, 312);
+            this.LabelAge.Location = new System.Drawing.Point(280, 312);
             this.LabelAge.Name = "LabelAge";
             this.LabelAge.Size = new System.Drawing.Size(39, 20);
             this.LabelAge.TabIndex = 27;
@@ -288,7 +288,7 @@ namespace Forms.HealthCareProfessionalScreens
             this.Controls.Add(this.TextBoxTreatmentName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ButtonAddTreatment);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "AddTreatmentItemScreen";
             this.Size = new System.Drawing.Size(762, 612);
             this.Controls.SetChildIndex(this.ButtonAddTreatment, 0);

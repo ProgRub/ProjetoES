@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,14 +17,13 @@ namespace Forms.HealthCareProfessionalScreens
         }
         private void SelectPatientScreen_Enter(object sender, EventArgs e)
         {
-            Debug.WriteLine("ASDAS");
             _patients = Services.Instance.GetAllPatients();
             if (!_patients.Any())
             {
                 LabelTitle.Text = "There are no patients registered yet...";
                 return;
             }
-
+            flowLayoutPanel1.Controls.Clear();
             for (var index = 0; index < _patients.Count(); index++)
             {
                 var button = new Button
@@ -44,7 +42,7 @@ namespace Forms.HealthCareProfessionalScreens
                         (index % 8) * (ButtonExamplePatient.Size.Height + 25))
                 };
                 button.MouseClick += ButtonClicked;
-                Controls.Add(button);
+                flowLayoutPanel1.Controls.Add(button);
             }
         }
 
