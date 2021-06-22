@@ -20,6 +20,9 @@ namespace Forms.HealthCareProfessionalScreens
         {
             _allergies = Services.Instance.GetAllAllergies();
             _diseases = Services.Instance.GetAllDiseases();
+            CheckedListBoxAllergies.Items.Clear();
+            CheckedListBoxDiseases.Items.Clear();
+
             foreach (var allergy in _allergies)
             {
                 CheckedListBoxAllergies.Items.Add($"{allergy.Id} - {allergy.Name}");

@@ -33,7 +33,7 @@ namespace ServicesLibrary.DifferentServices
                 AgeMinimum = exerciseDTO.AgeMinimum,
                 AgeMaximum = exerciseDTO.AgeMaximum,
                 Duration = exerciseDTO.Duration,
-                BodyParts = exerciseDTO.BodyParts.ToList()
+                BodyParts = exerciseDTO.BodyParts.Any() ? exerciseDTO.BodyParts.ToList() : null
             };
             _exerciseRepository.Add(exercise);
             _exerciseRepository.SaveChanges();

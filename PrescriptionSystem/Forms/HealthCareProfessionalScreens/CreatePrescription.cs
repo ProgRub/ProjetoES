@@ -32,6 +32,8 @@ namespace Forms.HealthCareProfessionalScreens
             _treatments = Services.Instance.GetAllTreatments();
             _medicines = Services.Instance.GetAllMedicines();
             _exercises = Services.Instance.GetAllExercises();
+            comboBoxPatient.Items.Clear();
+            comboBoxItems.Items.Clear();
 
             foreach (var patient in _patients)
             {

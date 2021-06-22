@@ -25,6 +25,8 @@ namespace Forms.PatientScreens
 
             CheckBoxSelectAll.Enabled = true;
             ButtonSelectHealthCareProfessionals.Enabled = true;
+            CheckedListBoxPrescriptions.Items.Clear();
+
             foreach (var prescription in _prescriptions)
             {
                 CheckedListBoxPrescriptions.Items.Add(

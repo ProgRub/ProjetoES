@@ -26,6 +26,8 @@ namespace Forms.PatientScreens
 
             CheckBoxSelectAll.Enabled = true;
             ButtonAddViewers.Enabled = true;
+            CheckedListBoxProfessionals.Items.Clear();
+
             foreach (var professional in _healthCareProfessionals)
             {
                 CheckedListBoxProfessionals.Items.Add($"{professional.Id} - {professional.FullName}");

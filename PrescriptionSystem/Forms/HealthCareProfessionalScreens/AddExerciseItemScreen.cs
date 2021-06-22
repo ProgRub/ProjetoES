@@ -27,6 +27,7 @@ namespace Forms.HealthCareProfessionalScreens
                 bodyParts.Add(checkedItem.ToString());
             }
 
+
             var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxName.Text,
                 TextBoxDescription.Text,
                 TextBoxMinimumAge.Text, TextBoxMaximumAge.Text, DateTimePickerDuration.Value.TimeOfDay,
@@ -51,35 +52,54 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            var first = true;
+            var errorMessage = "";
             ClearAllTextboxesPlaceholderText();
-            foreach (var error in errorCodes)
+            foreach (var errorCode in errorCodes)
             {
-                switch (error)
+                if (!first)
+                {
+                    errorMessage += Environment.NewLine;
+                }
+
+                switch (errorCode)
                 {
                     case Services.NameRequired:
                         ShowTextBoxErrorMessage(TextBoxName, "Name is required!");
                         break;
-                    case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(TextBoxDescription, "Description is required!");
+                    case Services.AgeMinimumNotANumber:
+                        errorMessage += "Age minimum needs to be an integer!";
+                        first = false;
                         break;
-                    case Services.AgeMinimumNotValid:
-                        ShowInformationMessageBox("Age minimum is required and needs to be a whole number!", "Error");
-                        break;
-                    case Services.AgeMaximumNotValid:
-                        ShowInformationMessageBox("Age maximum is required and needs to be a whole number!", "Error");
+                    case Services.AgeMaximumNotANumber:
+                        errorMessage += "Age maximum needs to be an integer!";
+                        first = false;
                         break;
                     case Services.AgesNotValid:
-                        ShowInformationMessageBox("The maximum age has to be greater than the minimum age.", "Error");
+                        errorMessage += "The maximum age has to be greater than the minimum age.";
+                        first = false;
+                        break;
+                    case Services.AgeMinimumRequired:
+                        errorMessage += "You have to set a minimum age for the exercise.";
+                        first = false;
+                        break;
+                    case Services.AgeMaximumRequired:
+                        errorMessage += "You have to set a maximum age for the exercise.";
+                        first = false;
                         break;
                     case Services.ItemAlreadyExists:
-                        ShowInformationMessageBox("That exercise already exists in the database.", "Error");
+                        errorMessage += "That exercise already exists in the database.";
+                        first = false;
+                        break;
+                    case Services.AtLeastOneBodyPart:
+                        errorMessage += "The exercise must target, at least, one body part.";
+                        first = false;
                         break;
                 }
             }
-        }
 
-        private void TextBoxMaximumAge_TextChanged(object sender, EventArgs e)
-        {
+            ShowInformationMessageBox(errorMessage, "Error");
         }
+        
     }
 }

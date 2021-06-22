@@ -39,12 +39,15 @@ namespace ServicesLibrary
         #region PrescriptionItemCreation
 
         public const int DescriptionRequired = 15,
-            AgeMinimumNotValid = 16,
-            AgeMaximumNotValid = 17,
+            AgeMinimumNotANumber = 16,
+            AgeMaximumNotANumber = 17,
             PriceNotValid = 18,
             AgesNotValid = 19,
             DatesNotValid = 20,
-            ItemAlreadyExists = 21;
+            ItemAlreadyExists = 21,
+            AgeMinimumRequired = 22,
+            AgeMaximumRequired = 23,
+            AtLeastOneBodyPart = 24;
 
         #endregion
 
@@ -165,17 +168,18 @@ namespace ServicesLibrary
             var errorCodes = new List<int>();
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
-            //validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
-            //validator.Validate(description);
-            validator = new StringEmptyValidator(AgeMinimumNotValid, ref errorCodes);
-            validator.SetNext(new StringIsIntegerValidator(AgeMinimumNotValid, ref errorCodes));
+            validator = new StringEmptyValidator(AgeMinimumRequired, ref errorCodes);
+            validator.SetNext(new StringIsIntegerValidator(AgeMinimumNotANumber, ref errorCodes));
             validator.Validate(ageMinimum);
-            validator = new StringEmptyValidator(AgeMaximumNotValid, ref errorCodes);
-            validator.SetNext(new StringIsIntegerValidator(AgeMaximumNotValid, ref errorCodes));
+            validator = new StringEmptyValidator(AgeMaximumRequired, ref errorCodes);
+            validator.SetNext(new StringIsIntegerValidator(AgeMaximumNotANumber, ref errorCodes));
             validator.Validate(ageMaximum);
             if (errorCodes.Any()) return errorCodes;
             validator = new MaxAgeGreaterThanMinAgeValidator(AgesNotValid, ref errorCodes);
             validator.Validate(new Tuple<int, int>(int.Parse(ageMaximum), int.Parse(ageMinimum)));
+            validator = new EnumerableNotEmptyValidator(AtLeastOneBodyPart, ref errorCodes);
+            validator.Validate(bodyParts);
+
             if (errorCodes.Any()) return errorCodes;
             validator = new PrescriptionItemUniqueValidator(ItemAlreadyExists, ref errorCodes);
             switch (type)
@@ -229,7 +233,7 @@ namespace ServicesLibrary
             BaseValidator validator = new ObjectNotNullValidator(PatientRequired, ref errorCodes);
             validator.Validate(session.Patient);
             if (errorCodes.Any()) return errorCodes;
-            validator = new EnumerableEmptyValidator(AtLeastOneTreatment, ref errorCodes);
+            validator = new EnumerableNotEmptyValidator(AtLeastOneTreatment, ref errorCodes);
             validator.Validate(session.Treatments);
             if (errorCodes.Any()) return errorCodes;
 

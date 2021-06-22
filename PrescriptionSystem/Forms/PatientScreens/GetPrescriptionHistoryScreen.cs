@@ -18,6 +18,7 @@ namespace Forms.PatientScreens
         private void GetPrescriptionHistoryScreen_Enter(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
+            ListViewPrescriptionHistory.Items.Clear();
             foreach (var prescription in _prescriptions)
             {
                 var listViewItem = new ListViewItem(prescription.Id.ToString());

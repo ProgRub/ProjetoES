@@ -88,6 +88,7 @@ namespace Forms.TherapistScreens
 
             TextBoxTreatmentNote.Text = "";
             CheckBoxCompletedTreatment.Checked = false;
+            ListViewTreatments.SelectedItems.Clear();
             SetEnabledTreatmentNoteControls(false);
         }
 

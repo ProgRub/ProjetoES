@@ -180,7 +180,6 @@ namespace Forms.HealthCareProfessionalScreens
             this.TextBoxMaximumAge.Name = "TextBoxMaximumAge";
             this.TextBoxMaximumAge.Size = new System.Drawing.Size(45, 27);
             this.TextBoxMaximumAge.TabIndex = 47;
-            this.TextBoxMaximumAge.TextChanged += new System.EventHandler(this.TextBoxMaximumAge_TextChanged);
             // 
             // TextBoxMinimumAge
             // 

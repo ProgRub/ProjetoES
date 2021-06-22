@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentsLibrary.Entities;
 using Forms.TherapistScreens;
 using ServicesLibrary;
 using ServicesLibrary.DTOs;
@@ -27,10 +28,17 @@ namespace Forms.HealthCareProfessionalScreens
                 }
             }
 
+            var bodyPartEnum = new List<BodyPart>();
+
+            if (bodyPart != "")
+            {
+                bodyPartEnum.Add(Services.Instance.ConvertStringToBodyPart(bodyPart));
+            }
+
             var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text,
                 TextBoxTreatmentDescription.Text,
                 TextBoxMinimumAge.Text, TextBoxMaximumAge.Text, DateTimePickerDuration.Value.TimeOfDay,
-                new[] {Services.Instance.ConvertStringToBodyPart(bodyPart)}, "Treatment");
+                bodyPartEnum, "Treatment");
             if (errorCodes.Any())
             {
                 ShowErrorMessages(errorCodes);
@@ -50,35 +58,54 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)
         {
+            var first = true;
+            var errorMessage = "";
             ClearAllTextboxesPlaceholderText();
-            foreach (var error in errorCodes)
+            foreach (var errorCode in errorCodes)
             {
-                switch (error)
+                if (!first)
+                {
+                    errorMessage += Environment.NewLine;
+                }
+
+                switch (errorCode)
                 {
                     case Services.NameRequired:
                         ShowTextBoxErrorMessage(TextBoxTreatmentName, "Name is required!");
                         break;
-                    case Services.DescriptionRequired:
-                        ShowTextBoxErrorMessage(TextBoxTreatmentDescription, "Description is required!");
+                    case Services.AgeMinimumNotANumber:
+                        errorMessage += "Age minimum needs to be an integer!";
+                        first = false;
                         break;
-                    case Services.AgeMinimumNotValid:
-                        ShowInformationMessageBox("Age minimum is required and needs to be a whole number!", "Error");
-                        break;
-                    case Services.AgeMaximumNotValid:
-                        ShowInformationMessageBox("Age maximum is required and needs to be a whole number!", "Error");
+                    case Services.AgeMaximumNotANumber:
+                        errorMessage += "Age maximum needs to be an integer!";
+                        first = false;
                         break;
                     case Services.AgesNotValid:
-                        ShowInformationMessageBox("The maximum age has to be greater than the minimum age.", "Error");
+                        errorMessage += "The maximum age has to be greater than the minimum age.";
+                        first = false;
+                        break;
+                    case Services.AgeMinimumRequired:
+                        errorMessage += "You have to set a minimum age for the treatment.";
+                        first = false;
+                        break;
+                    case Services.AgeMaximumRequired:
+                        errorMessage += "You have to set a maximum age for the treatment.";
+                        first = false;
                         break;
                     case Services.ItemAlreadyExists:
-                        ShowInformationMessageBox("That treatment already exists in the database.", "Error");
+                        errorMessage += "That treatment already exists in the database.";
+                        first = false;
+                        break;
+                    case Services.AtLeastOneBodyPart:
+                        errorMessage += "The treatment must target a body part.";
+                        first = false;
                         break;
                 }
             }
-        }
 
-        private void AddTreatmentItemScreen_Enter(object sender, EventArgs e)
-        {
+            ShowInformationMessageBox(errorMessage, "Error");
+
         }
     }
 }

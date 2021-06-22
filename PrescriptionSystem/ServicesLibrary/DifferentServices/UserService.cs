@@ -26,20 +26,6 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetById(id);
         }
 
-        //internal void RegisterUser(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber,
-        //    string email, string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases,
-        //    IEnumerable<string> missingBodyParts, string userType)
-        //{
-        //    switch (userType)
-        //    {
-        //        case "Patient":
-        //            PatientService.Instance.RegisterPatient(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
-        //            return;
-        //        case "Therapist":
-        //            TherapistService.Instance.RegisterTherapist(name, dateOfBirth, phoneNumber, healthUserNumber, email, password, allergies, diseases, missingBodyParts);
-        //            return;
-        //    }
-        //}
         public void RegisterUser(UserDTO user, string email, string password, string userType)
         {
             switch (userType)
@@ -67,22 +53,11 @@ namespace ServicesLibrary.DifferentServices
                     MedicalConditionService.Instance.GetMedicalConditionById(disease.Id));
             }
         }
-
-        //protected void AddMissingBodyPartsToUser(User user, IEnumerable<string> missingBodyParts)
-        //{
-        //    foreach (var bodyPartString in missingBodyParts)
-        //    {
-        //        _userRepository.AddMissingBodyPartToUser(user, (BodyPart) Enum.Parse(typeof(BodyPart), bodyPartString));
-        //    }
-        //}
+        
 
         protected void AddMissingBodyPartsToUser(User user, IEnumerable<BodyPart> missingBodyParts)
         {
-            user.MissingBodyParts = missingBodyParts.ToList();
-            //foreach (var bodyPart in missingBodyParts)
-            //{
-            //    _userRepository.AddMissingBodyPartToUser(user, bodyPart);
-            //}
+            user.MissingBodyParts = missingBodyParts.Any() ? missingBodyParts.ToList() : null;
         }
 
         internal bool IsUserEmailInDatabase(string email)

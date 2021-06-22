@@ -22,6 +22,9 @@ namespace Forms.CommonScreens
             _diseases = Services.Instance.GetAllDiseases();
             DateTimePickerDOB.MaxDate = DateTime.Today;
             DateTimePickerDOB.Value = DateTime.Today;
+            CheckedListBoxAllergies.Items.Clear();
+            CheckedListBoxDiseases.Items.Clear();
+
             foreach (var allergy in _allergies)
             {
                 CheckedListBoxAllergies.Items.Add($"{allergy.Id} - {allergy.Name}");
