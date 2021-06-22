@@ -1,4 +1,6 @@
 ﻿
+using Forms.CommonScreens;
+
 namespace Forms
 {
     partial class Window
@@ -29,7 +31,7 @@ namespace Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.loginScreen1 = new Forms.LoginScreen();
+            this.loginScreen1 = new LoginScreen();
             this.SuspendLayout();
             // 
             // loginScreen1
