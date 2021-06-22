@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Forms.CommandsVisualCompletedSession;
 using ServicesLibrary;
 using ServicesLibrary.Commands;
 using ServicesLibrary.Commands.FinishedTherapySession;
@@ -30,6 +32,8 @@ namespace Forms.TherapistScreens
                 listViewItem.SubItems.Add(treatment.BodyPart.ToString());
                 listViewItem.SubItems.Add(treatment.Duration.ToString());
                 ListViewTreatments.Items.Add(listViewItem);
+
+                if(Services.Instance.GetTreatmentCompletedStatus(_therapySession.Id, treatment.Id)) ListViewTreatments.Items[ListViewTreatments.Items.IndexOf(listViewItem)].BackColor = Color.GreenYellow;
             }
 
             TextBoxTherapySessionNote.Text = _therapySession.Note;
@@ -38,11 +42,13 @@ namespace Forms.TherapistScreens
         private void ButtonRedo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Redo();
+            _therapySession.Note = TextBoxTherapySessionNote.Text;
         }
 
         private void ButtonUndo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Undo();
+            _therapySession.Note = TextBoxTherapySessionNote.Text;
         }
 
         private void ListViewTreatments_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,9 +79,13 @@ namespace Forms.TherapistScreens
 
         private void ButtonAddTreatmentNoteSetCompletedState_Click(object sender, EventArgs e)
         {
-            CommandsManager.Instance.Execute(new CommandAddTreatmentNoteSetCompleted(TextBoxTreatmentNote.Text,
+            var macrocommand = new MacroCommand();
+            macrocommand.Add(new CommandAddTreatmentNoteSetCompleted(TextBoxTreatmentNote.Text,
                 CheckBoxCompletedTreatment.Checked, _therapySession.Id,
                 _therapySession.Treatments.ElementAt(ListViewTreatments.SelectedIndices[0]).Id));
+            macrocommand.Add(new CommandListViewRowSetColor(ListViewTreatments.SelectedItems[0], Color.GreenYellow));
+            CommandsManager.Instance.Execute(macrocommand);
+
             TextBoxTreatmentNote.Text = "";
             CheckBoxCompletedTreatment.Checked = false;
             SetEnabledTreatmentNoteControls(false);
@@ -83,7 +93,11 @@ namespace Forms.TherapistScreens
 
         private void ButtonAddSessionNote_Click(object sender, EventArgs e)
         {
-            CommandsManager.Instance.Execute(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text));
+            var macrocommand = new MacroCommand();
+            macrocommand.Add(new CommandSetTextboxText(TextBoxTherapySessionNote, _therapySession.Note));
+            macrocommand.Add(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text));
+            _therapySession.Note = TextBoxTherapySessionNote.Text;
+            CommandsManager.Instance.Execute(macrocommand);
         }
     }
 }
