@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,8 +16,9 @@ namespace Forms.HealthCareProfessionalScreens
         {
             InitializeComponent();
         }
-        private void SelectPatientScreen_Load(object sender, EventArgs e)
+        private void SelectPatientScreen_Enter(object sender, EventArgs e)
         {
+            Debug.WriteLine("ASDAS");
             _patients = Services.Instance.GetAllPatients();
             if (!_patients.Any())
             {

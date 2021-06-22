@@ -137,8 +137,7 @@ namespace Forms.CommonScreens
             this.MinimumSize = new System.Drawing.Size(343, 253);
             this.Name = "LoginScreen";
             this.Size = new System.Drawing.Size(674, 259);
-            this.Load += new System.EventHandler(this.LoginScreen_Load);
-            this.VisibleChanged += new System.EventHandler(this.LoginScreen_VisibleChanged);
+            this.Enter += new System.EventHandler(this.LoginScreen_Enter);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.LabelPassword, 0);
             this.Controls.SetChildIndex(this.TextBoxEmail, 0);

@@ -14,7 +14,7 @@ namespace Forms.HealthCareProfessionalScreens
             InitializeComponent();
         }
 
-        private void AddExerciseItemScreen_Load(object sender, EventArgs e)
+        private void AddExerciseItemScreen_Enter(object sender, EventArgs e)
         {
             SetCheckedListBoxColumnWidth(CheckedListBoxBodyPart);
         }

@@ -17,7 +17,7 @@ namespace Forms.TherapistScreens
             InitializeComponent();
         }
 
-        private void AddTherapySessionScreen_Load(object sender, EventArgs e)
+        private void AddTherapySessionScreen_Enter(object sender, EventArgs e)
         {
             _treatments = Services.Instance.GetAllTreatments();
             _patients = Services.Instance.GetAllPatients();

@@ -15,7 +15,7 @@ namespace Forms.PatientScreens
         {
             InitializeComponent();
         }
-        private void GetPrescriptionHistoryScreen_Load(object sender, EventArgs e)
+        private void GetPrescriptionHistoryScreen_Enter(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
             foreach (var prescription in _prescriptions)

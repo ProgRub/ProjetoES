@@ -40,15 +40,11 @@ namespace Forms.CommonScreens
             MoveToScreen(new SignUpScreen(), this);
         }
 
-        private void LoginScreen_Load(object sender, EventArgs e)
+        private void LoginScreen_Enter(object sender, EventArgs e)
         {
             Debug.WriteLine("HERE");
             SetFormAcceptButton(ButtonLogin);
         }
-
-        private void LoginScreen_VisibleChanged(object sender, EventArgs e)
-        {
-            if(this.Visible)Debug.WriteLine("ENTER");
-        }
+        
     }
 }

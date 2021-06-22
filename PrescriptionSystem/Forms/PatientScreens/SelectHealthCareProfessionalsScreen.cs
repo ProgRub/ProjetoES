@@ -14,7 +14,7 @@ namespace Forms.PatientScreens
         {
             InitializeComponent();
         }
-        private void SelectHealthCareProfessionalsScreen_Load(object sender, EventArgs e)
+        private void SelectHealthCareProfessionalsScreen_Enter(object sender, EventArgs e)
         {
 
             _healthCareProfessionals = Services.Instance.GetAllHealthCareProfessionals();

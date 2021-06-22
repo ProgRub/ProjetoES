@@ -16,7 +16,7 @@ namespace Forms.CommonScreens
             InitializeComponent();
         }
 
-        private void SignUpScreen_Load(object sender, EventArgs e)
+        private void SignUpScreen_Enter(object sender, EventArgs e)
         {
             _allergies = Services.Instance.GetAllAllergies();
             _diseases = Services.Instance.GetAllDiseases();

@@ -116,7 +116,7 @@ namespace Forms.PatientScreens
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "GetPrescriptionHistoryScreen";
             this.Size = new System.Drawing.Size(1167, 589);
-            this.Load += new System.EventHandler(this.GetPrescriptionHistoryScreen_Load);
+            this.Enter += new System.EventHandler(this.GetPrescriptionHistoryScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.ListViewPrescriptionHistory, 0);

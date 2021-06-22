@@ -16,7 +16,7 @@ namespace Forms.TherapistScreens
             InitializeComponent();
         }
 
-        private void TherapySessionCompletedScreen_Load(object sender, EventArgs e)
+        private void TherapySessionCompletedScreen_Enter(object sender, EventArgs e)
         {
             _therapySession = Services.Instance.GetSelectedTherapySession();
             CommandsManager.Instance.Notify += (sender, args) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };

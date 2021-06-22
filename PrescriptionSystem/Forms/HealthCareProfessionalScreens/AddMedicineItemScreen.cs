@@ -16,7 +16,7 @@ namespace Forms.HealthCareProfessionalScreens
             InitializeComponent();
         }
 
-        private void AddMedicineItemScreen_Load(object sender, EventArgs e)
+        private void AddMedicineItemScreen_Enter(object sender, EventArgs e)
         {
             _allergies = Services.Instance.GetAllAllergies();
             _diseases = Services.Instance.GetAllDiseases();

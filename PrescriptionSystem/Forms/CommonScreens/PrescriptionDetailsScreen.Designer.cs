@@ -183,7 +183,7 @@ namespace Forms.CommonScreens
             this.Controls.Add(this.TreeViewPrescriptionItems);
             this.Name = "PrescriptionDetailsScreen";
             this.Size = new System.Drawing.Size(1151, 430);
-            this.Load += new System.EventHandler(this.PrescriptionDetailsScreen_Load);
+            this.Enter += new System.EventHandler(this.PrescriptionDetailsScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.TreeViewPrescriptionItems, 0);
             this.Controls.SetChildIndex(this.LabelPatientImmutable, 0);

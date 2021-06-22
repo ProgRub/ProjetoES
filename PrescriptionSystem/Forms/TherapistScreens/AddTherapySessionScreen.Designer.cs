@@ -193,7 +193,7 @@ namespace Forms.TherapistScreens
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AddTherapySessionScreen";
             this.Size = new System.Drawing.Size(941, 506);
-            this.Load += new System.EventHandler(this.AddTherapySessionScreen_Load);
+            this.Enter += new System.EventHandler(this.AddTherapySessionScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);
             this.Controls.SetChildIndex(this.LabelPatient, 0);

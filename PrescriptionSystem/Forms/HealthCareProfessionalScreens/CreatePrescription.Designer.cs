@@ -282,8 +282,8 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CreatePrescription";
-            this.Size = new System.Drawing.Size(1206, 471);
-            this.Load += new System.EventHandler(this.CreatePrescription_Load);
+            this.Size = new System.Drawing.Size(1378, 628);
+            this.Enter += new System.EventHandler(this.CreatePrescription_Enter);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);

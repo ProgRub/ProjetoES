@@ -21,6 +21,7 @@ namespace Forms
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);
+            window.ActiveControl = newControl;
         }
         protected void ClearTextBox(TextBox textBox) => textBox.Text = "";
 
