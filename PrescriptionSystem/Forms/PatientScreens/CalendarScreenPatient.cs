@@ -26,6 +26,7 @@ namespace Forms.PatientScreens
         {
 
             var data = new List<KeyValuePair<string, string>>();
+            string sessions = "";
 
             var prescriptions =
                 Services.Instance.GetLoggedInPatientsPrescriptionsStartedBeforeDate(MonthCalendarPatient.SelectionRange
@@ -76,16 +77,27 @@ namespace Forms.PatientScreens
                 .SelectionRange.Start))
             {
                 var dataString = "Therapy session with therapist " + session.Therapist.FullName + ".";
-                data.Add(new KeyValuePair<string, string>(session.DateTime.TimeOfDay.ToString(), dataString));
+                data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(session.DateTime.TimeOfDay), dataString));
             }
 
             data.Sort((b, a) => (b.Value.CompareTo(a.Value)));
 
-            var sessions = data.Aggregate("", (current, pair) => current + pair + Environment.NewLine);
+            foreach (var pair in data)
+            {
+                if (pair.Key == "")
+                {
+                    sessions = sessions + "[" + pair.Value + "]" + Environment.NewLine;
+                }
+                else
+                {
+                    sessions = sessions + pair + Environment.NewLine;
+                }
+                
+            }
 
             if (sessions == "")
             {
-                sessions = "Nothing for today";
+                sessions = "Nothing for today!";
             }
 
             TextBoxDayEvents.Text = sessions;
