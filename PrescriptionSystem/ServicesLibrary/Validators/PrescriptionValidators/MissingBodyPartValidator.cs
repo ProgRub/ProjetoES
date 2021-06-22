@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
@@ -20,6 +21,13 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                     foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
                     {
                         if (missingBodyPart == treatment.BodyPart) return false;
+                    }
+                }
+                foreach (var exercise in prescription.Exercises)
+                {
+                    foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
+                    {
+                        if ( exercise.BodyParts.Contains(missingBodyPart)) return false;
                     }
                 }
 

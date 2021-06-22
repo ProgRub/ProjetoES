@@ -68,11 +68,11 @@ namespace Forms.HealthCareProfessionalScreens
                         ShowTextBoxErrorMessage(TextBoxName, "Name is required!");
                         break;
                     case Services.AgeMinimumNotANumber:
-                        errorMessage += "Age minimum needs to be an integer!";
+                        errorMessage += "Age minimum needs to be a non-negative integer!";
                         first = false;
                         break;
                     case Services.AgeMaximumNotANumber:
-                        errorMessage += "Age maximum needs to be an integer!";
+                        errorMessage += "Age maximum needs to be a non-negative integer!";
                         first = false;
                         break;
                     case Services.AgesNotValid:
