@@ -225,7 +225,6 @@ namespace ComponentsLibrary
                 Description = "This type of arthritis affects specifically the knees",
                 Type = Disease
             });
-
             modelBuilder.Entity<Patient>().HasData(new Patient
             {
                 Id = id++,
