@@ -15,7 +15,7 @@ namespace Forms.TherapistScreens
         {
             InitializeComponent();
         }
-        private void SelectPastTherapySessionScreen_Load(object sender, EventArgs e)
+        private void SelectPastTherapySessionScreen_Enter(object sender, EventArgs e)
         {
             _therapySessions = Services.Instance.GetPastTherapySessionsOfLoggedInTherapist();
             if (!_therapySessions.Any())

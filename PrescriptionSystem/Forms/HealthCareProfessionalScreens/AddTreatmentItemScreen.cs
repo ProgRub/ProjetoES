@@ -77,7 +77,7 @@ namespace Forms.HealthCareProfessionalScreens
             }
         }
 
-        private void AddTreatmentItemScreen_Load(object sender, EventArgs e)
+        private void AddTreatmentItemScreen_Enter(object sender, EventArgs e)
         {
         }
     }

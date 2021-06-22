@@ -308,7 +308,7 @@ namespace Forms.CommonScreens
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SignUpScreen";
             this.Size = new System.Drawing.Size(658, 750);
-            this.Load += new System.EventHandler(this.SignUpScreen_Load);
+            this.Enter += new System.EventHandler(this.SignUpScreen_Enter);
             this.Controls.SetChildIndex(this.LabelPhoneNumber, 0);
             this.Controls.SetChildIndex(this.LabelEmail, 0);
             this.Controls.SetChildIndex(this.TextBoxPhoneNumber, 0);

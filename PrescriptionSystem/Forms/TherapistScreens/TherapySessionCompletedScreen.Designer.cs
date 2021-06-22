@@ -241,7 +241,7 @@ namespace Forms.TherapistScreens
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TherapySessionCompletedScreen";
             this.Size = new System.Drawing.Size(1144, 670);
-            this.Load += new System.EventHandler(this.TherapySessionCompletedScreen_Load);
+            this.Enter += new System.EventHandler(this.TherapySessionCompletedScreen_Enter);
             this.Controls.SetChildIndex(this.ListViewTreatments, 0);
             this.Controls.SetChildIndex(this.LabelTreatments, 0);
             this.Controls.SetChildIndex(this.ButtonUndo, 0);

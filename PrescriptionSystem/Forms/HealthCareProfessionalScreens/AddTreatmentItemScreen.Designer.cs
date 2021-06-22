@@ -291,7 +291,7 @@ namespace Forms.HealthCareProfessionalScreens
             this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddTreatmentItemScreen";
             this.Size = new System.Drawing.Size(762, 612);
-            this.Load += new System.EventHandler(this.AddTreatmentItemScreen_Load);
+            this.Enter += new System.EventHandler(this.AddTreatmentItemScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonAddTreatment, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.TextBoxTreatmentName, 0);

@@ -212,7 +212,7 @@ namespace Forms.HealthCareProfessionalScreens
             this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Name = "AddExerciseItemScreen";
             this.Size = new System.Drawing.Size(777, 617);
-            this.Load += new System.EventHandler(this.AddExerciseItemScreen_Load);
+            this.Enter += new System.EventHandler(this.AddExerciseItemScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonAddExercise, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);
             this.Controls.SetChildIndex(this.TextBoxName, 0);

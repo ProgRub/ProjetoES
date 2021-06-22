@@ -64,7 +64,7 @@ namespace Forms.HealthCareProfessionalScreens
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonExamplePrescription);
             this.Name = "SelectPrescriptionScreen";
-            this.Load += new System.EventHandler(this.SelectPrescriptionScreen_Load);
+            this.Enter += new System.EventHandler(this.SelectPrescriptionScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.ButtonExamplePrescription, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

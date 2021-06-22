@@ -14,7 +14,7 @@ namespace Forms.CommonScreens
             InitializeComponent();
         }
 
-        private void PrescriptionDetailsScreen_Load(object sender, EventArgs e)
+        private void PrescriptionDetailsScreen_Enter(object sender, EventArgs e)
         {
             _prescription = Services.Instance.GetSelectedPrescription();
             LabelToChangePatient.Text = $"{_prescription.Patient.Id} - {_prescription.Patient.FullName}";

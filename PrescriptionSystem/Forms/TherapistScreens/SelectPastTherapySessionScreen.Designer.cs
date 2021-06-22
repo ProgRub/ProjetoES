@@ -69,7 +69,7 @@ namespace Forms.TherapistScreens
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonExampleTherapySession);
             this.Name = "SelectPastTherapySessionScreen";
-            this.Load += new System.EventHandler(this.SelectPastTherapySessionScreen_Load);
+            this.Enter += new System.EventHandler(this.SelectPastTherapySessionScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.ButtonExampleTherapySession, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

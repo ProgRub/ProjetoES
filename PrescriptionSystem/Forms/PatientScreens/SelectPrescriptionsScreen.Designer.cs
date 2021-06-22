@@ -100,7 +100,7 @@ namespace Forms.PatientScreens
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SelectPrescriptionsScreen";
             this.Size = new System.Drawing.Size(955, 419);
-            this.Load += new System.EventHandler(this.SelectPrescriptionsScreen_Load);
+            this.Enter += new System.EventHandler(this.SelectPrescriptionsScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.CheckedListBoxPrescriptions, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);

@@ -23,7 +23,7 @@ namespace Forms.HealthCareProfessionalScreens
             InitializeComponent();
         }
 
-        private void CreatePrescription_Load(object sender, EventArgs e)
+        private void CreatePrescription_Enter(object sender, EventArgs e)
         {
             CommandsManager.Instance.Notify += (_, _) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
 
@@ -246,6 +246,7 @@ namespace Forms.HealthCareProfessionalScreens
         private void ButtonRedo_Click(object sender, EventArgs e)
         {
             CommandsManager.Instance.Redo();
+            TreeViewPrescriptionItems.ExpandAll();
         }
 
         private IEnumerable<PrescriptionItemDTO> GetPrescriptionItemsInPrescription()

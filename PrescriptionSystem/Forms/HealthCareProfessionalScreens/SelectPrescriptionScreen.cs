@@ -18,7 +18,7 @@ namespace Forms.HealthCareProfessionalScreens
             InitializeComponent();
         }
 
-        private void SelectPrescriptionScreen_Load(object sender, EventArgs e)
+        private void SelectPrescriptionScreen_Enter(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetPatientsPrescriptionsByPatientId(Services.Instance.GetSelectedPatient().Id);
             if (!_prescriptions.Any())
