@@ -11,11 +11,8 @@ namespace ServicesLibrary.Validators.FormValidators
 
         public override bool RequestIsValid(object request)
         {
-            if (request is Tuple<string, string> tuple)
+            if (request is Tuple<int, int>(var ageMaximum, var ageMinimum))
             {
-                if (!int.TryParse(tuple.Item1, out var ageMaximum)) return false;
-                if (!int.TryParse(tuple.Item2, out var ageMinimum)) return false;
-
                 return ageMaximum >= ageMinimum;
             }
 

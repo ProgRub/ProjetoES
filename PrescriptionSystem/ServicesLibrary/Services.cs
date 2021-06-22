@@ -32,13 +32,19 @@ namespace ServicesLibrary
             EmailNotValid = 11,
             EmailAlreadyExists = 12,
             HealthUserNumberAlreadyExists = 13,
-            TherapistNotOldEnough = 14,
-            DescriptionRequired = 15,
+            TherapistNotOldEnough = 14;
+
+        #endregion
+
+        #region PrescriptionItemCreation
+
+        public const int DescriptionRequired = 15,
             AgeMinimumNotValid = 16,
             AgeMaximumNotValid = 17,
             PriceNotValid = 18,
             AgesNotValid = 19,
-            DatesNotValid = 20;
+            DatesNotValid = 20,
+            ItemAlreadyExists = 21;
 
         #endregion
 
@@ -156,21 +162,43 @@ namespace ServicesLibrary
         }
 
         public IEnumerable<int> CheckExerciseOrTreatmentCreation(string name, string description, string ageMinimum,
-            string ageMaximum)
+            string ageMaximum, TimeSpan duration, IEnumerable<BodyPart> bodyParts, string type)
         {
             var errorCodes = new List<int>();
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
-            validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
-            validator.Validate(description);
+            //validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
+            //validator.Validate(description);
             validator = new StringEmptyValidator(AgeMinimumNotValid, ref errorCodes);
             validator.SetNext(new StringIsIntegerValidator(AgeMinimumNotValid, ref errorCodes));
             validator.Validate(ageMinimum);
             validator = new StringEmptyValidator(AgeMaximumNotValid, ref errorCodes);
             validator.SetNext(new StringIsIntegerValidator(AgeMaximumNotValid, ref errorCodes));
             validator.Validate(ageMaximum);
+            if (errorCodes.Any()) return errorCodes;
             validator = new MaxAgeGreaterThanMinAgeValidator(AgesNotValid, ref errorCodes);
-            validator.Validate(new Tuple<string, string>(ageMaximum, ageMinimum));
+            validator.Validate(new Tuple<int, int>(int.Parse(ageMaximum), int.Parse(ageMinimum)));
+            if (errorCodes.Any()) return errorCodes;
+            validator = new PrescriptionItemUniqueValidator(ItemAlreadyExists, ref errorCodes);
+            switch (type)
+            {
+                case "Exercise":
+                    validator.Validate(new ExerciseDTO
+                    {
+                        Name = name, Duration = duration, BodyParts = bodyParts
+                    });
+                    break;
+                case "Treatment":
+                    validator.Validate(new TreatmentDTO
+                    {
+                        Name = name,
+                        Duration = duration,
+                        BodyPart = bodyParts.First()
+                    });
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
 
             return errorCodes;
         }
@@ -180,12 +208,18 @@ namespace ServicesLibrary
             var errorCodes = new List<int>();
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
-            validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
-            validator.Validate(description);
+            //validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
+            //validator.Validate(description);
             validator = new StringEmptyValidator(PriceNotValid, ref errorCodes);
-            validator.SetNext(new StringIsFloatValidator(PriceNotValid, ref errorCodes));
+            validator.SetNext(new StringIsDoubleValidator(PriceNotValid, ref errorCodes));
             validator.Validate(price);
-
+            if (errorCodes.Any()) return errorCodes;
+            validator = new PrescriptionItemUniqueValidator(ItemAlreadyExists, ref errorCodes);
+            validator.Validate(new MedicineDTO()
+            {
+                Name = name,
+                Price = double.Parse(price)
+            });
             return errorCodes;
         }
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class StringIsFloatValidator:BaseValidator
+    public class StringIsDoubleValidator:BaseValidator
     {
-        public StringIsFloatValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public StringIsDoubleValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
         }
 
@@ -14,7 +14,7 @@ namespace ServicesLibrary.Validators.FormValidators
 
             if (request is string requestString)
             {
-                return float.TryParse(requestString,out _);
+                return double.TryParse(requestString,out _);
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

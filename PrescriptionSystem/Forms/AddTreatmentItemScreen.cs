@@ -13,17 +13,9 @@ namespace Forms
         {
             InitializeComponent();
         }
+
         private void ButtonAddTreatment_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text,
-                TextBoxTreatmentDescription.Text,
-                TextBoxMinimumAge.Text, TextBoxMaximumAge.Text);
-            if (errorCodes.Any())
-            {
-                ShowErrorMessages(errorCodes);
-                return;
-            }
-
             var bodyPart = "";
             foreach (var radioButton in GroupBoxBodyPart.Controls.OfType<RadioButton>())
             {
@@ -33,6 +25,17 @@ namespace Forms
                     break;
                 }
             }
+
+            var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxTreatmentName.Text,
+                TextBoxTreatmentDescription.Text,
+                TextBoxMinimumAge.Text, TextBoxMaximumAge.Text, DateTimePickerDuration.Value.TimeOfDay,
+                new[] {Services.Instance.ConvertStringToBodyPart(bodyPart)}, "Treatment");
+            if (errorCodes.Any())
+            {
+                ShowErrorMessages(errorCodes);
+                return;
+            }
+
             Services.Instance.CreateTreatmentPrescriptionItem(new TreatmentDTO
             {
                 Name = TextBoxTreatmentName.Text, Description = TextBoxTreatmentDescription.Text,
@@ -58,13 +61,16 @@ namespace Forms
                         ShowTextBoxErrorMessage(TextBoxTreatmentDescription, "Description is required!");
                         break;
                     case Services.AgeMinimumNotValid:
-                        ShowTextBoxErrorMessage(TextBoxMinimumAge, "Age minimum is required!");
+                        ShowInformationMessageBox("Age minimum is required and needs to be a whole number!", "Error");
                         break;
                     case Services.AgeMaximumNotValid:
-                        ShowTextBoxErrorMessage(TextBoxMaximumAge, "Age maximum is required!");
+                        ShowInformationMessageBox("Age maximum is required and needs to be a whole number!", "Error");
                         break;
                     case Services.AgesNotValid:
                         ShowInformationMessageBox("The maximum age has to be greater than the minimum age.", "Error");
+                        break;
+                    case Services.ItemAlreadyExists:
+                        ShowInformationMessageBox("That treatment already exists in the database.", "Error");
                         break;
                 }
             }
@@ -72,7 +78,6 @@ namespace Forms
 
         private void AddTreatmentItemScreen_Load(object sender, EventArgs e)
         {
-
         }
     }
 }

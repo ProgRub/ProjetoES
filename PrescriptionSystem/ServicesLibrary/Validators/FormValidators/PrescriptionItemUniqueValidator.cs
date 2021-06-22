@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ServicesLibrary.DifferentServices;
 using ServicesLibrary.DTOs;
 
@@ -29,7 +30,7 @@ namespace ServicesLibrary.Validators.FormValidators
                     foreach (var exerciseInDB in PrescriptionItemService.Instance.GetAllExercises())
                     {
                         if (exerciseInDB.Name == exercise.Name &&
-                            Equals(exerciseInDB.BodyParts, exercise.BodyParts) &&
+                            exerciseInDB.BodyParts.All(e=>exercise.BodyParts.Contains(e)) &&
                             exerciseInDB.Duration == exercise.Duration) return false;
                     }
                     return true;

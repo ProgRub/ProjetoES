@@ -94,6 +94,9 @@ namespace Forms
                     case Services.PriceNotValid:
                         ShowTextBoxErrorMessage(TextBoxMedicinePrice, "Price is required!");
                         break;
+                    case Services.ItemAlreadyExists:
+                        ShowInformationMessageBox("That medicine already exists in the database.","Error");
+                        break;
                 }
             }
         }
