@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using Forms.CommonScreens;
 
 namespace Forms
 {
@@ -70,7 +71,7 @@ namespace Forms
 
         protected void ButtonBack_Click(object sender, EventArgs e)
         {
-            MoveToScreen(PreviousScreen, PreviousScreen.PreviousScreen??this);
+            MoveToScreen(PreviousScreen, PreviousScreen.PreviousScreen??new LoginScreen());
         }
     }
 }

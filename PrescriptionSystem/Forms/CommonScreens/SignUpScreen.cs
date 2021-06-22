@@ -79,7 +79,7 @@ namespace Forms.CommonScreens
                 PhoneNumber = int.Parse(TextBoxPhoneNumber.Text)
             }, TextBoxEmail.Text, TextBoxPassword.Text, userType);
             ShowInformationMessageBox("User registered successively.", "Success");
-            MoveToScreen(new LoginScreen(), this);
+            MoveToScreen(new LoginScreen(), null);
         }
 
         private void ShowErrorMessages(IEnumerable<int> errorCodes)

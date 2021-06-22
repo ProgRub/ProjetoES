@@ -38,7 +38,7 @@ namespace Forms.PatientScreens
                 {
                     if (Services.Instance.IsMedicine(item.Id))
                     {
-                        if (prescription.PrescriptionItemsRecommendedTimes != null)
+                        if (prescription.PrescriptionItemsRecommendedTimes[item] != null)
                         {
                             foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
                             {
@@ -46,17 +46,27 @@ namespace Forms.PatientScreens
                                 data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
                             }
                         }
+                        else
+                        {
+                            var dataString = "Take " + item.Name + " medicine.";
+                            data.Add(new KeyValuePair<string, string>("", dataString));
+                        }
                     }
 
                     if (Services.Instance.IsExercise(item.Id))
                     {
-                        if (prescription.PrescriptionItemsRecommendedTimes != null)
+                        if (prescription.PrescriptionItemsRecommendedTimes[item] != null)
                         {
                             foreach (var timeSpan in prescription.PrescriptionItemsRecommendedTimes[item])
                             {
                                 var dataString = "Do " + item.Name + " exercise.";
                                 data.Add(new KeyValuePair<string, string>(timeSpan.ToString(@"hh\:mm"), dataString));
                             }
+                        }
+                        else
+                        {
+                            var dataString = "Do " + item.Name + " exercise.";
+                            data.Add(new KeyValuePair<string, string>("", dataString));
                         }
                     }
                 }

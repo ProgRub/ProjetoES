@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Forms.PatientScreens;
 using Forms.TherapistScreens;
 using ServicesLibrary;
@@ -41,7 +42,13 @@ namespace Forms.CommonScreens
 
         private void LoginScreen_Load(object sender, EventArgs e)
         {
+            Debug.WriteLine("HERE");
             SetFormAcceptButton(ButtonLogin);
+        }
+
+        private void LoginScreen_VisibleChanged(object sender, EventArgs e)
+        {
+            if(this.Visible)Debug.WriteLine("ENTER");
         }
     }
 }

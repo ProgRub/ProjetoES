@@ -64,7 +64,7 @@ namespace ServicesLibrary.DifferentServices
         public void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
-            if (prescription.AuthorId == healthCareProfessional.Id) return;
+            if (CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional)) return;
             _prescriptionRepository.AddViewerToPrescription(prescription, healthCareProfessional);
             _prescriptionRepository.SaveChanges();
         }
@@ -72,7 +72,7 @@ namespace ServicesLibrary.DifferentServices
         public bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
-            return _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
+            return prescription.AuthorId == healthCareProfessional.Id  || _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
                 healthCareProfessional);
         }
 
