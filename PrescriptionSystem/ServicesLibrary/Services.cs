@@ -168,7 +168,7 @@ namespace ServicesLibrary
             return errorCodes;
         }
 
-        public IEnumerable<int> CheckExerciseOrTreatmentCreation(string name, string description, string ageMinimum,
+        public IEnumerable<int> CheckExerciseOrTreatmentCreation(string name, string ageMinimum,
             string ageMaximum, TimeSpan duration, IEnumerable<BodyPart> bodyParts, string type)
         {
             var errorCodes = new List<int>();
@@ -213,7 +213,7 @@ namespace ServicesLibrary
             return errorCodes;
         }
 
-        public IEnumerable<int> CheckMedicineCreation(string name, string description, string price)
+        public IEnumerable<int> CheckMedicineCreation(string name, string price)
         {
             var errorCodes = new List<int>();
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);

@@ -29,7 +29,6 @@ namespace Forms.HealthCareProfessionalScreens
 
 
             var errorCodes = Services.Instance.CheckExerciseOrTreatmentCreation(TextBoxName.Text,
-                TextBoxDescription.Text,
                 TextBoxMinimumAge.Text, TextBoxMaximumAge.Text, DateTimePickerDuration.Value.TimeOfDay,
                 bodyParts.Select(e => Services.Instance.ConvertStringToBodyPart(e)), "Exercise");
 

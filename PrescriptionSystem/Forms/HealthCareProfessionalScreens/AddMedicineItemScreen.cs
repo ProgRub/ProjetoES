@@ -52,8 +52,7 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void ButtonAddMedicine_Click(object sender, EventArgs e)
         {
-            var errorCodes = Services.Instance.CheckMedicineCreation(TextBoxMedicineName.Text,
-                TextBoxMedicineDescription.Text, TextBoxMedicinePrice.Text);
+            var errorCodes = Services.Instance.CheckMedicineCreation(TextBoxMedicineName.Text, TextBoxMedicinePrice.Text);
 
             if (errorCodes.Any())
             {
