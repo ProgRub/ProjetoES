@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class EmailFormatValidator:BaseValidator
+    public class EmailFormatValidator : BaseValidator
     {
         public EmailFormatValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {

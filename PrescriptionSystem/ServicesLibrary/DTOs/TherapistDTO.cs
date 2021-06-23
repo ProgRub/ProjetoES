@@ -7,7 +7,7 @@ namespace ServicesLibrary.DTOs
     public class TherapistDTO : HealthCareProfessionalDTO
 
     {
-        public static TherapistDTO ConvertTherapistToDTO(Therapist therapist)
+        internal static TherapistDTO ConvertTherapistToDTO(Therapist therapist)
         {
             var therapistDTO = new TherapistDTO
             {
@@ -33,6 +33,7 @@ namespace ServicesLibrary.DTOs
                         break;
                 }
             }
+
             therapistDTO.Allergies = allergies;
             therapistDTO.Diseases = diseases;
             therapistDTO.MissingBodyParts = UserService.Instance.GetUserMissingBodyPartsByUserId(therapistDTO.Id);

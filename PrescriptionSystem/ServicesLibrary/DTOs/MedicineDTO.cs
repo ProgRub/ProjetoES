@@ -11,7 +11,7 @@ namespace ServicesLibrary.DTOs
         public IEnumerable<MedicalConditionDTO> IncompatibleAllergies { get; set; }
         public IEnumerable<MedicalConditionDTO> IncompatibleDiseases { get; set; }
 
-        public static MedicineDTO ConvertMedicineToDTO(Medicine medicine)
+        internal static MedicineDTO ConvertMedicineToDTO(Medicine medicine)
         {
             var medicineDTO = new MedicineDTO
                 {Id = medicine.Id, Name = medicine.Name, Description = medicine.Description, Price = medicine.Price};

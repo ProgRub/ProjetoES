@@ -35,6 +35,7 @@ namespace Forms.CommonScreens
 
                 TreeViewPrescriptionItems.Nodes.Add(parentNode);
             }
+
             TreeViewPrescriptionItems.ExpandAll();
         }
     }

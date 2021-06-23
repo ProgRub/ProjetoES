@@ -17,15 +17,16 @@ namespace ServicesLibrary.DTOs
         public IEnumerable<ExerciseDTO> Exercises { get; set; }
         public IEnumerable<TreatmentDTO> Treatments { get; set; }
         public IEnumerable<MedicineDTO> Medicines { get; set; }
-        public IDictionary<PrescriptionItemDTO,IEnumerable<TimeSpan>> PrescriptionItemsRecommendedTimes { get; set; }
+        public IDictionary<PrescriptionItemDTO, IEnumerable<TimeSpan>> PrescriptionItemsRecommendedTimes { get; set; }
         public IEnumerable<HealthCareProfessionalDTO> Viewers { get; set; }
 
-        public static PrescriptionDTO ConvertPrescriptionToDTO(Prescription prescription)
+        internal static PrescriptionDTO ConvertPrescriptionToDTO(Prescription prescription)
         {
             var prescriptionDTO = new PrescriptionDTO
             {
                 Id = prescription.Id,
-                Patient = PatientDTO.ConvertPatientToDTO((Patient) UserService.Instance.GetUserById(prescription.PatientId)),
+                Patient = PatientDTO.ConvertPatientToDTO(
+                    (Patient) UserService.Instance.GetUserById(prescription.PatientId)),
                 Author = HealthCareProfessionalDTO.ConvertHealthCareProfessionalToDTO(
                     (HealthCareProfessional) UserService.Instance.GetUserById(prescription.AuthorId)),
                 Description = prescription.Description,
@@ -41,7 +42,7 @@ namespace ServicesLibrary.DTOs
             return prescriptionDTO;
         }
 
-        public static void AddPrescriptionItemsToDTO(PrescriptionDTO prescriptionDto,
+        internal static void AddPrescriptionItemsToDTO(PrescriptionDTO prescriptionDto,
             IEnumerable<PrescriptionItem> prescriptionItems)
         {
             var medicineDtos = new List<MedicineDTO>();
@@ -54,19 +55,25 @@ namespace ServicesLibrary.DTOs
                 {
                     var exerciseDto = ExerciseDTO.ConvertExerciseToDTO((Exercise) prescriptionItem);
                     exerciseDtos.Add(exerciseDto);
-                    recommendedTimes.Add(exerciseDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(prescriptionDto.Id, prescriptionItem.Id));
+                    recommendedTimes.Add(exerciseDto,
+                        PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(
+                            prescriptionDto.Id, prescriptionItem.Id));
                 }
                 else if (PrescriptionItemService.Instance.IsMedicine(prescriptionItem.Id))
                 {
                     var medicineDto = MedicineDTO.ConvertMedicineToDTO((Medicine) prescriptionItem);
                     medicineDtos.Add(medicineDto);
-                    recommendedTimes.Add(medicineDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(prescriptionDto.Id, prescriptionItem.Id));
+                    recommendedTimes.Add(medicineDto,
+                        PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(
+                            prescriptionDto.Id, prescriptionItem.Id));
                 }
                 else
                 {
                     var treatmentDto = TreatmentDTO.ConvertTreatmentToDTO((Treatment) prescriptionItem);
                     treatmentDtos.Add(treatmentDto);
-                    recommendedTimes.Add(treatmentDto, PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(prescriptionDto.Id, prescriptionItem.Id));
+                    recommendedTimes.Add(treatmentDto,
+                        PrescriptionService.Instance.GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(
+                            prescriptionDto.Id, prescriptionItem.Id));
                 }
             }
 

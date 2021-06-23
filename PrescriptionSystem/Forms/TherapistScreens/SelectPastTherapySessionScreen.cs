@@ -11,10 +11,12 @@ namespace Forms.TherapistScreens
     public partial class SelectPastTherapySessionScreen : BaseControl
     {
         private IEnumerable<TherapySessionDTO> _therapySessions;
+
         public SelectPastTherapySessionScreen()
         {
             InitializeComponent();
         }
+
         private void SelectPastTherapySessionScreen_Enter(object sender, EventArgs e)
         {
             _therapySessions = Services.Instance.GetPastTherapySessionsOfLoggedInTherapist();
@@ -23,7 +25,8 @@ namespace Forms.TherapistScreens
                 LabelTitle.Text = "You haven't completed any therapy sessions yet...";
                 return;
             }
-            flowLayoutPanel1.Controls.Clear();
+
+            FlowLayoutPanelTherapySessions.Controls.Clear();
             for (var index = 0; index < _therapySessions.Count(); index++)
             {
                 var button = new Button
@@ -43,7 +46,7 @@ namespace Forms.TherapistScreens
                 };
                 button.MouseClick += ButtonClicked;
 
-                flowLayoutPanel1.Controls.Add(button);
+                FlowLayoutPanelTherapySessions.Controls.Add(button);
             }
         }
 
@@ -58,6 +61,5 @@ namespace Forms.TherapistScreens
             return _therapySessions.FirstOrDefault(treatment =>
                 treatment.Id.ToString() == therapySessionString.Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
         }
-        
     }
 }

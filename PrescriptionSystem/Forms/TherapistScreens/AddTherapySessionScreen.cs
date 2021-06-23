@@ -12,6 +12,7 @@ namespace Forms.TherapistScreens
     {
         private IEnumerable<TreatmentDTO> _treatments;
         private IEnumerable<PatientDTO> _patients;
+
         public AddTherapySessionScreen()
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace Forms.TherapistScreens
                 DateTime = DateTimePickerDate.Value.Date.Add(DateTimePickerSessionHour.Value.TimeOfDay),
                 EstimatedDuration = TimeSpan.Parse(LabelSessionDuration.Text), Treatments = treatments
             };
-            
+
             var errorCodes = Services.Instance.CheckTherapySessionCreation(therapySession);
             if (errorCodes.Any())
             {
@@ -96,7 +97,8 @@ namespace Forms.TherapistScreens
                         errorMessage += "You have to select at least one treatment.";
                         break;
                     case Services.InvalidAge:
-                        errorMessage += "The patient is out of the age range of, at least, one of the selected treatments.";
+                        errorMessage +=
+                            "The patient is out of the age range of, at least, one of the selected treatments.";
                         break;
                     case Services.MissingBodyPart:
                         errorMessage += "The patient is missing the body part one of the treatments targets.";

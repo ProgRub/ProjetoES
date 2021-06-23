@@ -4,7 +4,7 @@ using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class TherapistOldEnoughValidator:BaseValidator
+    public class TherapistOldEnoughValidator : BaseValidator
     {
         public TherapistOldEnoughValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {

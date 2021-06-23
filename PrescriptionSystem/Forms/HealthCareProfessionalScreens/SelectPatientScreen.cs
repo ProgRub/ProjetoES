@@ -11,10 +11,12 @@ namespace Forms.HealthCareProfessionalScreens
     public partial class SelectPatientScreen : BaseControl
     {
         private IEnumerable<PatientDTO> _patients;
+
         public SelectPatientScreen()
         {
             InitializeComponent();
         }
+
         private void SelectPatientScreen_Enter(object sender, EventArgs e)
         {
             _patients = Services.Instance.GetAllPatients();
@@ -23,7 +25,8 @@ namespace Forms.HealthCareProfessionalScreens
                 LabelTitle.Text = "There are no patients registered yet...";
                 return;
             }
-            flowLayoutPanel1.Controls.Clear();
+
+            FlowLayoutPanelPatients.Controls.Clear();
             for (var index = 0; index < _patients.Count(); index++)
             {
                 var button = new Button
@@ -42,13 +45,13 @@ namespace Forms.HealthCareProfessionalScreens
                         (index % 8) * (ButtonExamplePatient.Size.Height + 25))
                 };
                 button.MouseClick += ButtonClicked;
-                flowLayoutPanel1.Controls.Add(button);
+                FlowLayoutPanelPatients.Controls.Add(button);
             }
         }
 
         private void ButtonClicked(object sender, MouseEventArgs e)
         {
-            Services.Instance.SelectPatient(GetPatientFromString(((Button)sender).Text));
+            Services.Instance.SelectPatient(GetPatientFromString(((Button) sender).Text));
             MoveToScreen(new SelectPrescriptionScreen(), this);
         }
 

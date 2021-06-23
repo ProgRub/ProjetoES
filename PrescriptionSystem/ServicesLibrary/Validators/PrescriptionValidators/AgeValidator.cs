@@ -1,52 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Validators.PrescriptionValidators
 {
-    public class AgeValidator:BaseValidator
+    public class AgeValidator : BaseValidator
     {
-
         public AgeValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
         }
 
         public override bool RequestIsValid(object request)
         {
-
-            if (request is  PrescriptionDTO prescription)
+            switch (request)
             {
-                var today = DateTime.Today;
-                var patientsAge = today.Year - prescription.Patient.DateOfBirth.Year;
-
-                if (prescription.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
-                
-                foreach (var prescriptionExercise in prescription.Exercises)
+                case PrescriptionDTO prescription:
                 {
-                        if (patientsAge < prescriptionExercise.AgeMinimum || patientsAge > prescriptionExercise.AgeMaximum) return false;
-                }
+                    var today = DateTime.Today;
+                    var patientsAge = today.Year - prescription.Patient.DateOfBirth.Year;
+                    if (prescription.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
 
-                foreach (var prescriptionTreatment in prescription.Treatments)
+                    if (prescription.Exercises.Any(prescriptionExercise =>
+                        patientsAge < prescriptionExercise.AgeMinimum ||
+                        patientsAge > prescriptionExercise.AgeMaximum))
+                    {
+                        return false;
+                    }
+
+                    return prescription.Treatments.All(prescriptionTreatment =>
+                        patientsAge >= prescriptionTreatment.AgeMinimum &&
+                        patientsAge <= prescriptionTreatment.AgeMaximum);
+                }
+                case TherapySessionDTO therapySession:
                 {
-                    if (patientsAge < prescriptionTreatment.AgeMinimum || patientsAge > prescriptionTreatment.AgeMaximum) return false;
-                }
+                    var today = DateTime.Today;
+                    var patientsAge = today.Year - therapySession.Patient.DateOfBirth.Year;
+                    if (therapySession.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
 
-                return true;
+                    return therapySession.Treatments.All(treatment =>
+                        patientsAge >= treatment.AgeMinimum && patientsAge <= treatment.AgeMaximum);
+                }
+                default:
+                    throw new NotSupportedException($"Invalid type {request.GetType()}!");
             }
-            if (request is TherapySessionDTO therapySession)
-            {
-                var today = DateTime.Today;
-                var patientsAge = today.Year - therapySession.Patient.DateOfBirth.Year;
-                if (therapySession.Patient.DateOfBirth.Date > today.AddYears(-patientsAge)) patientsAge--;
-                foreach (var treatment in therapySession.Treatments)
-                {
-                    if (patientsAge < treatment.AgeMinimum || patientsAge > treatment.AgeMaximum) return false;
-                }
-
-                return true;
-            }
-
-                throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
     }
 }

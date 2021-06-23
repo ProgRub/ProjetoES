@@ -19,11 +19,11 @@ namespace Forms.CommonScreens
             switch (code)
             {
                 case Services.EmailDoesntExist:
-                    ShowTextBoxErrorMessage(TextBoxEmail,"Incorrect Email");
+                    ShowTextBoxErrorMessage(TextBoxEmail, "Incorrect Email");
                     ShowTextBoxErrorMessage(TextBoxPassword, "Incorrect Password");
                     return;
                 case Services.PasswordDoesntMatch:
-                    ShowTextBoxErrorMessage(TextBoxPassword,"Incorrect Password");
+                    ShowTextBoxErrorMessage(TextBoxPassword, "Incorrect Password");
                     return;
                 case Services.Patient:
                     MoveToScreen(new CalendarScreenPatient(), this);
@@ -45,6 +45,5 @@ namespace Forms.CommonScreens
             TextBoxEmail.Text = "";
             SetFormAcceptButton(ButtonLogin);
         }
-        
     }
 }

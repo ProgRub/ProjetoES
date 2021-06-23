@@ -5,7 +5,7 @@ using ComponentsLibrary.Entities;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class EnumerableNotEmptyValidator:BaseValidator
+    public class EnumerableNotEmptyValidator : BaseValidator
     {
         public EnumerableNotEmptyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
@@ -13,19 +13,15 @@ namespace ServicesLibrary.Validators.FormValidators
 
         public override bool RequestIsValid(object request)
         {
-            if (request is IEnumerable<BodyPart> enumEnumerable)
+            switch (request)
             {
-                return enumEnumerable.Any();
+                case IEnumerable<BodyPart> enumEnumerable:
+                    return enumEnumerable.Any();
+                case IEnumerable<object> enumerable:
+                    return enumerable.Any();
+                default:
+                    throw new NotSupportedException($"Invalid type {request.GetType()}!");
             }
-
-            if (request is IEnumerable<object> enumerable)
-            {
-                return enumerable.Any();
-            }
-
-            
-
-            throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
     }
 }

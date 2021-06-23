@@ -13,41 +13,50 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
         public override bool RequestIsValid(object request)
         {
-            if (request is PrescriptionDTO prescription)
+            switch (request)
             {
-                if (prescription.Patient.MissingBodyParts == null) return true;
-                foreach (var treatment in prescription.Treatments)
+                case PrescriptionDTO prescription when prescription.Patient.MissingBodyParts == null:
+                    return true;
+                case PrescriptionDTO prescription:
                 {
-                    foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
+                    foreach (var treatment in prescription.Treatments)
                     {
-                        if (missingBodyPart == treatment.BodyPart) return false;
+                        if (prescription.Patient.MissingBodyParts.Any(missingBodyPart =>
+                            missingBodyPart == treatment.BodyPart))
+                        {
+                            return false;
+                        }
                     }
-                }
-                foreach (var exercise in prescription.Exercises)
-                {
-                    foreach (var missingBodyPart in prescription.Patient.MissingBodyParts)
-                    {
-                        if ( exercise.BodyParts.Contains(missingBodyPart)) return false;
-                    }
-                }
 
-                return true;
+                    foreach (var exercise in prescription.Exercises)
+                    {
+                        if (prescription.Patient.MissingBodyParts.Any(missingBodyPart =>
+                            exercise.BodyParts.Contains(missingBodyPart)))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+                case TherapySessionDTO therapySession when therapySession.Patient.MissingBodyParts == null:
+                    return true;
+                case TherapySessionDTO therapySession:
+                {
+                    foreach (var treatment in therapySession.Treatments)
+                    {
+                        if (therapySession.Patient.MissingBodyParts.Any(missingBodyPart =>
+                            missingBodyPart == treatment.BodyPart))
+                        {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+                default:
+                    throw new NotSupportedException($"Invalid type {request.GetType()}!");
             }
-            if (request is TherapySessionDTO therapySession)
-            {
-                if (therapySession.Patient.MissingBodyParts == null) return true;
-                foreach (var treatment in therapySession.Treatments)
-                {
-                    foreach (var missingBodyPart in therapySession.Patient.MissingBodyParts)
-                    {
-                        if (missingBodyPart == treatment.BodyPart) return false;
-                    }
-                }
-
-                return true;
-            }
-
-            throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
     }
 }

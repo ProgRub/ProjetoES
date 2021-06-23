@@ -21,7 +21,7 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void ButtonExercise_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new AddExerciseItemScreen(),this);
+            MoveToScreen(new AddExerciseItemScreen(), this);
         }
     }
 }

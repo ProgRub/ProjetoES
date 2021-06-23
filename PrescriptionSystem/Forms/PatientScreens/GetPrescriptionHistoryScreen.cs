@@ -11,10 +11,12 @@ namespace Forms.PatientScreens
     public partial class GetPrescriptionHistoryScreen : BaseControl
     {
         private IEnumerable<PrescriptionDTO> _prescriptions;
+
         public GetPrescriptionHistoryScreen()
         {
             InitializeComponent();
         }
+
         private void GetPrescriptionHistoryScreen_Enter(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();
@@ -33,9 +35,9 @@ namespace Forms.PatientScreens
 
         private void ListViewPrescriptionHistory_DoubleClick(object sender, EventArgs e)
         {
-            if(ListViewPrescriptionHistory.SelectedItems.Count==0)return;
+            if (ListViewPrescriptionHistory.SelectedItems.Count == 0) return;
             Services.Instance.SelectPrescriptions(new[] {GetSelectedPrescription()});
-            MoveToScreen(new PrescriptionDetailsScreen(),this);
+            MoveToScreen(new PrescriptionDetailsScreen(), this);
         }
 
         private PrescriptionDTO GetSelectedPrescription()

@@ -29,7 +29,7 @@ namespace Forms.PatientScreens
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.LabelTitle = new System.Windows.Forms.Label();
             this.ListViewPrescriptionHistory = new System.Windows.Forms.ListView();
             this.columnHeaderId = new System.Windows.Forms.ColumnHeader();
             this.columnHeaderCreatedBy = new System.Windows.Forms.ColumnHeader();
@@ -43,15 +43,15 @@ namespace Forms.PatientScreens
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // label1
+            // LabelTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(509, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(236, 31);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Prescription\'s History";
+            this.LabelTitle.AutoSize = true;
+            this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelTitle.Location = new System.Drawing.Point(445, 47);
+            this.LabelTitle.Name = "LabelTitle";
+            this.LabelTitle.Size = new System.Drawing.Size(193, 25);
+            this.LabelTitle.TabIndex = 6;
+            this.LabelTitle.Text = "Prescription\'s History";
             // 
             // ListViewPrescriptionHistory
             // 
@@ -67,10 +67,11 @@ namespace Forms.PatientScreens
             this.ListViewPrescriptionHistory.GridLines = true;
             this.ListViewPrescriptionHistory.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ListViewPrescriptionHistory.HideSelection = false;
-            this.ListViewPrescriptionHistory.Location = new System.Drawing.Point(33, 117);
+            this.ListViewPrescriptionHistory.Location = new System.Drawing.Point(29, 88);
+            this.ListViewPrescriptionHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ListViewPrescriptionHistory.MultiSelect = false;
             this.ListViewPrescriptionHistory.Name = "ListViewPrescriptionHistory";
-            this.ListViewPrescriptionHistory.Size = new System.Drawing.Size(1297, 632);
+            this.ListViewPrescriptionHistory.Size = new System.Drawing.Size(1135, 475);
             this.ListViewPrescriptionHistory.TabIndex = 6;
             this.ListViewPrescriptionHistory.UseCompatibleStateImageBehavior = false;
             this.ListViewPrescriptionHistory.View = System.Windows.Forms.View.Details;
@@ -107,17 +108,17 @@ namespace Forms.PatientScreens
             // 
             // GetPrescriptionHistoryScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.ListViewPrescriptionHistory);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Controls.Add(this.LabelTitle);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "GetPrescriptionHistoryScreen";
-            this.Size = new System.Drawing.Size(1334, 785);
+            this.Size = new System.Drawing.Size(1167, 589);
             this.Enter += new System.EventHandler(this.GetPrescriptionHistoryScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.LabelTitle, 0);
             this.Controls.SetChildIndex(this.ListViewPrescriptionHistory, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,7 +127,7 @@ namespace Forms.PatientScreens
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelTitle;
         private System.Windows.Forms.ListView ListViewPrescriptionHistory;
         private System.Windows.Forms.ColumnHeader columnHeaderCreatedBy;
         private System.Windows.Forms.ColumnHeader columnHeaderDescription;

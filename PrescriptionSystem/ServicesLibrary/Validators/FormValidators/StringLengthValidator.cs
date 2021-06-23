@@ -5,7 +5,8 @@ namespace ServicesLibrary.Validators.FormValidators
 {
     public class StringLengthValidator : BaseValidator
     {
-        private int _minimumLength, _maximumLength;
+        private readonly int _minimumLength;
+        private readonly int _maximumLength;
 
         public StringLengthValidator(int errorCode, ref List<int> errorCodes, int minimumLength, int maximumLength) :
             base(errorCode, ref errorCodes)

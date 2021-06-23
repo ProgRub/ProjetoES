@@ -66,7 +66,11 @@ namespace ServicesLibrary
 
         #region PrescriptionCreation
 
-        public const int InvalidAge = 15, IncompatibleMedicine = 16, IncompatibleDisease = 17, MissingBodyPart = 18, AtLeastOnePrescriptionItem=19;
+        public const int InvalidAge = 15,
+            IncompatibleMedicine = 16,
+            IncompatibleDisease = 17,
+            MissingBodyPart = 18,
+            AtLeastOnePrescriptionItem = 19;
 
         #endregion
 
@@ -214,8 +218,6 @@ namespace ServicesLibrary
             var errorCodes = new List<int>();
             BaseValidator validator = new StringEmptyValidator(NameRequired, ref errorCodes);
             validator.Validate(name);
-            //validator = new StringEmptyValidator(DescriptionRequired, ref errorCodes);
-            //validator.Validate(description);
             validator = new StringEmptyValidator(PriceNotValid, ref errorCodes);
             validator.SetNext(new StringIsDoubleValidator(PriceNotValid, ref errorCodes));
             validator.Validate(price);
@@ -405,13 +407,6 @@ namespace ServicesLibrary
                 _healthCareProfessionalService.GetById(healthCareProfessional.Id));
 
         public BodyPart ConvertStringToBodyPart(string bodyPart) => (BodyPart) Enum.Parse(typeof(BodyPart), bodyPart);
-
-        public string RemoveSecondsInTimeSpan(TimeSpan ts)
-        {
-            string tsString = ts.ToString();
-            string tsWithoutSeconds = tsString.Substring(0, 5);
-            return tsWithoutSeconds;
-        }
 
         #endregion
     }

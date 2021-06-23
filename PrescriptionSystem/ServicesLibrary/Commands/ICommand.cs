@@ -1,6 +1,5 @@
 ﻿namespace ServicesLibrary.Commands
 {
-
     public interface ICommand
     {
         void Execute();

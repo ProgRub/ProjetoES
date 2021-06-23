@@ -6,7 +6,7 @@ namespace ServicesLibrary.DTOs
 {
     public class PatientDTO : UserDTO
     {
-        public static PatientDTO ConvertPatientToDTO(Patient patient)
+        internal static PatientDTO ConvertPatientToDTO(Patient patient)
         {
             var patientDTO = new PatientDTO
             {
@@ -32,6 +32,7 @@ namespace ServicesLibrary.DTOs
                         break;
                 }
             }
+
             patientDTO.Allergies = allergies;
             patientDTO.Diseases = diseases;
             patientDTO.MissingBodyParts = UserService.Instance.GetUserMissingBodyPartsByUserId(patientDTO.Id);

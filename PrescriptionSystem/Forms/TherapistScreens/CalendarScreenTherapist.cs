@@ -11,6 +11,7 @@ namespace Forms.TherapistScreens
         {
             InitializeComponent();
         }
+
         private void ButtonCreatePrescription_Click(object sender, EventArgs e)
         {
             MoveToScreen(new CreatePrescription(), this);
@@ -58,7 +59,7 @@ namespace Forms.TherapistScreens
 
         private void ButtonCheckPatientsPrescriptions_Click(object sender, EventArgs e)
         {
-            MoveToScreen(new SelectPatientScreen(),this);
+            MoveToScreen(new SelectPatientScreen(), this);
         }
 
         private void CalendarScreenTherapist_Enter(object sender, EventArgs e)

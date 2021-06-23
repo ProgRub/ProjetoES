@@ -11,6 +11,7 @@ namespace Forms.CommonScreens
     {
         private IEnumerable<MedicalConditionDTO> _allergies;
         private IEnumerable<MedicalConditionDTO> _diseases;
+
         public SignUpScreen()
         {
             InitializeComponent();
@@ -74,6 +75,7 @@ namespace Forms.CommonScreens
                 ShowErrorMessages(errorCodes);
                 return;
             }
+
             Services.Instance.RegisterUser(new UserDTO
             {
                 Allergies = allergies, DateOfBirth = DateTimePickerDOB.Value, Diseases = diseases,
@@ -138,7 +140,8 @@ namespace Forms.CommonScreens
 
                         break;
                     case Services.HealthUserNumberNotANumber:
-                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber, "Health User Number needs to be a number bigger than 0!");
+                        ShowTextBoxErrorMessage(TextBoxHealthUserNumber,
+                            "Health User Number needs to be a number bigger than 0!");
                         break;
                     case Services.HealthUserNumberAlreadyExists:
                         ShowTextBoxErrorMessage(TextBoxHealthUserNumber,

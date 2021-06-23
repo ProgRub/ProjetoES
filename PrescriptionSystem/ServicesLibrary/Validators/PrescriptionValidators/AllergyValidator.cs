@@ -8,13 +8,8 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class AllergyValidator : BaseValidator
     {
-
         public AllergyValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
-        }
-        public bool MedicalConditionIsAllergy(int id)
-        {
-            return MedicalConditionService.Instance.GetAllergies().Any(e => e.Id == id);
         }
 
         public override bool RequestIsValid(object request)
@@ -25,9 +20,9 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
                 {
                     foreach (var allergenic in medicine.IncompatibleAllergies)
                     {
-                        foreach (var allergy in prescription.Patient.Allergies)
+                        if (prescription.Patient.Allergies.Any(allergy => allergy.Id == allergenic.Id))
                         {
-                            if (allergy.Id == allergenic.Id) return false;
+                            return false;
                         }
                     }
                 }
@@ -37,6 +32,5 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");
         }
-
     }
 }

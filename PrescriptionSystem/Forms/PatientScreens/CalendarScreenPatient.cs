@@ -13,6 +13,7 @@ namespace Forms.PatientScreens
         {
             InitializeComponent();
         }
+
         private void ButtonGetPrescriptionHistory_Click(object sender, EventArgs e)
         {
             MoveToScreen(new GetPrescriptionHistoryScreen(), this);
@@ -31,12 +32,9 @@ namespace Forms.PatientScreens
         private void ShowDayEvents()
         {
             var data = new List<KeyValuePair<string, string>>();
-            string sessions = "";
-
             var prescriptions =
                 Services.Instance.GetLoggedInPatientsPrescriptionsStartedBeforeDate(MonthCalendarPatient.SelectionRange
                     .Start);
-
 
             foreach (var prescription in prescriptions)
             {
@@ -57,7 +55,7 @@ namespace Forms.PatientScreens
             AddTherapySessionsInformation(data);
 
             var orderByKey = data.OrderBy(kvp => kvp.Key);
-
+            var sessions = "";
             sessions = BeautifyInformation(orderByKey, sessions);
 
             TextBoxDayEvents.Text = sessions;
@@ -91,12 +89,14 @@ namespace Forms.PatientScreens
                 .SelectionRange.Start))
             {
                 var dataString = "Therapy session with therapist " + session.Therapist.FullName + ".";
-                data.Add(new KeyValuePair<string, string>(Services.Instance.RemoveSecondsInTimeSpan(session.DateTime.TimeOfDay),
+                data.Add(new KeyValuePair<string, string>(
+                    session.DateTime.TimeOfDay.ToString(@"hh\:mm"),
                     dataString));
             }
         }
 
-        private void AddMedicineInformation(PrescriptionDTO prescription, PrescriptionItemDTO item, List<KeyValuePair<string, string>> data)
+        private void AddMedicineInformation(PrescriptionDTO prescription, PrescriptionItemDTO item,
+            List<KeyValuePair<string, string>> data)
         {
             if (prescription.PrescriptionItemsRecommendedTimes[item] != null)
             {
@@ -109,10 +109,10 @@ namespace Forms.PatientScreens
                 var dataString = "Take " + item.Name + " medicine.";
                 data.Add(new KeyValuePair<string, string>("", dataString));
             }
-
         }
 
-        private void AddExerciseInformation(PrescriptionDTO prescription, PrescriptionItemDTO item, List<KeyValuePair<string, string>> data)
+        private void AddExerciseInformation(PrescriptionDTO prescription, PrescriptionItemDTO item,
+            List<KeyValuePair<string, string>> data)
         {
             if (prescription.PrescriptionItemsRecommendedTimes[item] != null)
             {

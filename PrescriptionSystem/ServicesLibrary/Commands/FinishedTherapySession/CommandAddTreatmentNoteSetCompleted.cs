@@ -5,14 +5,17 @@ namespace ServicesLibrary.Commands.FinishedTherapySession
 {
     public class CommandAddTreatmentNoteSetCompleted : ICommand
     {
-        private string _treatmentOldNote, _treatmentNewNote;
-        private bool _treatmentOldCompletedState, _treatmentNewCompletedState;
-        private TherapySessionHasTreatments _therapySessionHasTreatments;
+        private readonly string _treatmentOldNote;
+        private readonly string _treatmentNewNote;
+        private readonly bool _treatmentOldCompletedState;
+        private readonly bool _treatmentNewCompletedState;
+        private readonly TherapySessionHasTreatments _therapySessionHasTreatments;
 
-        public CommandAddTreatmentNoteSetCompleted(string note, bool completedState,int sessionId,int treatmentId)
+        public CommandAddTreatmentNoteSetCompleted(string note, bool completedState, int sessionId, int treatmentId)
         {
             _therapySessionHasTreatments =
-                TherapySessionService.Instance.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId,treatmentId);
+                TherapySessionService.Instance.GetTherapySessionHasTreatmentsBySessionIdAndTreatmentId(sessionId,
+                    treatmentId);
             _treatmentOldNote = _therapySessionHasTreatments.Note;
             _treatmentOldCompletedState = _therapySessionHasTreatments.CompletedTreatment;
             _treatmentNewNote = note;

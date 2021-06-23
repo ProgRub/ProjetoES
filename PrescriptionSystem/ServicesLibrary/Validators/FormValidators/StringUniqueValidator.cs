@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServicesLibrary.Validators.FormValidators
 {
     public class StringUniqueValidator : BaseValidator
     {
-        private IEnumerable<string> _stringsToCheck;
+        private readonly IEnumerable<string> _stringsToCheck;
 
         public StringUniqueValidator(int errorCode, ref List<int> errorCodes, IEnumerable<string> stringsToCheck) :
             base(errorCode, ref errorCodes)
@@ -17,15 +18,7 @@ namespace ServicesLibrary.Validators.FormValidators
         {
             if (request is string requestString)
             {
-                foreach (var checkingString in _stringsToCheck)
-                {
-                    if (requestString == checkingString)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
+                return _stringsToCheck.All(checkingString => requestString != checkingString);
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

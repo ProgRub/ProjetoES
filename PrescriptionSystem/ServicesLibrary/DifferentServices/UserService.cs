@@ -10,7 +10,7 @@ namespace ServicesLibrary.DifferentServices
 {
     public class UserService
     {
-        private IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
         internal int LoggedInUserId { get; private set; }
 
@@ -26,12 +26,12 @@ namespace ServicesLibrary.DifferentServices
             return _userRepository.GetById(id);
         }
 
-        public void RegisterUser(UserDTO user, string email, string password, string userType)
+        internal void RegisterUser(UserDTO user, string email, string password, string userType)
         {
             switch (userType)
             {
                 case "Patient":
-                    PatientService.Instance.RegisterPatient(user,email,password);
+                    PatientService.Instance.RegisterPatient(user, email, password);
                     return;
                 case "Therapist":
                     TherapistService.Instance.RegisterTherapist(user, email, password);
@@ -39,7 +39,8 @@ namespace ServicesLibrary.DifferentServices
             }
         }
 
-        protected void AddMedicalConditionsToUser(User user, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases)
+        protected void AddMedicalConditionsToUser(User user, IEnumerable<MedicalConditionDTO> allergies,
+            IEnumerable<MedicalConditionDTO> diseases)
         {
             foreach (var allergy in allergies)
             {
@@ -53,7 +54,7 @@ namespace ServicesLibrary.DifferentServices
                     MedicalConditionService.Instance.GetMedicalConditionById(disease.Id));
             }
         }
-        
+
 
         protected void AddMissingBodyPartsToUser(User user, IEnumerable<BodyPart> missingBodyParts)
         {
@@ -75,7 +76,7 @@ namespace ServicesLibrary.DifferentServices
         {
             var user = _userRepository.Find(e => e.Email == email && e.Password == password).First();
             LoggedInUserId = user.Id;
-            return PatientService.Instance.GetById(LoggedInUserId)!=null ? Services.Patient : Services.Therapist;
+            return PatientService.Instance.GetById(LoggedInUserId) != null ? Services.Patient : Services.Therapist;
         }
 
         internal void LoadDBHelpFunction()
@@ -87,10 +88,13 @@ namespace ServicesLibrary.DifferentServices
         {
             return _userRepository.GetById(id).MissingBodyParts;
         }
-        
+
         internal IEnumerable<MedicalCondition> GetUsersMedicalConditionsByUserId(int userId)
         {
-            return _userRepository.GetUserHasMedicalConditionsEnumerableByUserId(userId).Select(userHasMedicalCondition => MedicalConditionService.Instance.GetMedicalConditionById(userHasMedicalCondition.MedicalConditionId)).ToList();
+            return _userRepository.GetUserHasMedicalConditionsEnumerableByUserId(userId)
+                .Select(userHasMedicalCondition =>
+                    MedicalConditionService.Instance.GetMedicalConditionById(userHasMedicalCondition
+                        .MedicalConditionId)).ToList();
         }
 
         internal IEnumerable<User> GetAllUsers()
@@ -99,6 +103,5 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal void SaveChanges() => _userRepository.SaveChanges();
-
     }
 }

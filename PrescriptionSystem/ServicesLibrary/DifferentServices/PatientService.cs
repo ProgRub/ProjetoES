@@ -9,7 +9,7 @@ namespace ServicesLibrary.DifferentServices
 {
     public class PatientService : UserService
     {
-        private IPatientRepository _patientRepository;
+        private readonly IPatientRepository _patientRepository;
 
         private PatientService()
         {
@@ -18,7 +18,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal new static PatientService Instance { get; } = new PatientService();
         internal int SelectedPatientId { get; set; }
-        
+
         public Patient GetById(int id)
         {
             return _patientRepository.GetById(id);
@@ -29,7 +29,7 @@ namespace ServicesLibrary.DifferentServices
             return _patientRepository.GetAll();
         }
 
-        public void RegisterPatient(UserDTO user, string email, string password)
+        internal void RegisterPatient(UserDTO user, string email, string password)
         {
             var patient = new Patient
             {
@@ -37,8 +37,8 @@ namespace ServicesLibrary.DifferentServices
                 HealthUserNumber = user.HealthUserNumber, PhoneNumber = user.PhoneNumber
             };
             _patientRepository.Add(patient);
-            AddMedicalConditionsToUser(patient,user.Allergies,user.Diseases);
-            AddMissingBodyPartsToUser(patient,user.MissingBodyParts);
+            AddMedicalConditionsToUser(patient, user.Allergies, user.Diseases);
+            AddMissingBodyPartsToUser(patient, user.MissingBodyParts);
             _patientRepository.SaveChanges();
             UserService.Instance.SaveChanges();
         }

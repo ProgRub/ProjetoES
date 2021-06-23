@@ -10,6 +10,7 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
         public PatientAvailabilityValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {
         }
+
         public override bool RequestIsValid(object request)
         {
             if (request is TherapySessionDTO therapySession)
@@ -18,17 +19,16 @@ namespace ServicesLibrary.Validators.TherapySessionValidators
                     TherapySessionService.Instance.GetAllTherapySessionsOfPatient(therapySession.Patient.Id);
                 foreach (var therapySessionInDatabase in patientTherapySessions)
                 {
-                    if (therapySession.DateTime.Date == therapySessionInDatabase.DateTime.Date)
+                    if (therapySession.DateTime.Date != therapySessionInDatabase.DateTime.Date) continue;
+
+                    var startTimeInDatabase = therapySessionInDatabase.DateTime.TimeOfDay;
+                    var endTimeInDatabase = startTimeInDatabase + therapySessionInDatabase.EstimatedDuration;
+                    var startTimeChecking = therapySession.DateTime.TimeOfDay;
+                    var endTimeChecking = startTimeChecking + therapySession.EstimatedDuration;
+                    if ((startTimeChecking >= startTimeInDatabase && startTimeChecking <= endTimeInDatabase) ||
+                        (endTimeChecking <= endTimeInDatabase && endTimeChecking >= startTimeInDatabase))
                     {
-                        var startTimeInDatabase = therapySessionInDatabase.DateTime.TimeOfDay;
-                        var endTimeInDatabase = startTimeInDatabase + therapySessionInDatabase.EstimatedDuration;
-                        var startTimeChecking = therapySession.DateTime.TimeOfDay;
-                        var endTimeChecking = startTimeChecking + therapySession.EstimatedDuration;
-                        if ((startTimeChecking >= startTimeInDatabase && startTimeChecking <= endTimeInDatabase) ||
-                            (endTimeChecking <= endTimeInDatabase && endTimeChecking >= startTimeInDatabase))
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
 

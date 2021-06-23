@@ -11,7 +11,7 @@ namespace ServicesLibrary.DTOs
         public int AgeMinimum { get; set; }
         public int AgeMaximum { get; set; }
 
-        public static TreatmentDTO ConvertTreatmentToDTO(Treatment treatment)
+        internal static TreatmentDTO ConvertTreatmentToDTO(Treatment treatment)
         {
             return new TreatmentDTO
             {

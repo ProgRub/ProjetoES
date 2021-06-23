@@ -12,7 +12,7 @@ namespace ServicesLibrary.DifferentServices
 {
     public class PrescriptionService
     {
-        private IPrescriptionRepository _prescriptionRepository;
+        private readonly IPrescriptionRepository _prescriptionRepository;
 
         private PrescriptionService()
         {
@@ -23,9 +23,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal List<Prescription> SelectedPrescriptions { get; set; }
 
-
-
-        public void CreatePrescription(PrescriptionDTO prescriptionDTO)
+        internal void CreatePrescription(PrescriptionDTO prescriptionDTO)
         {
             var prescription = new Prescription
             {
@@ -44,23 +42,23 @@ namespace ServicesLibrary.DifferentServices
             _prescriptionRepository.SaveChanges();
         }
 
-        public IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)
+        internal IEnumerable<Prescription> GetPrescriptionsOfPatientById(int patientId)
         {
             return _prescriptionRepository.Find(e => e.PatientId == patientId);
         }
 
-        public IEnumerable<Prescription> GetPrescriptionsStartedBeforeDate(IEnumerable<Prescription> prescriptions,
+        internal IEnumerable<Prescription> GetPrescriptionsStartedBeforeDate(IEnumerable<Prescription> prescriptions,
             DateTime date)
         {
-            return prescriptions.Where(e => e.StartDate <= date&& e.EndDate>=date);
+            return prescriptions.Where(e => e.StartDate <= date && e.EndDate >= date);
         }
 
-        public void AddSelectedPrescriptionById(int id)
+        internal void AddSelectedPrescriptionById(int id)
         {
             SelectedPrescriptions.Add(_prescriptionRepository.GetById(id));
         }
 
-        public void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
+        internal void AddHealthCareProfessionalAsViewerToPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
             if (CanHealthCareProfessionalViewPrescription(prescription, healthCareProfessional)) return;
@@ -68,18 +66,20 @@ namespace ServicesLibrary.DifferentServices
             _prescriptionRepository.SaveChanges();
         }
 
-        public bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
+        internal bool CanHealthCareProfessionalViewPrescription(Prescription prescription,
             HealthCareProfessional healthCareProfessional)
         {
-            return prescription.AuthorId == healthCareProfessional.Id  || _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
-                healthCareProfessional);
+            return prescription.AuthorId == healthCareProfessional.Id ||
+                   _prescriptionRepository.IsHealthCareProfessionalPrescriptionViewer(prescription,
+                       healthCareProfessional);
         }
 
         internal IEnumerable<PrescriptionItem> GetPrescriptionItemsOfPrescriptionById(int prescriptionId)
         {
             var prescriptionItems = new List<PrescriptionItem>();
-            foreach (var prescriptionHasItems in _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
-                prescriptionId))
+            foreach (var prescriptionHasItems in _prescriptionRepository
+                .GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
+                    prescriptionId))
             {
                 if (PrescriptionItemService.Instance.IsExercise(prescriptionHasItems.PrescriptionItemId))
                 {
@@ -101,17 +101,18 @@ namespace ServicesLibrary.DifferentServices
             return prescriptionItems;
         }
 
-        public IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
+        internal IEnumerable<HealthCareProfessional> GetPrescriptionViewersByPrescriptionId(int id)
         {
-            return _prescriptionRepository.GetPrescriptionViewersIdsByPrescriptionId(id).Select(e=>HealthCareProfessionalService.Instance.GetById(e));
+            return _prescriptionRepository.GetPrescriptionViewersIdsByPrescriptionId(id)
+                .Select(e => HealthCareProfessionalService.Instance.GetById(e));
         }
 
-        public Prescription GetPrescriptionById(int prescriptionId)
+        internal Prescription GetPrescriptionById(int prescriptionId)
         {
             return _prescriptionRepository.GetById(prescriptionId);
         }
 
-        public IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(int prescriptionID,
+        internal IEnumerable<TimeSpan> GetPrescriptionItemRecommendedTimesByPrescriptionIdAndItemId(int prescriptionID,
             int prescriptionItemId)
         {
             return _prescriptionRepository.GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(prescriptionID)

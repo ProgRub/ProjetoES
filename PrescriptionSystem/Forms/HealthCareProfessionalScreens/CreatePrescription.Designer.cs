@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LabelTitle = new System.Windows.Forms.Label();
+            this.LabelPatient = new System.Windows.Forms.Label();
+            this.LabelDescription = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.LabelStartDate = new System.Windows.Forms.Label();
+            this.LabelEndDate = new System.Windows.Forms.Label();
             this.dateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonCreatePrescription = new System.Windows.Forms.Button();
             this.comboBoxPatient = new System.Windows.Forms.ComboBox();
             this.TreeViewPrescriptionItems = new System.Windows.Forms.TreeView();
-            this.buttonAddPrescriptionItem = new System.Windows.Forms.Button();
-            this.comboBoxItems = new System.Windows.Forms.ComboBox();
-            this.buttonAddTime = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.ButtonAddPrescriptionItem = new System.Windows.Forms.Button();
+            this.ComboBoxItems = new System.Windows.Forms.ComboBox();
+            this.ButtonAddTime = new System.Windows.Forms.Button();
+            this.LabelPrescriptionItems = new System.Windows.Forms.Label();
+            this.LabelRecommendedTime = new System.Windows.Forms.Label();
             this.DateTimePickerRecommendedTime = new System.Windows.Forms.DateTimePicker();
             this.ButtonRedo = new System.Windows.Forms.Button();
             this.ButtonUndo = new System.Windows.Forms.Button();
@@ -53,170 +53,180 @@
             // 
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
-            // label1
+            // LabelTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(543, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Create prescription";
+            this.LabelTitle.AutoSize = true;
+            this.LabelTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelTitle.Location = new System.Drawing.Point(475, 21);
+            this.LabelTitle.Name = "LabelTitle";
+            this.LabelTitle.Size = new System.Drawing.Size(175, 25);
+            this.LabelTitle.TabIndex = 0;
+            this.LabelTitle.Text = "Create prescription";
             // 
-            // label2
+            // LabelPatient
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(37, 129);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Patient:";
+            this.LabelPatient.AutoSize = true;
+            this.LabelPatient.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelPatient.Location = new System.Drawing.Point(32, 97);
+            this.LabelPatient.Name = "LabelPatient";
+            this.LabelPatient.Size = new System.Drawing.Size(47, 15);
+            this.LabelPatient.TabIndex = 6;
+            this.LabelPatient.Text = "Patient:";
             // 
-            // label3
+            // LabelDescription
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(6, 169);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Description:";
+            this.LabelDescription.AutoSize = true;
+            this.LabelDescription.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelDescription.Location = new System.Drawing.Point(5, 127);
+            this.LabelDescription.Name = "LabelDescription";
+            this.LabelDescription.Size = new System.Drawing.Size(71, 15);
+            this.LabelDescription.TabIndex = 7;
+            this.LabelDescription.Text = "Description:";
             // 
             // textBoxDescription
             // 
             this.textBoxDescription.AcceptsReturn = true;
-            this.textBoxDescription.Location = new System.Drawing.Point(103, 172);
+            this.textBoxDescription.Location = new System.Drawing.Point(90, 129);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(489, 136);
+            this.textBoxDescription.Size = new System.Drawing.Size(428, 103);
             this.textBoxDescription.TabIndex = 9;
             // 
-            // label4
+            // LabelStartDate
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(153, 338);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Start date:";
+            this.LabelStartDate.AutoSize = true;
+            this.LabelStartDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelStartDate.Location = new System.Drawing.Point(134, 254);
+            this.LabelStartDate.Name = "LabelStartDate";
+            this.LabelStartDate.Size = new System.Drawing.Size(61, 15);
+            this.LabelStartDate.TabIndex = 10;
+            this.LabelStartDate.Text = "Start date:";
             // 
-            // label5
+            // LabelEndDate
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(158, 408);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 20);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "End date:";
+            this.LabelEndDate.AutoSize = true;
+            this.LabelEndDate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelEndDate.Location = new System.Drawing.Point(138, 306);
+            this.LabelEndDate.Name = "LabelEndDate";
+            this.LabelEndDate.Size = new System.Drawing.Size(56, 15);
+            this.LabelEndDate.TabIndex = 11;
+            this.LabelEndDate.Text = "End date:";
             // 
             // dateTimePickerStartDate
             // 
-            this.dateTimePickerStartDate.Location = new System.Drawing.Point(238, 338);
+            this.dateTimePickerStartDate.Location = new System.Drawing.Point(208, 254);
+            this.dateTimePickerStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerStartDate.Name = "dateTimePickerStartDate";
-            this.dateTimePickerStartDate.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePickerStartDate.Size = new System.Drawing.Size(219, 23);
             this.dateTimePickerStartDate.TabIndex = 12;
             // 
             // dateTimePickerEndDate
             // 
-            this.dateTimePickerEndDate.Location = new System.Drawing.Point(238, 402);
+            this.dateTimePickerEndDate.Location = new System.Drawing.Point(208, 302);
+            this.dateTimePickerEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
-            this.dateTimePickerEndDate.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePickerEndDate.Size = new System.Drawing.Size(219, 23);
             this.dateTimePickerEndDate.TabIndex = 13;
             // 
-            // button1
+            // ButtonCreatePrescription
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(543, 512);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(253, 43);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Create";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.ButtonCreatePrescription.BackColor = System.Drawing.Color.LimeGreen;
+            this.ButtonCreatePrescription.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonCreatePrescription.ForeColor = System.Drawing.Color.White;
+            this.ButtonCreatePrescription.Location = new System.Drawing.Point(475, 384);
+            this.ButtonCreatePrescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonCreatePrescription.Name = "ButtonCreatePrescription";
+            this.ButtonCreatePrescription.Size = new System.Drawing.Size(221, 32);
+            this.ButtonCreatePrescription.TabIndex = 14;
+            this.ButtonCreatePrescription.Text = "Create";
+            this.ButtonCreatePrescription.UseVisualStyleBackColor = false;
+            this.ButtonCreatePrescription.Click += new System.EventHandler(this.ButtonCreatePrescription_Click);
             // 
             // comboBoxPatient
             // 
             this.comboBoxPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPatient.FormattingEnabled = true;
-            this.comboBoxPatient.Location = new System.Drawing.Point(103, 129);
+            this.comboBoxPatient.Location = new System.Drawing.Point(90, 97);
+            this.comboBoxPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxPatient.Name = "comboBoxPatient";
-            this.comboBoxPatient.Size = new System.Drawing.Size(489, 28);
+            this.comboBoxPatient.Size = new System.Drawing.Size(428, 23);
             this.comboBoxPatient.TabIndex = 15;
             // 
             // TreeViewPrescriptionItems
             // 
-            this.TreeViewPrescriptionItems.Location = new System.Drawing.Point(615, 172);
+            this.TreeViewPrescriptionItems.Location = new System.Drawing.Point(538, 129);
+            this.TreeViewPrescriptionItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TreeViewPrescriptionItems.Name = "TreeViewPrescriptionItems";
-            this.TreeViewPrescriptionItems.Size = new System.Drawing.Size(528, 261);
+            this.TreeViewPrescriptionItems.Size = new System.Drawing.Size(462, 197);
             this.TreeViewPrescriptionItems.TabIndex = 16;
             this.TreeViewPrescriptionItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TreeViewPrescriptionItems_KeyDown);
             // 
-            // buttonAddPrescriptionItem
+            // ButtonAddPrescriptionItem
             // 
-            this.buttonAddPrescriptionItem.BackColor = System.Drawing.Color.Aquamarine;
-            this.buttonAddPrescriptionItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddPrescriptionItem.Location = new System.Drawing.Point(1061, 93);
-            this.buttonAddPrescriptionItem.Name = "buttonAddPrescriptionItem";
-            this.buttonAddPrescriptionItem.Size = new System.Drawing.Size(82, 29);
-            this.buttonAddPrescriptionItem.TabIndex = 17;
-            this.buttonAddPrescriptionItem.Text = "Add";
-            this.buttonAddPrescriptionItem.UseVisualStyleBackColor = false;
-            this.buttonAddPrescriptionItem.Click += new System.EventHandler(this.ButtonAddPrescriptionItem_Click);
+            this.ButtonAddPrescriptionItem.BackColor = System.Drawing.Color.Aquamarine;
+            this.ButtonAddPrescriptionItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddPrescriptionItem.Location = new System.Drawing.Point(928, 70);
+            this.ButtonAddPrescriptionItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddPrescriptionItem.Name = "ButtonAddPrescriptionItem";
+            this.ButtonAddPrescriptionItem.Size = new System.Drawing.Size(72, 22);
+            this.ButtonAddPrescriptionItem.TabIndex = 17;
+            this.ButtonAddPrescriptionItem.Text = "Add";
+            this.ButtonAddPrescriptionItem.UseVisualStyleBackColor = false;
+            this.ButtonAddPrescriptionItem.Click += new System.EventHandler(this.ButtonAddPrescriptionItem_Click);
             // 
-            // comboBoxItems
+            // ComboBoxItems
             // 
-            this.comboBoxItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxItems.FormattingEnabled = true;
-            this.comboBoxItems.Location = new System.Drawing.Point(615, 129);
-            this.comboBoxItems.Name = "comboBoxItems";
-            this.comboBoxItems.Size = new System.Drawing.Size(528, 28);
-            this.comboBoxItems.TabIndex = 18;
+            this.ComboBoxItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxItems.FormattingEnabled = true;
+            this.ComboBoxItems.Location = new System.Drawing.Point(538, 97);
+            this.ComboBoxItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ComboBoxItems.Name = "ComboBoxItems";
+            this.ComboBoxItems.Size = new System.Drawing.Size(462, 23);
+            this.ComboBoxItems.TabIndex = 18;
             // 
-            // buttonAddTime
+            // ButtonAddTime
             // 
-            this.buttonAddTime.BackColor = System.Drawing.Color.Gold;
-            this.buttonAddTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.buttonAddTime.Location = new System.Drawing.Point(1194, 294);
-            this.buttonAddTime.Name = "buttonAddTime";
-            this.buttonAddTime.Size = new System.Drawing.Size(94, 29);
-            this.buttonAddTime.TabIndex = 20;
-            this.buttonAddTime.Text = "Add Time";
-            this.buttonAddTime.UseVisualStyleBackColor = false;
-            this.buttonAddTime.Click += new System.EventHandler(this.ButtonAddTime_Click);
+            this.ButtonAddTime.BackColor = System.Drawing.Color.Gold;
+            this.ButtonAddTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ButtonAddTime.Location = new System.Drawing.Point(1045, 220);
+            this.ButtonAddTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonAddTime.Name = "ButtonAddTime";
+            this.ButtonAddTime.Size = new System.Drawing.Size(82, 22);
+            this.ButtonAddTime.TabIndex = 20;
+            this.ButtonAddTime.Text = "Add Time";
+            this.ButtonAddTime.UseVisualStyleBackColor = false;
+            this.ButtonAddTime.Click += new System.EventHandler(this.ButtonAddTime_Click);
             // 
-            // label6
+            // LabelPrescriptionItems
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(615, 97);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(135, 20);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Prescription Items:";
+            this.LabelPrescriptionItems.AutoSize = true;
+            this.LabelPrescriptionItems.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelPrescriptionItems.Location = new System.Drawing.Point(538, 73);
+            this.LabelPrescriptionItems.Name = "LabelPrescriptionItems";
+            this.LabelPrescriptionItems.Size = new System.Drawing.Size(106, 15);
+            this.LabelPrescriptionItems.TabIndex = 21;
+            this.LabelPrescriptionItems.Text = "Prescription Items:";
             // 
-            // label7
+            // LabelRecommendedTime
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(1170, 235);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(152, 20);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Recommended Time:";
+            this.LabelRecommendedTime.AutoSize = true;
+            this.LabelRecommendedTime.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LabelRecommendedTime.Location = new System.Drawing.Point(1024, 176);
+            this.LabelRecommendedTime.Name = "LabelRecommendedTime";
+            this.LabelRecommendedTime.Size = new System.Drawing.Size(121, 15);
+            this.LabelRecommendedTime.TabIndex = 22;
+            this.LabelRecommendedTime.Text = "Recommended Time:";
             // 
             // DateTimePickerRecommendedTime
             // 
             this.DateTimePickerRecommendedTime.CustomFormat = "HH:mm";
             this.DateTimePickerRecommendedTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DateTimePickerRecommendedTime.Location = new System.Drawing.Point(1194, 261);
+            this.DateTimePickerRecommendedTime.Location = new System.Drawing.Point(1045, 196);
+            this.DateTimePickerRecommendedTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DateTimePickerRecommendedTime.Name = "DateTimePickerRecommendedTime";
             this.DateTimePickerRecommendedTime.ShowUpDown = true;
-            this.DateTimePickerRecommendedTime.Size = new System.Drawing.Size(94, 27);
+            this.DateTimePickerRecommendedTime.Size = new System.Drawing.Size(83, 23);
             this.DateTimePickerRecommendedTime.TabIndex = 25;
             // 
             // ButtonRedo
@@ -226,10 +236,9 @@
             this.ButtonRedo.FlatAppearance.BorderSize = 0;
             this.ButtonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonRedo.Image = global::Forms.Properties.Resources.Redo;
-            this.ButtonRedo.Location = new System.Drawing.Point(914, 440);
-            this.ButtonRedo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonRedo.Location = new System.Drawing.Point(800, 330);
             this.ButtonRedo.Name = "ButtonRedo";
-            this.ButtonRedo.Size = new System.Drawing.Size(41, 31);
+            this.ButtonRedo.Size = new System.Drawing.Size(36, 23);
             this.ButtonRedo.TabIndex = 27;
             this.ButtonRedo.UseVisualStyleBackColor = true;
             this.ButtonRedo.Click += new System.EventHandler(this.ButtonRedo_Click);
@@ -241,57 +250,56 @@
             this.ButtonUndo.FlatAppearance.BorderSize = 0;
             this.ButtonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ButtonUndo.Image = global::Forms.Properties.Resources.Undo;
-            this.ButtonUndo.Location = new System.Drawing.Point(829, 440);
-            this.ButtonUndo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonUndo.Location = new System.Drawing.Point(725, 330);
             this.ButtonUndo.Name = "ButtonUndo";
-            this.ButtonUndo.Size = new System.Drawing.Size(41, 31);
+            this.ButtonUndo.Size = new System.Drawing.Size(36, 23);
             this.ButtonUndo.TabIndex = 26;
             this.ButtonUndo.UseVisualStyleBackColor = true;
             this.ButtonUndo.Click += new System.EventHandler(this.ButtonUndo_Click);
             // 
             // CreatePrescription
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.ButtonRedo);
             this.Controls.Add(this.ButtonUndo);
             this.Controls.Add(this.DateTimePickerRecommendedTime);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.buttonAddTime);
-            this.Controls.Add(this.comboBoxItems);
-            this.Controls.Add(this.buttonAddPrescriptionItem);
+            this.Controls.Add(this.LabelRecommendedTime);
+            this.Controls.Add(this.LabelPrescriptionItems);
+            this.Controls.Add(this.ButtonAddTime);
+            this.Controls.Add(this.ComboBoxItems);
+            this.Controls.Add(this.ButtonAddPrescriptionItem);
             this.Controls.Add(this.TreeViewPrescriptionItems);
             this.Controls.Add(this.comboBoxPatient);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ButtonCreatePrescription);
             this.Controls.Add(this.dateTimePickerEndDate);
             this.Controls.Add(this.dateTimePickerStartDate);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.LabelEndDate);
+            this.Controls.Add(this.LabelStartDate);
             this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(3);
+            this.Controls.Add(this.LabelDescription);
+            this.Controls.Add(this.LabelPatient);
+            this.Controls.Add(this.LabelTitle);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CreatePrescription";
-            this.Size = new System.Drawing.Size(1595, 837);
+            this.Size = new System.Drawing.Size(1396, 628);
             this.Enter += new System.EventHandler(this.CreatePrescription_Enter);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.LabelTitle, 0);
+            this.Controls.SetChildIndex(this.LabelPatient, 0);
+            this.Controls.SetChildIndex(this.LabelDescription, 0);
             this.Controls.SetChildIndex(this.textBoxDescription, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.LabelStartDate, 0);
+            this.Controls.SetChildIndex(this.LabelEndDate, 0);
             this.Controls.SetChildIndex(this.dateTimePickerStartDate, 0);
             this.Controls.SetChildIndex(this.dateTimePickerEndDate, 0);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.ButtonCreatePrescription, 0);
             this.Controls.SetChildIndex(this.comboBoxPatient, 0);
             this.Controls.SetChildIndex(this.TreeViewPrescriptionItems, 0);
-            this.Controls.SetChildIndex(this.buttonAddPrescriptionItem, 0);
-            this.Controls.SetChildIndex(this.comboBoxItems, 0);
-            this.Controls.SetChildIndex(this.buttonAddTime, 0);
-            this.Controls.SetChildIndex(this.label6, 0);
-            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.ButtonAddPrescriptionItem, 0);
+            this.Controls.SetChildIndex(this.ComboBoxItems, 0);
+            this.Controls.SetChildIndex(this.ButtonAddTime, 0);
+            this.Controls.SetChildIndex(this.LabelPrescriptionItems, 0);
+            this.Controls.SetChildIndex(this.LabelRecommendedTime, 0);
             this.Controls.SetChildIndex(this.DateTimePickerRecommendedTime, 0);
             this.Controls.SetChildIndex(this.ButtonUndo, 0);
             this.Controls.SetChildIndex(this.ButtonRedo, 0);
@@ -303,22 +311,22 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LabelTitle;
+        private System.Windows.Forms.Label LabelPatient;
+        private System.Windows.Forms.Label LabelDescription;
         private System.Windows.Forms.TextBox textBoxDescription;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LabelStartDate;
+        private System.Windows.Forms.Label LabelEndDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerStartDate;
         private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonCreatePrescription;
         private System.Windows.Forms.ComboBox comboBoxPatient;
         private System.Windows.Forms.TreeView TreeViewPrescriptionItems;
-        private System.Windows.Forms.Button buttonAddPrescriptionItem;
-        private System.Windows.Forms.ComboBox comboBoxItems;
-        private System.Windows.Forms.Button buttonAddTime;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button ButtonAddPrescriptionItem;
+        private System.Windows.Forms.ComboBox ComboBoxItems;
+        private System.Windows.Forms.Button ButtonAddTime;
+        private System.Windows.Forms.Label LabelPrescriptionItems;
+        private System.Windows.Forms.Label LabelRecommendedTime;
         private System.Windows.Forms.DateTimePicker DateTimePickerRecommendedTime;
         private System.Windows.Forms.Button ButtonRedo;
         private System.Windows.Forms.Button ButtonUndo;

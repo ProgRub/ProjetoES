@@ -5,7 +5,8 @@ namespace ServicesLibrary.Validators.FormValidators
 {
     public class MaxAgeGreaterThanMinAgeValidator : BaseValidator
     {
-        public MaxAgeGreaterThanMinAgeValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public MaxAgeGreaterThanMinAgeValidator(int errorCode, ref List<int> errorCodes) : base(errorCode,
+            ref errorCodes)
         {
         }
 

@@ -9,7 +9,7 @@ namespace ServicesLibrary.DTOs
         public string Description { get; set; }
         public int Type { get; set; }
 
-        public static MedicalConditionDTO ConvertMedicalConditionToDTO(MedicalCondition medicalCondition)
+        internal static MedicalConditionDTO ConvertMedicalConditionToDTO(MedicalCondition medicalCondition)
         {
             return new MedicalConditionDTO
             {

@@ -2,7 +2,7 @@
 {
     public interface IValidator
     {
-         IValidator SetNext(IValidator checker);
-         object Validate(object request);
+        IValidator SetNext(IValidator checker);
+        object Validate(object request);
     }
 }

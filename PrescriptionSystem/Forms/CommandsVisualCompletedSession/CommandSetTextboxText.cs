@@ -3,13 +3,13 @@ using ServicesLibrary.Commands;
 
 namespace Forms.CommandsVisualCompletedSession
 {
-    public class CommandSetTextboxText : ICommand
+    public class CommandSetTextBoxText : ICommand
     {
         private TextBox TextBox { get; set; }
-        private string _oldText;
-        private string _newText;
+        private readonly string _oldText;
+        private readonly string _newText;
 
-        public CommandSetTextboxText(TextBox textBox, string oldText)
+        public CommandSetTextBoxText(TextBox textBox, string oldText)
         {
             _oldText = oldText;
             TextBox = textBox;

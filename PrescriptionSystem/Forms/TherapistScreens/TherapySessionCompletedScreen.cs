@@ -13,6 +13,7 @@ namespace Forms.TherapistScreens
     public partial class TherapySessionCompletedScreen : BaseControl
     {
         private TherapySessionDTO _therapySession;
+
         public TherapySessionCompletedScreen()
         {
             InitializeComponent();
@@ -21,8 +22,14 @@ namespace Forms.TherapistScreens
         private void TherapySessionCompletedScreen_Enter(object sender, EventArgs e)
         {
             _therapySession = Services.Instance.GetSelectedTherapySession();
-            CommandsManager.Instance.Notify += (sender, args) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
-            CommandsManager.Instance.Notify += (sender, args) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
+            CommandsManager.Instance.Notify += (sender, args) =>
+            {
+                ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
+            };
+            CommandsManager.Instance.Notify += (sender, args) =>
+            {
+                ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
+            };
             LabelSessionInfo.Text =
                 $"{_therapySession.Id} | {_therapySession.Patient.FullName} | {_therapySession.DateTime:dddd dd/MM/yyyy HH:mm}";
             foreach (var treatment in _therapySession.Treatments)
@@ -33,7 +40,9 @@ namespace Forms.TherapistScreens
                 listViewItem.SubItems.Add(treatment.Duration.ToString());
                 ListViewTreatments.Items.Add(listViewItem);
 
-                if(Services.Instance.GetTreatmentCompletedStatus(_therapySession.Id, treatment.Id)) ListViewTreatments.Items[ListViewTreatments.Items.IndexOf(listViewItem)].BackColor = Color.GreenYellow;
+                if (Services.Instance.GetTreatmentCompletedStatus(_therapySession.Id, treatment.Id))
+                    ListViewTreatments.Items[ListViewTreatments.Items.IndexOf(listViewItem)].BackColor =
+                        Color.GreenYellow;
             }
 
             TextBoxTherapySessionNote.Text = _therapySession.Note;
@@ -95,8 +104,8 @@ namespace Forms.TherapistScreens
         private void ButtonAddSessionNote_Click(object sender, EventArgs e)
         {
             var macrocommand = new MacroCommand();
-            macrocommand.Add(new CommandSetTextboxText(TextBoxTherapySessionNote, _therapySession.Note));
-            macrocommand.Add(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text,_therapySession));
+            macrocommand.Add(new CommandSetTextBoxText(TextBoxTherapySessionNote, _therapySession.Note));
+            macrocommand.Add(new CommandAddTherapySessionNote(TextBoxTherapySessionNote.Text, _therapySession));
             CommandsManager.Instance.Execute(macrocommand);
         }
     }

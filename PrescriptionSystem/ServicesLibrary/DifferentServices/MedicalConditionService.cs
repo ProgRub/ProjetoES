@@ -13,11 +13,10 @@ namespace ServicesLibrary.DifferentServices
         #region Constants
 
         public const int Allergy = 0, Disease = 1;
-        
 
         #endregion
 
-        private IMedicalConditionRepository _medicalConditionRepository;
+        private readonly IMedicalConditionRepository _medicalConditionRepository;
 
         private MedicalConditionService()
         {
@@ -25,20 +24,10 @@ namespace ServicesLibrary.DifferentServices
         }
 
         internal static MedicalConditionService Instance { get; } = new MedicalConditionService();
+
         internal MedicalCondition GetMedicalConditionById(int id)
         {
             return _medicalConditionRepository.GetById(id);
-        }
-        internal MedicalCondition GetMedicalConditionByName(string name)
-        {
-            try
-            {
-                return _medicalConditionRepository.Find(e => e.Name == name).First();
-            }
-            catch (ArgumentNullException)
-            {
-                return null;
-            }
         }
 
         internal IEnumerable<MedicalCondition> GetAllergies()
@@ -48,7 +37,6 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<MedicalCondition> GetDiseases()
         {
-
             return _medicalConditionRepository.Find(e => e.Type == Disease);
         }
     }

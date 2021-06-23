@@ -7,7 +7,7 @@ namespace ComponentsLibrary.Repositories.Implementations
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
 
-        private UserHasMedicalConditionRepository _userHasMedicalConditionRepository;
+        private readonly UserHasMedicalConditionRepository _userHasMedicalConditionRepository;
 
         public UserRepository(PrescriptionSystemDbContext context) : base(context)
         {

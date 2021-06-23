@@ -6,8 +6,8 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
 {
     public class StartDateIsBeforeEndDateValidator : BaseValidator
     {
-
-        public StartDateIsBeforeEndDateValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public StartDateIsBeforeEndDateValidator(int errorCode, ref List<int> errorCodes) : base(errorCode,
+            ref errorCodes)
         {
         }
 
@@ -16,7 +16,6 @@ namespace ServicesLibrary.Validators.PrescriptionValidators
             if (request is PrescriptionDTO prescription)
             {
                 return prescription.EndDate.Date >= prescription.StartDate.Date;
-
             }
 
             throw new NotSupportedException($"Invalid type {request.GetType()}!");

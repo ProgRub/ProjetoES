@@ -31,6 +31,7 @@ namespace ServicesLibrary.Commands
             {
                 command.Undo();
             }
+
             _commands.Reverse();
         }
 

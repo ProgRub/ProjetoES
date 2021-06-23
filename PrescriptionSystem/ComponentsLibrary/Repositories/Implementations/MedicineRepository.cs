@@ -7,7 +7,7 @@ namespace ComponentsLibrary.Repositories.Implementations
 {
     public class MedicineRepository:BaseRepository<Medicine>, IMedicineRepository
     {
-        private MedicineHasIncompatibilityRepository _medicineHasIncompatibilityRepository;
+        private readonly MedicineHasIncompatibilityRepository _medicineHasIncompatibilityRepository;
         public MedicineRepository(PrescriptionSystemDbContext context) : base(context)
         {
             _medicineHasIncompatibilityRepository = new MedicineHasIncompatibilityRepository(context);

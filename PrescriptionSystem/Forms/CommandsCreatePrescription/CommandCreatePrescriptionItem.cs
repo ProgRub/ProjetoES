@@ -10,7 +10,7 @@ namespace Forms.CommandsCreatePrescription
             Name = $"{prescriptionItem.Id} - {prescriptionItem.Name}";
         }
 
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public void Execute()
         {

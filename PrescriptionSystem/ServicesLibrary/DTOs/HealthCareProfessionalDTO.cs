@@ -4,10 +4,10 @@ using ServicesLibrary.DifferentServices;
 
 namespace ServicesLibrary.DTOs
 {
-    public class HealthCareProfessionalDTO:UserDTO
+    public class HealthCareProfessionalDTO : UserDTO
 
     {
-        public static HealthCareProfessionalDTO ConvertHealthCareProfessionalToDTO(
+        internal static HealthCareProfessionalDTO ConvertHealthCareProfessionalToDTO(
             HealthCareProfessional healthCareProfessional)
         {
             var healthCareProfessionalDTO = new HealthCareProfessionalDTO
@@ -34,9 +34,11 @@ namespace ServicesLibrary.DTOs
                         break;
                 }
             }
+
             healthCareProfessionalDTO.Allergies = allergies;
             healthCareProfessionalDTO.Diseases = diseases;
-            healthCareProfessionalDTO.MissingBodyParts = UserService.Instance.GetUserMissingBodyPartsByUserId(healthCareProfessionalDTO.Id);
+            healthCareProfessionalDTO.MissingBodyParts =
+                UserService.Instance.GetUserMissingBodyPartsByUserId(healthCareProfessionalDTO.Id);
             return healthCareProfessionalDTO;
         }
     }

@@ -15,23 +15,25 @@ namespace ServicesLibrary.DTOs
         public string Note { get; set; }
         public IEnumerable<TreatmentDTO> Treatments { get; set; }
 
-        public static TherapySessionDTO ConvertTherapySessionToDTO(TherapySession therapySession)
+        internal static TherapySessionDTO ConvertTherapySessionToDTO(TherapySession therapySession)
         {
             var therapySessionDTO = new TherapySessionDTO
             {
                 Id = therapySession.Id,
-                Patient = PatientDTO.ConvertPatientToDTO((Patient)UserService.Instance.GetUserById(therapySession.PatientId)),
-                Therapist = TherapistDTO.ConvertTherapistToDTO((Therapist)UserService.Instance.GetUserById(therapySession.TherapistId)),
+                Patient = PatientDTO.ConvertPatientToDTO(
+                    (Patient) UserService.Instance.GetUserById(therapySession.PatientId)),
+                Therapist = TherapistDTO.ConvertTherapistToDTO(
+                    (Therapist) UserService.Instance.GetUserById(therapySession.TherapistId)),
                 Note = therapySession.Note,
                 EstimatedDuration = therapySession.EstimatedDuration,
                 DateTime = therapySession.DateTime
             };
             var treatments =
                 TherapySessionService.Instance.GetTherapySessionTreatmentsBySessionId(therapySessionDTO.Id);
-            therapySessionDTO.Treatments = treatments.Select(treatment => TreatmentDTO.ConvertTreatmentToDTO(treatment)).ToList();
+            therapySessionDTO.Treatments =
+                treatments.Select(treatment => TreatmentDTO.ConvertTreatmentToDTO(treatment)).ToList();
 
             return therapySessionDTO;
         }
-
     }
 }

@@ -6,7 +6,7 @@ using ServicesLibrary.DifferentServices;
 
 namespace ServicesLibrary.DTOs
 {
-    public class ExerciseDTO:PrescriptionItemDTO
+    public class ExerciseDTO : PrescriptionItemDTO
     {
         public TimeSpan Duration { get; set; }
         public int AgeMinimum { get; set; }

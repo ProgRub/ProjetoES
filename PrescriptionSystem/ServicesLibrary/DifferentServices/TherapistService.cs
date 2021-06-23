@@ -6,9 +6,9 @@ using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.DifferentServices
 {
-    public class TherapistService:UserService
+    public class TherapistService : UserService
     {
-        private ITherapistRepository _therapistRepository;
+        private readonly ITherapistRepository _therapistRepository;
 
         private TherapistService()
         {
@@ -17,28 +17,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal new static TherapistService Instance { get; } = new TherapistService();
 
-
-
-        //internal void RegisterTherapist(string name, DateTime dateOfBirth, int phoneNumber, int healthUserNumber, string email,
-        //    string password, IEnumerable<MedicalConditionDTO> allergies, IEnumerable<MedicalConditionDTO> diseases, IEnumerable<string> missingBodyParts)
-        //{
-        //    var therapist = new Therapist
-        //    {
-        //        FullName = name,
-        //        DateOfBirth = dateOfBirth,
-        //        Email = email,
-        //        HealthUserNumber = healthUserNumber,
-        //        Password = password,
-        //        PhoneNumber = phoneNumber
-        //    };
-        //    _therapistRepository.Add(therapist);
-        //    AddMedicalConditionsToUser(therapist, allergies, diseases);
-        //    AddMissingBodyPartsToUser(therapist, missingBodyParts);
-        //    _therapistRepository.SaveChanges();
-        //    UserService.Instance.SaveChanges();
-        //}
-
-        public void RegisterTherapist(UserDTO user, string email, string password)
+        internal void RegisterTherapist(UserDTO user, string email, string password)
         {
             var therapist = new Therapist
             {

@@ -10,10 +10,12 @@ namespace Forms.PatientScreens
     public partial class SelectPrescriptionsScreen : BaseControl
     {
         private IEnumerable<PrescriptionDTO> _prescriptions;
+
         public SelectPrescriptionsScreen()
         {
             InitializeComponent();
         }
+
         private void SelectPrescriptionsScreen_Enter(object sender, EventArgs e)
         {
             _prescriptions = Services.Instance.GetAllLoggedInPatientsPrescriptions();

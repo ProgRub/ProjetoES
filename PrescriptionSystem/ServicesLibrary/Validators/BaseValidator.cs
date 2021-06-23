@@ -2,14 +2,13 @@
 
 namespace ServicesLibrary.Validators
 {
-    public abstract class BaseValidator:IValidator
+    public abstract class BaseValidator : IValidator
     {
-
         private IValidator _nextValidator;
-        private int _errorCode;
-        private List<int> _errorCodes;
+        private readonly int _errorCode;
+        private readonly List<int> _errorCodes;
 
-        protected BaseValidator(int errorCode,ref List<int> errorCodes)
+        protected BaseValidator(int errorCode, ref List<int> errorCodes)
         {
             _errorCode = errorCode;
             _errorCodes = errorCodes;
@@ -20,12 +19,14 @@ namespace ServicesLibrary.Validators
             _nextValidator = next;
             return _nextValidator;
         }
+
         public object Validate(object request)
         {
             if (!RequestIsValid(request))
             {
                 _errorCodes.Add(_errorCode);
             }
+
             return _nextValidator?.Validate(request);
         }
 

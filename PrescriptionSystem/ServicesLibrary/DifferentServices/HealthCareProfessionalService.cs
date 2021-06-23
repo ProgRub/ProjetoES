@@ -6,9 +6,9 @@ using ComponentsLibrary.Repositories.Interfaces;
 
 namespace ServicesLibrary.DifferentServices
 {
-    public class HealthCareProfessionalService:UserService
+    public class HealthCareProfessionalService : UserService
     {
-        private IHealthCareProfessionalRepository _healthCareProfessionalRepository;
+        private readonly IHealthCareProfessionalRepository _healthCareProfessionalRepository;
 
         private HealthCareProfessionalService()
         {
@@ -22,7 +22,7 @@ namespace ServicesLibrary.DifferentServices
             return _healthCareProfessionalRepository.GetAll();
         }
 
-        public HealthCareProfessional GetById(int professionalId)
+        internal HealthCareProfessional GetById(int professionalId)
         {
             return _healthCareProfessionalRepository.GetById(professionalId);
         }

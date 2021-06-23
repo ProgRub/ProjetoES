@@ -8,6 +8,7 @@ namespace Forms
     public partial class BaseControl : UserControl
     {
         public BaseControl PreviousScreen { private get; set; }
+
         public BaseControl()
         {
             InitializeComponent();
@@ -17,19 +18,20 @@ namespace Forms
         protected void MoveToScreen(BaseControl newControl, BaseControl previousControl)
         {
             newControl.PreviousScreen = previousControl;
-            var window = (Window)Parent ?? (Window) newControl.Parent;
+            var window = (Window) Parent ?? (Window) newControl.Parent;
             window.Controls.Remove(this);
             newControl.Dock = DockStyle.Fill;
             window.Controls.Add(newControl);
             window.ActiveControl = newControl;
         }
+
         protected void ClearTextBox(TextBox textBox) => textBox.Text = "";
 
         protected void ShowTextBoxErrorMessage(TextBox textBox, string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(textBox.PlaceholderText))
             {
-                ((Window)Parent).ActiveControl = null;
+                ((Window) Parent).ActiveControl = null;
                 ClearTextBox(textBox);
                 textBox.PlaceholderText = errorMessage;
             }
@@ -42,13 +44,12 @@ namespace Forms
 
         protected void SetFormAcceptButton(Button button)
         {
-            ((Window)Parent).AcceptButton = button;
+            ((Window) Parent).AcceptButton = button;
         }
 
 
         protected void SetCheckedListBoxColumnWidth(CheckedListBox checkedListBox)
         {
-
             var columnWidth = 0;
             foreach (string item in checkedListBox.Items)
             {
@@ -58,6 +59,7 @@ namespace Forms
                     columnWidth = width + 20;
                 }
             }
+
             checkedListBox.ColumnWidth = columnWidth;
         }
 
@@ -72,7 +74,7 @@ namespace Forms
 
         protected void ButtonBack_Click(object sender, EventArgs e)
         {
-            MoveToScreen(PreviousScreen, PreviousScreen.PreviousScreen??new LoginScreen());
+            MoveToScreen(PreviousScreen, PreviousScreen.PreviousScreen ?? new LoginScreen());
         }
     }
 }

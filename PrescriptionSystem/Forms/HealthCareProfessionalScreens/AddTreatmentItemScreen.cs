@@ -109,7 +109,6 @@ namespace Forms.HealthCareProfessionalScreens
             }
 
             ShowInformationMessageBox(errorMessage, "Error");
-
         }
     }
 }

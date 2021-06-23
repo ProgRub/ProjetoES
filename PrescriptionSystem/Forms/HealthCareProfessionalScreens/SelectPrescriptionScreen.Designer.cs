@@ -31,15 +31,15 @@ namespace Forms.HealthCareProfessionalScreens
         {
             this.LabelTitle = new System.Windows.Forms.Label();
             this.ButtonExamplePrescription = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowLayoutPanelPrescriptions = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // LabelTitle
             // 
             this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelTitle.Location = new System.Drawing.Point(64, 0);
+            this.LabelTitle.Location = new System.Drawing.Point(56, 0);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(1376, 68);
+            this.LabelTitle.Size = new System.Drawing.Size(1204, 51);
             this.LabelTitle.TabIndex = 11;
             this.LabelTitle.Text = "Click a prescription to view its details";
             this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -50,37 +50,38 @@ namespace Forms.HealthCareProfessionalScreens
             this.ButtonExamplePrescription.Enabled = false;
             this.ButtonExamplePrescription.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.ButtonExamplePrescription.ForeColor = System.Drawing.Color.White;
-            this.ButtonExamplePrescription.Location = new System.Drawing.Point(93, 84);
-            this.ButtonExamplePrescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ButtonExamplePrescription.Location = new System.Drawing.Point(81, 63);
             this.ButtonExamplePrescription.Name = "ButtonExamplePrescription";
-            this.ButtonExamplePrescription.Size = new System.Drawing.Size(433, 67);
+            this.ButtonExamplePrescription.Size = new System.Drawing.Size(379, 50);
             this.ButtonExamplePrescription.TabIndex = 10;
             this.ButtonExamplePrescription.Text = "button1";
             this.ButtonExamplePrescription.UseVisualStyleBackColor = false;
             this.ButtonExamplePrescription.Visible = false;
             // 
-            // flowLayoutPanel1
+            // FlowLayoutPanelPrescriptions
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(64, 73);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1376, 534);
-            this.flowLayoutPanel1.TabIndex = 12;
+            this.FlowLayoutPanelPrescriptions.AutoScroll = true;
+            this.FlowLayoutPanelPrescriptions.Location = new System.Drawing.Point(56, 55);
+            this.FlowLayoutPanelPrescriptions.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FlowLayoutPanelPrescriptions.Name = "FlowLayoutPanelPrescriptions";
+            this.FlowLayoutPanelPrescriptions.Size = new System.Drawing.Size(1204, 400);
+            this.FlowLayoutPanelPrescriptions.TabIndex = 12;
             // 
             // SelectPrescriptionScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.FlowLayoutPanelPrescriptions);
             this.Controls.Add(this.LabelTitle);
             this.Controls.Add(this.ButtonExamplePrescription);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SelectPrescriptionScreen";
-            this.Size = new System.Drawing.Size(1443, 610);
+            this.Size = new System.Drawing.Size(1263, 458);
             this.Enter += new System.EventHandler(this.SelectPrescriptionScreen_Enter);
             this.Controls.SetChildIndex(this.ButtonBack, 0);
             this.Controls.SetChildIndex(this.ButtonExamplePrescription, 0);
             this.Controls.SetChildIndex(this.LabelTitle, 0);
-            this.Controls.SetChildIndex(this.flowLayoutPanel1, 0);
+            this.Controls.SetChildIndex(this.FlowLayoutPanelPrescriptions, 0);
             this.ResumeLayout(false);
 
         }
@@ -89,6 +90,6 @@ namespace Forms.HealthCareProfessionalScreens
 
         private System.Windows.Forms.Label LabelTitle;
         private System.Windows.Forms.Button ButtonExamplePrescription;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel FlowLayoutPanelPrescriptions;
     }
 }

@@ -5,7 +5,10 @@ namespace ServicesLibrary.Commands
 {
     public class CommandsManager
     {
-        private CommandsManager() { }
+        private CommandsManager()
+        {
+        }
+
         public static CommandsManager Instance { get; } = new CommandsManager();
 
         public event EventHandler Notify;
@@ -20,7 +23,6 @@ namespace ServicesLibrary.Commands
 
         public void Execute(ICommand command)
         {
-
             if (HasRedo)
             {
                 _commands.RemoveRange(_position + 1, _commands.Count - (_position + 1));

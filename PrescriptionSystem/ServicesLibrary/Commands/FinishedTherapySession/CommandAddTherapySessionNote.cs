@@ -4,17 +4,20 @@ using ServicesLibrary.DTOs;
 
 namespace ServicesLibrary.Commands.FinishedTherapySession
 {
-    public class CommandAddTherapySessionNote:ICommand
+    public class CommandAddTherapySessionNote : ICommand
     {
-        private string _therapySessionOldNote, _therapySessionNewNote;
-        private TherapySession _therapySession = TherapySessionService.Instance.GetSelectedTherapySession();
-        private TherapySessionDTO _therapySessionDto;
-        public CommandAddTherapySessionNote(string note,TherapySessionDTO therapySession)
+        private readonly string _therapySessionOldNote;
+        private readonly string _therapySessionNewNote;
+        private readonly TherapySession _therapySession = TherapySessionService.Instance.GetSelectedTherapySession();
+        private readonly TherapySessionDTO _therapySessionDto;
+
+        public CommandAddTherapySessionNote(string note, TherapySessionDTO therapySession)
         {
             _therapySessionNewNote = note;
-            _therapySessionOldNote= _therapySession.Note;
+            _therapySessionOldNote = _therapySession.Note;
             _therapySessionDto = therapySession;
         }
+
         public void Execute()
         {
             _therapySession.Note = _therapySessionNewNote;

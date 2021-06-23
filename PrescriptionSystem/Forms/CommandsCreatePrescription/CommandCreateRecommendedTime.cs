@@ -10,7 +10,7 @@ namespace Forms.CommandsCreatePrescription
             RecommendedTime = recommendedTimeSpan;
         }
 
-        public TimeSpan? RecommendedTime { get; set; }
+        public TimeSpan? RecommendedTime { get; private set; }
 
         public void Execute()
         {

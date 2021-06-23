@@ -8,7 +8,7 @@ namespace ComponentsLibrary.Repositories.Implementations
 {
     public class TherapySessionRepository : BaseRepository<TherapySession>, ITherapySessionRepository
     {
-        private TherapySessionHasTreatmentsRepository _therapySessionHasTreatmentsRepository;
+        private readonly TherapySessionHasTreatmentsRepository _therapySessionHasTreatmentsRepository;
 
         public TherapySessionRepository(PrescriptionSystemDbContext context) : base(context)
         {

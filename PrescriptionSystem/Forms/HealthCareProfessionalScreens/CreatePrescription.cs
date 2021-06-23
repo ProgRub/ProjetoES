@@ -25,15 +25,21 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void CreatePrescription_Enter(object sender, EventArgs e)
         {
-            CommandsManager.Instance.Notify += (sender, args) => { ButtonUndo.Enabled = CommandsManager.Instance.HasUndo; };
+            CommandsManager.Instance.Notify += (sender, args) =>
+            {
+                ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
+            };
 
-            CommandsManager.Instance.Notify += (sender, args) => { ButtonRedo.Enabled = CommandsManager.Instance.HasRedo; };
+            CommandsManager.Instance.Notify += (sender, args) =>
+            {
+                ButtonRedo.Enabled = CommandsManager.Instance.HasRedo;
+            };
             _patients = Services.Instance.GetAllPatients();
             _treatments = Services.Instance.GetAllTreatments();
             _medicines = Services.Instance.GetAllMedicines();
             _exercises = Services.Instance.GetAllExercises();
             comboBoxPatient.Items.Clear();
-            comboBoxItems.Items.Clear();
+            ComboBoxItems.Items.Clear();
 
             foreach (var patient in _patients)
             {
@@ -42,18 +48,18 @@ namespace Forms.HealthCareProfessionalScreens
 
             foreach (var medicine in _medicines)
             {
-                comboBoxItems.Items.Add($"(Medicine) {medicine.Id} | {medicine.Name}");
+                ComboBoxItems.Items.Add($"(Medicine) {medicine.Id} | {medicine.Name}");
             }
 
             foreach (var treatment in _treatments)
             {
-                comboBoxItems.Items.Add(
+                ComboBoxItems.Items.Add(
                     $"(Treatment) {treatment.Id} | {treatment.Name} | Age range: {treatment.AgeMinimum}-{treatment.AgeMaximum}");
             }
 
             foreach (var exercise in _exercises)
             {
-                comboBoxItems.Items.Add(
+                ComboBoxItems.Items.Add(
                     $"(Exercise) {exercise.Id} | {exercise.Name} | Age range: {exercise.AgeMinimum}-{exercise.AgeMaximum}");
             }
         }
@@ -93,21 +99,21 @@ namespace Forms.HealthCareProfessionalScreens
 
         private PrescriptionItemDTO GetPrescriptionItemInComboBox()
         {
-            if (comboBoxItems.SelectedItem == null) return null;
-            switch (comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf('(') + 1,
-                comboBoxItems.Text.IndexOf(')') - 1))
+            if (ComboBoxItems.SelectedItem == null) return null;
+            switch (ComboBoxItems.Text.Substring(ComboBoxItems.Text.IndexOf('(') + 1,
+                ComboBoxItems.Text.IndexOf(')') - 1))
             {
                 case "Exercise":
                     return _exercises.First(e =>
-                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                        e.Id.ToString() == ComboBoxItems.Text.Substring(ComboBoxItems.Text.IndexOf(')') + 2)
                             .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
                 case "Treatment":
                     return _treatments.First(e =>
-                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                        e.Id.ToString() == ComboBoxItems.Text.Substring(ComboBoxItems.Text.IndexOf(')') + 2)
                             .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
                 case "Medicine":
                     return _medicines.First(e =>
-                        e.Id.ToString() == comboBoxItems.Text.Substring(comboBoxItems.Text.IndexOf(')') + 2)
+                        e.Id.ToString() == ComboBoxItems.Text.Substring(ComboBoxItems.Text.IndexOf(')') + 2)
                             .Split(" | ", StringSplitOptions.RemoveEmptyEntries)[0]);
                 default:
                     throw new NotImplementedException();
@@ -127,7 +133,7 @@ namespace Forms.HealthCareProfessionalScreens
             return null;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonCreatePrescription_Click(object sender, EventArgs e)
         {
             var recommendedTimes = GetRecommendedTimesDictionary(TreeViewPrescriptionItems);
             var selectedItems = GetParentNodes(TreeViewPrescriptionItems);
@@ -225,7 +231,8 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void ButtonAddPrescriptionItem_Click(object sender, EventArgs e)
         {
-            if (GetPrescriptionItemInComboBox() == null ||GetPrescriptionItemsInPrescription().Any(e=>e.Id== GetPrescriptionItemInComboBox().Id)) return;
+            if (GetPrescriptionItemInComboBox() == null || GetPrescriptionItemsInPrescription()
+                .Any(e => e.Id == GetPrescriptionItemInComboBox().Id)) return;
             var macro = new MacroCommand();
             var command1 = new CommandCreatePrescriptionItem(GetPrescriptionItemInComboBox());
             macro.Add(command1);

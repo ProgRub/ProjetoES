@@ -10,13 +10,14 @@ namespace Forms.PatientScreens
     public partial class SelectHealthCareProfessionalsScreen : BaseControl
     {
         private IEnumerable<HealthCareProfessionalDTO> _healthCareProfessionals;
+
         public SelectHealthCareProfessionalsScreen()
         {
             InitializeComponent();
         }
+
         private void SelectHealthCareProfessionalsScreen_Enter(object sender, EventArgs e)
         {
-
             _healthCareProfessionals = Services.Instance.GetAllHealthCareProfessionals();
             if (!_healthCareProfessionals.Any())
             {
@@ -38,7 +39,7 @@ namespace Forms.PatientScreens
 
         private void CheckBoxSelectAll_MouseClick(object sender, MouseEventArgs e)
         {
-            if (((CheckBox)sender).Checked)
+            if (((CheckBox) sender).Checked)
             {
                 for (var i = 0; i < CheckedListBoxProfessionals.Items.Count; i++)
                 {
@@ -83,8 +84,10 @@ namespace Forms.PatientScreens
                 {
                     checkedProfessionals.Add(GetHealthCareProfessionalByString(checkedItem.ToString()));
                 }
+
                 Services.Instance.AddPermissionToHealthCareProfessionals(checkedProfessionals);
-                ShowInformationMessageBox("The selected Health Care Professionals now have access to your prescription details.", "Success");
+                ShowInformationMessageBox(
+                    "The selected Health Care Professionals now have access to your prescription details.", "Success");
                 MoveToScreen(new SelectPrescriptionsScreen(), new CalendarScreenPatient());
             }
             else

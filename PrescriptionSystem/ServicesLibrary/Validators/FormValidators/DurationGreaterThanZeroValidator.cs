@@ -5,7 +5,8 @@ namespace ServicesLibrary.Validators.FormValidators
 {
     public class DurationGreaterThanZeroValidator : BaseValidator
     {
-        public DurationGreaterThanZeroValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
+        public DurationGreaterThanZeroValidator(int errorCode, ref List<int> errorCodes) : base(errorCode,
+            ref errorCodes)
         {
         }
 

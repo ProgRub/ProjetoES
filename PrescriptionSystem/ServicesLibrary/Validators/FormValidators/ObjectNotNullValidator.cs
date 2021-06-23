@@ -2,7 +2,7 @@
 
 namespace ServicesLibrary.Validators.FormValidators
 {
-    public class ObjectNotNullValidator:BaseValidator
+    public class ObjectNotNullValidator : BaseValidator
     {
         public ObjectNotNullValidator(int errorCode, ref List<int> errorCodes) : base(errorCode, ref errorCodes)
         {

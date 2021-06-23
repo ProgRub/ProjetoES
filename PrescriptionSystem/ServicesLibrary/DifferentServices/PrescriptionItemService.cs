@@ -24,7 +24,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal static PrescriptionItemService Instance { get; } = new PrescriptionItemService();
 
-        public void CreateExercisePrescriptionItem(ExerciseDTO exerciseDTO)
+        internal void CreateExercisePrescriptionItem(ExerciseDTO exerciseDTO)
         {
             var exercise = new Exercise
             {
@@ -39,7 +39,7 @@ namespace ServicesLibrary.DifferentServices
             _exerciseRepository.SaveChanges();
         }
 
-        public void CreateMedicinePrescriptionItem(MedicineDTO medicineDTO)
+        internal void CreateMedicinePrescriptionItem(MedicineDTO medicineDTO)
         {
             var medicine = new Medicine
             {
@@ -131,12 +131,12 @@ namespace ServicesLibrary.DifferentServices
             return _exerciseRepository.Find(e => e.Id == item_id).Any();
         }
 
-        public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
+        internal IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
         {
             return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
         }
 
-        public PrescriptionItem GetPrescriptionItemById(int prescriptionItemId)
+        internal PrescriptionItem GetPrescriptionItemById(int prescriptionItemId)
         {
             if (IsExercise(prescriptionItemId)) return GetExerciseById(prescriptionItemId);
             if (IsMedicine(prescriptionItemId)) return GetMedicineById(prescriptionItemId);

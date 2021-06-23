@@ -11,6 +11,7 @@ namespace Forms.HealthCareProfessionalScreens
     {
         private IEnumerable<MedicalConditionDTO> _diseases;
         private IEnumerable<MedicalConditionDTO> _allergies;
+
         public AddMedicineItemScreen()
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace Forms.HealthCareProfessionalScreens
             {
                 CheckedListBoxAllergies.Items.Add($"{allergy.Id} - {allergy.Name}");
             }
+
             foreach (var disease in _diseases)
             {
                 CheckedListBoxDiseases.Items.Add($"{disease.Id} - {disease.Name}");
@@ -66,15 +68,17 @@ namespace Forms.HealthCareProfessionalScreens
             {
                 allergies.Add(GetAllergyFromString(checkedItem.ToString()));
             }
+
             foreach (var checkedItem in CheckedListBoxDiseases.CheckedItems)
             {
                 diseases.Add(GetDiseaseFromString(checkedItem.ToString()));
             }
-            
+
             Services.Instance.CreateMedicinePrescriptionItem(new MedicineDTO
             {
-                Name = TextBoxMedicineName.Text,Description = TextBoxMedicineDescription.Text,Price = double.Parse(TextBoxMedicinePrice.Text),
-                IncompatibleAllergies = allergies,IncompatibleDiseases = diseases
+                Name = TextBoxMedicineName.Text, Description = TextBoxMedicineDescription.Text,
+                Price = double.Parse(TextBoxMedicinePrice.Text),
+                IncompatibleAllergies = allergies, IncompatibleDiseases = diseases
             });
             ShowInformationMessageBox("Medicine successfully added.", "Success");
             MoveToScreen(new AddPrescriptionItemScreen(), new CalendarScreenTherapist());
@@ -94,10 +98,11 @@ namespace Forms.HealthCareProfessionalScreens
                         ShowTextBoxErrorMessage(TextBoxMedicineDescription, "Description is required!");
                         break;
                     case Services.PriceNotValid:
-                        ShowTextBoxErrorMessage(TextBoxMedicinePrice, "Price is required and needs to be bigger than 0!");
+                        ShowTextBoxErrorMessage(TextBoxMedicinePrice,
+                            "Price is required and needs to be bigger than 0!");
                         break;
                     case Services.ItemAlreadyExists:
-                        ShowInformationMessageBox("That medicine already exists in the database.","Error");
+                        ShowInformationMessageBox("That medicine already exists in the database.", "Error");
                         break;
                 }
             }
