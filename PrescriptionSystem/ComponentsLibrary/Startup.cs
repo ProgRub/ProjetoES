@@ -18,21 +18,13 @@ namespace ComponentsLibrary
             services.AddDbContext<PrescriptionSystemDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-//            #region Repositories
-//            services.AddTransient(typeof(IGenericRepository<>), typeof(BaseRepository<>));
-//            services.AddTransient<IExerciseRepository, ExerciseRepository>();
-//            services.AddTransient<IMedicalConditionRepository, MedicalConditionRepository>();
-//            services.AddTransient<IMedicineRepository, MedicineRepository>();
-//            services.AddTransient<IPatientRepository, PatientRepository>();
-//            services.AddTransient<IPrescriptionRepository, PrescriptionRepository>();
-//            services.AddTransient<ITherapistRepository, TherapistRepository>();
-//            services.AddTransient<ITherapySessionRepository, TherapySessionRepository>();
-//            services.AddTransient<ITreatmentRepository, TreatmentRepository>();
-//            services.AddTransient<IUserRepository, UserRepository>();
-//            #endregion
 
-//            #region Services
-//#endregion
         }
+        //public void Configure( PrescriptionSystemDbContext dataContext)
+        //{
+        //    // migrate any database changes on startup (includes initial db creation)
+        //    dataContext.Database.Migrate();
+            
+        //}
     }
 }
