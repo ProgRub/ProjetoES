@@ -21,7 +21,7 @@ namespace Forms.TherapistScreens
         {
             _treatments = Services.Instance.GetAllTreatments();
             _patients = Services.Instance.GetAllPatients();
-            //DateTimePickerDate.MinDate = DateTime.Today;
+            DateTimePickerDate.MinDate = DateTime.Today;
             ComboBoxPatient.Items.Clear();
             CheckedListBoxTreatments.Items.Clear();
 

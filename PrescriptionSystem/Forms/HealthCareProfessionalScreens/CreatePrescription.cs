@@ -191,6 +191,9 @@ namespace Forms.HealthCareProfessionalScreens
                     case Services.DatesNotValid:
                         errorMessage += "The end date has to be after the start date.";
                         break;
+                    case Services.AtLeastOnePrescriptionItem:
+                        errorMessage += "You have to prescribe, at least, one item.";
+                        break;
                 }
             }
 

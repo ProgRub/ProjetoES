@@ -66,7 +66,7 @@ namespace ServicesLibrary
 
         #region PrescriptionCreation
 
-        public const int InvalidAge = 15, IncompatibleMedicine = 16, IncompatibleDisease = 17, MissingBodyPart = 18;
+        public const int InvalidAge = 15, IncompatibleMedicine = 16, IncompatibleDisease = 17, MissingBodyPart = 18, AtLeastOnePrescriptionItem=19;
 
         #endregion
 
@@ -158,7 +158,8 @@ namespace ServicesLibrary
                 .SetNext(new MissingBodyPartValidator(MissingBodyPart, ref errorCodes))
                 .SetNext(new StartDateIsBeforeEndDateValidator(DatesNotValid, ref errorCodes));
             validator.Validate(prescription);
-
+            validator = new EnumerableNotEmptyValidator(AtLeastOnePrescriptionItem, ref errorCodes);
+            validator.Validate(prescription.PrescriptionItemsRecommendedTimes.Keys);
 
             return errorCodes;
         }
