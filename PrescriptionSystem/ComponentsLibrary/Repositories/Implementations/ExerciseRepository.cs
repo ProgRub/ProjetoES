@@ -11,18 +11,6 @@ namespace ComponentsLibrary.Repositories.Implementations
         {
         }
 
-        public void AddBodyPartsToExercise(Exercise exercise, BodyPart bodyPart)
-        {
-            if (exercise.BodyParts == null)
-            {
-                exercise.BodyParts = new List<BodyPart> {bodyPart};
-            }
-            else
-            {
-                exercise.BodyParts.Add(bodyPart);
-            }
-        }
-
         public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
         {
             return GetById(exerciseId).BodyParts;

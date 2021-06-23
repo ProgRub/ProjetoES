@@ -2,7 +2,7 @@
 
 namespace ComponentsLibrary.Repositories.Interfaces
 {
-    public interface ITherapistRepository:IGenericRepository<Therapist>
+    public interface ITherapistRepository : IGenericRepository<Therapist>
     {
     }
 }

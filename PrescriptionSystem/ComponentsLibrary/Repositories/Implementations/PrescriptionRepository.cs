@@ -11,6 +11,7 @@ namespace ComponentsLibrary.Repositories.Implementations
     {
         private readonly PrescriptionHasItemsRepository _prescriptionHasItemsRepository;
         private readonly PrescriptionHasViewersRepository _prescriptionHasViewersRepository;
+
         public PrescriptionRepository(PrescriptionSystemDbContext context) : base(context)
         {
             _prescriptionHasItemsRepository = new PrescriptionHasItemsRepository(context);
@@ -24,7 +25,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             _prescriptionHasItemsRepository.SaveChanges();
         }
 
-        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item, List<TimeSpan> recommendedTimes)
+        public void AddPrescriptionItemToPrescription(Prescription prescription, PrescriptionItem item,
+            List<TimeSpan> recommendedTimes)
         {
             if (prescription.PrescriptionHasPrescriptionItemsCollection == null)
             {
@@ -33,8 +35,8 @@ namespace ComponentsLibrary.Repositories.Implementations
                     new PrescriptionHasPrescriptionItems
                     {
                         Prescription = prescription,
-                        PrescriptionItem = _context.PrescriptionItems.First(e=>e.Id==item.Id),
-                        RecommendedTimes = recommendedTimes.Any()? recommendedTimes : null
+                        PrescriptionItem = _context.PrescriptionItems.First(e => e.Id == item.Id),
+                        RecommendedTimes = recommendedTimes.Any() ? recommendedTimes : null
                     }
                 };
             }
@@ -79,8 +81,9 @@ namespace ComponentsLibrary.Repositories.Implementations
                 e.HealthCareProfessionalId == healthCareProfessional.Id && e.PrescriptionId == prescription.Id).Any();
         }
 
-        public IEnumerable<PrescriptionHasPrescriptionItems> GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
-            int prescriptionId)
+        public IEnumerable<PrescriptionHasPrescriptionItems>
+            GetPrescriptionHasPrescriptionItemsEnumerableByPrescriptionId(
+                int prescriptionId)
         {
             return _prescriptionHasItemsRepository.Find(e => e.PrescriptionId == prescriptionId);
         }

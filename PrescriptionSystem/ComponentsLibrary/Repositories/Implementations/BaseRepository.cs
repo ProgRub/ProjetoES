@@ -11,6 +11,7 @@ namespace ComponentsLibrary.Repositories.Implementations
     {
         protected readonly PrescriptionSystemDbContext _context;
         protected readonly DbSet<T> _dbSet;
+
         public BaseRepository(PrescriptionSystemDbContext context)
         {
             _context = context;
@@ -24,7 +25,7 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void Add(T entity)
         {
-            _dbSet.Add(entity); 
+            _dbSet.Add(entity);
         }
 
         public void AddRange(IEnumerable<T> entities)

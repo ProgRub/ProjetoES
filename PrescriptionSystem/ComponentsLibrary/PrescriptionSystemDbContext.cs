@@ -246,7 +246,7 @@ namespace ComponentsLibrary
                 HealthUserNumber = 295831023,
                 Email = "marybreu@hotmail.com",
                 Password = "M_A_R_Y",
-                MissingBodyParts = new List<BodyPart> { BodyPart.LeftLeg }
+                MissingBodyParts = new List<BodyPart> {BodyPart.LeftLeg}
             });
 
             modelBuilder.Entity<Therapist>().HasData(new Therapist

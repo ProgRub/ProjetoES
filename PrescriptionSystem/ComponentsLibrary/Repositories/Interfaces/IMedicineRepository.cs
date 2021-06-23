@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace ComponentsLibrary.Repositories.Interfaces
 {
-    public interface IMedicineRepository:IGenericRepository<Medicine>
+    public interface IMedicineRepository : IGenericRepository<Medicine>
     {
-
         void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition);
-        IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id);
-        IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions);
+
+        IEnumerable<MedicineHasIncompatibleMedicalConditions>
+            GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id);
     }
 }

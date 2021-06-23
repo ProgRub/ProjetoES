@@ -17,14 +17,6 @@ namespace ComponentsLibrary
         {
             services.AddDbContext<PrescriptionSystemDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-
         }
-        //public void Configure( PrescriptionSystemDbContext dataContext)
-        //{
-        //    // migrate any database changes on startup (includes initial db creation)
-        //    dataContext.Database.Migrate();
-            
-        //}
     }
 }

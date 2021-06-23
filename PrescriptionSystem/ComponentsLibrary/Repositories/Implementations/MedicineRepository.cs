@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 namespace ComponentsLibrary.Repositories.Implementations
 {
-    public class MedicineRepository:BaseRepository<Medicine>, IMedicineRepository
+    public class MedicineRepository : BaseRepository<Medicine>, IMedicineRepository
     {
         private readonly MedicineHasIncompatibilityRepository _medicineHasIncompatibilityRepository;
+
         public MedicineRepository(PrescriptionSystemDbContext context) : base(context)
         {
             _medicineHasIncompatibilityRepository = new MedicineHasIncompatibilityRepository(context);
@@ -22,14 +23,16 @@ namespace ComponentsLibrary.Repositories.Implementations
 
         public void AddMedicalConditionToMedicine(Medicine medicine, MedicalCondition medicalCondition)
         {
-            if(medicine.MedicineHasIncompatibleMedicalConditionsList == null)
+            if (medicine.MedicineHasIncompatibleMedicalConditionsList == null)
             {
-                medicine.MedicineHasIncompatibleMedicalConditionsList = new List<MedicineHasIncompatibleMedicalConditions>{
-                    new MedicineHasIncompatibleMedicalConditions
+                medicine.MedicineHasIncompatibleMedicalConditionsList =
+                    new List<MedicineHasIncompatibleMedicalConditions>
                     {
-                        Medicine = medicine, MedicalCondition = medicalCondition
-                    }
-                };
+                        new MedicineHasIncompatibleMedicalConditions
+                        {
+                            Medicine = medicine, MedicalCondition = medicalCondition
+                        }
+                    };
             }
             else
             {
@@ -39,26 +42,13 @@ namespace ComponentsLibrary.Repositories.Implementations
                     MedicalCondition = medicalCondition
                 });
             }
-            
         }
 
 
-        public IEnumerable<MedicineHasIncompatibleMedicalConditions> GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id)
+        public IEnumerable<MedicineHasIncompatibleMedicalConditions>
+            GetIncompatibleMedicalConditionsOfMedicineByMedicineId(int id)
         {
             return _medicineHasIncompatibilityRepository.Find(e => e.MedicineId == id);
         }
-
-        public IEnumerable<int> GetMedicineIncompatibleMedicalConditionsIds(IEnumerable<MedicineHasIncompatibleMedicalConditions> medicineIncompatibleMedicalConditions)
-        {
-            var ids = new List<int>();
-
-            foreach (var medicalCondition in medicineIncompatibleMedicalConditions)
-            {
-                ids.Add(medicalCondition.MedicalConditionId);
-            }
-
-            return ids;
-        }
-
     }
 }
