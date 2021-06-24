@@ -6,6 +6,5 @@ namespace ComponentsLibrary.Repositories.Interfaces
 {
     public interface IExerciseRepository : IGenericRepository<Exercise>
     {
-        IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId);
     }
 }

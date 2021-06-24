@@ -30,7 +30,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                     {
                         new MedicineHasIncompatibleMedicalConditions
                         {
-                            Medicine = medicine, MedicalCondition = medicalCondition
+                            MedicineId = medicine.Id, MedicalConditionId = medicalCondition.Id
                         }
                     };
             }
@@ -38,8 +38,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 medicine.MedicineHasIncompatibleMedicalConditionsList.Add(new MedicineHasIncompatibleMedicalConditions
                 {
-                    Medicine = medicine,
-                    MedicalCondition = medicalCondition
+                    MedicineId = medicine.Id,
+                    MedicalConditionId = medicalCondition.Id
                 });
             }
         }

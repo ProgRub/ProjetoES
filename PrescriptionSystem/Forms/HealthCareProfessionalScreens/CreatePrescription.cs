@@ -25,6 +25,8 @@ namespace Forms.HealthCareProfessionalScreens
 
         private void CreatePrescription_Enter(object sender, EventArgs e)
         {
+            DateTimePickerStartDate.MinDate = DateTime.Today;
+            DateTimePickerEndDate.MinDate = DateTime.Today;
             CommandsManager.Instance.Notify += (sender, args) =>
             {
                 ButtonUndo.Enabled = CommandsManager.Instance.HasUndo;
@@ -54,7 +56,7 @@ namespace Forms.HealthCareProfessionalScreens
             foreach (var treatment in _treatments)
             {
                 ComboBoxItems.Items.Add(
-                    $"(Treatment) {treatment.Id} | {treatment.Name} | Age range: {treatment.AgeMinimum}-{treatment.AgeMaximum}");
+                    $"(Treatment) {treatment.Id} | {treatment.Name} | {treatment.BodyPart} | Age range: {treatment.AgeMinimum}-{treatment.AgeMaximum}");
             }
 
             foreach (var exercise in _exercises)
@@ -142,8 +144,8 @@ namespace Forms.HealthCareProfessionalScreens
                 Author = Services.Instance.GetLoggedInHealthCareProfessional(),
                 Patient = GetSelectedPatientInComboBox(),
                 Description = textBoxDescription.Text,
-                StartDate = dateTimePickerStartDate.Value,
-                EndDate = dateTimePickerEndDate.Value,
+                StartDate = DateTimePickerStartDate.Value,
+                EndDate = DateTimePickerEndDate.Value,
                 PrescriptionItemsRecommendedTimes = recommendedTimes,
                 Exercises = selectedItems.OfType<ExerciseDTO>(),
                 Medicines = selectedItems.OfType<MedicineDTO>(),

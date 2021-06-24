@@ -34,8 +34,8 @@ namespace ComponentsLibrary.Repositories.Implementations
                 {
                     new PrescriptionHasPrescriptionItems
                     {
-                        Prescription = prescription,
-                        PrescriptionItem = _context.PrescriptionItems.First(e => e.Id == item.Id),
+                        PrescriptionId = prescription.Id,
+                        PrescriptionItemId = _context.PrescriptionItems.First(e => e.Id == item.Id).Id,
                         RecommendedTimes = recommendedTimes.Any() ? recommendedTimes : null
                     }
                 };
@@ -44,8 +44,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 prescription.PrescriptionHasPrescriptionItemsCollection.Add(new PrescriptionHasPrescriptionItems
                 {
-                    Prescription = prescription,
-                    PrescriptionItem = _context.PrescriptionItems.First(e => e.Id == item.Id),
+                    PrescriptionId = prescription.Id,
+                    PrescriptionItemId = _context.PrescriptionItems.First(e => e.Id == item.Id).Id,
                     RecommendedTimes = recommendedTimes.Any() ? recommendedTimes : null
                 });
             }
@@ -59,8 +59,8 @@ namespace ComponentsLibrary.Repositories.Implementations
                 {
                     new PrescriptionHasViewers()
                     {
-                        Prescription = prescription,
-                        HealthCareProfessional = healthCareProfessional
+                        PrescriptionId = prescription.Id,
+                        HealthCareProfessionalId = healthCareProfessional.Id
                     }
                 };
             }
@@ -68,8 +68,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 prescription.PrescriptionHasViewersCollection.Add(new PrescriptionHasViewers
                 {
-                    Prescription = prescription,
-                    HealthCareProfessional = healthCareProfessional
+                    PrescriptionId = prescription.Id,
+                    HealthCareProfessionalId = healthCareProfessional.Id
                 });
             }
         }

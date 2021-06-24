@@ -28,7 +28,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                 {
                     new UserHasMedicalCondition
                     {
-                        User = user, MedicalCondition = medicalCondition
+                        UserId = user.Id, MedicalConditionId = medicalCondition.Id
                     }
                 };
             }
@@ -36,8 +36,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 user.UserHasMedicalConditions.Add(new UserHasMedicalCondition
                 {
-                    User = user,
-                    MedicalCondition = medicalCondition
+                    UserId = user.Id,
+                    MedicalConditionId = medicalCondition.Id
                 });
             }
         }

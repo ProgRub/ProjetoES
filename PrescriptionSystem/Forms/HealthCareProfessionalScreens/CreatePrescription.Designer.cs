@@ -34,8 +34,8 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.LabelStartDate = new System.Windows.Forms.Label();
             this.LabelEndDate = new System.Windows.Forms.Label();
-            this.dateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
+            this.DateTimePickerStartDate = new System.Windows.Forms.DateTimePicker();
+            this.DateTimePickerEndDate = new System.Windows.Forms.DateTimePicker();
             this.ButtonCreatePrescription = new System.Windows.Forms.Button();
             this.comboBoxPatient = new System.Windows.Forms.ComboBox();
             this.TreeViewPrescriptionItems = new System.Windows.Forms.TreeView();
@@ -113,21 +113,21 @@
             this.LabelEndDate.TabIndex = 11;
             this.LabelEndDate.Text = "End date:";
             // 
-            // dateTimePickerStartDate
+            // DateTimePickerStartDate
             // 
-            this.dateTimePickerStartDate.Location = new System.Drawing.Point(208, 254);
-            this.dateTimePickerStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePickerStartDate.Name = "dateTimePickerStartDate";
-            this.dateTimePickerStartDate.Size = new System.Drawing.Size(219, 23);
-            this.dateTimePickerStartDate.TabIndex = 12;
+            this.DateTimePickerStartDate.Location = new System.Drawing.Point(208, 254);
+            this.DateTimePickerStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerStartDate.Name = "DateTimePickerStartDate";
+            this.DateTimePickerStartDate.Size = new System.Drawing.Size(219, 23);
+            this.DateTimePickerStartDate.TabIndex = 12;
             // 
-            // dateTimePickerEndDate
+            // DateTimePickerEndDate
             // 
-            this.dateTimePickerEndDate.Location = new System.Drawing.Point(208, 302);
-            this.dateTimePickerEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePickerEndDate.Name = "dateTimePickerEndDate";
-            this.dateTimePickerEndDate.Size = new System.Drawing.Size(219, 23);
-            this.dateTimePickerEndDate.TabIndex = 13;
+            this.DateTimePickerEndDate.Location = new System.Drawing.Point(208, 302);
+            this.DateTimePickerEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DateTimePickerEndDate.Name = "DateTimePickerEndDate";
+            this.DateTimePickerEndDate.Size = new System.Drawing.Size(219, 23);
+            this.DateTimePickerEndDate.TabIndex = 13;
             // 
             // ButtonCreatePrescription
             // 
@@ -272,8 +272,8 @@
             this.Controls.Add(this.TreeViewPrescriptionItems);
             this.Controls.Add(this.comboBoxPatient);
             this.Controls.Add(this.ButtonCreatePrescription);
-            this.Controls.Add(this.dateTimePickerEndDate);
-            this.Controls.Add(this.dateTimePickerStartDate);
+            this.Controls.Add(this.DateTimePickerEndDate);
+            this.Controls.Add(this.DateTimePickerStartDate);
             this.Controls.Add(this.LabelEndDate);
             this.Controls.Add(this.LabelStartDate);
             this.Controls.Add(this.textBoxDescription);
@@ -290,8 +290,8 @@
             this.Controls.SetChildIndex(this.textBoxDescription, 0);
             this.Controls.SetChildIndex(this.LabelStartDate, 0);
             this.Controls.SetChildIndex(this.LabelEndDate, 0);
-            this.Controls.SetChildIndex(this.dateTimePickerStartDate, 0);
-            this.Controls.SetChildIndex(this.dateTimePickerEndDate, 0);
+            this.Controls.SetChildIndex(this.DateTimePickerStartDate, 0);
+            this.Controls.SetChildIndex(this.DateTimePickerEndDate, 0);
             this.Controls.SetChildIndex(this.ButtonCreatePrescription, 0);
             this.Controls.SetChildIndex(this.comboBoxPatient, 0);
             this.Controls.SetChildIndex(this.TreeViewPrescriptionItems, 0);
@@ -317,8 +317,8 @@
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Label LabelStartDate;
         private System.Windows.Forms.Label LabelEndDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerStartDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerEndDate;
+        private System.Windows.Forms.DateTimePicker DateTimePickerStartDate;
+        private System.Windows.Forms.DateTimePicker DateTimePickerEndDate;
         private System.Windows.Forms.Button ButtonCreatePrescription;
         private System.Windows.Forms.ComboBox comboBoxPatient;
         private System.Windows.Forms.TreeView TreeViewPrescriptionItems;

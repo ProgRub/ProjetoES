@@ -133,7 +133,7 @@ namespace ServicesLibrary.DifferentServices
 
         internal IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
         {
-            return _exerciseRepository.GetExerciseBodyPartsByExerciseId(exerciseId);
+            return _exerciseRepository.GetById(exerciseId).BodyParts;
         }
 
         internal PrescriptionItem GetPrescriptionItemById(int prescriptionItemId)

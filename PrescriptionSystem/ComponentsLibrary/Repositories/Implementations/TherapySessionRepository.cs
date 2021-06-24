@@ -29,7 +29,7 @@ namespace ComponentsLibrary.Repositories.Implementations
                 {
                     new TherapySessionHasTreatments
                     {
-                        TherapySession = therapySession, Treatment = treatment
+                        TherapySessionId = therapySession.Id, TreatmentId = treatment.Id
                     }
                 };
             }
@@ -37,7 +37,8 @@ namespace ComponentsLibrary.Repositories.Implementations
             {
                 therapySession.TherapySessionHasTreatmentsCollection.Add(new TherapySessionHasTreatments
                 {
-                    TherapySession = therapySession, Treatment = treatment
+                    TherapySessionId = therapySession.Id,
+                    TreatmentId = treatment.Id
                 });
             }
         }

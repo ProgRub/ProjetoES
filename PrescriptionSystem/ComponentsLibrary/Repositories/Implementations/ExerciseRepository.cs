@@ -10,10 +10,5 @@ namespace ComponentsLibrary.Repositories.Implementations
         public ExerciseRepository(PrescriptionSystemDbContext context) : base(context)
         {
         }
-
-        public IEnumerable<BodyPart> GetExerciseBodyPartsByExerciseId(int exerciseId)
-        {
-            return GetById(exerciseId).BodyParts;
-        }
     }
 }
